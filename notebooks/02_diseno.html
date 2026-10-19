@@ -1,0 +1,980 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Diseño experimental &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02_diseno';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="3. Optimización de hiperparámetros" href="03_optimizacion.html" />
+    <link rel="prev" title="1. Datos: ETL y análisis exploratorio mejorado" href="01_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_regresion.html">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_estadistica.html">7. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_interpretabilidad.html">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/02_diseno.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Diseño experimental</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-pipeline-combinatorio">2.1 Un pipeline combinatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada-anidada-con-knndm">2.2 Validación cruzada anidada con kNNDM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-submuestra-para-la-busqueda">2.3 Una submuestra para la búsqueda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semilla-unica">2.4 Semilla única</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-maestra-de-experimentos">2.5 Tabla maestra de experimentos</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="diseno-experimental">
+<h1>2. Diseño experimental<a class="headerlink" href="#diseno-experimental" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> ¿Cómo se entrenan y evalúan 156 combinaciones de forma justa, sin fuga de información y en un
+portátil?</p>
+<p><strong>Respuesta corta.</strong> Todas pasan por la misma validación anidada (5 pliegues externos × 3 internos, armados con
+kNNDM para imitar zonas nuevas), con el preprocesamiento y el balanceo dentro de cada pliegue, 12 evaluaciones
+de búsqueda y una submuestra estratificada de 10 001 viviendas. Cada una de las 640 tareas queda registrada en
+una tabla maestra.</p>
+</div>
+<section id="un-pipeline-combinatorio">
+<h2>2.1 Un pipeline combinatorio<a class="headerlink" href="#un-pipeline-combinatorio" title="Link to this heading">#</a></h2>
+<p>La guía pide entrenar el <strong>producto</strong> de alternativas, no su suma: cada modelo con cada técnica de balanceo y
+cada optimizador. A los 7 modelos de clasificación de la guía se agrega el <strong>XGBoost geográfico</strong>, el modelo
+nuevo del proyecto, para medirlo con exactamente el mismo protocolo.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tarea</p></th>
+<th class="head"><p>Modelos</p></th>
+<th class="head"><p>Balanceo</p></th>
+<th class="head"><p>Optimización</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Clasificación</p></td>
+<td><p>7 + 1 (XGBoost geográfico)</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>7 × 4 × 4 = <strong>112</strong> (+ 16)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Regresión</p></td>
+<td><p>7</p></td>
+<td><p>no aplica</p></td>
+<td><p>4</p></td>
+<td><p>7 × 4 = <strong>28</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><strong>140</strong> (+ 16)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El pipeline está programado con funciones parametrizadas (modelo → balanceo → optimizador) y cada corrida se
+registra en una tabla maestra (sección 2.5).</p>
+<p><strong>Equivalentes de <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>.</strong> Naive Bayes no tiene pesos de clase: se usan priors uniformes,
+que es el mismo efecto. KNN tampoco: se divide cada probabilidad por la frecuencia de la clase en el
+entrenamiento y se renormaliza (<span class="math notranslate nohighlight">\(\tilde p_k \propto p_k/\pi_k\)</span>), la corrección bayesiana que convierte priors
+empíricos en uniformes. XGBoost y el geográfico usan pesos de muestra <span class="math notranslate nohighlight">\(1/\text{frecuencia}\)</span>.</p>
+<p><strong>SMOTE y ADASYN</strong> van dentro de <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code>, después del preprocesamiento: se aplican solo al
+entrenamiento de cada pliegue y nunca al predecir. ADASYN reparte las muestras sintéticas según cuántos vecinos
+de otra clase tiene cada ejemplo; cuando un estrato no tiene ninguno (algo frecuente con un estrato tan
+concentrado), su densidad es cero y la librería falla. En ese caso se aplica estrato por estrato y el que falla
+se deja sin muestras sintéticas.</p>
+</section>
+<section id="validacion-cruzada-anidada-con-knndm">
+<h2>2.2 Validación cruzada anidada con kNNDM<a class="headerlink" href="#validacion-cruzada-anidada-con-knndm" title="Link to this heading">#</a></h2>
+<p>Elegir hiperparámetros mirando el mismo esquema con que se reporta el desempeño da una cifra optimista. Por
+eso:</p>
+<ul class="simple">
+<li><p><strong>Bucle externo (5 pliegues):</strong> estima el desempeño de generalización. Sus pliegues se arman con <strong>kNNDM</strong>
+(<em>k-fold nearest neighbour distance matching</em>; Linnenbrink et al., 2024): grupos compactos de K-Means
+repartidos en pliegues de modo que la distancia de cada vivienda de validación a la vivienda de entrenamiento
+más cercana se parezca a la del escenario real (la geometría del test del Entregable 1). Las unidades de un
+mismo edificio nunca se separan (ICC 0.99).</p></li>
+<li><p><strong>Bucle interno (3 pliegues):</strong> dentro del entrenamiento de cada pliegue externo, otro kNNDM cuyo escenario
+es el propio pliegue externo: la búsqueda de hiperparámetros se valida a la misma distancia a la que luego se
+evalúa.</p></li>
+</ul>
+<p><strong>Por qué 5 × 3.</strong> Con 5 pliegues externos hay una media y una desviación entre pliegues (sección 5.4) y bloques
+para la prueba de Friedman. Con 3 internos cada evaluación cuesta 3 ajustes; 5 internos habrían multiplicado el
+costo por 5/3 sin cambiar la elección del óptimo en el piloto.</p>
+</section>
+<section id="una-submuestra-para-la-busqueda">
+<h2>2.3 Una submuestra para la búsqueda<a class="headerlink" href="#una-submuestra-para-la-busqueda" title="Link to this heading">#</a></h2>
+<p>Con las 257 273 viviendas de entrenamiento, las 156 combinaciones con validación anidada costaban unas 630
+horas-CPU en el portátil del proyecto (Intel Core i5-8265U, 4 núcleos; piloto del 18-oct). Se usa una
+<strong>submuestra estratificada de 10 000 viviendas</strong> (mismas proporciones de estrato), con 12 evaluaciones por
+búsqueda: 38 horas de cómputo en tareas, que con 8 procesos cupieron en 4.8 horas. Los finalistas se reentrenan
+y se evalúan en el test del Entregable 1, y además se reentrenan con las 257 273 viviendas para medir cuánto
+cuesta la submuestra (sección 9.4).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">_comun</span><span class="w"> </span><span class="kn">import</span> <span class="n">RES</span><span class="p">,</span> <span class="n">leer_csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"datos_clasificacion.pkl"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="n">paq</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+<span class="n">sub</span> <span class="o">=</span> <span class="n">paq</span><span class="p">[</span><span class="s2">"sub"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Submuestra: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> viviendas | kNNDM externo: q = </span><span class="si">{</span><span class="n">paq</span><span class="p">[</span><span class="s1">'knndm'</span><span class="p">][</span><span class="s1">'q'</span><span class="p">]</span><span class="si">}</span><span class="s2"> grupos, "</span>
+      <span class="sa">f</span><span class="s2">"Wasserstein </span><span class="si">{</span><span class="n">paq</span><span class="p">[</span><span class="s1">'knndm'</span><span class="p">][</span><span class="s1">'W_km'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> km (validación aleatoria: </span><span class="si">{</span><span class="n">paq</span><span class="p">[</span><span class="s1">'knndm'</span><span class="p">][</span><span class="s1">'W_aleatoria_km'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> km)"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"pliegue externo"</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+              <span class="s2">"entrenamiento"</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">paq</span><span class="p">[</span><span class="s2">"externos"</span><span class="p">]],</span>
+              <span class="s2">"validación"</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">paq</span><span class="p">[</span><span class="s2">"externos"</span><span class="p">]],</span>
+              <span class="s2">"estratos en validación"</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">estrato_num</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="n">b</span><span class="p">]))</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">paq</span><span class="p">[</span><span class="s2">"externos"</span><span class="p">]],</span>
+              <span class="s2">"pliegues internos (tamaños de validación)"</span><span class="p">:</span> <span class="p">[</span><span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">paq</span><span class="p">[</span><span class="s2">"internos"</span><span class="p">]]})</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Submuestra: 10,001 viviendas | kNNDM externo: q = 50 grupos, Wasserstein 0.124 km (validación aleatoria: 0.431 km)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pliegue externo</th>
+      <th>entrenamiento</th>
+      <th>validación</th>
+      <th>estratos en validación</th>
+      <th>pliegues internos (tamaños de validación)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>7943</td>
+      <td>2058</td>
+      <td>6</td>
+      <td>2639, 2664, 2640</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>8128</td>
+      <td>1873</td>
+      <td>6</td>
+      <td>2729, 2683, 2716</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>7990</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>2684, 2688, 2618</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>7965</td>
+      <td>2036</td>
+      <td>6</td>
+      <td>2602, 2569, 2794</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>7978</td>
+      <td>2023</td>
+      <td>6</td>
+      <td>2701, 2643, 2634</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">estrato_num</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"proporción en la submuestra"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+ <span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"</span><span class="si">{:.1%}</span><span class="s2">"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_b8e38">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_b8e38_level0_col0" class="col_heading level0 col0" >proporción en la submuestra</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >estrato_num</th>
+      <th class="blank col0" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_b8e38_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_b8e38_row0_col0" class="data row0 col0" >30.0%</td>
+    </tr>
+    <tr>
+      <th id="T_b8e38_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_b8e38_row1_col0" class="data row1 col0" >22.7%</td>
+    </tr>
+    <tr>
+      <th id="T_b8e38_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_b8e38_row2_col0" class="data row2 col0" >22.9%</td>
+    </tr>
+    <tr>
+      <th id="T_b8e38_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_b8e38_row3_col0" class="data row3 col0" >14.4%</td>
+    </tr>
+    <tr>
+      <th id="T_b8e38_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_b8e38_row4_col0" class="data row4 col0" >5.2%</td>
+    </tr>
+    <tr>
+      <th id="T_b8e38_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_b8e38_row5_col0" class="data row5 col0" >4.8%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="semilla-unica">
+<h2>2.4 Semilla única<a class="headerlink" href="#semilla-unica" title="Link to this heading">#</a></h2>
+<p>Una sola semilla global (<code class="docutils literal notranslate"><span class="pre">SEED</span> <span class="pre">=</span> <span class="pre">42</span></code>, en <code class="docutils literal notranslate"><span class="pre">estrato3/configuracion.py</span></code>) se propaga a numpy, scikit-learn,
+imbalanced-learn (SMOTE/ADASYN), XGBoost, Optuna (TPE) y DEAP. La sensibilidad a otras semillas se mide en el
+capítulo 5.</p>
+</section>
+<section id="tabla-maestra-de-experimentos">
+<h2>2.5 Tabla maestra de experimentos<a class="headerlink" href="#tabla-maestra-de-experimentos" title="Link to this heading">#</a></h2>
+<p>Cada tarea (combinación × pliegue externo) guarda su semilla, sus hiperparámetros finales, las métricas del
+bucle externo, el tiempo de búsqueda, de ajuste y de inferencia, el número de evaluaciones y el historial
+completo de la búsqueda. La tabla maestra las reúne:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tm</span> <span class="o">=</span> <span class="n">leer_csv</span><span class="p">(</span><span class="s2">"tabla_maestra_clasificacion.csv"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">tm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span><span class="si">}</span><span class="s2"> tareas registradas (</span><span class="si">{</span><span class="n">tm</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'modelo'</span><span class="p">,</span><span class="w"> </span><span class="s1">'balanceo'</span><span class="p">,</span><span class="w"> </span><span class="s1">'metodo'</span><span class="p">])</span><span class="o">.</span><span class="n">ngroups</span><span class="si">}</span><span class="s2"> combinaciones)"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">tm</span><span class="p">[[</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"balanceo"</span><span class="p">,</span> <span class="s2">"metodo"</span><span class="p">,</span> <span class="s2">"fold"</span><span class="p">,</span> <span class="s2">"f1_macro"</span><span class="p">,</span> <span class="s2">"auc_ovr"</span><span class="p">,</span> <span class="s2">"n_evaluaciones"</span><span class="p">,</span> <span class="s2">"seg_busqueda"</span><span class="p">,</span>
+                <span class="s2">"params"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>640 tareas registradas (128 combinaciones)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>balanceo</th>
+      <th>metodo</th>
+      <th>fold</th>
+      <th>f1_macro</th>
+      <th>auc_ovr</th>
+      <th>n_evaluaciones</th>
+      <th>seg_busqueda</th>
+      <th>params</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SVM</td>
+      <td>ninguno</td>
+      <td>Bayesiana</td>
+      <td>2</td>
+      <td>0.517046</td>
+      <td>0.869238</td>
+      <td>12</td>
+      <td>189.724244</td>
+      <td>{"gamma": 0.007188274526338213, "n_components"...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SVM</td>
+      <td>ninguno</td>
+      <td>Grid</td>
+      <td>0</td>
+      <td>0.605863</td>
+      <td>0.921779</td>
+      <td>12</td>
+      <td>220.615410</td>
+      <td>{"gamma": 0.03, "n_components": 300, "C": 10.0}</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Logística L1/L2</td>
+      <td>smote</td>
+      <td>Genética</td>
+      <td>1</td>
+      <td>0.740358</td>
+      <td>0.931903</td>
+      <td>12</td>
+      <td>232.473543</td>
+      <td>{"penalty": "l2", "C": 0.03478056878034407}</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>XGBoost geográfico</td>
+      <td>smote</td>
+      <td>Bayesiana</td>
+      <td>0</td>
+      <td>0.642805</td>
+      <td>0.936005</td>
+      <td>12</td>
+      <td>435.170296</td>
+      <td>{"n_estimators": 182, "learning_rate": 0.06443...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Naive Bayes</td>
+      <td>class_weight</td>
+      <td>Genética</td>
+      <td>2</td>
+      <td>0.291275</td>
+      <td>0.750880</td>
+      <td>12</td>
+      <td>8.613736</td>
+      <td>{"var_smoothing": 0.06108254627409418}</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>XGBoost</td>
+      <td>class_weight</td>
+      <td>Genética</td>
+      <td>3</td>
+      <td>0.622791</td>
+      <td>0.927669</td>
+      <td>12</td>
+      <td>176.482811</td>
+      <td>{"n_estimators": 152, "learning_rate": 0.08241...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost geográfico</td>
+      <td>ninguno</td>
+      <td>Bayesiana</td>
+      <td>2</td>
+      <td>0.589674</td>
+      <td>0.895117</td>
+      <td>12</td>
+      <td>222.002559</td>
+      <td>{"n_estimators": 141, "learning_rate": 0.12195...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Árbol de decisión</td>
+      <td>ninguno</td>
+      <td>Grid</td>
+      <td>3</td>
+      <td>0.546517</td>
+      <td>0.875510</td>
+      <td>12</td>
+      <td>13.558258</td>
+      <td>{"max_depth": 10, "min_samples_leaf": 50, "cri...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SVM</td>
+      <td>smote</td>
+      <td>Grid</td>
+      <td>4</td>
+      <td>0.629443</td>
+      <td>0.915162</td>
+      <td>12</td>
+      <td>451.349229</td>
+      <td>{"gamma": 0.03, "n_components": 300, "C": 0.1}</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Naive Bayes</td>
+      <td>class_weight</td>
+      <td>Genética</td>
+      <td>0</td>
+      <td>0.373592</td>
+      <td>0.865896</td>
+      <td>12</td>
+      <td>10.814411</td>
+      <td>{"var_smoothing": 0.0999999999999999}</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Naive Bayes</td>
+      <td>adasyn</td>
+      <td>Genética</td>
+      <td>0</td>
+      <td>0.401528</td>
+      <td>0.862054</td>
+      <td>12</td>
+      <td>43.350842</td>
+      <td>{"var_smoothing": 0.06069799455522593}</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Naive Bayes</td>
+      <td>adasyn</td>
+      <td>Genética</td>
+      <td>1</td>
+      <td>0.443180</td>
+      <td>0.898689</td>
+      <td>12</td>
+      <td>30.939849</td>
+      <td>{"var_smoothing": 0.06069799455522593}</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_datos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1. Datos: ETL y análisis exploratorio mejorado</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_optimizacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">3. Optimización de hiperparámetros</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-pipeline-combinatorio">2.1 Un pipeline combinatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada-anidada-con-knndm">2.2 Validación cruzada anidada con kNNDM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-submuestra-para-la-busqueda">2.3 Una submuestra para la búsqueda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semilla-unica">2.4 Semilla única</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-maestra-de-experimentos">2.5 Tabla maestra de experimentos</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

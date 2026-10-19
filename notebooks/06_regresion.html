@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Regresión: el estrato como número &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/06_regresion';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="7. Comparación estadística" href="07_estadistica.html" />
+    <link rel="prev" title="5. Clasificación: resultados de las combinaciones" href="05_clasificacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_diseno.html">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_estadistica.html">7. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_interpretabilidad.html">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/06_regresion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6. Regresión: el estrato como número</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-en-el-bucle-externo">6.1 Métricas en el bucle externo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-validacion-y-prueba">6.2 Entrenamiento, validación y prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-residuos-del-mejor-modelo">6.3 Análisis de residuos del mejor modelo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regresion-el-estrato-como-numero">
+<h1>6. Regresión: el estrato como número<a class="headerlink" href="#regresion-el-estrato-como-numero" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> ¿Ayuda tratar el estrato como un número (1 a 6) en vez de como una categoría?</p>
+<p><strong>Respuesta corta.</strong> No para clasificar. El mejor regresor (Random Forest, RMSE 0.57 estratos) comprime los
+extremos y, al redondear, su F1 macro queda por debajo del de los clasificadores. Sus residuos están
+correlacionados en el espacio: la ubicación deja información sin explicar.</p>
+</div>
+<p>La guía pide también 7 modelos de regresión. El problema del proyecto es de clasificación, así que la rama de
+regresión se plantea como <strong>la lectura ordinal del mismo problema</strong>: predecir el estrato (1–6) como número y
+medir el error en estratos. Así se puede comparar con la clasificación (redondeando la predicción al estrato
+más cercano) y responder si tratar el estrato como continuo ayuda. Mismos datos, submuestra y pliegues; el
+balanceo no aplica.</p>
+<section id="metricas-en-el-bucle-externo">
+<h2>6.1 Métricas en el bucle externo<a class="headerlink" href="#metricas-en-el-bucle-externo" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">_comun</span><span class="w"> </span><span class="kn">import</span> <span class="n">figura</span><span class="p">,</span> <span class="n">leer_csv</span><span class="p">,</span> <span class="n">leer_json</span>
+
+<span class="n">RR</span> <span class="o">=</span> <span class="n">leer_csv</span><span class="p">(</span><span class="s2">"resumen_regresion.csv"</span><span class="p">)</span>
+<span class="n">AR</span> <span class="o">=</span> <span class="n">leer_json</span><span class="p">(</span><span class="s2">"analisis_regresion.json"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+<span class="k">if</span> <span class="n">RR</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RR</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_mean"</span><span class="p">,</span> <span class="s2">" (media)"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_std"</span><span class="p">,</span> <span class="s2">" (desv.)"</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>metodo</th>
+      <th>rmse (media)</th>
+      <th>rmse (desv.)</th>
+      <th>mae (media)</th>
+      <th>mae (desv.)</th>
+      <th>r2 (media)</th>
+      <th>r2 (desv.)</th>
+      <th>f1_macro_redondeado (media)</th>
+      <th>f1_macro_redondeado (desv.)</th>
+      <th>seg_busqueda (media)</th>
+      <th>seg_busqueda (desv.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Random Forest (regresión)</td>
+      <td>Grid</td>
+      <td>0.5706</td>
+      <td>0.1004</td>
+      <td>0.4320</td>
+      <td>0.0743</td>
+      <td>0.8303</td>
+      <td>0.0715</td>
+      <td>0.5830</td>
+      <td>0.0905</td>
+      <td>376.0797</td>
+      <td>111.1016</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest (regresión)</td>
+      <td>Random</td>
+      <td>0.5783</td>
+      <td>0.1054</td>
+      <td>0.4331</td>
+      <td>0.0737</td>
+      <td>0.8242</td>
+      <td>0.0807</td>
+      <td>0.5836</td>
+      <td>0.0633</td>
+      <td>364.3528</td>
+      <td>62.9948</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest (regresión)</td>
+      <td>Genética</td>
+      <td>0.5793</td>
+      <td>0.1066</td>
+      <td>0.4323</td>
+      <td>0.0738</td>
+      <td>0.8237</td>
+      <td>0.0809</td>
+      <td>0.5885</td>
+      <td>0.0675</td>
+      <td>391.0167</td>
+      <td>67.0071</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>XGBoost (regresión)</td>
+      <td>Random</td>
+      <td>0.5809</td>
+      <td>0.1019</td>
+      <td>0.4438</td>
+      <td>0.0774</td>
+      <td>0.8238</td>
+      <td>0.0756</td>
+      <td>0.6027</td>
+      <td>0.0692</td>
+      <td>115.8124</td>
+      <td>13.5476</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>XGBoost (regresión)</td>
+      <td>Bayesiana</td>
+      <td>0.5830</td>
+      <td>0.1060</td>
+      <td>0.4438</td>
+      <td>0.0813</td>
+      <td>0.8216</td>
+      <td>0.0811</td>
+      <td>0.5702</td>
+      <td>0.0564</td>
+      <td>116.0518</td>
+      <td>7.1118</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>XGBoost (regresión)</td>
+      <td>Genética</td>
+      <td>0.5881</td>
+      <td>0.1025</td>
+      <td>0.4404</td>
+      <td>0.0755</td>
+      <td>0.8192</td>
+      <td>0.0778</td>
+      <td>0.5848</td>
+      <td>0.0740</td>
+      <td>169.5667</td>
+      <td>15.7016</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Random Forest (regresión)</td>
+      <td>Bayesiana</td>
+      <td>0.5936</td>
+      <td>0.1142</td>
+      <td>0.4372</td>
+      <td>0.0844</td>
+      <td>0.8154</td>
+      <td>0.0817</td>
+      <td>0.5954</td>
+      <td>0.1117</td>
+      <td>459.6834</td>
+      <td>179.7294</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>Random</td>
+      <td>0.5958</td>
+      <td>0.0602</td>
+      <td>0.4626</td>
+      <td>0.0459</td>
+      <td>0.8177</td>
+      <td>0.0552</td>
+      <td>0.6002</td>
+      <td>0.0863</td>
+      <td>87.5135</td>
+      <td>21.0557</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SVR</td>
+      <td>Grid</td>
+      <td>0.5976</td>
+      <td>0.0613</td>
+      <td>0.4615</td>
+      <td>0.0508</td>
+      <td>0.8164</td>
+      <td>0.0570</td>
+      <td>0.5994</td>
+      <td>0.0862</td>
+      <td>178.0523</td>
+      <td>35.2861</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SVR</td>
+      <td>Bayesiana</td>
+      <td>0.5984</td>
+      <td>0.0620</td>
+      <td>0.4706</td>
+      <td>0.0439</td>
+      <td>0.8162</td>
+      <td>0.0554</td>
+      <td>0.6019</td>
+      <td>0.0850</td>
+      <td>187.2957</td>
+      <td>52.6456</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>XGBoost (regresión)</td>
+      <td>Grid</td>
+      <td>0.6044</td>
+      <td>0.1526</td>
+      <td>0.4531</td>
+      <td>0.1082</td>
+      <td>0.8026</td>
+      <td>0.1168</td>
+      <td>0.6034</td>
+      <td>0.1156</td>
+      <td>204.6779</td>
+      <td>22.4364</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>KNN (regresión)</td>
+      <td>Bayesiana</td>
+      <td>0.6329</td>
+      <td>0.1331</td>
+      <td>0.4732</td>
+      <td>0.0897</td>
+      <td>0.7853</td>
+      <td>0.1232</td>
+      <td>0.5668</td>
+      <td>0.0899</td>
+      <td>80.7634</td>
+      <td>15.7832</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>KNN (regresión)</td>
+      <td>Grid</td>
+      <td>0.6332</td>
+      <td>0.1335</td>
+      <td>0.4721</td>
+      <td>0.0883</td>
+      <td>0.7850</td>
+      <td>0.1234</td>
+      <td>0.5712</td>
+      <td>0.0940</td>
+      <td>78.5516</td>
+      <td>24.4478</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>SVR</td>
+      <td>Genética</td>
+      <td>0.6341</td>
+      <td>0.0725</td>
+      <td>0.4949</td>
+      <td>0.0439</td>
+      <td>0.7923</td>
+      <td>0.0712</td>
+      <td>0.5786</td>
+      <td>0.0765</td>
+      <td>192.1698</td>
+      <td>43.1905</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>KNN (regresión)</td>
+      <td>Random</td>
+      <td>0.6351</td>
+      <td>0.1354</td>
+      <td>0.4717</td>
+      <td>0.0877</td>
+      <td>0.7835</td>
+      <td>0.1258</td>
+      <td>0.5593</td>
+      <td>0.0919</td>
+      <td>86.4951</td>
+      <td>29.2493</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>KNN (regresión)</td>
+      <td>Genética</td>
+      <td>0.6365</td>
+      <td>0.1282</td>
+      <td>0.4816</td>
+      <td>0.0918</td>
+      <td>0.7837</td>
+      <td>0.1194</td>
+      <td>0.5615</td>
+      <td>0.0945</td>
+      <td>89.6450</td>
+      <td>19.3509</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Ridge</td>
+      <td>Bayesiana</td>
+      <td>0.6704</td>
+      <td>0.0788</td>
+      <td>0.5273</td>
+      <td>0.0510</td>
+      <td>0.7682</td>
+      <td>0.0783</td>
+      <td>0.5362</td>
+      <td>0.0663</td>
+      <td>771.9604</td>
+      <td>275.3356</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Lasso</td>
+      <td>Genética</td>
+      <td>0.6712</td>
+      <td>0.0791</td>
+      <td>0.5276</td>
+      <td>0.0512</td>
+      <td>0.7676</td>
+      <td>0.0789</td>
+      <td>0.5441</td>
+      <td>0.0634</td>
+      <td>22.8255</td>
+      <td>7.7613</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Lasso</td>
+      <td>Bayesiana</td>
+      <td>0.6715</td>
+      <td>0.0795</td>
+      <td>0.5280</td>
+      <td>0.0517</td>
+      <td>0.7673</td>
+      <td>0.0794</td>
+      <td>0.5390</td>
+      <td>0.0634</td>
+      <td>34.4077</td>
+      <td>8.9324</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Ridge</td>
+      <td>Random</td>
+      <td>0.6720</td>
+      <td>0.0774</td>
+      <td>0.5283</td>
+      <td>0.0501</td>
+      <td>0.7672</td>
+      <td>0.0775</td>
+      <td>0.5396</td>
+      <td>0.0645</td>
+      <td>772.9912</td>
+      <td>193.1743</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Ridge</td>
+      <td>Genética</td>
+      <td>0.6721</td>
+      <td>0.0773</td>
+      <td>0.5283</td>
+      <td>0.0501</td>
+      <td>0.7672</td>
+      <td>0.0775</td>
+      <td>0.5403</td>
+      <td>0.0653</td>
+      <td>425.5571</td>
+      <td>153.4034</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Lasso</td>
+      <td>Grid</td>
+      <td>0.6736</td>
+      <td>0.0792</td>
+      <td>0.5298</td>
+      <td>0.0511</td>
+      <td>0.7661</td>
+      <td>0.0786</td>
+      <td>0.5378</td>
+      <td>0.0672</td>
+      <td>33.8267</td>
+      <td>9.9571</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Lasso</td>
+      <td>Random</td>
+      <td>0.6737</td>
+      <td>0.0783</td>
+      <td>0.5287</td>
+      <td>0.0501</td>
+      <td>0.7660</td>
+      <td>0.0785</td>
+      <td>0.5497</td>
+      <td>0.0640</td>
+      <td>29.7346</td>
+      <td>4.8336</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Ridge</td>
+      <td>Grid</td>
+      <td>0.6740</td>
+      <td>0.0758</td>
+      <td>0.5294</td>
+      <td>0.0488</td>
+      <td>0.7660</td>
+      <td>0.0765</td>
+      <td>0.5418</td>
+      <td>0.0658</td>
+      <td>910.1270</td>
+      <td>257.1465</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Árbol (regresión)</td>
+      <td>Grid</td>
+      <td>0.7567</td>
+      <td>0.1447</td>
+      <td>0.5247</td>
+      <td>0.1013</td>
+      <td>0.6991</td>
+      <td>0.1429</td>
+      <td>0.5106</td>
+      <td>0.1073</td>
+      <td>19.6864</td>
+      <td>1.9576</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Árbol (regresión)</td>
+      <td>Genética</td>
+      <td>0.7607</td>
+      <td>0.1473</td>
+      <td>0.5142</td>
+      <td>0.0741</td>
+      <td>0.6952</td>
+      <td>0.1457</td>
+      <td>0.5328</td>
+      <td>0.1098</td>
+      <td>17.4057</td>
+      <td>2.1693</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Árbol (regresión)</td>
+      <td>Random</td>
+      <td>0.7739</td>
+      <td>0.1771</td>
+      <td>0.5356</td>
+      <td>0.1202</td>
+      <td>0.6766</td>
+      <td>0.1947</td>
+      <td>0.5230</td>
+      <td>0.1197</td>
+      <td>16.0500</td>
+      <td>3.3821</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Árbol (regresión)</td>
+      <td>Bayesiana</td>
+      <td>0.7871</td>
+      <td>0.1881</td>
+      <td>0.5323</td>
+      <td>0.1159</td>
+      <td>0.6631</td>
+      <td>0.2149</td>
+      <td>0.5165</td>
+      <td>0.0939</td>
+      <td>18.5995</td>
+      <td>2.9076</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lectura.</strong> Los ensambles de árboles vuelven a ganar: Random Forest (RMSE 0.571 ± 0.100 estratos, R² 0.83) y
+XGBoost (0.581) van por delante de SVR (0.596), KNN (0.633), los lineales Ridge y Lasso (≈ 0.67,
+indistinguibles entre sí y entre optimizadores) y el árbol individual (0.76). Un RMSE de 0.57 quiere decir que
+el error típico es de algo más de medio estrato; el MAE, de 0.43 estratos.</p>
+<p>Al redondear la predicción al estrato más cercano, el F1 macro de los mejores (0.57 a 0.60) queda por debajo
+del de los clasificadores (≈ 0.66, capítulo 5). La causa es que la regresión <strong>comprime los extremos hacia el
+centro</strong>: en las predicciones fuera de muestra de Random Forest, las viviendas de estrato 6 reciben en
+promedio 5.03 y solo el 19 % se redondea a 6; las de estrato 1 reciben 1.48 (65 % de acierto). La pérdida
+cuadrática empuja hacia la media en las clases raras de los extremos, que son justo las que más pesan en el F1
+macro. Para este problema, entonces, tratar el estrato como número no mejora la clasificación; sirve como
+lectura ordinal del error.</p>
+<p>Los tiempos de búsqueda de esta tabla están inflados: por un error de ejecución corrieron dos copias
+simultáneas de la regresión, así que solo se pueden comparar entre sí, no con los de clasificación. Aun con
+esa salvedad, Ridge con SAGA es el más lento (770 a 910 s por búsqueda) por la convergencia del solver con
+regularización débil (capítulo 4).</p>
+</section>
+<section id="entrenamiento-validacion-y-prueba">
+<h2>6.2 Entrenamiento, validación y prueba<a class="headerlink" href="#entrenamiento-validacion-y-prueba" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figura</span><span class="p">(</span><span class="s2">"regresion_train_val_test.png"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">AR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"test_mejor"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">AR</span><span class="p">[</span><span class="s2">"test_mejor"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/b847840d80f7cc18f205c4fe2c97463b87b63e8f6f8fb7b6a09a4a3943e3057d.png" src="../_images/b847840d80f7cc18f205c4fe2c97463b87b63e8f6f8fb7b6a09a4a3943e3057d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'modelo': 'Random Forest (regresión) | Grid', 'params': {'n_estimators': 150, 'max_depth': 20, 'max_features': 0.3, 'min_samples_leaf': 2}, 'rmse': 0.5168115844154807, 'mae': 0.4286304535128251, 'f1_macro_redondeado': 0.520388915152966}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-de-residuos-del-mejor-modelo">
+<h2>6.3 Análisis de residuos del mejor modelo<a class="headerlink" href="#analisis-de-residuos-del-mejor-modelo" title="Link to this heading">#</a></h2>
+<p>Las pruebas de independencia de la guía (BDS, Ljung-Box, ACF) se diseñaron para series de tiempo. El catastro no
+tiene tiempo, así que los residuos se <strong>ordenan en el espacio</strong> (de sur a norte, la dirección del gradiente del
+estrato): la «autocorrelación serial» se lee como parecido entre viviendas cercanas en esa dirección. Se
+complementa con el I de Moran de los residuos (8 vecinos), la prueba natural de dependencia espacial.</p>
+<ul class="simple">
+<li><p><strong>White</strong>: H0 = varianza constante de los errores (regresores: predicción y coordenadas).</p></li>
+<li><p><strong>BDS</strong>: H0 = residuos independientes e idénticamente distribuidos (detecta dependencia no lineal).</p></li>
+<li><p><strong>Ljung-Box</strong> (20 rezagos): H0 = sin autocorrelación.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figura</span><span class="p">(</span><span class="s2">"residuos_regresion.png"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">AR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"supuestos_mejor"</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">AR</span><span class="p">[</span><span class="s2">"supuestos_mejor"</span><span class="p">]</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"estadístico"</span><span class="p">:</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lm"</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="s2">"bds"</span><span class="p">][</span><span class="s2">"estadistico_dim2"</span><span class="p">],</span>
+                                          <span class="n">s</span><span class="p">[</span><span class="s2">"ljung_box"</span><span class="p">][</span><span class="s2">"q"</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">"normalidad"</span><span class="p">][</span><span class="s2">"asimetria"</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">"moran_residuos_k8"</span><span class="p">]],</span>
+                          <span class="s2">"p-valor"</span><span class="p">:</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="s2">"bds"</span><span class="p">][</span><span class="s2">"p_dim2"</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">"ljung_box"</span><span class="p">][</span><span class="s2">"p"</span><span class="p">],</span>
+                                      <span class="n">s</span><span class="p">[</span><span class="s2">"normalidad"</span><span class="p">][</span><span class="s2">"p_dagostino"</span><span class="p">],</span> <span class="kc">None</span><span class="p">]},</span>
+                         <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"White"</span><span class="p">,</span> <span class="s2">"BDS (dim. 2)"</span><span class="p">,</span> <span class="s2">"Ljung-Box (20)"</span><span class="p">,</span> <span class="s2">"asimetría / D'Agostino"</span><span class="p">,</span> <span class="s2">"I de Moran"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/dd2877b9be9de67ef5375151f444e5168c99c6558229f879a7d52570089db5a3.png" src="../_images/dd2877b9be9de67ef5375151f444e5168c99c6558229f879a7d52570089db5a3.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>estadístico</th>
+      <th>p-valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>White</th>
+      <td>721.119405</td>
+      <td>1.990266e-149</td>
+    </tr>
+    <tr>
+      <th>BDS (dim. 2)</th>
+      <td>20.211913</td>
+      <td>7.690874e-91</td>
+    </tr>
+    <tr>
+      <th>Ljung-Box (20)</th>
+      <td>9687.879940</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>asimetría / D'Agostino</th>
+      <td>-0.020295</td>
+      <td>4.425040e-120</td>
+    </tr>
+    <tr>
+      <th>I de Moran</th>
+      <td>0.346160</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lectura.</strong> Los residuos del mejor modelo (Random Forest con Grid) no cumplen ningún supuesto clásico. White
+rechaza la varianza constante (LM = 721, p ≈ 10⁻¹⁴⁹); BDS y Ljung-Box rechazan la independencia (p ≈ 0); la
+autocorrelación en el orden sur → norte es 0.46 en el primer rezago y decae despacio (0.30 en el cuarto, 0.07
+en el vigésimo). El I de Moran de los residuos con 8 vecinos es 0.35: viviendas vecinas comparten el error.
+Las colas son más pesadas que las de una normal (curtosis en exceso 2.3), aunque la distribución es simétrica
+(asimetría −0.02).</p>
+<p>Esto importa para el proyecto por dos razones. Primero, aun con la vecindad física de 8 vecinos como
+variables, queda estructura espacial sin explicar en el error: es justo lo que el XGBoost geográfico intenta
+capturar con modelos locales. Segundo, como los errores no son independientes, las pruebas e intervalos deben
+remuestrear bloques espaciales (capítulo 7), no viviendas sueltas.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_clasificacion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">5. Clasificación: resultados de las combinaciones</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_estadistica.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">7. Comparación estadística</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-en-el-bucle-externo">6.1 Métricas en el bucle externo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-validacion-y-prueba">6.2 Entrenamiento, validación y prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-residuos-del-mejor-modelo">6.3 Análisis de residuos del mejor modelo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

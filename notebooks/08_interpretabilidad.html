@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. Interpretabilidad: SHAP y LIME &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/08_interpretabilidad';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="9. El modelo nuevo frente al modelo base" href="09_modelo_nuevo.html" />
+    <link rel="prev" title="7. Comparación estadística" href="07_estadistica.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_diseno.html">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_regresion.html">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_estadistica.html">7. Comparación estadística</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/08_interpretabilidad.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>8. Interpretabilidad: SHAP y LIME</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-global-clasificacion">8.1 Interpretabilidad global: clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicaciones-locales-una-vivienda-bien-clasificada-y-una-con-error-grande">8.2 Explicaciones locales: una vivienda bien clasificada y una con error grande</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-el-mejor-modelo-del-estrato-como-numero">8.3 Regresión: el mejor modelo del estrato como número</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interpretabilidad-shap-y-lime">
+<h1>8. Interpretabilidad: SHAP y LIME<a class="headerlink" href="#interpretabilidad-shap-y-lime" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> ¿Qué variables deciden el estrato que predice el modelo, en general y en una vivienda concreta?
+¿Coinciden SHAP y LIME?</p>
+<p><strong>Respuesta corta.</strong> La ubicación y el entorno, no la vivienda: la posición norte-sur, la distancia al centro y
+el área y los baños de los vecinos. El estrato 1 lo explica sobre todo la distancia al centro; el 6, el norte de
+la ciudad y vecinos con viviendas grandes. LIME coincide solo en parte con SHAP y se aparta con variables
+correlacionadas o binarias.</p>
+</div>
+<p><strong>SHAP</strong> reparte la predicción de una vivienda entre sus variables con los <strong>valores de Shapley</strong> de la teoría de
+juegos cooperativos: la contribución de una variable es su aporte marginal promedio sobre todas las coaliciones
+posibles de las demás. Es la única atribución que cumple a la vez <strong>eficiencia</strong> (las contribuciones suman la
+diferencia entre la predicción y el promedio), <strong>simetría</strong> (dos variables intercambiables reciben lo mismo) y
+<strong>aditividad</strong>. Para XGBoost se calculan exactos con TreeSHAP; para otros modelos, por permutaciones.</p>
+<p><strong>LIME</strong> ajusta, alrededor de una vivienda, un modelo <strong>lineal local</strong> sobre perturbaciones de sus variables
+(discretizadas en cuartiles) ponderadas por su cercanía. Es más barato, pero su explicación depende del radio
+del vecindario y del muestreo, no garantiza que las contribuciones sumen la predicción y puede cambiar entre
+corridas.</p>
+<p><strong>Cuándo divergen.</strong> Con variables correlacionadas (área, baños y habitaciones; x, y y distancia al centro) LIME
+perturba cada una por separado y crea viviendas imposibles, mientras SHAP reparte el efecto entre las
+correlacionadas. Con efectos muy no lineales o interacciones (la ubicación cambia el efecto del tamaño), una
+aproximación lineal local puede ser mala lejos del punto. En esos casos sus rankings de variables difieren.</p>
+<p><strong>Qué modelos se explican.</strong> La guía pide SHAP para el mejor modelo de cada tarea y la comparación con LIME en
+XGBoost. Se explican: <strong>XGBoost</strong> (TreeSHAP exacto), el <strong>XGBoost geográfico</strong> (el modelo nuevo) y el <strong>mejor
+finalista en el test</strong> de clasificación (SHAP por permutaciones, que sirve para cualquier modelo), y el <strong>mejor
+modelo de regresión</strong> (Random Forest, TreeSHAP exacto). Las explicaciones se calculan sobre viviendas del test
+elegidas con la semilla fija; las variables están en la escala del preprocesamiento (estandarizadas), así que en
+los <em>summary plots</em> el color indica valores bajos (azul) o altos (rojo) de cada variable.</p>
+<section id="interpretabilidad-global-clasificacion">
+<h2>8.1 Interpretabilidad global: clasificación<a class="headerlink" href="#interpretabilidad-global-clasificacion" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">_comun</span><span class="w"> </span><span class="kn">import</span> <span class="n">figura</span><span class="p">,</span> <span class="n">leer_json</span>
+
+<span class="n">IN</span> <span class="o">=</span> <span class="n">leer_json</span><span class="p">(</span><span class="s2">"interpretabilidad.json"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="n">IN</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"clasificacion"</span><span class="p">,</span> <span class="p">{})</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">arch</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"("</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">")"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">IC</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Mejor finalista en el test:"</span><span class="p">,</span> <span class="n">IN</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mejor_clasificacion_test"</span><span class="p">))</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"importancia_global"</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">IC</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">IC</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">IC</span><span class="p">:</span>
+    <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shap_global_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor finalista en el test: Logística L1/L2
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>XGBoost</th>
+      <th>XGBoost geográfico</th>
+      <th>Logística L1/L2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>y_km</th>
+      <td>0.8408</td>
+      <td>0.0642</td>
+      <td>0.0284</td>
+    </tr>
+    <tr>
+      <th>knn8_log_area</th>
+      <td>0.5082</td>
+      <td>0.0270</td>
+      <td>0.0702</td>
+    </tr>
+    <tr>
+      <th>knn8_banios</th>
+      <td>0.5079</td>
+      <td>0.0220</td>
+      <td>0.0207</td>
+    </tr>
+    <tr>
+      <th>dist_centro_km</th>
+      <td>0.3184</td>
+      <td>0.0533</td>
+      <td>0.0436</td>
+    </tr>
+    <tr>
+      <th>x_km</th>
+      <td>0.2828</td>
+      <td>0.0484</td>
+      <td>0.0310</td>
+    </tr>
+    <tr>
+      <th>knn8_dist_km</th>
+      <td>0.2654</td>
+      <td>0.0152</td>
+      <td>0.0162</td>
+    </tr>
+    <tr>
+      <th>knn8_prop_PH</th>
+      <td>0.1481</td>
+      <td>0.0069</td>
+      <td>0.0101</td>
+    </tr>
+    <tr>
+      <th>knn8_piso</th>
+      <td>0.1450</td>
+      <td>0.0099</td>
+      <td>0.0210</td>
+    </tr>
+    <tr>
+      <th>knn8_habitaciones</th>
+      <td>0.0655</td>
+      <td>0.0065</td>
+      <td>0.0159</td>
+    </tr>
+    <tr>
+      <th>total_banios</th>
+      <td>0.0628</td>
+      <td>0.0022</td>
+      <td>0.0085</td>
+    </tr>
+    <tr>
+      <th>area_construida</th>
+      <td>0.0594</td>
+      <td>0.0088</td>
+      <td>0.0101</td>
+    </tr>
+    <tr>
+      <th>knn8_antiguedad</th>
+      <td>0.0587</td>
+      <td>0.0076</td>
+      <td>0.0151</td>
+    </tr>
+    <tr>
+      <th>condicion_predio_Informal</th>
+      <td>0.0428</td>
+      <td>0.0051</td>
+      <td>0.0162</td>
+    </tr>
+    <tr>
+      <th>area_catastral_terreno</th>
+      <td>0.0377</td>
+      <td>0.0038</td>
+      <td>0.0109</td>
+    </tr>
+    <tr>
+      <th>antiguedad</th>
+      <td>0.0373</td>
+      <td>0.0065</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/3d9f1677bea01f1c8bb7ea5442a43b71d436186f9c8370cb9912d33e91101978.png" src="../_images/3d9f1677bea01f1c8bb7ea5442a43b71d436186f9c8370cb9912d33e91101978.png" />
+<img alt="../_images/1f97ce3487cd2125cba512b60864232f22bfb985ad104dc4e625cd3d93e3f6a9.png" src="../_images/1f97ce3487cd2125cba512b60864232f22bfb985ad104dc4e625cd3d93e3f6a9.png" />
+<img alt="../_images/cab6ea6f54a1ea89256472c8b78c23be86ffb018290a0448d8a13f94698223cb.png" src="../_images/cab6ea6f54a1ea89256472c8b78c23be86ffb018290a0448d8a13f94698223cb.png" />
+</div>
+</div>
+<p>Los <em>summary plots</em> (beeswarm) muestran, para los estratos de los extremos, el efecto de cada variable en cada
+vivienda: a la derecha empuja hacia ese estrato, a la izquierda lo aleja.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">IC</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+        <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shap_beeswarm_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="si">}</span><span class="s2">_estrato</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/59f9e0fcc41f6fd5369c1fd3f3f4daff84338f0b0e95a06f9b14cde0250aa802.png" src="../_images/59f9e0fcc41f6fd5369c1fd3f3f4daff84338f0b0e95a06f9b14cde0250aa802.png" />
+<img alt="../_images/e65e9cc5fb254d7f0cf3aaed922dd016e5c2d403896c2b7ee4d683b48c40d98e.png" src="../_images/e65e9cc5fb254d7f0cf3aaed922dd016e5c2d403896c2b7ee4d683b48c40d98e.png" />
+<img alt="../_images/5cf0469a7c95dfb718ab152ebd0356b97ef9c9be577e660afb66049595de415e.png" src="../_images/5cf0469a7c95dfb718ab152ebd0356b97ef9c9be577e660afb66049595de415e.png" />
+<img alt="../_images/ffacde84a7217bfb88fc7e7bec6d4ba3a0ca4de39c7965a4fe84cf82ca9636b8.png" src="../_images/ffacde84a7217bfb88fc7e7bec6d4ba3a0ca4de39c7965a4fe84cf82ca9636b8.png" />
+<img alt="../_images/450783bcdb3cc7390124b823b3af25451944d09bd0485fab71987c67b5f1249e.png" src="../_images/450783bcdb3cc7390124b823b3af25451944d09bd0485fab71987c67b5f1249e.png" />
+<img alt="../_images/8769d85b9da3c5b1ba8c8658648603a82651e4b86e0868d356efe40e485ff3cd.png" src="../_images/8769d85b9da3c5b1ba8c8658648603a82651e4b86e0868d356efe40e485ff3cd.png" />
+</div>
+</div>
+<p><strong>Escalas.</strong> En XGBoost, TreeSHAP reparte el <em>margen</em> del modelo (log-odds de cada estrato); en los modelos
+explicados por permutaciones, la <em>probabilidad</em>. Por eso las magnitudes no se comparan entre modelos, pero el
+orden de las variables sí.</p>
+<p><strong>Lectura.</strong> Los tres modelos cuentan la misma historia: <strong>el estrato lo deciden la ubicación y el entorno, no
+la vivienda.</strong> En XGBoost, las variables más importantes son la posición norte-sur (<code class="docutils literal notranslate"><span class="pre">y_km</span></code>), el área y los
+baños de los 8 vecinos (<code class="docutils literal notranslate"><span class="pre">knn8_log_area</span></code>, <code class="docutils literal notranslate"><span class="pre">knn8_banios</span></code>), la distancia al centro, la posición este-oeste y la
+distancia típica a esos vecinos (<code class="docutils literal notranslate"><span class="pre">knn8_dist_km</span></code>, una medida de densidad); la primera variable propia de la
+vivienda, sus baños, aparece en el décimo lugar con un peso 13 veces menor que <code class="docutils literal notranslate"><span class="pre">y_km</span></code>. En la logística el
+orden es parecido (primero el área de los vecinos y la distancia al centro, luego las coordenadas), y aparece
+la condición del predio (propiedad horizontal o no, informal) como única variable propia relevante.</p>
+<p>Por estrato, los <em>summary plots</em> muestran mecanismos distintos para los dos extremos:</p>
+<ul class="simple">
+<li><p><strong>Estrato 1:</strong> lo explica sobre todo la <strong>distancia al centro</strong> (en XGBoost, |φ| = 0.84, la mayor, seguida del área
+de los vecinos con 0.68) y que los vecinos tengan <strong>viviendas pequeñas</strong>: las viviendas lejanas del centro con vecinos de poca área
+empujan hacia el 1.</p></li>
+<li><p><strong>Estrato 6:</strong> lo explican la <strong>posición al norte</strong> (<code class="docutils literal notranslate"><span class="pre">y_km</span></code>, |φ| = 0.95) y vecinos con <strong>muchos baños y mucha
+área</strong>; la distancia al centro casi no importa (0.06). Es la geografía conocida de Barranquilla: los estratos
+altos se concentran en el norte, no en un anillo alrededor del centro.</p></li>
+</ul>
+<p>Esto explica también por qué la vecindad física mejora tanto al modelo base (capítulo 9): las variables que
+más pesan son justo las que la logística B no tenía.</p>
+<p><strong>El XGBoost geográfico</strong> (en escala de probabilidad) ordena las variables igual que XGBoost: posición norte-
+sur, distancia al centro, posición este-oeste y área y baños de los vecinos. Las coordenadas en km que solo
+sirven para elegir el ancla de cada vivienda, <code class="docutils literal notranslate"><span class="pre">x_km</span> <span class="pre">(ancla)</span></code> e <code class="docutils literal notranslate"><span class="pre">y_km</span> <span class="pre">(ancla)</span></code>, casi no pesan (|φ| = 0.002 para
+la <em>y</em>, frente a 0.064 de <code class="docutils literal notranslate"><span class="pre">y_km</span></code> como variable del modelo). Es lo esperable con α = 0.97: los modelos locales
+reciben solo el 3 % del peso, así que cambiar de ancla casi no mueve la predicción. En los modelos explicados
+en probabilidad, las contribuciones al estrato 6 son pequeñas porque ese estrato es raro en el test (1.2 %) y
+su probabilidad casi siempre es baja.</p>
+</section>
+<section id="explicaciones-locales-una-vivienda-bien-clasificada-y-una-con-error-grande">
+<h2>8.2 Explicaciones locales: una vivienda bien clasificada y una con error grande<a class="headerlink" href="#explicaciones-locales-una-vivienda-bien-clasificada-y-una-con-error-grande" title="Link to this heading">#</a></h2>
+<p>Gráficos <em>waterfall</em>: parten del valor base (la predicción promedio del modelo para ese estrato) y cada barra
+suma o resta la contribución de una variable hasta llegar a la predicción de la vivienda (por la propiedad de
+eficiencia, las contribuciones suman exactamente esa diferencia). Debajo, la explicación LIME de la misma
+vivienda: sus reglas son intervalos de las variables y sus pesos los coeficientes del modelo lineal local.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">IC</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">etq</span><span class="p">,</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">v</span><span class="p">[</span><span class="s2">"locales"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">etq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span><span class="w"> </span><span class="s1">' '</span><span class="p">)</span><span class="si">}</span><span class="s2">: estrato real </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'real'</span><span class="p">]</span><span class="si">}</span><span class="s2">, predicho </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'predicho'</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+              <span class="sa">f</span><span class="s2">"(probabilidad </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'probabilidad'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">); R² del modelo local de LIME = </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'lime_r2_local'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">; "</span>
+              <span class="sa">f</span><span class="s2">"variables en común entre los 8 primeros de SHAP y de LIME: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">loc</span><span class="p">[</span><span class="s1">'variables_en_comun_top8'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shap_waterfall_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">etq</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+        <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lime_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">etq</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost — bien clasificada: estrato real 1, predicho 1 (probabilidad 0.93); R² del modelo local de LIME = 0.38; variables en común entre los 8 primeros de SHAP y de LIME: 4
+</pre></div>
+</div>
+<img alt="../_images/176283bca8b79605e6b39370ae79518ce3f8034ba3ca46a706ac9a572dd7ab8c.png" src="../_images/176283bca8b79605e6b39370ae79518ce3f8034ba3ca46a706ac9a572dd7ab8c.png" />
+<img alt="../_images/6dab0602447e24084e0aeb31a0a01f0e1b36ac2f62998259063b2304b6efb9e9.png" src="../_images/6dab0602447e24084e0aeb31a0a01f0e1b36ac2f62998259063b2304b6efb9e9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost — error grande: estrato real 2, predicho 4 (probabilidad 0.48); R² del modelo local de LIME = 0.12; variables en común entre los 8 primeros de SHAP y de LIME: 3
+</pre></div>
+</div>
+<img alt="../_images/255e5321455117e6f69a27b2c0101a518b1a3d8a778ac5e9ab7ace3af9678773.png" src="../_images/255e5321455117e6f69a27b2c0101a518b1a3d8a778ac5e9ab7ace3af9678773.png" />
+<img alt="../_images/5343962fb48bbb974dcf7aecf219172270f85389af162fc7098b4dcfa501937f.png" src="../_images/5343962fb48bbb974dcf7aecf219172270f85389af162fc7098b4dcfa501937f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost geográfico — bien clasificada: estrato real 3, predicho 3 (probabilidad 0.44); R² del modelo local de LIME = 0.02; variables en común entre los 8 primeros de SHAP y de LIME: 1
+</pre></div>
+</div>
+<img alt="../_images/eb99b12bed48f5d3b61ddf87a266a1fae858244891e1b11e8d404cb4b58223d5.png" src="../_images/eb99b12bed48f5d3b61ddf87a266a1fae858244891e1b11e8d404cb4b58223d5.png" />
+<img alt="../_images/8b00758a36acb09e4d2c6d9cb536526b8418bcfae77a1890ab2bf7b9c2b0b0c2.png" src="../_images/8b00758a36acb09e4d2c6d9cb536526b8418bcfae77a1890ab2bf7b9c2b0b0c2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost geográfico — error grande: estrato real 4, predicho 2 (probabilidad 0.38); R² del modelo local de LIME = 0.08; variables en común entre los 8 primeros de SHAP y de LIME: 2
+</pre></div>
+</div>
+<img alt="../_images/9f830a83659e59abd3c58f53874b3d03b84876c79b47a35d2536ef1056cff7e0.png" src="../_images/9f830a83659e59abd3c58f53874b3d03b84876c79b47a35d2536ef1056cff7e0.png" />
+<img alt="../_images/144b9999186e2a2151f94977492286d953034909fd2498ece5274d72e8fcd9c3.png" src="../_images/144b9999186e2a2151f94977492286d953034909fd2498ece5274d72e8fcd9c3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logística L1/L2 — bien clasificada: estrato real 3, predicho 3 (probabilidad 0.56); R² del modelo local de LIME = 0.18; variables en común entre los 8 primeros de SHAP y de LIME: 4
+</pre></div>
+</div>
+<img alt="../_images/6c6eb30a125cf2a5cf22524f3e2e3368332bb12bd3aead669793216cd4f94509.png" src="../_images/6c6eb30a125cf2a5cf22524f3e2e3368332bb12bd3aead669793216cd4f94509.png" />
+<img alt="../_images/4dd89497591ca916698ebc1a7080e2c9dbf5952aed154efdecd9629f4e3aff0d.png" src="../_images/4dd89497591ca916698ebc1a7080e2c9dbf5952aed154efdecd9629f4e3aff0d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logística L1/L2 — error grande: estrato real 3, predicho 5 (probabilidad 0.47); R² del modelo local de LIME = 0.29; variables en común entre los 8 primeros de SHAP y de LIME: 5
+</pre></div>
+</div>
+<img alt="../_images/215e5b34b21ad4eb52afbf506e9e52a07b7cb3f1bab960233f1a533755b10c9a.png" src="../_images/215e5b34b21ad4eb52afbf506e9e52a07b7cb3f1bab960233f1a533755b10c9a.png" />
+<img alt="../_images/bc043df8b6f27657f03f028d60acc46c0d0f79e635a84dca5eb6a71c1043bc83.png" src="../_images/bc043df8b6f27657f03f028d60acc46c0d0f79e635a84dca5eb6a71c1043bc83.png" />
+</div>
+</div>
+<p><strong>Lectura de los casos.</strong></p>
+<ul class="simple">
+<li><p><strong>XGBoost, vivienda bien clasificada</strong> (estrato 1, probabilidad 0.93): la empujan hacia el 1 su distancia al
+centro (+0.77 en el margen), el área pequeña de sus vecinos (+0.56) y su posición al oeste (+0.50). LIME coincide en
+las mismas cuatro variables de ubicación y entorno, con reglas del tipo «distancia al centro alta» y «área de los
+vecinos baja».</p></li>
+<li><p><strong>XGBoost, error grande</strong> (estrato 2 predicho como 4, probabilidad 0.48): sus vecinos tienen muchos baños (+0.52)
+y su posición este-oeste es la de barrios de estrato 4 (+0.45). Es una vivienda modesta en una zona de transición:
+el modelo ve el barrio, no la casa.</p></li>
+<li><p><strong>Logística, error grande</strong> (estrato 3 predicho como 5): el área grande de sus vecinos (+0.31) domina la
+predicción. Mismo patrón: una vivienda de estrato medio rodeada de viviendas grandes.</p></li>
+</ul>
+<p><strong>SHAP frente a LIME.</strong> Coinciden en 3 a 5 de las 8 variables principales en XGBoost y la logística, y en 1 o
+2 en el XGBoost geográfico. Divergen justo donde la teoría lo anticipa:</p>
+<ol class="arabic simple">
+<li><p><strong>Calidad de la aproximación lineal local:</strong> el R² del modelo lineal de LIME va de 0.02 a 0.38. Con interacciones
+fuertes (el efecto del tamaño cambia con la ubicación), una recta local explica poco de la superficie de
+decisión de los árboles.</p></li>
+<li><p><strong>Variables binarias y correlacionadas:</strong> LIME perturba cada variable por separado y crea viviendas imposibles
+(un predio con indicadores de faltante encendidos al azar, o con <code class="docutils literal notranslate"><span class="pre">x_km</span></code> cambiado sin cambiar <code class="docutils literal notranslate"><span class="pre">dist_centro_km</span></code>).
+Por eso aparecen en su lista indicadores de faltante y categorías «infrecuentes» que SHAP considera
+irrelevantes. SHAP, en cambio, reparte el efecto entre variables correlacionadas y sus contribuciones suman
+exactamente la predicción (propiedad de eficiencia).</p></li>
+<li><p><strong>Inestabilidad:</strong> las reglas de LIME dependen de la discretización en cuartiles y del muestreo; las de SHAP,
+del fondo y, en las permutaciones, de la semilla, que aquí está fija.</p></li>
+</ol>
+<p>Para este problema, SHAP es la explicación más confiable; LIME sirve como verificación rápida cuando las dos
+coinciden.</p>
+</section>
+<section id="regresion-el-mejor-modelo-del-estrato-como-numero">
+<h2>8.3 Regresión: el mejor modelo del estrato como número<a class="headerlink" href="#regresion-el-mejor-modelo-del-estrato-como-numero" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="o">=</span> <span class="n">IN</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"regresion"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">IR</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Modelo:"</span><span class="p">,</span> <span class="n">IR</span><span class="p">[</span><span class="s2">"modelo"</span><span class="p">],</span> <span class="n">IR</span><span class="p">[</span><span class="s2">"params"</span><span class="p">])</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">IR</span><span class="p">[</span><span class="s2">"importancia_global"</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"|φ| medio (estratos)"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">())</span>
+    <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shap_beeswarm_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">IR</span><span class="p">[</span><span class="s1">'modelo'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' | '</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">etq</span><span class="p">,</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">IR</span><span class="p">[</span><span class="s2">"locales"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">etq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span><span class="w"> </span><span class="s1">' '</span><span class="p">)</span><span class="si">}</span><span class="s2">: estrato real </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'real'</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, predicho </span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">'predicho'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">figura</span><span class="p">(</span><span class="sa">f</span><span class="s2">"shap_waterfall_</span><span class="si">{</span><span class="n">arch</span><span class="p">(</span><span class="n">IR</span><span class="p">[</span><span class="s1">'modelo'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' | '</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">etq</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Modelo: Random Forest (regresión) | Grid {'n_estimators': 150, 'max_depth': 20, 'max_features': 0.3, 'min_samples_leaf': 2}
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>|φ| medio (estratos)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>knn8_banios</th>
+      <td>0.3036</td>
+    </tr>
+    <tr>
+      <th>y_km</th>
+      <td>0.2766</td>
+    </tr>
+    <tr>
+      <th>dist_centro_km</th>
+      <td>0.2738</td>
+    </tr>
+    <tr>
+      <th>knn8_log_area</th>
+      <td>0.2418</td>
+    </tr>
+    <tr>
+      <th>x_km</th>
+      <td>0.0917</td>
+    </tr>
+    <tr>
+      <th>knn8_prop_PH</th>
+      <td>0.0900</td>
+    </tr>
+    <tr>
+      <th>knn8_piso</th>
+      <td>0.0606</td>
+    </tr>
+    <tr>
+      <th>knn8_dist_km</th>
+      <td>0.0485</td>
+    </tr>
+    <tr>
+      <th>area_construida</th>
+      <td>0.0404</td>
+    </tr>
+    <tr>
+      <th>total_banios</th>
+      <td>0.0334</td>
+    </tr>
+    <tr>
+      <th>condicion_predio_Informal</th>
+      <td>0.0313</td>
+    </tr>
+    <tr>
+      <th>uso_Residencial_Vivienda_Hasta_3_Pisos</th>
+      <td>0.0270</td>
+    </tr>
+    <tr>
+      <th>knn8_habitaciones</th>
+      <td>0.0190</td>
+    </tr>
+    <tr>
+      <th>antiguedad</th>
+      <td>0.0136</td>
+    </tr>
+    <tr>
+      <th>knn8_antiguedad</th>
+      <td>0.0135</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/4db374f40781658b457c356032006a1d33364f1f24b64a48e928037f9c63f775.png" src="../_images/4db374f40781658b457c356032006a1d33364f1f24b64a48e928037f9c63f775.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bien predicha: estrato real 3, predicho 2.86
+</pre></div>
+</div>
+<img alt="../_images/14871ab95a313db17dc292de21fd2a29b71e983b0303186f5464bd4c69c73be3.png" src="../_images/14871ab95a313db17dc292de21fd2a29b71e983b0303186f5464bd4c69c73be3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>error grande: estrato real 5, predicho 2.92
+</pre></div>
+</div>
+<img alt="../_images/17dc1b1d7781dc653f1a3b9684d5c17b6c0d1dcc038f640acbf7f380cc8c89bb.png" src="../_images/17dc1b1d7781dc653f1a3b9684d5c17b6c0d1dcc038f640acbf7f380cc8c89bb.png" />
+</div>
+</div>
+<p><strong>Lectura.</strong> En el mejor modelo de regresión (Random Forest, estrato como número), las cuatro variables más
+importantes son las mismas de la clasificación: baños y área de los vecinos, posición norte-sur y distancia al
+centro, con |φ| medio de 0.24 a 0.30 estratos cada una; la primera variable propia de la vivienda (su área
+construida) aporta 0.04. Los <em>waterfalls</em> parten del valor base de 2.57 (el estrato medio de la submuestra):</p>
+<ul class="simple">
+<li><p><strong>Bien predicha</strong> (estrato 3, predicción 2.86): su posición al sur la baja (−0.36), pero la distancia al centro y
+el área de sus vecinos la suben (+0.29 y +0.27).</p></li>
+<li><p><strong>Error grande</strong> (estrato 5, predicción 2.92): su ubicación la sube (+0.37 por <code class="docutils literal notranslate"><span class="pre">y_km</span></code> y +0.37 por la distancia al
+centro), pero sus vecinos tienen pocos baños (−0.25). Es el caso simétrico al de la clasificación: una vivienda de
+estrato alto en un entorno modesto. La regresión además comprime los extremos (capítulo 6), así que no se atreve
+a predecir un 5.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_estadistica.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">7. Comparación estadística</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_modelo_nuevo.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">9. El modelo nuevo frente al modelo base</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-global-clasificacion">8.1 Interpretabilidad global: clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicaciones-locales-una-vivienda-bien-clasificada-y-una-con-error-grande">8.2 Explicaciones locales: una vivienda bien clasificada y una con error grande</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-el-mejor-modelo-del-estrato-como-numero">8.3 Regresión: el mejor modelo del estrato como número</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A. Reproducibilidad e ingeniería del pipeline &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/A_reproducibilidad';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="10. Conclusiones" href="10_conclusiones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_diseno.html">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_regresion.html">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_estadistica.html">7. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_interpretabilidad.html">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/A_reproducibilidad.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A. Reproducibilidad e ingeniería del pipeline</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-entorno-fijado">A.1 Entorno fijado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-semilla-unica">A.2 Semilla única</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-3-registro-estructurado-de-experimentos">A.3 Registro estructurado de experimentos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-4-modularidad">A.4 Modularidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-5-orden-de-ejecucion">A.5 Orden de ejecución</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-6-verificacion-de-reproducibilidad">A.6 Verificación de reproducibilidad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-reproducibilidad-e-ingenieria-del-pipeline">
+<h1>A. Reproducibilidad e ingeniería del pipeline<a class="headerlink" href="#a-reproducibilidad-e-ingenieria-del-pipeline" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> ¿Cómo se reproduce todo y qué tan reproducible es?</p>
+<p><strong>Respuesta corta.</strong> Con el entorno fijado, la semilla única, las tareas registradas y el orden de ejecución de
+la sección A.5. Al repetir las búsquedas en procesos nuevos, XGBoost elige exactamente lo mismo; el genético de
+Random Forest puede cambiar por diferencias de redondeo numérico, sin cambiar ninguna conclusión (sección A.6).</p>
+</div>
+<section id="a-1-entorno-fijado">
+<h2>A.1 Entorno fijado<a class="headerlink" href="#a-1-entorno-fijado" title="Link to this heading">#</a></h2>
+<p>Python 3.14.6 en Windows 11 (Intel Core i5-8265U, 4 núcleos y 8 hilos, sin GPU NVIDIA). Versiones exactas en
+<code class="docutils literal notranslate"><span class="pre">requirements-e3.txt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arch</span><span class="o">==</span><span class="mf">8.0.0</span>
+<span class="n">deap</span><span class="o">==</span><span class="mf">1.4.4</span>
+<span class="n">imbalanced</span><span class="o">-</span><span class="n">learn</span><span class="o">==</span><span class="mf">0.14.2</span>
+<span class="n">ipykernel</span><span class="o">==</span><span class="mf">7.4.0</span>
+<span class="n">joblib</span><span class="o">==</span><span class="mf">1.5.3</span>
+<span class="n">jupyter</span><span class="o">-</span><span class="n">book</span><span class="o">==</span><span class="mf">1.0.4</span><span class="o">.</span><span class="n">post1</span>
+<span class="n">jupytext</span><span class="o">==</span><span class="mf">1.19.6</span>
+<span class="n">lime</span><span class="o">==</span><span class="mf">0.2.0.1</span>
+<span class="n">matplotlib</span><span class="o">==</span><span class="mf">3.11.2</span>
+<span class="n">memory</span><span class="o">-</span><span class="n">profiler</span><span class="o">==</span><span class="mf">0.61.0</span>
+<span class="n">nbclient</span><span class="o">==</span><span class="mf">0.11.0</span>
+<span class="n">numpy</span><span class="o">==</span><span class="mf">2.4.4</span>
+<span class="n">optuna</span><span class="o">==</span><span class="mf">5.0.0</span>
+<span class="n">pandas</span><span class="o">==</span><span class="mf">3.0.2</span>
+<span class="n">plotly</span><span class="o">==</span><span class="mf">7.1.0</span>
+<span class="n">pyarrow</span><span class="o">==</span><span class="mf">25.0.1</span>
+<span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">==</span><span class="mf">1.8.0</span>
+<span class="n">scikit</span><span class="o">-</span><span class="n">posthocs</span><span class="o">==</span><span class="mf">0.17.1</span>
+<span class="n">scipy</span><span class="o">==</span><span class="mf">1.17.1</span>
+<span class="n">seaborn</span><span class="o">==</span><span class="mf">0.13.2</span>
+<span class="n">shap</span><span class="o">==</span><span class="mf">0.54.1</span>
+<span class="n">statsmodels</span><span class="o">==</span><span class="mf">0.15.0</span>
+<span class="n">xgboost</span><span class="o">==</span><span class="mf">3.2.0</span>
+<span class="n">faiss</span><span class="o">-</span><span class="n">cpu</span><span class="o">==</span><span class="mf">1.15.1</span>
+</pre></div>
+</div>
+</section>
+<section id="a-2-semilla-unica">
+<h2>A.2 Semilla única<a class="headerlink" href="#a-2-semilla-unica" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SEED</span> <span class="pre">=</span> <span class="pre">42</span></code> en <code class="docutils literal notranslate"><span class="pre">estrato3/configuracion.py</span></code>; <code class="docutils literal notranslate"><span class="pre">fijar_semillas()</span></code> fija <code class="docutils literal notranslate"><span class="pre">random</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> y <code class="docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code>, y todos
+los componentes reciben <code class="docutils literal notranslate"><span class="pre">random_state=SEED</span></code> explícito: submuestra, K-Means de kNNDM, SMOTE/ADASYN, modelos,
+Random Search, TPE de Optuna y el genético de DEAP. Los pliegues (externos e internos) se calculan una sola vez y
+se guardan en <code class="docutils literal notranslate"><span class="pre">resultados/datos_clasificacion.pkl</span></code>, así que todas las combinaciones usan exactamente los mismos.</p>
+</section>
+<section id="a-3-registro-estructurado-de-experimentos">
+<h2>A.3 Registro estructurado de experimentos<a class="headerlink" href="#a-3-registro-estructurado-de-experimentos" title="Link to this heading">#</a></h2>
+<p>Cada tarea (modelo, balanceo, optimizador, pliegue externo) se guarda en <code class="docutils literal notranslate"><span class="pre">resultados/tareas/&lt;hash&gt;.json</span></code> con:
+semilla, presupuesto, hiperparámetros finales, F1 interno del óptimo, métricas del bucle externo, número de
+evaluaciones, tiempos (búsqueda, ajuste final e inferencia) y el <strong>historial completo</strong> de la búsqueda
+(configuración, puntaje y tiempo de cada evaluación); las probabilidades fuera de muestra van en un <code class="docutils literal notranslate"><span class="pre">.npz</span></code>. La
+tabla maestra (<code class="docutils literal notranslate"><span class="pre">tabla_maestra_clasificacion.csv</span></code> y <code class="docutils literal notranslate"><span class="pre">tabla_maestra_regresion.csv</span></code>) las reúne. Como cada tarea se
+guarda al terminar, el experimento se puede interrumpir y retomar sin repetir trabajo.</p>
+</section>
+<section id="a-4-modularidad">
+<h2>A.4 Modularidad<a class="headerlink" href="#a-4-modularidad" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Módulo</p></th>
+<th class="head"><p>Responsabilidad</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/datos.py</span></code></p></td>
+<td><p>Carga, variables, submuestra y pliegues</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/modelos.py</span></code>, <code class="docutils literal notranslate"><span class="pre">estrato3/modelos_propios.py</span></code></p></td>
+<td><p>Modelos, espacios de búsqueda y pipelines</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/optimizacion.py</span></code></p></td>
+<td><p>Función objetivo y los cuatro optimizadores</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/evaluacion.py</span></code></p></td>
+<td><p>Métricas</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/estadistica.py</span></code>, <code class="docutils literal notranslate"><span class="pre">estrato3/estadistica_regresion.py</span></code></p></td>
+<td><p>Pruebas estadísticas</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">estrato3/experimento.py</span></code></p></td>
+<td><p>Una tarea del pipeline combinatorio</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">experimentos/*.py</span></code></p></td>
+<td><p>Ejecutores y análisis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Todas las funciones reutilizadas tienen docstrings estilo NumPy (parámetros, retorno y supuestos).</p>
+</section>
+<section id="a-5-orden-de-ejecucion">
+<h2>A.5 Orden de ejecución<a class="headerlink" href="#a-5-orden-de-ejecucion" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>experimentos/correr_clasificacion.py<span class="w">      </span><span class="c1"># 640 tareas (~4.8 h con 8 procesos)</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/correr_regresion.py<span class="w">          </span><span class="c1"># 140 tareas</span>
+python<span class="w"> </span>experimentos/analizar_clasificacion.py
+python<span class="w"> </span>experimentos/analizar_regresion.py
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/finalistas.py<span class="w">                </span><span class="c1"># test, calibración, semillas (paralelo)</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/multifidelidad.py
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/complejidad.py<span class="w">               </span><span class="c1"># con el computador libre (mide tiempos)</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/complejidad_faiss.py<span class="w">         </span><span class="c1"># con el computador libre</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/tabla_estandar_optimizado.py<span class="w"> </span><span class="c1"># con el computador libre</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/todos_los_datos.py<span class="w">           </span><span class="c1"># finalistas con las 257 273 viviendas</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/interpretabilidad.py<span class="w">         </span><span class="c1"># SHAP y LIME (clasificación y regresión)</span>
+python<span class="w"> </span>-u<span class="w"> </span>experimentos/verificar_reproducibilidad.py
+<span class="nb">cd</span><span class="w"> </span>libro<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python<span class="w"> </span>construir_libro.py
+</pre></div>
+</div>
+</section>
+<section id="a-6-verificacion-de-reproducibilidad">
+<h2>A.6 Verificación de reproducibilidad<a class="headerlink" href="#a-6-verificacion-de-reproducibilidad" title="Link to this heading">#</a></h2>
+<p>La semilla única se comprobó repitiendo, en procesos nuevos, la búsqueda final de los dos finalistas con
+aleatoriedad en el modelo, el balanceo y la búsqueda (<code class="docutils literal notranslate"><span class="pre">experimentos/verificar_reproducibilidad.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">resultados/reproducibilidad.json</span></code>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Finalista</p></th>
+<th class="head"><p>Optimizador</p></th>
+<th class="head"><p>¿Mismos hiperparámetros?</p></th>
+<th class="head"><p>F1 de test (corrida del libro → repetición)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>XGBoost (SMOTE)</p></td>
+<td><p>Random</p></td>
+<td><p>sí</p></td>
+<td><p>0.5665 → 0.5670</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Forest (SMOTE)</p></td>
+<td><p>Genética</p></td>
+<td><p>no (profundidad 21 y hojas de 2 → profundidad 15 y hojas de 3)</p></td>
+<td><p>0.557 → 0.565</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La semilla fija todo lo que es aleatorio, pero no las diferencias de redondeo de las bibliotecas numéricas. La
+causa más probable es BLAS, que reparte las operaciones de matrices entre varios hilos según la carga del
+computador y así cambia el orden de las sumas en la última cifra decimal. En SMOTE, eso basta para que cambie un
+vecino empatado, y entonces cambian algunas viviendas sintéticas. En una búsqueda que compara valores de F1 muy
+parecidos, como el algoritmo genético de Random Forest, eso puede cambiar la configuración elegida. La diferencia
+(0.008) es menor que la variación de Random Forest entre semillas (±0.013, sección 5.6), así que no cambia ninguna
+conclusión. Para obtener resultados idénticos bit a bit hay que fijar además <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS=1</span></code> y
+<code class="docutils literal notranslate"><span class="pre">OPENBLAS_NUM_THREADS=1</span></code> antes de correr.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="10_conclusiones.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">10. Conclusiones</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-entorno-fijado">A.1 Entorno fijado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-semilla-unica">A.2 Semilla única</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-3-registro-estructurado-de-experimentos">A.3 Registro estructurado de experimentos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-4-modularidad">A.4 Modularidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-5-orden-de-ejecucion">A.5 Orden de ejecución</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-6-verificacion-de-reproducibilidad">A.6 Verificación de reproducibilidad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

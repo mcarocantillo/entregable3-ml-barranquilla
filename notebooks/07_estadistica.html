@@ -1,0 +1,1796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Comparación estadística &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/07_estadistica';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="8. Interpretabilidad: SHAP y LIME" href="08_interpretabilidad.html" />
+    <link rel="prev" title="6. Regresión: el estrato como número" href="06_regresion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_diseno.html">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_regresion.html">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_interpretabilidad.html">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/07_estadistica.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7. Comparación estadística</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-friedman-nemenyi">7.1 Clasificación: Friedman → Nemenyi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-dirigidas-delong-con-holm">7.2 Comparaciones dirigidas: DeLong con Holm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-del-efecto-e-intervalos-de-confianza">7.3 Tamaño del efecto e intervalos de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-mcs-giacomini-white-clark-west-diebold-mariano">7.4 Regresión: MCS → Giacomini-White / Clark-West → Diebold-Mariano</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="comparacion-estadistica">
+<h1>7. Comparación estadística<a class="headerlink" href="#comparacion-estadistica" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> De todas las diferencias observadas, ¿cuáles son reales y cuáles son ruido?</p>
+<p><strong>Respuesta corta.</strong> Friedman confirma que los modelos difieren. Con la mejor combinación de cada uno, el
+XGBoost geográfico tiene el mejor rango medio, pero Nemenyi solo separa a Naive Bayes del grupo de cabeza.
+Frente a la logística, el geográfico ordena mejor los estratos 1 a 4 y peor el 5 y el 6 (DeLong con Holm), con
+un efecto pequeño (δ de Cliff = 0.28). En regresión, el MCS deja 8 de 28 combinaciones, y la diferencia entre
+las dos mejores es significativa pero sin relevancia práctica.</p>
+</div>
+<p>Con 140 modelos hay 9 730 pares posibles; probarlos uno a uno con α = 0.05 daría unos 487 falsos positivos por
+azar. Por eso la comparación es <strong>jerárquica</strong>: primero una prueba global, después comparaciones dirigidas entre
+pocos finalistas con corrección por comparaciones múltiples, y siempre con tamaño del efecto.</p>
+<section id="clasificacion-friedman-nemenyi">
+<h2>7.1 Clasificación: Friedman → Nemenyi<a class="headerlink" href="#clasificacion-friedman-nemenyi" title="Link to this heading">#</a></h2>
+<p><strong>Bloques.</strong> Con 5 pliegues externos, la prueba de Friedman tiene muy poca potencia (la diferencia crítica de
+Nemenyi para 8 modelos sería de casi 5 rangos). Se usan además, como bloques, los <strong>bloques espaciales de 2 km</strong>
+del Entregable 1: el F1 macro de las predicciones fuera de muestra de cada combinación, calculado en cada bloque.
+Ambas versiones se reportan.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">_comun</span><span class="w"> </span><span class="kn">import</span> <span class="n">figura</span><span class="p">,</span> <span class="n">leer_json</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">leer_json</span><span class="p">(</span><span class="s2">"analisis_clasificacion.json"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">clave</span><span class="p">,</span> <span class="n">titulo</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"friedman_todas_pliegues"</span><span class="p">,</span> <span class="s2">"Todas las combinaciones, bloques = pliegues externos"</span><span class="p">),</span>
+                      <span class="p">(</span><span class="s2">"friedman_todas_bloques"</span><span class="p">,</span> <span class="s2">"Todas las combinaciones, bloques = bloques espaciales"</span><span class="p">),</span>
+                      <span class="p">(</span><span class="s2">"friedman_mejor_por_modelo"</span><span class="p">,</span> <span class="s2">"Mejor combinación de cada modelo, bloques espaciales"</span><span class="p">)]:</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">clave</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">clave</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">titulo</span><span class="si">}</span><span class="s2">: χ²_F = </span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="s1">'chi2'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, gl = </span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="s1">'gl'</span><span class="p">]</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="s1">'p'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">, n = </span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="s1">'n_bloques'</span><span class="p">]</span><span class="si">}</span><span class="s2"> bloques, "</span>
+              <span class="sa">f</span><span class="s2">"diferencia crítica (Nemenyi, α = 0.05) = </span><span class="si">{</span><span class="n">f</span><span class="p">[</span><span class="s1">'cd'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> rangos"</span><span class="p">)</span>
+<span class="n">figura</span><span class="p">(</span><span class="s2">"cd_mejor_combinación_por_modelo.png"</span><span class="p">)</span>
+<span class="n">figura</span><span class="p">(</span><span class="s2">"cd_todas_las_combinaciones_(bloques_espaciales).png"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Todas las combinaciones, bloques = pliegues externos: χ²_F = 506.16, gl = 127, p = 1.04e-46, n = 5 bloques, diferencia crítica (Nemenyi, α = 0.05) = 103.42 rangos
+Todas las combinaciones, bloques = bloques espaciales: χ²_F = 979.51, gl = 127, p = 1.23e-131, n = 32 bloques, diferencia crítica (Nemenyi, α = 0.05) = 40.88 rangos
+Mejor combinación de cada modelo, bloques espaciales: χ²_F = 47.62, gl = 7, p = 4.22e-08, n = 32 bloques, diferencia crítica (Nemenyi, α = 0.05) = 1.86 rangos
+</pre></div>
+</div>
+<img alt="../_images/df6d7651b6a4bedf2e64d8521c569cc68b77cc739424ef6e6971f00b82e1cb85.png" src="../_images/df6d7651b6a4bedf2e64d8521c569cc68b77cc739424ef6e6971f00b82e1cb85.png" />
+<img alt="../_images/93cc1902bfdb2a8d5f73f70893eb3030975f7f2130d49c673c69a4c4ca08feb9.png" src="../_images/93cc1902bfdb2a8d5f73f70893eb3030975f7f2130d49c673c69a4c4ca08feb9.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nemenyi_mejor_por_modelo"</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="s2">"nemenyi_mejor_por_modelo"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Random Forest</th>
+      <th>XGBoost</th>
+      <th>XGBoost geográfico</th>
+      <th>SVM</th>
+      <th>Logística L1/L2</th>
+      <th>KNN</th>
+      <th>Árbol de decisión</th>
+      <th>Naive Bayes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Random Forest</th>
+      <td>1.000</td>
+      <td>0.967</td>
+      <td>0.714</td>
+      <td>0.889</td>
+      <td>0.967</td>
+      <td>0.982</td>
+      <td>0.908</td>
+      <td>0.001</td>
+    </tr>
+    <tr>
+      <th>XGBoost</th>
+      <td>0.967</td>
+      <td>1.000</td>
+      <td>0.999</td>
+      <td>0.255</td>
+      <td>0.420</td>
+      <td>0.488</td>
+      <td>0.281</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>XGBoost geográfico</th>
+      <td>0.714</td>
+      <td>0.999</td>
+      <td>1.000</td>
+      <td>0.057</td>
+      <td>0.121</td>
+      <td>0.155</td>
+      <td>0.066</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>0.889</td>
+      <td>0.255</td>
+      <td>0.057</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>0.121</td>
+    </tr>
+    <tr>
+      <th>Logística L1/L2</th>
+      <td>0.967</td>
+      <td>0.420</td>
+      <td>0.121</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>0.057</td>
+    </tr>
+    <tr>
+      <th>KNN</th>
+      <td>0.982</td>
+      <td>0.488</td>
+      <td>0.155</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>0.042</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>0.908</td>
+      <td>0.281</td>
+      <td>0.066</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>0.106</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>0.001</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.121</td>
+      <td>0.057</td>
+      <td>0.042</td>
+      <td>0.106</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lectura.</strong> Las tres versiones de Friedman rechazan que todas las combinaciones sean equivalentes (p entre
+10⁻⁴⁶ y 10⁻¹³¹). Con 128 combinaciones, sin embargo, la diferencia crítica es enorme (103 rangos con 5
+pliegues; 41 con 32 bloques espaciales) y Nemenyi solo separa los extremos.</p>
+<p>La comparación útil es la de la <strong>mejor combinación de cada modelo</strong> con 32 bloques espaciales (χ² = 47.6, p =
+4·10⁻⁸, CD = 1.86 rangos). <strong>El XGBoost geográfico tiene el mejor rango medio (3.03)</strong>, seguido de XGBoost
+(3.41) y Random Forest (4.05); KNN (4.63), la logística (4.69), el árbol (4.83) y SVM (4.86) forman un grupo
+intermedio, y Naive Bayes es el último (6.52). En Nemenyi, lo único claramente separado es Naive Bayes, peor
+que los tres ensambles y que KNN (p &lt; 0.05). El XGBoost geográfico aventaja a la logística en 1.66 rangos,
+menos que la CD (p = 0.12), y a SVM en 1.83 (p = 0.057). Nemenyi es conservador con 8 modelos; por eso las
+comparaciones dirigidas de 7.2 y 7.3 se hacen solo entre finalistas.</p>
+</section>
+<section id="comparaciones-dirigidas-delong-con-holm">
+<h2>7.2 Comparaciones dirigidas: DeLong con Holm<a class="headerlink" href="#comparaciones-dirigidas-delong-con-holm" title="Link to this heading">#</a></h2>
+<p>La prueba de DeLong compara dos AUC calculadas sobre las mismas observaciones teniendo en cuenta su correlación.
+Es una prueba para AUC binarias, así que se aplica a cada estrato contra el resto (6 pruebas por par de
+modelos), solo entre los tres mejores modelos y el modelo base, y los p-valores se ajustan con <strong>Holm-Bonferroni</strong>
+(control del error familiar) y <strong>Benjamini-Hochberg</strong> (tasa de falsos descubrimientos).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"delong_finalistas"</span><span class="p">):</span>
+    <span class="n">dl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="s2">"delong_finalistas"</span><span class="p">])</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">dl</span><span class="p">[[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"estrato"</span><span class="p">,</span> <span class="s2">"auc_1"</span><span class="p">,</span> <span class="s2">"auc_2"</span><span class="p">,</span> <span class="s2">"diferencia"</span><span class="p">,</span> <span class="s2">"z"</span><span class="p">,</span> <span class="s2">"p"</span><span class="p">,</span> <span class="s2">"p_holm"</span><span class="p">,</span> <span class="s2">"p_bh"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>estrato</th>
+      <th>auc_1</th>
+      <th>auc_2</th>
+      <th>diferencia</th>
+      <th>z</th>
+      <th>p</th>
+      <th>p_holm</th>
+      <th>p_bh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>1</td>
+      <td>0.9412</td>
+      <td>0.9349</td>
+      <td>0.0063</td>
+      <td>5.3685</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>2</td>
+      <td>0.8927</td>
+      <td>0.8860</td>
+      <td>0.0067</td>
+      <td>3.7348</td>
+      <td>0.0002</td>
+      <td>0.0026</td>
+      <td>0.0003</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>3</td>
+      <td>0.9192</td>
+      <td>0.9051</td>
+      <td>0.0140</td>
+      <td>8.6876</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>4</td>
+      <td>0.9506</td>
+      <td>0.9462</td>
+      <td>0.0045</td>
+      <td>2.7381</td>
+      <td>0.0062</td>
+      <td>0.0556</td>
+      <td>0.0079</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>5</td>
+      <td>0.9555</td>
+      <td>0.9570</td>
+      <td>-0.0015</td>
+      <td>-1.0002</td>
+      <td>0.3172</td>
+      <td>1.0000</td>
+      <td>0.3460</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>6</td>
+      <td>0.9717</td>
+      <td>0.9544</td>
+      <td>0.0173</td>
+      <td>4.7714</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>1</td>
+      <td>0.9412</td>
+      <td>0.9383</td>
+      <td>0.0029</td>
+      <td>2.3948</td>
+      <td>0.0166</td>
+      <td>0.1164</td>
+      <td>0.0200</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>2</td>
+      <td>0.8927</td>
+      <td>0.8857</td>
+      <td>0.0070</td>
+      <td>3.6114</td>
+      <td>0.0003</td>
+      <td>0.0040</td>
+      <td>0.0005</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>3</td>
+      <td>0.9192</td>
+      <td>0.8993</td>
+      <td>0.0198</td>
+      <td>8.7120</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>4</td>
+      <td>0.9506</td>
+      <td>0.9488</td>
+      <td>0.0018</td>
+      <td>1.2806</td>
+      <td>0.2003</td>
+      <td>1.0000</td>
+      <td>0.2254</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>5</td>
+      <td>0.9555</td>
+      <td>0.9373</td>
+      <td>0.0182</td>
+      <td>6.4047</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>6</td>
+      <td>0.9717</td>
+      <td>0.9676</td>
+      <td>0.0041</td>
+      <td>2.4466</td>
+      <td>0.0144</td>
+      <td>0.1154</td>
+      <td>0.0179</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>1</td>
+      <td>0.9412</td>
+      <td>0.9132</td>
+      <td>0.0280</td>
+      <td>14.8866</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>2</td>
+      <td>0.8927</td>
+      <td>0.8348</td>
+      <td>0.0579</td>
+      <td>17.8887</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>3</td>
+      <td>0.9192</td>
+      <td>0.8714</td>
+      <td>0.0478</td>
+      <td>17.1134</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>4</td>
+      <td>0.9506</td>
+      <td>0.9330</td>
+      <td>0.0177</td>
+      <td>7.7774</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>5</td>
+      <td>0.9555</td>
+      <td>0.9563</td>
+      <td>-0.0008</td>
+      <td>-0.4066</td>
+      <td>0.6843</td>
+      <td>1.0000</td>
+      <td>0.7246</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>6</td>
+      <td>0.9717</td>
+      <td>0.9786</td>
+      <td>-0.0069</td>
+      <td>-4.1690</td>
+      <td>0.0000</td>
+      <td>0.0005</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>1</td>
+      <td>0.9349</td>
+      <td>0.9383</td>
+      <td>-0.0034</td>
+      <td>-3.4042</td>
+      <td>0.0007</td>
+      <td>0.0073</td>
+      <td>0.0009</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>2</td>
+      <td>0.8860</td>
+      <td>0.8857</td>
+      <td>0.0002</td>
+      <td>0.1326</td>
+      <td>0.8945</td>
+      <td>1.0000</td>
+      <td>0.8945</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>3</td>
+      <td>0.9051</td>
+      <td>0.8993</td>
+      <td>0.0058</td>
+      <td>3.1391</td>
+      <td>0.0017</td>
+      <td>0.0170</td>
+      <td>0.0023</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>4</td>
+      <td>0.9462</td>
+      <td>0.9488</td>
+      <td>-0.0026</td>
+      <td>-2.1592</td>
+      <td>0.0308</td>
+      <td>0.1850</td>
+      <td>0.0358</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>5</td>
+      <td>0.9570</td>
+      <td>0.9373</td>
+      <td>0.0196</td>
+      <td>6.8016</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>6</td>
+      <td>0.9544</td>
+      <td>0.9676</td>
+      <td>-0.0132</td>
+      <td>-3.5790</td>
+      <td>0.0003</td>
+      <td>0.0041</td>
+      <td>0.0005</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>1</td>
+      <td>0.9349</td>
+      <td>0.9132</td>
+      <td>0.0217</td>
+      <td>10.0868</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>2</td>
+      <td>0.8860</td>
+      <td>0.8348</td>
+      <td>0.0511</td>
+      <td>14.8202</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>3</td>
+      <td>0.9051</td>
+      <td>0.8714</td>
+      <td>0.0338</td>
+      <td>10.8465</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>4</td>
+      <td>0.9462</td>
+      <td>0.9330</td>
+      <td>0.0132</td>
+      <td>5.4385</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>5</td>
+      <td>0.9570</td>
+      <td>0.9563</td>
+      <td>0.0006</td>
+      <td>0.2812</td>
+      <td>0.7785</td>
+      <td>1.0000</td>
+      <td>0.8008</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>6</td>
+      <td>0.9544</td>
+      <td>0.9786</td>
+      <td>-0.0242</td>
+      <td>-5.4242</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>1</td>
+      <td>0.9383</td>
+      <td>0.9132</td>
+      <td>0.0251</td>
+      <td>11.0454</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>2</td>
+      <td>0.8857</td>
+      <td>0.8348</td>
+      <td>0.0509</td>
+      <td>13.5993</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>3</td>
+      <td>0.8993</td>
+      <td>0.8714</td>
+      <td>0.0280</td>
+      <td>7.3231</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>4</td>
+      <td>0.9488</td>
+      <td>0.9330</td>
+      <td>0.0158</td>
+      <td>6.7702</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>5</td>
+      <td>0.9373</td>
+      <td>0.9563</td>
+      <td>-0.0190</td>
+      <td>-5.4555</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>6</td>
+      <td>0.9676</td>
+      <td>0.9786</td>
+      <td>-0.0110</td>
+      <td>-4.5861</td>
+      <td>0.0000</td>
+      <td>0.0001</td>
+      <td>0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lectura.</strong> Las AUC se calculan con las predicciones fuera de muestra del bucle externo (10 001 viviendas),
+así que diferencias pequeñas resultan significativas; lo que importa es el signo y el tamaño.</p>
+<ul class="simple">
+<li><p><strong>XGBoost geográfico frente a la logística</strong> (la mejor combinación de la familia del modelo base): AUC mayor en
+los estratos 1 a 4 (+0.016 a +0.051, p de Holm &lt; 10⁻⁴) y <strong>menor en los estratos 5 y 6</strong> (−0.019 y −0.011,
+también significativas).</p></li>
+<li><p>XGBoost y Random Forest muestran el mismo patrón frente a la logística: ganan en los estratos 1 a 4, empatan en
+el 5 y pierden en el 6. La logística ordena mejor los estratos altos; posiblemente porque son pocos, están
+concentrados y las variables físicas los separan casi linealmente, mientras que los estratos bajos y medios se
+mezclan en el espacio y ahí ayudan las interacciones de los árboles.</p></li>
+<li><p>Entre ensambles las diferencias son de milésimas y cambian de signo según el estrato. Random Forest ordena algo
+mejor que los dos XGBoost en la mayoría de estratos; el XGBoost geográfico supera al global en los estratos 1 y
+6 (y en el 4 sin significancia tras Holm) y pierde en el 3 y el 5.</p></li>
+</ul>
+<p>Una AUC por estrato mide la capacidad de <strong>ordenar</strong>; el F1 macro mide la decisión final. Por eso Random
+Forest puede tener AUC algo mayores y aun así quedar detrás del XGBoost geográfico en el rango de F1 por
+bloques.</p>
+</section>
+<section id="tamano-del-efecto-e-intervalos-de-confianza">
+<h2>7.3 Tamaño del efecto e intervalos de confianza<a class="headerlink" href="#tamano-del-efecto-e-intervalos-de-confianza" title="Link to this heading">#</a></h2>
+<p><strong>Delta de Cliff</strong> (sobre el F1 por bloque espacial): probabilidad de que un modelo supere al otro en un bloque
+menos la probabilidad contraria; |δ| &lt; 0.147 despreciable, &lt; 0.33 pequeño, &lt; 0.474 mediano, mayor grande.
+<strong>Intervalos BCa</strong> (<em>bias-corrected and accelerated</em>) del F1 macro, remuestreando bloques espaciales completos.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cliff_finalistas"</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="s2">"cliff_finalistas"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ic_bca_f1_finalistas"</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="s2">"ic_bca_f1_finalistas"</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"IC 95 </span><span class="si">% i</span><span class="s2">nf"</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% s</span><span class="s2">up"</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>delta_cliff_bloques</th>
+      <th>magnitud</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost | smote | Random</td>
+      <td>-0.093</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>-0.128</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest | smote | Genética</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>0.172</td>
+      <td>pequeño</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>XGBoost | smote | Random</td>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>-0.038</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>XGBoost | smote | Random</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>0.242</td>
+      <td>pequeño</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>XGBoost geográfico | class_weight | Bayesiana</td>
+      <td>Logística L1/L2 | ninguno | Bayesiana</td>
+      <td>0.283</td>
+      <td>pequeño</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IC 95 % inf</th>
+      <th>IC 95 % sup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Random Forest | smote | Genética</th>
+      <td>0.640</td>
+      <td>0.728</td>
+    </tr>
+    <tr>
+      <th>XGBoost | smote | Random</th>
+      <td>0.654</td>
+      <td>0.729</td>
+    </tr>
+    <tr>
+      <th>XGBoost geográfico | class_weight | Bayesiana</th>
+      <td>0.648</td>
+      <td>0.732</td>
+    </tr>
+    <tr>
+      <th>Logística L1/L2 | ninguno | Bayesiana</th>
+      <td>0.584</td>
+      <td>0.691</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lectura.</strong> Los intervalos BCa del F1 macro (remuestreando bloques espaciales) se solapan entre los tres
+ensambles: Random Forest [0.640, 0.728], XGBoost [0.654, 0.729] y XGBoost geográfico [0.648, 0.732]. El de la
+logística, [0.584, 0.691], está desplazado hacia abajo, aunque se solapa en parte con los demás.</p>
+<p>El delta de Cliff confirma la lectura. Entre ensambles es despreciable (|δ| ≤ 0.13). Frente a la logística es
+<strong>pequeño y a favor de los ensambles</strong>, mayor para el XGBoost geográfico (δ = 0.28: sin empates, gana en ≈ 64</p>
+<p><strong>Conclusión de la comparación en zonas nuevas:</strong> el XGBoost geográfico está en el grupo de los mejores, sin
+diferencia demostrable con XGBoost y Random Forest, y mejora a la logística con un efecto pequeño pero
+consistente en las tres miradas (rango, AUC de los estratos 1–4 y delta de Cliff).</p>
+</section>
+<section id="regresion-mcs-giacomini-white-clark-west-diebold-mariano">
+<h2>7.4 Regresión: MCS → Giacomini-White / Clark-West → Diebold-Mariano<a class="headerlink" href="#regresion-mcs-giacomini-white-clark-west-diebold-mariano" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Model Confidence Set</strong> (Hansen, Lunde y Nason, 2011): parte de las 28 combinaciones y elimina, con bootstrap
+por bloques, las significativamente peores; quedan las indistinguibles de la mejor (α = 0.10).</p></li>
+<li><p><strong>Giacomini-White</strong> (2006) entre finalistas no anidados: ¿un modelo es mejor de forma condicional (dada la
+diferencia de pérdida de la vivienda vecina en el orden sur → norte)?</p></li>
+<li><p><strong>Clark-West</strong> (2007) para un par <strong>anidado</strong>: Ridge con vecindad física frente a Ridge sin ella. Corrige el
+sesgo del Diebold-Mariano a favor del modelo grande.</p></li>
+<li><p><strong>Diebold-Mariano</strong> con la corrección de Harvey, Leybourne y Newbold entre el mejor y el segundo, con intervalo
+por <strong>bootstrap estacionario</strong> (Politis y Romano, 1994) y d de Cohen.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AR</span> <span class="o">=</span> <span class="n">leer_json</span><span class="p">(</span><span class="s2">"analisis_regresion.json"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+<span class="k">if</span> <span class="n">AR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcs"</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">AR</span><span class="p">[</span><span class="s2">"mcs"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">AR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"giacomini_white"</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">AR</span><span class="p">[</span><span class="s2">"giacomini_white"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"clark_west_ridge_vecindad"</span><span class="p">,</span> <span class="s2">"diebold_mariano_hln"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">AR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">AR</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model name</th>
+      <th>Pvalue</th>
+      <th>en_el_conjunto</th>
+      <th>perdida_media</th>
+      <th>rango_perdida</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Random Forest (regresión) | Grid</td>
+      <td>1.0000</td>
+      <td>True</td>
+      <td>0.3361</td>
+      <td>12.9538</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest (regresión) | Random</td>
+      <td>0.2773</td>
+      <td>True</td>
+      <td>0.3457</td>
+      <td>12.9360</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest (regresión) | Genética</td>
+      <td>0.2362</td>
+      <td>True</td>
+      <td>0.3471</td>
+      <td>12.8802</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>XGBoost (regresión) | Random</td>
+      <td>0.4635</td>
+      <td>True</td>
+      <td>0.3482</td>
+      <td>13.5731</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>XGBoost (regresión) | Bayesiana</td>
+      <td>0.2773</td>
+      <td>True</td>
+      <td>0.3513</td>
+      <td>13.5262</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>XGBoost (regresión) | Genética</td>
+      <td>0.0711</td>
+      <td>False</td>
+      <td>0.3567</td>
+      <td>13.3256</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SVR | Random</td>
+      <td>0.4785</td>
+      <td>True</td>
+      <td>0.3593</td>
+      <td>14.0688</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR | Grid</td>
+      <td>0.4785</td>
+      <td>True</td>
+      <td>0.3616</td>
+      <td>13.9522</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SVR | Bayesiana</td>
+      <td>0.4785</td>
+      <td>True</td>
+      <td>0.3627</td>
+      <td>14.4429</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Random Forest (regresión) | Bayesiana</td>
+      <td>0.0621</td>
+      <td>False</td>
+      <td>0.3657</td>
+      <td>12.8231</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>XGBoost (regresión) | Grid</td>
+      <td>0.0621</td>
+      <td>False</td>
+      <td>0.3873</td>
+      <td>13.6268</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>SVR | Genética</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4080</td>
+      <td>14.8317</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>KNN (regresión) | Bayesiana</td>
+      <td>0.0470</td>
+      <td>False</td>
+      <td>0.4170</td>
+      <td>14.2747</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>KNN (regresión) | Grid</td>
+      <td>0.0450</td>
+      <td>False</td>
+      <td>0.4175</td>
+      <td>14.2589</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>KNN (regresión) | Random</td>
+      <td>0.0450</td>
+      <td>False</td>
+      <td>0.4203</td>
+      <td>14.2132</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>KNN (regresión) | Genética</td>
+      <td>0.0250</td>
+      <td>False</td>
+      <td>0.4205</td>
+      <td>14.6606</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Ridge | Bayesiana</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4562</td>
+      <td>16.0257</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Lasso | Genética</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4574</td>
+      <td>16.1003</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Lasso | Bayesiana</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4578</td>
+      <td>16.1672</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Ridge | Random</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4583</td>
+      <td>16.0685</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Ridge | Genética</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4584</td>
+      <td>16.0528</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Lasso | Grid</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4606</td>
+      <td>16.2948</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Lasso | Random</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4608</td>
+      <td>16.1334</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Ridge | Grid</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.4608</td>
+      <td>16.0352</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Árbol (regresión) | Grid</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.5935</td>
+      <td>14.2819</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Árbol (regresión) | Genética</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.6004</td>
+      <td>13.9037</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Árbol (regresión) | Random</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.6283</td>
+      <td>14.4315</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Árbol (regresión) | Bayesiana</td>
+      <td>0.0000</td>
+      <td>False</td>
+      <td>0.6521</td>
+      <td>14.1572</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>estadistico</th>
+      <th>gl</th>
+      <th>p</th>
+      <th>signo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Random Forest (regresión) | Grid</td>
+      <td>Random Forest (regresión) | Random</td>
+      <td>207.1860</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest (regresión) | Grid</td>
+      <td>Random Forest (regresión) | Genética</td>
+      <td>176.9032</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest (regresión) | Grid</td>
+      <td>XGBoost (regresión) | Random</td>
+      <td>439.9519</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Random Forest (regresión) | Random</td>
+      <td>Random Forest (regresión) | Genética</td>
+      <td>82.2043</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Random Forest (regresión) | Random</td>
+      <td>XGBoost (regresión) | Random</td>
+      <td>307.3110</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest (regresión) | Genética</td>
+      <td>XGBoost (regresión) | Random</td>
+      <td>307.9129</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>modelo 1 mejor</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>clark_west_ridge_vecindad {'alpha': 141.7710381103998, 'media_ajustada': 0.5860443668108442, 'estadistico': 47.352146203861885, 'p_una_cola': 0.0}
+diebold_mariano_hln {'mejor': 'Random Forest (regresión) | Grid', 'segundo': 'Random Forest (regresión) | Random', 'diferencia_perdida': -0.009638045279607078, 'estadistico': -5.665901363064036, 'p': 1.5030012747987353e-08, 'ic95_bootstrap_estacionario': [-0.01921152126966127, -0.0012228799866175095], 'd_cohen': -0.056656180892412415}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Lectura.</strong> El MCS (α = 0.10) conserva 8 de las 28 combinaciones: Random Forest con Grid, Random y Genética,
+XGBoost con Random y Bayesiana, y SVR con Random, Grid y Bayesiana; elimina KNN, los lineales y el árbol.</p>
+<p>Giacomini-White distingue a los finalistas de forma condicional (p &lt; 10⁻¹⁸ en los 6 pares, siempre a favor del
+de menor pérdida media): conociendo la diferencia de pérdida de la vivienda vecina se puede anticipar cuál
+modelo se equivocará menos, otra vez porque los errores están correlacionados en el espacio. Con 10 001
+viviendas, además, la prueba detecta diferencias muy pequeñas.</p>
+<p>Diebold-Mariano (HLN) entre los dos primeros (Random Forest con Grid y con Random) encuentra una diferencia
+estadísticamente significativa (−0.0096 en pérdida cuadrática, p = 1.5·10⁻⁸; IC 95 % por bootstrap
+estacionario [−0.019, −0.001]) pero <strong>sin relevancia práctica</strong>: d de Cohen = −0.06.</p>
+<p>Clark-West confirma que la vecindad física aporta información: Ridge con las 7 variables de vecindad predice
+mejor que el mismo Ridge sin ellas (estadístico 47.4, p ≈ 0).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06_regresion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">6. Regresión: el estrato como número</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="08_interpretabilidad.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">8. Interpretabilidad: SHAP y LIME</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-friedman-nemenyi">7.1 Clasificación: Friedman → Nemenyi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-dirigidas-delong-con-holm">7.2 Comparaciones dirigidas: DeLong con Holm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-del-efecto-e-intervalos-de-confianza">7.3 Tamaño del efecto e intervalos de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-mcs-giacomini-white-clark-west-diebold-mariano">7.4 Regresión: MCS → Giacomini-White / Clark-West → Diebold-Mariano</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

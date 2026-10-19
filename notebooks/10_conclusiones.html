@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. Conclusiones &#8212; Estrato y catastro en Barranquilla — Entregable 3</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/10_conclusiones';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="A. Reproducibilidad e ingeniería del pipeline" href="A_reproducibilidad.html" />
+    <link rel="prev" title="9. El modelo nuevo frente al modelo base" href="09_modelo_nuevo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Estrato y catastro en Barranquilla — Entregable 3</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Estrato socioeconómico y catastro en Barranquilla — Entregable 3
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_datos.html">1. Datos: ETL y análisis exploratorio mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_diseno.html">2. Diseño experimental</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_optimizacion.html">3. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_computacional.html">4. Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_clasificacion.html">5. Clasificación: resultados de las combinaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_regresion.html">6. Regresión: el estrato como número</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_estadistica.html">7. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_interpretabilidad.html">8. Interpretabilidad: SHAP y LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_modelo_nuevo.html">9. El modelo nuevo frente al modelo base</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/10_conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10. Conclusiones</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-modelo-nuevo-supera-al-modelo-base">10.1 ¿El modelo nuevo supera al modelo base?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-enseno-el-pipeline-combinatorio">10.2 Qué enseñó el pipeline combinatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-frente-a-test">10.3 Validación frente a test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computo">10.4 Cómputo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">10.5 Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">10.6 Trabajo futuro</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones">
+<h1>10. Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h1>
+<p><em>Autores: María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)</em></p>
+<div class="tip admonition">
+<p class="admonition-title">Qué responde este capítulo</p>
+<p><strong>Pregunta.</strong> ¿Qué responde el proyecto, qué se aprendió del pipeline combinatorio y qué queda pendiente?</p>
+<p><strong>Respuesta corta.</strong> El modelo nuevo supera al modelo base en zonas nuevas, pero su ventaja frente a modelos con
+la misma información solo aparece en zonas con datos cerca. Del pipeline: el modelo pesa más que el balanceo y
+el optimizador; la validación y el test no siempre coinciden; y la complejidad teórica guía bien el costo.</p>
+</div>
+<section id="el-modelo-nuevo-supera-al-modelo-base">
+<h2>10.1 ¿El modelo nuevo supera al modelo base?<a class="headerlink" href="#el-modelo-nuevo-supera-al-modelo-base" title="Link to this heading">#</a></h2>
+<p>El objetivo del proyecto era usar un modelo que no se había aplicado a este problema, el <strong>XGBoost geográfico
+adaptado a clasificación</strong>, y comprobar si supera al <strong>modelo base</strong> (la logística B del Entregable 1).</p>
+<p><strong>Respuesta: sí lo supera en zonas nuevas, pero no siempre, y la mejora viene sobre todo de la vecindad física.</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Evidencia</p></th>
+<th class="head"><p>XGBoost geográfico − modelo base</p></th>
+<th class="head"><p>Lectura</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>E2, todos los datos, validación kNNDM</p></td>
+<td><p>+0.11 de F1 (SE 0.03, 5 de 5 pliegues)</p></td>
+<td><p>lo reemplaza</p></td>
+</tr>
+<tr class="row-odd"><td><p>E2, todos los datos, test</p></td>
+<td><p>+0.09, IC [+0.03, +0.20]</p></td>
+<td><p>se confirma</p></td>
+</tr>
+<tr class="row-even"><td><p>E3, submuestra, validación anidada</p></td>
+<td><p>+0.20 (SE 0.03, 5 de 5 pliegues)</p></td>
+<td><p>lo reemplaza</p></td>
+</tr>
+<tr class="row-odd"><td><p>E3, submuestra, test</p></td>
+<td><p>+0.094, IC [+0.042, +0.147], 6 de 7 bloques</p></td>
+<td><p>se confirma</p></td>
+</tr>
+<tr class="row-even"><td><p>E3, todos los datos con hiperparámetros de la submuestra, test</p></td>
+<td><p>+0.021, IC [−0.079, +0.082]</p></td>
+<td><p>no se distingue</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Frente a modelos que reciben <strong>las mismas variables de vecindad</strong>, el modelo nuevo no gana en zonas nuevas: en el
+test empata o pierde con la logística con vecindad, XGBoost y Random Forest, y con todos los datos pierde
+claramente frente a los dos últimos. Su ventaja sobre la mejor logística con las mismas variables solo se demostró
+en <strong>zonas conocidas</strong> (E2: +0.022, 4 de 5 pliegues), donde los modelos locales tienen datos cerca para aprender.</p>
+<p>Para el proyecto, esto significa que el aporte que más mejora la predicción del estrato en una zona sin datos no
+es el modelo sino <strong>describir el entorno</strong> de cada vivienda: el área, los baños, el piso y la proporción de
+propiedad horizontal de sus 8 vecinos, más su posición norte-sur y su distancia al centro (capítulo 8). El XGBoost
+geográfico es una buena opción para <strong>completar el mapa en zonas ya muestreadas</strong>, no para extrapolar a barrios
+nuevos.</p>
+</section>
+<section id="que-enseno-el-pipeline-combinatorio">
+<h2>10.2 Qué enseñó el pipeline combinatorio<a class="headerlink" href="#que-enseno-el-pipeline-combinatorio" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>El modelo importa mucho más que el balanceo y el optimizador.</strong> Entre modelos, el mejor F1 macro externo va de
+0.452 (Naive Bayes) a 0.658 (Random Forest); dentro de un mismo modelo, las 16 combinaciones de balanceo y
+optimizador se separan apenas 0.02 a 0.05 (0.08 en el árbol). Los tres ensambles de árboles (Random Forest,
+XGBoost y XGBoost geográfico) forman el grupo de cabeza en validación, sin diferencias demostrables entre ellos.</p></li>
+<li><p><strong>Balanceo:</strong> <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> es la mejor opción y la más barata (rango medio 2.25 de 4; 136 s por búsqueda frente a
+259 s de SMOTE). SMOTE y no balancear quedan casi empatados, y <strong>ADASYN es la peor</strong> (Friedman p = 2·10⁻⁶): al
+concentrar los ejemplos sintéticos en las viviendas «difíciles», que aquí son las que están en la frontera
+espacial entre estratos, refuerza el ruido. Todas las técnicas de balanceo empeoran algo la calibración.</p></li>
+<li><p><strong>Optimizadores:</strong> con el mismo presupuesto (12 evaluaciones), Grid, Random, bayesiana (TPE) y genética llegan
+al mismo F1 externo (0.586 a 0.590; Friedman p = 0.74). La diferencia está en la eficiencia: la bayesiana y Random
+alcanzan el 99 % de su mejor valor en 5 o 6 evaluaciones y Grid necesita 10. El genético converge
+prematuramente con una población de 4. Successive Halving da el mismo F1 que Random Search en XGBoost con un
+cuarto del cómputo, pero pierde en Random Forest, cuyos hiperparámetros dependen del tamaño de la muestra.</p></li>
+<li><p><strong>Regresión:</strong> tratar el estrato como número no ayuda a clasificarlo. El mejor regresor (Random Forest, RMSE 0.57
+estratos) comprime los extremos: solo el 19 % de las viviendas de estrato 6 se redondea a 6. Sus residuos son
+heterocedásticos y están autocorrelacionados en el espacio (I de Moran 0.35), otra señal de que queda
+estructura espacial por explicar.</p></li>
+</ol>
+</section>
+<section id="validacion-frente-a-test">
+<h2>10.3 Validación frente a test<a class="headerlink" href="#validacion-frente-a-test" title="Link to this heading">#</a></h2>
+<p>La validación anidada con kNNDM y el test no cuentan la misma historia, y esa diferencia es en sí un resultado:</p>
+<ul class="simple">
+<li><p><strong>Todo baja en el test.</strong> Los ensambles pasan de un F1 de ≈ 0.66 en el bucle externo a 0.52–0.57 en el test.
+kNNDM reproduce la <em>distancia</em> entre el test y el entrenamiento, pero no su <em>composición</em>: los 7 bloques de test
+tienen muy pocas viviendas de estrato 6 (1.2 %, frente al 4.8 % de la submuestra), y un recall bajo en esa clase
+pesa un sexto del F1 macro.</p></li>
+<li><p><strong>El orden cambia.</strong> En validación ganan los árboles; en el test, la logística con vecindad empata con XGBoost y
+Random Forest (0.572 frente a 0.571 y 0.571 de media entre semillas) porque reconoce mucho mejor los estratos 1
+y 6.</p></li>
+<li><p><strong>El test tiene 7 bloques.</strong> Sus intervalos BCa son anchos y la mayoría de las diferencias entre los mejores
+modelos no son concluyentes. Las conclusiones firmes son las que aparecen en las dos miradas.</p></li>
+</ul>
+</section>
+<section id="computo">
+<h2>10.4 Cómputo<a class="headerlink" href="#computo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>La complejidad teórica predice bien el escalamiento:</strong> el SVM de núcleo completo crece casi
+cuadráticamente (b = 1.88), Nyström y SGD casi linealmente, y XGBoost <code class="docutils literal notranslate"><span class="pre">hist</span></code> es 9 veces más rápido que <code class="docutils literal notranslate"><span class="pre">exact</span></code>
+con el mismo F1.</p></li>
+<li><p><strong>No toda «optimización» de la guía conviene en estos datos:</strong> con 35 variables densas, lbfgs es 7 veces más
+rápido que SAGA y la búsqueda exhaustiva de KNN es 17 veces más rápida que KD-Tree; los árboles de búsqueda solo
+ayudan con las 2 coordenadas.</p></li>
+<li><p><strong>El perfil manda:</strong> el 91 % del tiempo de una evaluación es construir árboles; el preprocesamiento y SMOTE no
+llegan al 5 %.</p></li>
+<li><p><strong>Paralelizar entre tareas grandes:</strong> las 640 tareas (38.4 horas de tarea) terminaron en 4.8 horas con 8
+procesos; paralelizar pliegues de un segundo no acelera nada.</p></li>
+</ul>
+</section>
+<section id="limitaciones">
+<h2>10.5 Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Submuestra.</strong> Para que las 156 combinaciones con validación anidada cupieran en un portátil (38 horas de
+cómputo en tareas, frente a unas 630 con todos los datos), se entrenó con 10 001 de las 257 273 viviendas.
+Reentrenar los finalistas con todos los datos (sección 9.4) mueve el F1 de test entre +0.006 y +0.025 en los
+modelos cuyos hiperparámetros no dependen de n, y los tres mejores siguen empatados; pero los hiperparámetros
+elegidos con 10 000 viviendas no se trasladan a los modelos que cuentan viviendas (el árbol, KNN) ni al XGBoost
+geográfico.</p></li>
+<li><p><strong>Presupuesto de búsqueda corto</strong> (12 evaluaciones): suficiente para llegar a la meseta en estos espacios, pero
+no para que el genético o la multi-fidelidad muestren todo su potencial.</p></li>
+<li><p><strong>Test de 7 bloques.</strong> Los intervalos del test son anchos y asimétricos; con tan pocos bloques, diferencias de
+0.01 a 0.05 entre los mejores modelos no son concluyentes.</p></li>
+<li><p><strong>Tiempos.</strong> Los tiempos de búsqueda se midieron con 8 procesos simultáneos, y los de la regresión con dos
+copias de la corrida en paralelo por un error de ejecución: solo son comparables dentro de cada tabla.</p></li>
+</ul>
+</section>
+<section id="trabajo-futuro">
+<h2>10.6 Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Repetir la <strong>búsqueda</strong> del XGBoost geográfico con todos los datos (o con más viviendas por ancla): con los
+hiperparámetros de la submuestra pierde frente a XGBoost global, mientras que con los del Entregable 2
+(α = 0.75, profundidad 4) superaba al modelo base.</p></li>
+<li><p>Recalibrar con validación cruzada como paso final del pipeline: en el test mejoró la calibración y, en varios
+modelos, también el F1.</p></li>
+<li><p>Para la multi-fidelidad, expresar los frenos de los árboles como fracciones de n o usar Hyperband con una
+fidelidad mínima más alta.</p></li>
+<li><p>Un ensamble apilado de la logística con vecindad y los árboles: ordenan mejor estratos distintos (la logística
+los altos, los árboles los bajos y medios; capítulo 7).</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_modelo_nuevo.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">9. El modelo nuevo frente al modelo base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="A_reproducibilidad.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">A. Reproducibilidad e ingeniería del pipeline</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-modelo-nuevo-supera-al-modelo-base">10.1 ¿El modelo nuevo supera al modelo base?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-enseno-el-pipeline-combinatorio">10.2 Qué enseñó el pipeline combinatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-frente-a-test">10.3 Validación frente a test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computo">10.4 Cómputo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">10.5 Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">10.6 Trabajo futuro</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

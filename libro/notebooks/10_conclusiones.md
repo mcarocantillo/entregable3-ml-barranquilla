@@ -31,6 +31,12 @@ test empata o pierde con la logística con vecindad, XGBoost y Random Forest, y 
 claramente frente a los dos últimos. Su ventaja sobre la mejor logística con las mismas variables solo se demostró
 en **zonas conocidas** (E2: +0.022, 4 de 5 pliegues), donde los modelos locales tienen datos cerca para aprender.
 
+**¿Sigue siendo un aporte nuevo?** Sí. La revisión bibliográfica del Entregable 2 no encontró ningún estudio que
+clasifique el estrato de una vivienda con datos catastrales, y el XGBoost geográfico no se había usado en
+clasificación ni para el estrato. Los modelos conocidos que aparecen en este entregable son los modelos de
+referencia que exige la guía: no reemplazan a la propuesta, la ponen a prueba. Gracias a ellos se sabe algo que el
+Entregable 2 no podía separar: cuánto de la mejora viene del modelo y cuánto de la información de vecindad.
+
 Para el proyecto, esto significa que el aporte que más mejora la predicción del estrato en una zona sin datos no
 es el modelo sino **describir el entorno** de cada vivienda: el área, los baños, el piso y la proporción de
 propiedad horizontal de sus 8 vecinos, más su posición norte-sur y su distancia al centro (capítulo 8). El XGBoost

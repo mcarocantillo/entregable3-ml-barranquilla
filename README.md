@@ -23,6 +23,15 @@ y los hiperparámetros de la submuestra ya no se distingue del modelo base. Su v
 mismo presupuesto (la bayesiana llega antes); `class_weight` es el mejor balanceo y ADASYN el peor. Detalle en los
 capítulos 9 y 10 del libro.
 
+## Propuesta y modelos de referencia
+
+La revisión bibliográfica del Entregable 2 no encontró ningún estudio que clasifique el estrato de una vivienda con sus
+datos catastrales, y el XGBoost geográfico solo existía para regresión: **la propuesta del proyecto es ese modelo,
+adaptado a clasificación**. Los 7 modelos de la guía (KNN, Naive Bayes, logística L1/L2, árbol, Random Forest, XGBoost
+y SVM) son **modelos de referencia** que exige el entregable: no reemplazan a la propuesta, la ponen a prueba con el
+mismo protocolo, y XGBoost (el mismo algoritmo que la parte global del modelo nuevo, sin los modelos locales) sirve
+además de experimento de ablación. El modelo base sigue siendo la logística B del Entregable 1.
+
 ## Qué se entrena
 
 | Tarea | Modelos | Balanceo | Optimizadores | Combinaciones |

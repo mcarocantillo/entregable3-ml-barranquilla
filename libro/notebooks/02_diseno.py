@@ -32,6 +32,12 @@
 # cada optimizador. A los 7 modelos de clasificación de la guía se agrega el **XGBoost geográfico**, el modelo
 # nuevo del proyecto, para medirlo con exactamente el mismo protocolo.
 #
+# ```{note}
+# **Propuesta y referencias.** Los 7 modelos de la guía no son la propuesta del proyecto: son los modelos de referencia
+# (*benchmarks*) contra los que se pone a prueba el XGBoost geográfico, el único que no se había usado antes para
+# clasificar el estrato (revisión bibliográfica del Entregable 2). La introducción explica el papel de cada uno.
+# ```
+#
 # | Tarea | Modelos | Balanceo | Optimización | Total |
 # |---|---|---|---|---|
 # | Clasificación | 7 + 1 (XGBoost geográfico) | 4 | 4 | 7 × 4 × 4 = **112** (+ 16) |

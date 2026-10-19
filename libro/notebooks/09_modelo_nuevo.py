@@ -33,6 +33,9 @@
 # $p = \alpha\,p_{\text{global}} + (1-\alpha)\,p_{\text{local}}$. Grekousis (2025) lo propuso para regresión; la
 # versión multiclase con mezcla de probabilidades es la adaptación de este proyecto. El modelo base es la
 # regresión logística multinomial del Entregable 1.
+#
+# Los demás modelos del pipeline son **referencias**, no la propuesta: sirven para que la comparación sea justa y para
+# saber de dónde viene la mejora (introducción, recuadro «¿Por qué aparecen modelos conocidos…?»).
 # ```
 #
 # **Criterio de reemplazo** (el mismo desde el Entregable 1): un modelo reemplaza al base si su diferencia
@@ -124,7 +127,9 @@ if A.get("friedman_mejor_por_modelo"):
 # Frente a la logística la ventaja es de más de tres errores estándar y aparece en todos los pliegues; el MAE
 # ordinal baja de 0.403 a 0.320 estratos. Frente a los otros dos ensambles, empate.
 #
-# ¿Los modelos locales aportan algo? El peso del XGBoost global, α, lo eligieron los optimizadores en las 80
+# ¿Los modelos locales aportan algo? La comparación con XGBoost responde esa pregunta, porque XGBoost es el mismo
+# algoritmo que la parte global del modelo nuevo, sin los modelos locales: es un experimento de ablación. El peso del XGBoost global, α, lo
+# eligieron los optimizadores en las 80
 # búsquedas (16 combinaciones × 5 pliegues): mediana 0.65 (rango intercuartílico 0.53 a 0.74), solo 1 de 80
 # eligió α ≥ 0.95 (el XGBoost global puro) y 18 dieron más peso a la parte local (α ≤ 0.5). La búsqueda prefiere
 # siempre una mezcla, aunque el F1 final quede igual que el del XGBoost global: la parte local reparte el

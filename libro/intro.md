@@ -31,6 +31,39 @@ ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la
 (SHAP).
 ```
 
+```{admonition} ¿Por qué aparecen modelos conocidos si el proyecto busca un modelo no usado antes?
+:class: important
+**La regla del proyecto.** La revisión bibliográfica del Entregable 2
+([capítulo 1](https://mcarocantillo.github.io/entregable2-ml-barranquilla/v3/notebooks/01_revision.html)) buscó en
+Scopus quién había clasificado el nivel socioeconómico con aprendizaje supervisado y datos catastrales o
+geoespaciales. **No encontró ningún estudio que clasifique el estrato de una vivienda con sus datos catastrales.** Los
+trabajos más cercanos hacen otra cosa: predicen el *precio* de la vivienda (con XGBoost, Random Forest o SVR) o usan
+una regresión logística con datos agregados por sector censal (1998). Por eso el proyecto propone un modelo que no se
+había usado para esto: el **XGBoost geográfico**, que solo existía para regresión y que adaptamos a clasificación.
+
+**El papel de cada modelo en este entregable.** Los modelos conocidos no son la propuesta: son la **competencia** contra
+la que se pone a prueba.
+
+| Modelo | Papel en el proyecto | ¿Se había usado para clasificar el estrato de una vivienda con el catastro? |
+|---|---|---|
+| **XGBoost geográfico adaptado a clasificación** | **La propuesta** (el modelo nuevo) | No. La adaptación a clasificación es nuestra y no hay aplicaciones al estrato. |
+| Logística B del Entregable 1 | **El modelo base**, la línea que la propuesta debe superar | No con datos de viviendas; solo hay un antecedente de 1998 con datos agregados. |
+| KNN, Naive Bayes, logística L1/L2, árbol de decisión, Random Forest, XGBoost y SVM | **Modelos de referencia (*benchmarks*)** que exige la guía de este entregable (sección 7.2) | No para este problema; algunos sí en problemas vecinos, como el precio de la vivienda. |
+
+**Por qué hacen falta los modelos de referencia.**
+
+1. **Para que la comparación sea justa.** Decir que un modelo nuevo aporta algo exige medirlo contra los métodos
+   conocidos con el mismo protocolo: las mismas variables, los mismos pliegues, el mismo presupuesto de búsqueda y las
+   mismas pruebas estadísticas. Eso es lo que hace el pipeline combinatorio.
+2. **Para saber de dónde viene la mejora.** El XGBoost de la guía es el mismo algoritmo que la parte global del modelo
+   nuevo, pero sin los modelos locales, así que compararlos funciona como un **experimento de ablación**: muestra cuánto aporta la parte geográfica (los
+   modelos locales alrededor de las anclas). Y la logística con las mismas variables de vecindad muestra cuánto aporta
+   esa información por sí sola.
+
+El aporte del proyecto sigue siendo el mismo del Entregable 2: un modelo no usado antes en esta aplicación, puesto a
+prueba con más rigor. Lo que se encontró sobre él, incluidas sus limitaciones, está en el capítulo 9.
+```
+
 ## Cómo está organizado
 
 El libro sigue el orden de un experimento: cómo se diseñó, cómo se optimizó, qué resultó y qué responde.

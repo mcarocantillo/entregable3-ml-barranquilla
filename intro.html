@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -239,6 +239,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/10_conclusiones.html">10. Conclusiones</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Después del entregable</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/11_mejoras.html">11. Después del entregable: todos los datos y otros modelos de la revisión</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/A_reproducibilidad.html">A. Reproducibilidad e ingeniería del pipeline</a></li>
@@ -420,6 +424,10 @@ calibración e interpretabilidad.</p>
 [+0.042, +0.147]), pero esa mejora la explica sobre todo la <strong>vecindad física</strong> (cómo son los 8 edificios más
 cercanos), que también hace mejorar a la logística, a XGBoost y a Random Forest. Frente a modelos con la misma
 información, el modelo nuevo no gana en zonas nuevas; su ventaja aparece en zonas con datos cerca (capítulos 9 y 10).</p>
+<p><strong>Después del entregable (capítulo 11).</strong> Con todos los datos y pruebas corregidas por comparaciones múltiples, la
+mejora sobre el modelo base es <strong>estadísticamente significativa</strong> (efecto mediano a grande) para todos los modelos con
+vecindad física, incluidos el XGBoost geográfico y el <strong>Rotation Forest</strong>, otro modelo original de la revisión
+bibliográfica. Ningún modelo original supera significativamente a los convencionales que reciben la misma información.</p>
 <p><strong>Otros hallazgos.</strong> (1) El modelo pesa mucho más que el balanceo o el optimizador. (2) Con el mismo presupuesto, los
 cuatro optimizadores llegan al mismo resultado; la bayesiana llega antes. (3) <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> es el mejor balanceo y
 ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la vivienda, no la vivienda misma
@@ -469,8 +477,10 @@ nuevo, pero sin los modelos locales, así que compararlos funciona como un <stro
 modelos locales alrededor de las anclas). Y la logística con las mismas variables de vecindad muestra cuánto aporta
 esa información por sí sola.</p></li>
 </ol>
-<p>El aporte del proyecto sigue siendo el mismo del Entregable 2: un modelo no usado antes en esta aplicación, puesto a
-prueba con más rigor. Lo que se encontró sobre él, incluidas sus limitaciones, está en el capítulo 9.</p>
+<p>El aporte del proyecto sigue siendo el mismo del Entregable 2: modelos no usados antes en esta aplicación, puestos a
+prueba con más rigor. Lo que se encontró sobre el XGBoost geográfico, incluidas sus limitaciones, está en el capítulo 9;
+los demás candidatos originales de la revisión (Rotation Forest, stacking y RF + SVM) están en el capítulo 11 de este
+libro y en el capítulo 9 del Entregable 2 (versión 3).</p>
 </div>
 <section id="como-esta-organizado">
 <h2>Cómo está organizado<a class="headerlink" href="#como-esta-organizado" title="Link to this heading">#</a></h2>
@@ -534,7 +544,12 @@ prueba con más rigor. Lo que se encontró sobre él, incluidas sus limitaciones
 <td><p>Respuesta, lecciones, limitaciones y próximos pasos</p></td>
 <td><p>8, 9</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Apéndice</strong></p></td>
+<tr class="row-even"><td><p><strong>Después del entregable</strong></p></td>
+<td><p>11. Todos los datos y otros modelos de la revisión</p></td>
+<td><p>¿Mejora el modelo nuevo con todos los datos? ¿Funcionan otros modelos originales de la revisión? ¿Son significativas las diferencias?</p></td>
+<td><p>Próximos pasos (10.6)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Apéndice</strong></p></td>
 <td><p>A. Reproducibilidad</p></td>
 <td><p>Entorno, semilla, registro de experimentos, módulos, orden de ejecución y verificación</p></td>
 <td><p>7.3</p></td>
@@ -573,6 +588,8 @@ pesa lo mismo que el estrato 1 (35 %). Es la métrica principal del proyecto (se
 </ul>
 </div>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="A. Reproducibilidad e ingeniería del pipeline" href="A_reproducibilidad.html" />
+    <link rel="next" title="11. Después del entregable: todos los datos y otros modelos de la revisión" href="11_mejoras.html" />
     <link rel="prev" title="9. El modelo nuevo frente al modelo base" href="09_modelo_nuevo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
@@ -235,6 +235,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Después del entregable</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="11_mejoras.html">11. Después del entregable: todos los datos y otros modelos de la revisión</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
 <ul class="nav bd-sidenav">
@@ -461,6 +465,12 @@ es el modelo sino <strong>describir el entorno</strong> de cada vivienda: el ár
 propiedad horizontal de sus 8 vecinos, más su posición norte-sur y su distancia al centro (capítulo 8). El XGBoost
 geográfico es una buena opción para <strong>completar el mapa en zonas ya muestreadas</strong>, no para extrapolar a barrios
 nuevos.</p>
+<p><strong>Después del entregable (capítulo 11).</strong> Con todos los datos y pruebas corregidas por comparaciones múltiples, la
+mejora sobre el modelo base es <strong>estadísticamente significativa</strong> para todos los modelos con vecindad física
+(30 bloques espaciales, Wilcoxon con Holm p &lt; 0.01, efecto mediano a grande), incluidos el XGBoost geográfico y el
+Rotation Forest, otro modelo original de la revisión bibliográfica, que además es el único original cuyo intervalo de
+test frente al base excluye el 0. <strong>Ningún modelo original supera significativamente a los convencionales con la
+misma información</strong>: lo significativo es la vecindad física.</p>
 </section>
 <section id="que-enseno-el-pipeline-combinatorio">
 <h2>10.2 Qué enseñó el pipeline combinatorio<a class="headerlink" href="#que-enseno-el-pipeline-combinatorio" title="Link to this heading">#</a></h2>
@@ -534,15 +544,17 @@ copias de la corrida en paralelo por un error de ejecución: solo son comparable
 <section id="trabajo-futuro">
 <h2>10.6 Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Repetir la <strong>búsqueda</strong> del XGBoost geográfico con todos los datos (o con más viviendas por ancla): con los
-hiperparámetros de la submuestra pierde frente a XGBoost global, mientras que con los del Entregable 2
-(α = 0.75, profundidad 4) superaba al modelo base.</p></li>
+<li><p>~~Repetir la <strong>búsqueda</strong> del XGBoost geográfico con todos los datos~~ <strong>Hecho en el capítulo 11:</strong> sube la
+validación (0.581) pero no el test (0.566 frente a 0.585 con la configuración del Entregable 2).</p></li>
 <li><p>Recalibrar con validación cruzada como paso final del pipeline: en el test mejoró la calibración y, en varios
 modelos, también el F1.</p></li>
 <li><p>Para la multi-fidelidad, expresar los frenos de los árboles como fracciones de n o usar Hyperband con una
 fidelidad mínima más alta.</p></li>
-<li><p>Un ensamble apilado de la logística con vecindad y los árboles: ordenan mejor estratos distintos (la logística
-los altos, los árboles los bajos y medios; capítulo 7).</p></li>
+<li><p>~~Un ensamble apilado de la logística con vecindad y los árboles~~ <strong>Hecho en el capítulo 11</strong> (stacking, candidato 8
+de la revisión): empata con el mejor en la validación, pero su intervalo de test frente al base toca el 0.</p></li>
+<li><p>Más datos de test: con 7 bloques, ninguna diferencia puede ser significativa después de corregir por comparaciones
+múltiples (capítulo 11). Evaluar en más zonas nuevas, por ejemplo con otra ciudad o con otra partición de bloques,
+permitiría confirmar o descartar las diferencias pequeñas.</p></li>
 </ul>
 </section>
 </section>
@@ -587,11 +599,11 @@ los altos, los árboles los bajos y medios; capítulo 7).</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="A_reproducibilidad.html"
+       href="11_mejoras.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">A. Reproducibilidad e ingeniería del pipeline</p>
+        <p class="prev-next-title">11. Después del entregable: todos los datos y otros modelos de la revisión</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

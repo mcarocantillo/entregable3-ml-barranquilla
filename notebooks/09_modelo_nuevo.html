@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -237,6 +237,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">10. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Después del entregable</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="11_mejoras.html">11. Después del entregable: todos los datos y otros modelos de la revisión</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Apéndice</span></p>
 <ul class="nav bd-sidenav">
@@ -1459,6 +1463,20 @@ logística, a XGBoost y a Random Forest. Los modelos locales del XGBoost geográ
 cerca (zonas conocidas) y cuando se les da peso (α ≈ 0.75). Con pocos datos por ancla su aporte es inestable: en
 los pliegues externos la búsqueda les dio un peso mediano del 35 % (α = 0.65), pero la búsqueda final con toda la
 submuestra casi los apagó (α = 0.97) y el modelo quedó reducido a un XGBoost global más profundo.</p>
+<div class="note admonition">
+<p class="admonition-title">Actualización después del entregable (capítulo 11)</p>
+<ul class="simple">
+<li><p><strong>Significancia.</strong> Sobre 30 bloques espaciales de 2 km, con Wilcoxon y corrección de Holm, el XGBoost geográfico
+supera al modelo base con significancia estadística y un efecto grande (δ de Cliff 0.43 con la configuración del
+Entregable 2 y 0.51 afinado con todos los datos), igual que los demás modelos con vecindad física; frente a ellos,
+ninguna diferencia es significativa.</p></li>
+<li><p><strong>Intervalo del Entregable 2.</strong> Con el método BCa de este entregable, el +0.092 de la configuración del Entregable
+2 frente al modelo base tiene IC [−0.024, +0.172]; el Entregable 2 publicó [+0.034, +0.199] con bootstrap de
+percentiles. Con 7 bloques de test, esa confirmación depende del método del intervalo.</p></li>
+<li><p><strong>Hiperparámetros con todos los datos.</strong> Buscarlos con las 257 273 viviendas no mejora el test (0.566 frente a
+0.585 con la configuración del Entregable 2).</p></li>
+</ul>
+</div>
 </section>
 </section>
 

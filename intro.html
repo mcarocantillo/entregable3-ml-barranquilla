@@ -425,6 +425,53 @@ cuatro optimizadores llegan al mismo resultado; la bayesiana llega antes. (3) <c
 ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la vivienda, no la vivienda misma
 (SHAP).</p>
 </div>
+<div class="important admonition">
+<p class="admonition-title">¿Por qué aparecen modelos conocidos si el proyecto busca un modelo no usado antes?</p>
+<p><strong>La regla del proyecto.</strong> La revisión bibliográfica del Entregable 2
+(<a class="reference external" href="https://mcarocantillo.github.io/entregable2-ml-barranquilla/v3/notebooks/01_revision.html">capítulo 1</a>) buscó en
+Scopus quién había clasificado el nivel socioeconómico con aprendizaje supervisado y datos catastrales o
+geoespaciales. <strong>No encontró ningún estudio que clasifique el estrato de una vivienda con sus datos catastrales.</strong> Los
+trabajos más cercanos hacen otra cosa: predicen el <em>precio</em> de la vivienda (con XGBoost, Random Forest o SVR) o usan
+una regresión logística con datos agregados por sector censal (1998). Por eso el proyecto propone un modelo que no se
+había usado para esto: el <strong>XGBoost geográfico</strong>, que solo existía para regresión y que adaptamos a clasificación.</p>
+<p><strong>El papel de cada modelo en este entregable.</strong> Los modelos conocidos no son la propuesta: son la <strong>competencia</strong> contra
+la que se pone a prueba.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Papel en el proyecto</p></th>
+<th class="head"><p>¿Se había usado para clasificar el estrato de una vivienda con el catastro?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>XGBoost geográfico adaptado a clasificación</strong></p></td>
+<td><p><strong>La propuesta</strong> (el modelo nuevo)</p></td>
+<td><p>No. La adaptación a clasificación es nuestra y no hay aplicaciones al estrato.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Logística B del Entregable 1</p></td>
+<td><p><strong>El modelo base</strong>, la línea que la propuesta debe superar</p></td>
+<td><p>No con datos de viviendas; solo hay un antecedente de 1998 con datos agregados.</p></td>
+</tr>
+<tr class="row-even"><td><p>KNN, Naive Bayes, logística L1/L2, árbol de decisión, Random Forest, XGBoost y SVM</p></td>
+<td><p><strong>Modelos de referencia (<em>benchmarks</em>)</strong> que exige la guía de este entregable (sección 7.2)</p></td>
+<td><p>No para este problema; algunos sí en problemas vecinos, como el precio de la vivienda.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Por qué hacen falta los modelos de referencia.</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Para que la comparación sea justa.</strong> Decir que un modelo nuevo aporta algo exige medirlo contra los métodos
+conocidos con el mismo protocolo: las mismas variables, los mismos pliegues, el mismo presupuesto de búsqueda y las
+mismas pruebas estadísticas. Eso es lo que hace el pipeline combinatorio.</p></li>
+<li><p><strong>Para saber de dónde viene la mejora.</strong> El XGBoost de la guía es el mismo algoritmo que la parte global del modelo
+nuevo, pero sin los modelos locales, así que compararlos funciona como un <strong>experimento de ablación</strong>: muestra cuánto aporta la parte geográfica (los
+modelos locales alrededor de las anclas). Y la logística con las mismas variables de vecindad muestra cuánto aporta
+esa información por sí sola.</p></li>
+</ol>
+<p>El aporte del proyecto sigue siendo el mismo del Entregable 2: un modelo no usado antes en esta aplicación, puesto a
+prueba con más rigor. Lo que se encontró sobre él, incluidas sus limitaciones, está en el capítulo 9.</p>
+</div>
 <section id="como-esta-organizado">
 <h2>Cómo está organizado<a class="headerlink" href="#como-esta-organizado" title="Link to this heading">#</a></h2>
 <p>El libro sigue el orden de un experimento: cómo se diseñó, cómo se optimizó, qué resultó y qué responde.</p>

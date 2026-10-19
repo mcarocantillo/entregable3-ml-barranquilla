@@ -1,0 +1,265 @@
+{
+ "n_train": 257273,
+ "n_test": 65145,
+ "n_submuestra": 10001,
+ "modelos": {
+  "XGBoost geográfico": {
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "test": {
+    "f1_macro": 0.5141249431375378,
+    "accuracy": 0.6445314298871747,
+    "balanced_accuracy": 0.5199925130208458,
+    "precision_macro": 0.6129933041829861,
+    "recall_macro": 0.5199925130208458,
+    "auc_ovr": 0.9306941163528052,
+    "log_loss": 0.7791828374598857,
+    "brier": 0.45961255043165944,
+    "ece": 0.07743323565198451,
+    "mae_ordinal": 0.3664747870135851,
+    "acc_pm1": 0.990006907667511,
+    "kappa_cuadratico": 0.8875876791403436
+   },
+   "ic95_bca_f1_test": [
+    0.45069720665094876,
+    0.7210278505327014
+   ],
+   "f1_test_submuestra": 0.5220504140687906,
+   "segundos": 229.4760712999996
+  },
+  "Random Forest": {
+   "balanceo": "smote",
+   "metodo": "Genética",
+   "test": {
+    "f1_macro": 0.5816330163948883,
+    "accuracy": 0.6913347148668355,
+    "balanced_accuracy": 0.5808485073283897,
+    "precision_macro": 0.6202469792913211,
+    "recall_macro": 0.5808485073283897,
+    "auc_ovr": 0.9363650429527365,
+    "log_loss": 0.7648426793347234,
+    "brier": 0.4361601107579955,
+    "ece": 0.10004773032887158,
+    "mae_ordinal": 0.3199171079898688,
+    "acc_pm1": 0.989484995011129,
+    "kappa_cuadratico": 0.9033964122261373
+   },
+   "ic95_bca_f1_test": [
+    0.5191581206233832,
+    0.7768811042469909
+   ],
+   "f1_test_submuestra": 0.5570999100296592,
+   "segundos": 1019.2966488999955
+  },
+  "XGBoost": {
+   "balanceo": "smote",
+   "metodo": "Random",
+   "test": {
+    "f1_macro": 0.5756861832559194,
+    "accuracy": 0.6741269475784788,
+    "balanced_accuracy": 0.5680982474716146,
+    "precision_macro": 0.6266168332797092,
+    "recall_macro": 0.5680982474716146,
+    "auc_ovr": 0.9325416453005128,
+    "log_loss": 0.721848860289194,
+    "brier": 0.4243197236257119,
+    "ece": 0.024511578021377267,
+    "mae_ordinal": 0.3335021874280451,
+    "acc_pm1": 0.9929388287665976,
+    "kappa_cuadratico": 0.9010340514757816
+   },
+   "ic95_bca_f1_test": [
+    0.5347119412389261,
+    0.7567101165906865
+   ],
+   "f1_test_submuestra": 0.5664869754596945,
+   "segundos": 261.0840265000006
+  },
+  "Logística L1/L2": {
+   "balanceo": "ninguno",
+   "metodo": "Bayesiana",
+   "test": {
+    "f1_macro": 0.5776527356058577,
+    "accuracy": 0.6974441630209532,
+    "balanced_accuracy": 0.5927837893723992,
+    "precision_macro": 0.576523365256297,
+    "recall_macro": 0.5927837893723992,
+    "auc_ovr": 0.9305375593809923,
+    "log_loss": 0.7023863247626808,
+    "brier": 0.41137409676375086,
+    "ece": 0.015408645623778111,
+    "mae_ordinal": 0.32037761915726454,
+    "acc_pm1": 0.9823624222887405,
+    "kappa_cuadratico": 0.9042590541667962
+   },
+   "ic95_bca_f1_test": [
+    0.5529840059631671,
+    0.6097026657467411
+   ],
+   "f1_test_submuestra": 0.5716270271786491,
+   "segundos": 268.02377149999666
+  },
+  "SVM": {
+   "balanceo": "class_weight",
+   "metodo": "Grid",
+   "test": {
+    "f1_macro": 0.49475147006957404,
+    "accuracy": 0.5596285209916341,
+    "balanced_accuracy": 0.5185029274218885,
+    "precision_macro": 0.4938134686624147,
+    "recall_macro": 0.5185029274218885,
+    "auc_ovr": 0.8903801964135659,
+    "log_loss": 0.9885700354926225,
+    "brier": 0.5685702347228532,
+    "ece": 0.09802541853099538,
+    "mae_ordinal": 0.4695371862767672,
+    "acc_pm1": 0.9762376237623762,
+    "kappa_cuadratico": 0.8459380673502037
+   },
+   "ic95_bca_f1_test": [
+    0.39670670263568103,
+    0.5490622854725702
+   ],
+   "f1_test_submuestra": 0.4848776705216354,
+   "segundos": 611.8711862000055
+  },
+  "KNN": {
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "test": {
+    "f1_macro": 0.5184656786339431,
+    "accuracy": 0.5986338168700591,
+    "balanced_accuracy": 0.5822031657667076,
+    "precision_macro": 0.5055552496535156,
+    "recall_macro": 0.5822031657667076,
+    "auc_ovr": 0.8738117951199754,
+    "log_loss": 2.5072664386486547,
+    "brier": 0.5663149953420628,
+    "ece": 0.1417826071050841,
+    "mae_ordinal": 0.4518382070765216,
+    "acc_pm1": 0.9572645636656689,
+    "kappa_cuadratico": 0.85630960990371
+   },
+   "ic95_bca_f1_test": [
+    0.507226635995222,
+    0.5319960091083906
+   ],
+   "f1_test_submuestra": 0.5363264240692106,
+   "segundos": 550.622952500009
+  },
+  "Árbol de decisión": {
+   "balanceo": "smote",
+   "metodo": "Grid",
+   "test": {
+    "f1_macro": 0.4097308684477381,
+    "accuracy": 0.5498503338705963,
+    "balanced_accuracy": 0.4361158912600773,
+    "precision_macro": 0.45567999383774177,
+    "recall_macro": 0.4361158912600773,
+    "auc_ovr": 0.810312233960226,
+    "log_loss": 4.181120842994801,
+    "brier": 0.7757841602006506,
+    "ece": 0.31223937587298695,
+    "mae_ordinal": 0.5056566121728452,
+    "acc_pm1": 0.9500191879653082,
+    "kappa_cuadratico": 0.8166405730223969
+   },
+   "ic95_bca_f1_test": [
+    0.37714727041908486,
+    0.47090548604066784
+   ],
+   "f1_test_submuestra": 0.4852772307296534,
+   "segundos": 92.60659229999874
+  },
+  "Naive Bayes": {
+   "balanceo": "smote",
+   "metodo": "Bayesiana",
+   "test": {
+    "f1_macro": 0.40529787885038043,
+    "accuracy": 0.49488065085578326,
+    "balanced_accuracy": 0.5386879434743407,
+    "precision_macro": 0.49704608136402256,
+    "recall_macro": 0.5386879434743407,
+    "auc_ovr": 0.8642272758858341,
+    "log_loss": 3.3435591302743157,
+    "brier": 0.888762902661376,
+    "ece": 0.4028793545127722,
+    "mae_ordinal": 0.5949190267863995,
+    "acc_pm1": 0.9148361347762684,
+    "kappa_cuadratico": 0.8050452176910204
+   },
+   "ic95_bca_f1_test": [
+    0.30413150302585756,
+    0.4436502593487201
+   ],
+   "f1_test_submuestra": 0.38660371934964993,
+   "segundos": 73.3023736999894
+  },
+  "Logística B (modelo base del E1)": {
+   "balanceo": "ninguno",
+   "metodo": "fijo (E1: C = 0.01)",
+   "test": {
+    "f1_macro": 0.4931804942143754,
+    "accuracy": 0.6613554378693683,
+    "balanced_accuracy": 0.49523889973330043,
+    "precision_macro": 0.5395271546867392,
+    "recall_macro": 0.49523889973330043,
+    "auc_ovr": 0.9074969681177348,
+    "log_loss": 0.8143295116525091,
+    "brier": 0.4534510252811362,
+    "ece": 0.03211024866570376,
+    "mae_ordinal": 0.38432726993629596,
+    "acc_pm1": 0.9585232941898841,
+    "kappa_cuadratico": 0.8546541263524294
+   },
+   "ic95_bca_f1_test": [
+    0.4662311701867528,
+    0.5316239003553651
+   ],
+   "f1_test_submuestra": 0.4276231857820337,
+   "segundos": 17.793673399995896
+  }
+ },
+ "geo_vs_rivales": [
+  {
+   "rival": "Logística B (modelo base del E1)",
+   "test_dif": 0.020944448923162384,
+   "test_ic95_bca": [
+    -0.07854990763934125,
+    0.08160448284786057
+   ],
+   "test_bloques_a_favor": 5,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "Logística L1/L2",
+   "test_dif": -0.06352779246831997,
+   "test_ic95_bca": [
+    -0.10941065234091679,
+    0.004861691984287191
+   ],
+   "test_bloques_a_favor": 3,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "XGBoost",
+   "test_dif": -0.0615612401183816,
+   "test_ic95_bca": [
+    -0.07238385737929898,
+    -0.04527213596004709
+   ],
+   "test_bloques_a_favor": 2,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "Random Forest",
+   "test_dif": -0.06750807325735053,
+   "test_ic95_bca": [
+    -0.09622653285438787,
+    -0.0188307056992789
+   ],
+   "test_bloques_a_favor": 1,
+   "test_n_bloques": 7
+  }
+ ]
+}

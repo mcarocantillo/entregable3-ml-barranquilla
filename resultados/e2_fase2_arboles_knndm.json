@@ -1,0 +1,7372 @@
+{
+ "descripcion": "Árboles (XGBoost y XGBoost geográfico) con validación kNNDM y vecindad física (v3, fase 2). Mismos folds, variables y test que vecindad_knn.json (07_vecindad_knn.py).",
+ "modo_rapido": false,
+ "n_train": 257273,
+ "n_test": 65145,
+ "hiperparametros": {
+  "Logística B": {
+   "C": 0.01,
+   "class_weight": null
+  },
+  "XGBoost": {
+   "max_depth": 4,
+   "balanceado": true
+  },
+  "XGBoost geográfico": {
+   "frac_vecinos": 0.15,
+   "alpha": 0.75
+  }
+ },
+ "notas": [
+  "Hiperparámetros fijos (logística B v3; árboles del cap. 4, elegidos con la CV de bloques + buffer).",
+  "SE de la diferencia pareada por fold con ddof = 1 (07_vecindad_knn.py usaba ddof = 0).",
+  "XGBoost = modelo global del XGBoost geográfico (mismos hiperparámetros y semilla).",
+  "LightGBM no se evaluó: no está instalado en venv_e2."
+ ],
+ "resumen": {
+  "zonas nuevas": {
+   "cv": "CV kNNDM (zonas nuevas, q = 30): el mejor árbol es XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100) con F1 0.593 frente a 0.600 de la logística B + vecindad (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)); diferencia pareada -0.007 (SE 0.036, gana en 2 de 5 folds) → NO la supera por más de 1 SE. MAE 0.389 frente a 0.396 (diferencia -0.007, SE 0.039).",
+   "mejor_arbol_cv": "XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+   "dif_F1_cv": {
+    "dif_por_fold": [
+     0.039434,
+     -0.017432,
+     -0.093396,
+     -0.069643,
+     0.104169
+    ],
+    "media": -0.007374,
+    "SE": 0.036063,
+    "folds_a_favor": 2,
+    "supera_por_1SE": false
+   },
+   "dif_MAE_cv": {
+    "dif_por_fold": [
+     -0.069526,
+     0.014649,
+     0.129977,
+     -0.015514,
+     -0.096069
+    ],
+    "media": -0.007297,
+    "SE": 0.039463,
+    "folds_a_favor": 3,
+    "supera_por_1SE": false
+   },
+   "test_XGBoost_elegido_por_cv_vs_logistica_elegida_por_cv": {
+    "diferencia": -0.018625,
+    "IC95_inf": -0.048764,
+    "IC95_sup": 0.037984,
+    "p_bootstrap": 0.504
+   },
+   "test_XGBoost geográfico_elegido_por_cv_vs_logistica_elegida_por_cv": {
+    "diferencia": -0.014246,
+    "IC95_inf": -0.052611,
+    "IC95_sup": 0.034784,
+    "p_bootstrap": 0.476
+   },
+   "test": "Test (variables elegidas por CV para cada modelo): logística B (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) F1 0.574 [0.436, 0.592], MAE 0.325; XGBoost (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) F1 0.555 [0.425, 0.582], MAE 0.351: diferencia -0.019 [-0.049, +0.038] (IC incluye 0); XGBoost geográfico (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) F1 0.560 [0.417, 0.588], MAE 0.355: diferencia -0.014 [-0.053, +0.035] (IC incluye 0).",
+   "foco_xgb_geografico": [
+    "XGBoost geográfico (B) − Logística B v3 (sin vecindad): CV +0.070 (SE 0.037, 4/5 folds) → REEMPLAZA; test -0.009 [-0.054, +0.150]",
+    "XGBoost geográfico (B) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.070 (SE 0.041, 1/5 folds) → no reemplaza; test -0.090 [-0.142, -0.008]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B v3 (sin vecindad): CV +0.121 (SE 0.027, 5/5 folds) → REEMPLAZA; test +0.092 [-0.016, +0.214]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad por radios (300 m y 1 km): CV +0.001 (SE 0.026, 3/5 folds) → no reemplaza; test -0.011 [-0.106, +0.063]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.019 (SE 0.031, 3/5 folds) → no reemplaza; test +0.011 [-0.108, +0.075]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B v3 (sin vecindad): CV +0.112 (SE 0.029, 5/5 folds) → REEMPLAZA; test +0.092 [+0.034, +0.199]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B + vecindad KNN (k = 8): CV -0.004 (SE 0.027, 2/5 folds) → no reemplaza; test +0.011 [-0.047, +0.071]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.028 (SE 0.032, 1/5 folds) → no reemplaza; test +0.011 [-0.058, +0.055]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) − Logística B v3 (sin vecindad): CV +0.132 (SE 0.031, 5/5 folds) → REEMPLAZA; test +0.067 [+0.030, +0.183]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.007 (SE 0.036, 2/5 folds) → no reemplaza; test -0.014 [-0.053, +0.035]"
+   ]
+  },
+  "zonas conocidas": {
+   "cv": "CV kNNDM (zonas conocidas, q = 6000): el mejor árbol es XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30) con F1 0.778 frente a 0.756 de la logística B + vecindad (B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)); diferencia pareada +0.022 (SE 0.010, gana en 4 de 5 folds) → la SUPERA por más de 1 SE. MAE 0.240 frente a 0.276 (diferencia -0.036, SE 0.023).",
+   "mejor_arbol_cv": "XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+   "dif_F1_cv": {
+    "dif_por_fold": [
+     0.048499,
+     0.024572,
+     -0.008413,
+     0.007715,
+     0.03642
+    ],
+    "media": 0.021759,
+    "SE": 0.010113,
+    "folds_a_favor": 4,
+    "supera_por_1SE": true
+   },
+   "dif_MAE_cv": {
+    "dif_por_fold": [
+     -0.092102,
+     -0.001769,
+     0.014459,
+     -0.008551,
+     -0.093598
+    ],
+    "media": -0.036312,
+    "SE": 0.023384,
+    "folds_a_favor": 4,
+    "supera_por_1SE": true
+   },
+   "oof": "OOF (zonas conocidas, IC por bloques de train): XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30) − logística de referencia +0.022 [+0.011, +0.089].",
+   "foco_xgb_geografico": [
+    "XGBoost geográfico (B) − Logística B v3 (sin vecindad): CV +0.189 (SE 0.007, 5/5 folds) → REEMPLAZA; OOF +0.187 [+0.162, +0.249]",
+    "XGBoost geográfico (B) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV -0.017 (SE 0.007, 1/5 folds) → no reemplaza; OOF -0.019 [-0.040, +0.092]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B v3 (sin vecindad): CV +0.209 (SE 0.010, 5/5 folds) → REEMPLAZA; OOF +0.208 [+0.177, +0.259]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad por radios (300 m y 1 km): CV +0.075 (SE 0.010, 5/5 folds) → REEMPLAZA; OOF +0.073 [+0.048, +0.139]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.004 (SE 0.005, 4/5 folds) → no reemplaza; OOF +0.003 [-0.015, +0.087]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B v3 (sin vecindad): CV +0.222 (SE 0.007, 5/5 folds) → REEMPLAZA; OOF +0.222 [+0.178, +0.271]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B + vecindad KNN (k = 30): CV +0.079 (SE 0.006, 5/5 folds) → REEMPLAZA; OOF +0.079 [+0.046, +0.133]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.016 (SE 0.004, 5/5 folds) → REEMPLAZA; OOF +0.016 [+0.003, +0.078]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)) − Logística B v3 (sin vecindad): CV +0.228 (SE 0.004, 5/5 folds) → REEMPLAZA; OOF +0.227 [+0.195, +0.277]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.022 (SE 0.010, 4/5 folds) → REEMPLAZA; OOF +0.022 [+0.011, +0.089]"
+   ]
+  }
+ },
+ "xgb_geografico_vs_logistica": {
+  "zonas nuevas": {
+   "criterio": "reemplaza si la diferencia pareada de F1 por fold (CV kNNDM) supera 1 SE (ddof = 1); test con IC 95 % por bootstrap de los 7 bloques de test",
+   "variantes": {
+    "XGBoost geográfico | B": {
+     "F1_cv": 0.529667,
+     "MAE_cv": 0.48597,
+     "recall_cv": {
+      "E1": 0.785368,
+      "E2": 0.573219,
+      "E3": 0.601303,
+      "E4": 0.603699,
+      "E5": 0.50996,
+      "E6": 0.436665
+     },
+     "F1_test": 0.483848,
+     "IC95_F1_test": [
+      0.366035,
+      0.515631
+     ],
+     "MAE_test": 0.406186,
+     "recall_test": {
+      "E1": 0.643454,
+      "E2": 0.828684,
+      "E3": 0.337616,
+      "E4": 0.670939,
+      "E5": 0.50698,
+      "E6": 0.058008
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.460054,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.090685,
+        0.100514,
+        -0.050312,
+        0.032939,
+        0.17424
+       ],
+       "media": 0.069613,
+       "SE": 0.037465,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.091475,
+        -0.105178,
+        0.116712,
+        0.081376,
+        -0.212653
+       ],
+       "media": -0.042244,
+       "SE": 0.061633,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": 0.055834,
+       "IC95_inf": -0.005966,
+       "IC95_sup": 0.145181,
+       "p_bootstrap": 0.076
+      },
+      "oof_MAE": {
+       "diferencia": -0.046072,
+       "IC95_inf": -0.149215,
+       "IC95_sup": 0.051052,
+       "p_bootstrap": 0.336
+      },
+      "reemplaza_en_cv": true,
+      "F1_logistica_test": 0.49318,
+      "test_F1": {
+       "diferencia": -0.009333,
+       "IC95_inf": -0.054017,
+       "IC95_sup": 0.149626,
+       "p_bootstrap": 0.84
+      },
+      "test_MAE": {
+       "diferencia": 0.021859,
+       "IC95_inf": -0.109754,
+       "IC95_sup": 0.100174,
+       "p_bootstrap": 0.756
+      }
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.579138,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.005081,
+        -0.066679,
+        -0.162606,
+        -0.052379,
+        0.029228
+       ],
+       "media": -0.049471,
+       "SE": 0.033372,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        0.057542,
+        0.066432,
+        0.2916,
+        0.135815,
+        -0.019693
+       ],
+       "media": 0.106339,
+       "SE": 0.052463,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.079894,
+       "IC95_inf": -0.128732,
+       "IC95_sup": 0.028173,
+       "p_bootstrap": 0.152
+      },
+      "oof_MAE": {
+       "diferencia": 0.103734,
+       "IC95_inf": -0.02378,
+       "IC95_sup": 0.234338,
+       "p_bootstrap": 0.152
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.595832,
+      "test_F1": {
+       "diferencia": -0.111984,
+       "IC95_inf": -0.154126,
+       "IC95_sup": 0.002306,
+       "p_bootstrap": 0.072
+      },
+      "test_MAE": {
+       "diferencia": 0.1069,
+       "IC95_inf": 0.040956,
+       "IC95_sup": 0.150561,
+       "p_bootstrap": 0.008
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8)": {
+      "F1_logistica_cv": 0.575114,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.017216,
+        -0.066176,
+        -0.13197,
+        -0.094377,
+        0.048072
+       ],
+       "media": -0.045447,
+       "SE": 0.033899,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.018547,
+        0.017341,
+        0.290075,
+        0.130488,
+        -0.097584
+       ],
+       "media": 0.064355,
+       "SE": 0.067317,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.070408,
+       "IC95_inf": -0.124298,
+       "IC95_sup": 0.059546,
+       "p_bootstrap": 0.216
+      },
+      "oof_MAE": {
+       "diferencia": 0.061025,
+       "IC95_inf": -0.087655,
+       "IC95_sup": 0.184053,
+       "p_bootstrap": 0.444
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.57422,
+      "test_F1": {
+       "diferencia": -0.090372,
+       "IC95_inf": -0.132598,
+       "IC95_sup": 0.001909,
+       "p_bootstrap": 0.072
+      },
+      "test_MAE": {
+       "diferencia": 0.089017,
+       "IC95_inf": 0.015161,
+       "IC95_sup": 0.143229,
+       "p_bootstrap": 0.028
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+      "F1_logistica_cv": 0.599894,
+      "cv_F1": {
+       "dif_por_fold": [
+        -0.035004,
+        -0.045925,
+        -0.195299,
+        -0.121375,
+        0.046468
+       ],
+       "media": -0.070227,
+       "SE": 0.041054,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        0.034473,
+        0.021204,
+        0.351762,
+        0.116089,
+        -0.074693
+       ],
+       "media": 0.089767,
+       "SE": 0.072159,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.088971,
+       "IC95_inf": -0.149561,
+       "IC95_sup": 0.025931,
+       "p_bootstrap": 0.124
+      },
+      "oof_MAE": {
+       "diferencia": 0.086088,
+       "IC95_inf": -0.046897,
+       "IC95_sup": 0.214279,
+       "p_bootstrap": 0.264
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.573942,
+      "test_F1": {
+       "diferencia": -0.090094,
+       "IC95_inf": -0.141698,
+       "IC95_sup": -0.008407,
+       "p_bootstrap": 0.036
+      },
+      "test_MAE": {
+       "diferencia": 0.081434,
+       "IC95_inf": 0.027178,
+       "IC95_sup": 0.123038,
+       "p_bootstrap": 0.016
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "F1_cv": 0.580558,
+     "MAE_cv": 0.430529,
+     "recall_cv": {
+      "E1": 0.729272,
+      "E2": 0.633304,
+      "E3": 0.590338,
+      "E4": 0.665383,
+      "E5": 0.508315,
+      "E6": 0.576277
+     },
+     "F1_test": 0.584768,
+     "IC95_F1_test": [
+      0.398767,
+      0.627779
+     ],
+     "MAE_test": 0.320163,
+     "recall_test": {
+      "E1": 0.768958,
+      "E2": 0.846043,
+      "E3": 0.411259,
+      "E4": 0.77249,
+      "E5": 0.294327,
+      "E6": 0.453972
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.460054,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.151717,
+        0.151615,
+        0.025651,
+        0.097262,
+        0.176276
+       ],
+       "media": 0.120504,
+       "SE": 0.027009,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.169865,
+        -0.169633,
+        0.09526,
+        -0.021043,
+        -0.223145
+       ],
+       "media": -0.097685,
+       "SE": 0.058834,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.129262,
+       "IC95_inf": 0.081019,
+       "IC95_sup": 0.172897,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.100974,
+       "IC95_inf": -0.190025,
+       "IC95_sup": -0.005799,
+       "p_bootstrap": 0.044
+      },
+      "reemplaza_en_cv": true,
+      "F1_logistica_test": 0.49318,
+      "test_F1": {
+       "diferencia": 0.091588,
+       "IC95_inf": -0.015579,
+       "IC95_sup": 0.213584,
+       "p_bootstrap": 0.052
+      },
+      "test_MAE": {
+       "diferencia": -0.064165,
+       "IC95_inf": -0.185574,
+       "IC95_sup": 0.026758,
+       "p_bootstrap": 0.196
+      }
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.579138,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.066112,
+        -0.015578,
+        -0.086643,
+        0.011944,
+        0.031263
+       ],
+       "media": 0.00142,
+       "SE": 0.02572,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.020848,
+        0.001978,
+        0.270148,
+        0.033397,
+        -0.030184
+       ],
+       "media": 0.050898,
+       "SE": 0.055898,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.006465,
+       "IC95_inf": -0.045041,
+       "IC95_sup": 0.034509,
+       "p_bootstrap": 0.856
+      },
+      "oof_MAE": {
+       "diferencia": 0.048831,
+       "IC95_inf": -0.045323,
+       "IC95_sup": 0.174164,
+       "p_bootstrap": 0.528
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.595832,
+      "test_F1": {
+       "diferencia": -0.011064,
+       "IC95_inf": -0.106341,
+       "IC95_sup": 0.06297,
+       "p_bootstrap": 0.936
+      },
+      "test_MAE": {
+       "diferencia": 0.020877,
+       "IC95_inf": -0.054753,
+       "IC95_sup": 0.095905,
+       "p_bootstrap": 0.612
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8)": {
+      "F1_logistica_cv": 0.575114,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.078248,
+        -0.015075,
+        -0.056007,
+        -0.030054,
+        0.050108
+       ],
+       "media": 0.005444,
+       "SE": 0.025251,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.096937,
+        -0.047114,
+        0.268623,
+        0.02807,
+        -0.108075
+       ],
+       "media": 0.008913,
+       "SE": 0.069226,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": 0.00302,
+       "IC95_inf": -0.04065,
+       "IC95_sup": 0.06629,
+       "p_bootstrap": 0.82
+      },
+      "oof_MAE": {
+       "diferencia": 0.006122,
+       "IC95_inf": -0.102142,
+       "IC95_sup": 0.122725,
+       "p_bootstrap": 0.992
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.57422,
+      "test_F1": {
+       "diferencia": 0.010548,
+       "IC95_inf": -0.093063,
+       "IC95_sup": 0.082025,
+       "p_bootstrap": 0.996
+      },
+      "test_MAE": {
+       "diferencia": 0.002993,
+       "IC95_inf": -0.058399,
+       "IC95_sup": 0.071062,
+       "p_bootstrap": 0.976
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+      "F1_logistica_cv": 0.599894,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.026028,
+        0.005176,
+        -0.119336,
+        -0.057052,
+        0.048503
+       ],
+       "media": -0.019336,
+       "SE": 0.030564,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.043917,
+        -0.043251,
+        0.33031,
+        0.013671,
+        -0.085185
+       ],
+       "media": 0.034326,
+       "SE": 0.075649,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.015542,
+       "IC95_inf": -0.066029,
+       "IC95_sup": 0.041744,
+       "p_bootstrap": 0.664
+      },
+      "oof_MAE": {
+       "diferencia": 0.031185,
+       "IC95_inf": -0.073576,
+       "IC95_sup": 0.144288,
+       "p_bootstrap": 0.724
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.573942,
+      "test_F1": {
+       "diferencia": 0.010826,
+       "IC95_inf": -0.108267,
+       "IC95_sup": 0.074519,
+       "p_bootstrap": 0.872
+      },
+      "test_MAE": {
+       "diferencia": -0.00459,
+       "IC95_inf": -0.072394,
+       "IC95_sup": 0.075284,
+       "p_bootstrap": 0.844
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8)": {
+     "F1_cv": 0.571571,
+     "MAE_cv": 0.450078,
+     "recall_cv": {
+      "E1": 0.743058,
+      "E2": 0.589012,
+      "E3": 0.621724,
+      "E4": 0.648712,
+      "E5": 0.547924,
+      "E6": 0.513229
+     },
+     "F1_test": 0.584825,
+     "IC95_F1_test": [
+      0.421663,
+      0.622486
+     ],
+     "MAE_test": 0.317031,
+     "recall_test": {
+      "E1": 0.757698,
+      "E2": 0.722029,
+      "E3": 0.52345,
+      "E4": 0.825143,
+      "E5": 0.362934,
+      "E6": 0.310214
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.460054,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.119775,
+        0.115048,
+        0.022181,
+        0.098869,
+        0.201716
+       ],
+       "media": 0.111518,
+       "SE": 0.028598,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.15712,
+        -0.099575,
+        0.058938,
+        0.023169,
+        -0.216094
+       ],
+       "media": -0.078136,
+       "SE": 0.052337,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.107557,
+       "IC95_inf": 0.06262,
+       "IC95_sup": 0.15387,
+       "p_bootstrap": 0.004
+      },
+      "oof_MAE": {
+       "diferencia": -0.080712,
+       "IC95_inf": -0.171427,
+       "IC95_sup": 0.015982,
+       "p_bootstrap": 0.084
+      },
+      "reemplaza_en_cv": true,
+      "F1_logistica_test": 0.49318,
+      "test_F1": {
+       "diferencia": 0.091645,
+       "IC95_inf": 0.033814,
+       "IC95_sup": 0.198993,
+       "p_bootstrap": 0.036
+      },
+      "test_MAE": {
+       "diferencia": -0.067296,
+       "IC95_inf": -0.211011,
+       "IC95_sup": 0.029594,
+       "p_bootstrap": 0.232
+      }
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.579138,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.03417,
+        -0.052145,
+        -0.090114,
+        0.01355,
+        0.056703
+       ],
+       "media": -0.007567,
+       "SE": 0.027495,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.008103,
+        0.072035,
+        0.233826,
+        0.077609,
+        -0.023134
+       ],
+       "media": 0.070447,
+       "SE": 0.045647,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.02817,
+       "IC95_inf": -0.067328,
+       "IC95_sup": 0.030544,
+       "p_bootstrap": 0.288
+      },
+      "oof_MAE": {
+       "diferencia": 0.069094,
+       "IC95_inf": -0.041273,
+       "IC95_sup": 0.1992,
+       "p_bootstrap": 0.288
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.595832,
+      "test_F1": {
+       "diferencia": -0.011007,
+       "IC95_inf": -0.069494,
+       "IC95_sup": 0.052923,
+       "p_bootstrap": 0.804
+      },
+      "test_MAE": {
+       "diferencia": 0.017745,
+       "IC95_inf": -0.044395,
+       "IC95_sup": 0.089407,
+       "p_bootstrap": 0.676
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8)": {
+      "F1_logistica_cv": 0.575114,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.046306,
+        -0.051642,
+        -0.059478,
+        -0.028447,
+        0.075548
+       ],
+       "media": -0.003543,
+       "SE": 0.027205,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.084192,
+        0.022944,
+        0.232301,
+        0.072282,
+        -0.101025
+       ],
+       "media": 0.028462,
+       "SE": 0.060398,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.018685,
+       "IC95_inf": -0.062638,
+       "IC95_sup": 0.059671,
+       "p_bootstrap": 0.688
+      },
+      "oof_MAE": {
+       "diferencia": 0.026384,
+       "IC95_inf": -0.085095,
+       "IC95_sup": 0.138003,
+       "p_bootstrap": 0.78
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.57422,
+      "test_F1": {
+       "diferencia": 0.010605,
+       "IC95_inf": -0.047348,
+       "IC95_sup": 0.070948,
+       "p_bootstrap": 0.844
+      },
+      "test_MAE": {
+       "diferencia": -0.000138,
+       "IC95_inf": -0.074228,
+       "IC95_sup": 0.06852,
+       "p_bootstrap": 0.92
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+      "F1_logistica_cv": 0.599894,
+      "cv_F1": {
+       "dif_por_fold": [
+        -0.005914,
+        -0.031391,
+        -0.122807,
+        -0.055445,
+        0.073943
+       ],
+       "media": -0.028323,
+       "SE": 0.032119,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.031172,
+        0.026807,
+        0.293988,
+        0.057882,
+        -0.078134
+       ],
+       "media": 0.053874,
+       "SE": 0.064445,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.037247,
+       "IC95_inf": -0.084538,
+       "IC95_sup": 0.02709,
+       "p_bootstrap": 0.272
+      },
+      "oof_MAE": {
+       "diferencia": 0.051447,
+       "IC95_inf": -0.053784,
+       "IC95_sup": 0.169905,
+       "p_bootstrap": 0.468
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.573942,
+      "test_F1": {
+       "diferencia": 0.010883,
+       "IC95_inf": -0.058387,
+       "IC95_sup": 0.054684,
+       "p_bootstrap": 0.984
+      },
+      "test_MAE": {
+       "diferencia": -0.007721,
+       "IC95_inf": -0.066633,
+       "IC95_sup": 0.064394,
+       "p_bootstrap": 0.792
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "F1_cv": 0.59252,
+     "MAE_cv": 0.388907,
+     "recall_cv": {
+      "E1": 0.776183,
+      "E2": 0.577317,
+      "E3": 0.62499,
+      "E4": 0.750433,
+      "E5": 0.492544,
+      "E6": 0.512062
+     },
+     "F1_test": 0.559696,
+     "IC95_F1_test": [
+      0.417059,
+      0.587854
+     ],
+     "MAE_test": 0.355284,
+     "recall_test": {
+      "E1": 0.81339,
+      "E2": 0.629776,
+      "E3": 0.472856,
+      "E4": 0.689633,
+      "E5": 0.458865,
+      "E6": 0.291299
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.460054,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.165123,
+        0.129007,
+        0.051592,
+        0.08467,
+        0.231942
+       ],
+       "media": 0.132467,
+       "SE": 0.031463,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.195474,
+        -0.111734,
+        -0.105073,
+        -0.050227,
+        -0.234029
+       ],
+       "media": -0.139307,
+       "SE": 0.033162,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.132344,
+       "IC95_inf": 0.075539,
+       "IC95_sup": 0.194339,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.140326,
+       "IC95_inf": -0.203566,
+       "IC95_sup": -0.077397,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true,
+      "F1_logistica_test": 0.49318,
+      "test_F1": {
+       "diferencia": 0.066516,
+       "IC95_inf": 0.030048,
+       "IC95_sup": 0.182543,
+       "p_bootstrap": 0.04
+      },
+      "test_MAE": {
+       "diferencia": -0.029043,
+       "IC95_inf": -0.139383,
+       "IC95_sup": 0.053652,
+       "p_bootstrap": 0.532
+      }
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.579138,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.079519,
+        -0.038186,
+        -0.060703,
+        -0.000648,
+        0.086929
+       ],
+       "media": 0.013382,
+       "SE": 0.030106,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.046458,
+        0.059877,
+        0.069815,
+        0.004213,
+        -0.041068
+       ],
+       "media": 0.009276,
+       "SE": 0.024384,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.003383,
+       "IC95_inf": -0.043631,
+       "IC95_sup": 0.051196,
+       "p_bootstrap": 0.996
+      },
+      "oof_MAE": {
+       "diferencia": 0.00948,
+       "IC95_inf": -0.074179,
+       "IC95_sup": 0.07753,
+       "p_bootstrap": 0.888
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.595832,
+      "test_F1": {
+       "diferencia": -0.036136,
+       "IC95_inf": -0.064251,
+       "IC95_sup": 0.03322,
+       "p_bootstrap": 0.448
+      },
+      "test_MAE": {
+       "diferencia": 0.055998,
+       "IC95_inf": -0.022397,
+       "IC95_sup": 0.103233,
+       "p_bootstrap": 0.124
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8)": {
+      "F1_logistica_cv": 0.575114,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.091654,
+        -0.037683,
+        -0.030066,
+        -0.042646,
+        0.105774
+       ],
+       "media": 0.017407,
+       "SE": 0.033329,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.122547,
+        0.010785,
+        0.068289,
+        -0.001114,
+        -0.118959
+       ],
+       "media": -0.032709,
+       "SE": 0.037816,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": 0.006103,
+       "IC95_inf": -0.039423,
+       "IC95_sup": 0.076055,
+       "p_bootstrap": 0.716
+      },
+      "oof_MAE": {
+       "diferencia": -0.033229,
+       "IC95_inf": -0.108666,
+       "IC95_sup": 0.034761,
+       "p_bootstrap": 0.352
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.57422,
+      "test_F1": {
+       "diferencia": -0.014524,
+       "IC95_inf": -0.054493,
+       "IC95_sup": 0.055241,
+       "p_bootstrap": 0.628
+      },
+      "test_MAE": {
+       "diferencia": 0.038115,
+       "IC95_inf": -0.02955,
+       "IC95_sup": 0.099779,
+       "p_bootstrap": 0.3
+      }
+     },
+     "vs Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+      "F1_logistica_cv": 0.599894,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.039434,
+        -0.017432,
+        -0.093396,
+        -0.069643,
+        0.104169
+       ],
+       "media": -0.007374,
+       "SE": 0.036063,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.069526,
+        0.014649,
+        0.129977,
+        -0.015514,
+        -0.096069
+       ],
+       "media": -0.007297,
+       "SE": 0.039463,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.01246,
+       "IC95_inf": -0.058969,
+       "IC95_sup": 0.053965,
+       "p_bootstrap": 0.816
+      },
+      "oof_MAE": {
+       "diferencia": -0.008166,
+       "IC95_inf": -0.081783,
+       "IC95_sup": 0.059773,
+       "p_bootstrap": 0.736
+      },
+      "reemplaza_en_cv": false,
+      "F1_logistica_test": 0.573942,
+      "test_F1": {
+       "diferencia": -0.014246,
+       "IC95_inf": -0.052611,
+       "IC95_sup": 0.034784,
+       "p_bootstrap": 0.476
+      },
+      "test_MAE": {
+       "diferencia": 0.030532,
+       "IC95_inf": -0.01646,
+       "IC95_sup": 0.067122,
+       "p_bootstrap": 0.168
+      }
+     }
+    }
+   },
+   "lectura": [
+    "XGBoost geográfico (B) − Logística B v3 (sin vecindad): CV +0.070 (SE 0.037, 4/5 folds) → REEMPLAZA; test -0.009 [-0.054, +0.150]",
+    "XGBoost geográfico (B) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.070 (SE 0.041, 1/5 folds) → no reemplaza; test -0.090 [-0.142, -0.008]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B v3 (sin vecindad): CV +0.121 (SE 0.027, 5/5 folds) → REEMPLAZA; test +0.092 [-0.016, +0.214]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad por radios (300 m y 1 km): CV +0.001 (SE 0.026, 3/5 folds) → no reemplaza; test -0.011 [-0.106, +0.063]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.019 (SE 0.031, 3/5 folds) → no reemplaza; test +0.011 [-0.108, +0.075]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B v3 (sin vecindad): CV +0.112 (SE 0.029, 5/5 folds) → REEMPLAZA; test +0.092 [+0.034, +0.199]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B + vecindad KNN (k = 8): CV -0.004 (SE 0.027, 2/5 folds) → no reemplaza; test +0.011 [-0.047, +0.071]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.028 (SE 0.032, 1/5 folds) → no reemplaza; test +0.011 [-0.058, +0.055]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) − Logística B v3 (sin vecindad): CV +0.132 (SE 0.031, 5/5 folds) → REEMPLAZA; test +0.067 [+0.030, +0.183]",
+    "XGBoost geográfico (B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)) − Logística B + vecindad KNN (k = 8) + estrato de vecinos (k = 100): CV -0.007 (SE 0.036, 2/5 folds) → no reemplaza; test -0.014 [-0.053, +0.035]"
+   ]
+  },
+  "zonas conocidas": {
+   "criterio": "reemplaza si la diferencia pareada de F1 por fold (CV kNNDM) supera 1 SE (ddof = 1); sin test externo: IC 95 % de las predicciones OOF por bootstrap de bloques de train",
+   "variantes": {
+    "XGBoost geográfico | B": {
+     "F1_cv": 0.739548,
+     "MAE_cv": 0.276846,
+     "recall_cv": {
+      "E1": 0.846866,
+      "E2": 0.713458,
+      "E3": 0.802019,
+      "E4": 0.694824,
+      "E5": 0.707941,
+      "E6": 0.747799
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.550681,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.165788,
+        0.200785,
+        0.203274,
+        0.188396,
+        0.186092
+       ],
+       "media": 0.188867,
+       "SE": 0.006672,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.230847,
+        -0.109146,
+        -0.199436,
+        -0.182,
+        -0.160143
+       ],
+       "media": -0.176315,
+       "SE": 0.020389,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.186908,
+       "IC95_inf": 0.161579,
+       "IC95_sup": 0.249149,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.176315,
+       "IC95_inf": -0.234435,
+       "IC95_sup": -0.119674,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.685496,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.008934,
+        0.063883,
+        0.048418,
+        0.079731,
+        0.069297
+       ],
+       "media": 0.054053,
+       "SE": 0.012361,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.037917,
+        0.007949,
+        -0.027441,
+        -0.059468,
+        -0.034166
+       ],
+       "media": -0.030209,
+       "SE": 0.010943,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.051328,
+       "IC95_inf": 0.021315,
+       "IC95_sup": 0.149519,
+       "p_bootstrap": 0.004
+      },
+      "oof_MAE": {
+       "diferencia": -0.030209,
+       "IC95_inf": -0.086082,
+       "IC95_sup": 0.034,
+       "p_bootstrap": 0.284
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30)": {
+      "F1_logistica_cv": 0.693406,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.017099,
+        0.04574,
+        0.064718,
+        0.042515,
+        0.06064
+       ],
+       "media": 0.046142,
+       "SE": 0.008402,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.057158,
+        0.003634,
+        -0.081838,
+        -0.073791,
+        -0.09595
+       ],
+       "media": -0.061021,
+       "SE": 0.017337,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.04413,
+       "IC95_inf": 0.007672,
+       "IC95_sup": 0.144591,
+       "p_bootstrap": 0.036
+      },
+      "oof_MAE": {
+       "diferencia": -0.061021,
+       "IC95_inf": -0.135562,
+       "IC95_sup": 0.003021,
+       "p_bootstrap": 0.076
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+      "F1_logistica_cv": 0.756461,
+      "cv_F1": {
+       "dif_por_fold": [
+        -0.022136,
+        -0.009048,
+        -0.031874,
+        -0.027974,
+        0.006467
+       ],
+       "media": -0.016913,
+       "SE": 0.007007,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.04194,
+        0.061161,
+        0.050588,
+        0.017355,
+        -0.084561
+       ],
+       "media": 0.000521,
+       "SE": 0.027847,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": -0.018567,
+       "IC95_inf": -0.040067,
+       "IC95_sup": 0.092337,
+       "p_bootstrap": 0.46
+      },
+      "oof_MAE": {
+       "diferencia": 0.000521,
+       "IC95_inf": -0.045568,
+       "IC95_sup": 0.033678,
+       "p_bootstrap": 0.972
+      },
+      "reemplaza_en_cv": false
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "F1_cv": 0.76007,
+     "MAE_cv": 0.246734,
+     "recall_cv": {
+      "E1": 0.846714,
+      "E2": 0.730367,
+      "E3": 0.812291,
+      "E4": 0.737613,
+      "E5": 0.71083,
+      "E6": 0.780576
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.550681,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.192571,
+        0.221211,
+        0.243827,
+        0.201562,
+        0.187774
+       ],
+       "media": 0.209389,
+       "SE": 0.010337,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.283554,
+        -0.128445,
+        -0.253561,
+        -0.194496,
+        -0.172076
+       ],
+       "media": -0.206427,
+       "SE": 0.027905,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.208196,
+       "IC95_inf": 0.177479,
+       "IC95_sup": 0.25885,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.206427,
+       "IC95_inf": -0.264841,
+       "IC95_sup": -0.151083,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.685496,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.035718,
+        0.084309,
+        0.088971,
+        0.092896,
+        0.070979
+       ],
+       "media": 0.074575,
+       "SE": 0.010393,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.090625,
+        -0.01135,
+        -0.081566,
+        -0.071964,
+        -0.046099
+       ],
+       "media": -0.060321,
+       "SE": 0.014328,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.072616,
+       "IC95_inf": 0.048064,
+       "IC95_sup": 0.139129,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.060321,
+       "IC95_inf": -0.095937,
+       "IC95_sup": -0.028981,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30)": {
+      "F1_logistica_cv": 0.693406,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.043882,
+        0.066166,
+        0.105271,
+        0.05568,
+        0.062322
+       ],
+       "media": 0.066664,
+       "SE": 0.010366,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.109865,
+        -0.015664,
+        -0.135963,
+        -0.086287,
+        -0.107883
+       ],
+       "media": -0.091133,
+       "SE": 0.020445,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.065418,
+       "IC95_inf": 0.035779,
+       "IC95_sup": 0.141027,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.091133,
+       "IC95_inf": -0.143615,
+       "IC95_sup": -0.05164,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+      "F1_logistica_cv": 0.756461,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.004647,
+        0.011377,
+        0.008679,
+        -0.014809,
+        0.008149
+       ],
+       "media": 0.003609,
+       "SE": 0.004727,
+       "folds_a_favor": 4,
+       "supera_por_1SE": false
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.094648,
+        0.041863,
+        -0.003537,
+        0.004859,
+        -0.096494
+       ],
+       "media": -0.029592,
+       "SE": 0.028,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.002721,
+       "IC95_inf": -0.014828,
+       "IC95_sup": 0.086572,
+       "p_bootstrap": 0.56
+      },
+      "oof_MAE": {
+       "diferencia": -0.029591,
+       "IC95_inf": -0.072284,
+       "IC95_sup": 0.002539,
+       "p_bootstrap": 0.084
+      },
+      "reemplaza_en_cv": false
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30)": {
+     "F1_cv": 0.772874,
+     "MAE_cv": 0.266527,
+     "recall_cv": {
+      "E1": 0.850465,
+      "E2": 0.712236,
+      "E3": 0.782772,
+      "E4": 0.787843,
+      "E5": 0.756179,
+      "E6": 0.791885
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.550681,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.215957,
+        0.231072,
+        0.241689,
+        0.223847,
+        0.1984
+       ],
+       "media": 0.222193,
+       "SE": 0.007303,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.254849,
+        -0.136491,
+        -0.244699,
+        -0.209519,
+        -0.087612
+       ],
+       "media": -0.186634,
+       "SE": 0.032302,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.221515,
+       "IC95_inf": 0.17761,
+       "IC95_sup": 0.270624,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.186634,
+       "IC95_inf": -0.266954,
+       "IC95_sup": -0.110977,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.685496,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.059103,
+        0.09417,
+        0.086833,
+        0.115182,
+        0.081605
+       ],
+       "media": 0.087379,
+       "SE": 0.009089,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.061919,
+        -0.019396,
+        -0.072704,
+        -0.086987,
+        0.038364
+       ],
+       "media": -0.040528,
+       "SE": 0.022718,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.085935,
+       "IC95_inf": 0.062651,
+       "IC95_sup": 0.130404,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.040529,
+       "IC95_inf": -0.093594,
+       "IC95_sup": 0.044887,
+       "p_bootstrap": 0.228
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30)": {
+      "F1_logistica_cv": 0.693406,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.067268,
+        0.076027,
+        0.103133,
+        0.077966,
+        0.072947
+       ],
+       "media": 0.079468,
+       "SE": 0.006187,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.08116,
+        -0.02371,
+        -0.127101,
+        -0.10131,
+        -0.023419
+       ],
+       "media": -0.07134,
+       "SE": 0.020819,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.078737,
+       "IC95_inf": 0.04617,
+       "IC95_sup": 0.133371,
+       "p_bootstrap": 0.012
+      },
+      "oof_MAE": {
+       "diferencia": -0.071341,
+       "IC95_inf": -0.135984,
+       "IC95_sup": 0.002263,
+       "p_bootstrap": 0.056
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+      "F1_logistica_cv": 0.756461,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.028033,
+        0.021238,
+        0.006541,
+        0.007477,
+        0.018775
+       ],
+       "media": 0.016413,
+       "SE": 0.00413,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.065942,
+        0.033817,
+        0.005325,
+        -0.010164,
+        -0.01203
+       ],
+       "media": -0.009799,
+       "SE": 0.016261,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "oof_F1": {
+       "diferencia": 0.016039,
+       "IC95_inf": 0.002906,
+       "IC95_sup": 0.077919,
+       "p_bootstrap": 0.048
+      },
+      "oof_MAE": {
+       "diferencia": -0.009799,
+       "IC95_inf": -0.043759,
+       "IC95_sup": 0.018264,
+       "p_bootstrap": 0.416
+      },
+      "reemplaza_en_cv": true
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "F1_cv": 0.77822,
+     "MAE_cv": 0.240014,
+     "recall_cv": {
+      "E1": 0.84884,
+      "E2": 0.770694,
+      "E3": 0.790154,
+      "E4": 0.772137,
+      "E5": 0.747515,
+      "E6": 0.796323
+     },
+     "vs Logística B v3 (sin vecindad)": {
+      "F1_logistica_cv": 0.550681,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.236424,
+        0.234405,
+        0.226735,
+        0.224085,
+        0.216044
+       ],
+       "media": 0.227539,
+       "SE": 0.00368,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.281008,
+        -0.172076,
+        -0.235565,
+        -0.207906,
+        -0.16918
+       ],
+       "media": -0.213147,
+       "SE": 0.020923,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.22749,
+       "IC95_inf": 0.195086,
+       "IC95_sup": 0.277253,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.213147,
+       "IC95_inf": -0.274984,
+       "IC95_sup": -0.158507,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad por radios (300 m y 1 km)": {
+      "F1_logistica_cv": 0.685496,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.07957,
+        0.097504,
+        0.071879,
+        0.115419,
+        0.099249
+       ],
+       "media": 0.092724,
+       "SE": 0.007707,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.088079,
+        -0.054981,
+        -0.06357,
+        -0.085374,
+        -0.043204
+       ],
+       "media": -0.067041,
+       "SE": 0.008673,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.09191,
+       "IC95_inf": 0.072472,
+       "IC95_sup": 0.147543,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.067042,
+       "IC95_inf": -0.104639,
+       "IC95_sup": -0.027435,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30)": {
+      "F1_logistica_cv": 0.693406,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.087735,
+        0.07936,
+        0.088179,
+        0.078204,
+        0.090592
+       ],
+       "media": 0.084814,
+       "SE": 0.002517,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.107319,
+        -0.059296,
+        -0.117967,
+        -0.099697,
+        -0.104987
+       ],
+       "media": -0.097853,
+       "SE": 0.010087,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.084712,
+       "IC95_inf": 0.062003,
+       "IC95_sup": 0.142342,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.097853,
+       "IC95_inf": -0.155464,
+       "IC95_sup": -0.059584,
+       "p_bootstrap": 0.002
+      },
+      "reemplaza_en_cv": true
+     },
+     "vs Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+      "F1_logistica_cv": 0.756461,
+      "cv_F1": {
+       "dif_por_fold": [
+        0.048499,
+        0.024572,
+        -0.008413,
+        0.007715,
+        0.03642
+       ],
+       "media": 0.021759,
+       "SE": 0.010113,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "cv_MAE": {
+       "dif_por_fold": [
+        -0.092102,
+        -0.001769,
+        0.014459,
+        -0.008551,
+        -0.093598
+       ],
+       "media": -0.036312,
+       "SE": 0.023384,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "oof_F1": {
+       "diferencia": 0.022015,
+       "IC95_inf": 0.010806,
+       "IC95_sup": 0.089147,
+       "p_bootstrap": 0.002
+      },
+      "oof_MAE": {
+       "diferencia": -0.036312,
+       "IC95_inf": -0.075139,
+       "IC95_sup": -0.008619,
+       "p_bootstrap": 0.004
+      },
+      "reemplaza_en_cv": true
+     }
+    }
+   },
+   "lectura": [
+    "XGBoost geográfico (B) − Logística B v3 (sin vecindad): CV +0.189 (SE 0.007, 5/5 folds) → REEMPLAZA; OOF +0.187 [+0.162, +0.249]",
+    "XGBoost geográfico (B) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV -0.017 (SE 0.007, 1/5 folds) → no reemplaza; OOF -0.019 [-0.040, +0.092]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B v3 (sin vecindad): CV +0.209 (SE 0.010, 5/5 folds) → REEMPLAZA; OOF +0.208 [+0.177, +0.259]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad por radios (300 m y 1 km): CV +0.075 (SE 0.010, 5/5 folds) → REEMPLAZA; OOF +0.073 [+0.048, +0.139]",
+    "XGBoost geográfico (B + vecindad por radios (300 m y 1 km)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.004 (SE 0.005, 4/5 folds) → no reemplaza; OOF +0.003 [-0.015, +0.087]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B v3 (sin vecindad): CV +0.222 (SE 0.007, 5/5 folds) → REEMPLAZA; OOF +0.222 [+0.178, +0.271]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B + vecindad KNN (k = 30): CV +0.079 (SE 0.006, 5/5 folds) → REEMPLAZA; OOF +0.079 [+0.046, +0.133]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.016 (SE 0.004, 5/5 folds) → REEMPLAZA; OOF +0.016 [+0.003, +0.078]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)) − Logística B v3 (sin vecindad): CV +0.228 (SE 0.004, 5/5 folds) → REEMPLAZA; OOF +0.227 [+0.195, +0.277]",
+    "XGBoost geográfico (B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)) − Logística B + vecindad KNN (k = 30) + estrato de vecinos (k = 30): CV +0.022 (SE 0.010, 4/5 folds) → REEMPLAZA; OOF +0.022 [+0.011, +0.089]"
+   ]
+  }
+ },
+ "cv": {
+  "zonas nuevas": {
+   "q": 30,
+   "W_km": 0.178175,
+   "k_vecindad": 8,
+   "k_estrato": 100,
+   "conjuntos": [
+    "B",
+    "B + vecindad por radios (300 m y 1 km)",
+    "B + vecindad KNN (k = 8)",
+    "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)"
+   ],
+   "referencia_logistica": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+   "verificacion_folds_logistica_vs_07_max_dif_F1": {
+    "B": 0.0003,
+    "B + vecindad por radios (300 m y 1 km)": 0.0017,
+    "B + vecindad KNN (k = 8)": 0.0006,
+    "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": 0.0006
+   },
+   "variables_elegidas_por_cv": {
+    "Logística B": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+    "XGBoost": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+    "XGBoost geográfico": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)"
+   },
+   "modelos": {
+    "Logística B | B": {
+     "modelo": "Logística B",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.449283,
+       0.483622,
+       0.440702,
+       0.435543,
+       0.491119
+      ],
+      "MAE": [
+       0.448731,
+       0.49696,
+       0.740087,
+       0.471302,
+       0.483992
+      ],
+      "recall": {
+       "E1": [
+        0.662531,
+        0.847663,
+        0.659805,
+        0.834082,
+        0.747287
+       ],
+       "E2": [
+        0.529908,
+        0.517894,
+        0.724659,
+        0.33796,
+        0.266679
+       ],
+       "E3": [
+        0.636298,
+        0.253601,
+        0.05791,
+        0.517864,
+        0.853113
+       ],
+       "E4": [
+        0.587384,
+        0.703046,
+        0.671703,
+        0.541242,
+        0.500924
+       ],
+       "E5": [
+        0.183932,
+        0.173518,
+        0.074212,
+        0.043359,
+        0.163518
+       ],
+       "E6": [
+        0.081761,
+        0.697578,
+        0.546247,
+        0.727273,
+        0.431072
+       ]
+      }
+     },
+     "F1_macro": 0.460054,
+     "MAE": 0.528214,
+     "recall": {
+      "E1": 0.750274,
+      "E2": 0.47542,
+      "E3": 0.463757,
+      "E4": 0.600859,
+      "E5": 0.127708,
+      "E6": 0.496786
+     }
+    },
+    "XGBoost | B": {
+     "modelo": "XGBoost",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.534664,
+       0.584442,
+       0.391342,
+       0.459392,
+       0.662444
+      ],
+      "MAE": [
+       0.369861,
+       0.392167,
+       0.856959,
+       0.570844,
+       0.269842
+      ],
+      "recall": {
+       "E1": [
+        0.87392,
+        0.895445,
+        0.489075,
+        0.715788,
+        0.913054
+       ],
+       "E2": [
+        0.479588,
+        0.389692,
+        0.822,
+        0.737087,
+        0.475519
+       ],
+       "E3": [
+        0.828232,
+        0.713947,
+        0.046875,
+        0.461344,
+        0.942333
+       ],
+       "E4": [
+        0.338067,
+        0.851805,
+        0.874754,
+        0.369314,
+        0.524197
+       ],
+       "E5": [
+        0.880902,
+        0.178324,
+        0.345771,
+        0.187199,
+        0.947784
+       ],
+       "E6": [
+        0.012579,
+        0.79654,
+        0.112894,
+        0.940039,
+        0.332547
+       ]
+      }
+     },
+     "F1_macro": 0.526457,
+     "MAE": 0.491935,
+     "recall": {
+      "E1": 0.777456,
+      "E2": 0.580777,
+      "E3": 0.598546,
+      "E4": 0.591627,
+      "E5": 0.507996,
+      "E6": 0.438919
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.085381,
+        0.10082,
+        -0.04936,
+        0.023849,
+        0.171325
+       ],
+       "media": 0.066403,
+       "SE": 0.037259,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.07887,
+        -0.104794,
+        0.116873,
+        0.099542,
+        -0.214149
+       ],
+       "media": -0.03628,
+       "SE": 0.063265,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.040308,
+        -0.045619,
+        -0.194348,
+        -0.130465,
+        0.043553
+       ],
+       "media": -0.073437,
+       "SE": 0.040884,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        0.047078,
+        0.021589,
+        0.351922,
+        0.134256,
+        -0.076189
+       ],
+       "media": 0.095731,
+       "SE": 0.072298,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.085381,
+        0.10082,
+        -0.04936,
+        0.023849,
+        0.171325
+       ],
+       "media": 0.066403,
+       "SE": 0.037259,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.07887,
+        -0.104794,
+        0.116873,
+        0.099542,
+        -0.214149
+       ],
+       "media": -0.03628,
+       "SE": 0.063265,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     }
+    },
+    "XGBoost geográfico | B": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.539968,
+       0.584136,
+       0.39039,
+       0.468482,
+       0.665359
+      ],
+      "MAE": [
+       0.357256,
+       0.391782,
+       0.856799,
+       0.552677,
+       0.271338
+      ],
+      "recall": {
+       "E1": [
+        0.917968,
+        0.879299,
+        0.491674,
+        0.745037,
+        0.892864
+       ],
+       "E2": [
+        0.456159,
+        0.374434,
+        0.816505,
+        0.731238,
+        0.487759
+       ],
+       "E3": [
+        0.825423,
+        0.722334,
+        0.049876,
+        0.469116,
+        0.939768
+       ],
+       "E4": [
+        0.358957,
+        0.889312,
+        0.841517,
+        0.375513,
+        0.553195
+       ],
+       "E5": [
+        0.875969,
+        0.160972,
+        0.370647,
+        0.196834,
+        0.94538
+       ],
+       "E6": [
+        0.012579,
+        0.789619,
+        0.109131,
+        0.940039,
+        0.331957
+       ]
+      }
+     },
+     "F1_macro": 0.529667,
+     "MAE": 0.48597,
+     "recall": {
+      "E1": 0.785368,
+      "E2": 0.573219,
+      "E3": 0.601303,
+      "E4": 0.603699,
+      "E5": 0.50996,
+      "E6": 0.436665
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.090685,
+        0.100514,
+        -0.050312,
+        0.032939,
+        0.17424
+       ],
+       "media": 0.069613,
+       "SE": 0.037465,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.091475,
+        -0.105178,
+        0.116712,
+        0.081376,
+        -0.212653
+       ],
+       "media": -0.042244,
+       "SE": 0.061633,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.035004,
+        -0.045925,
+        -0.195299,
+        -0.121375,
+        0.046468
+       ],
+       "media": -0.070227,
+       "SE": 0.041054,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        0.034473,
+        0.021204,
+        0.351762,
+        0.116089,
+        -0.074693
+       ],
+       "media": 0.089767,
+       "SE": 0.072159,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.090685,
+        0.100514,
+        -0.050312,
+        0.032939,
+        0.17424
+       ],
+       "media": 0.069613,
+       "SE": 0.037465,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.091475,
+        -0.105178,
+        0.116712,
+        0.081376,
+        -0.212653
+       ],
+       "media": -0.042244,
+       "SE": 0.061633,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.005304,
+        -0.000306,
+        -0.000951,
+        0.00909,
+        0.002915
+       ],
+       "media": 0.00321,
+       "SE": 0.001854,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.012605,
+        -0.000385,
+        -0.000161,
+        -0.018167,
+        0.001496
+       ],
+       "media": -0.005964,
+       "SE": 0.003959,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "Logística B | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.534887,
+       0.650815,
+       0.552997,
+       0.520861,
+       0.636131
+      ],
+      "MAE": [
+       0.299714,
+       0.32535,
+       0.565199,
+       0.416862,
+       0.291031
+      ],
+      "recall": {
+       "E1": [
+        0.917898,
+        0.633434,
+        0.836085,
+        0.792011,
+        0.876614
+       ],
+       "E2": [
+        0.395634,
+        0.752962,
+        0.825925,
+        0.511252,
+        0.514764
+       ],
+       "E3": [
+        0.834066,
+        0.699088,
+        0.17929,
+        0.584881,
+        0.964871
+       ],
+       "E4": [
+        0.770481,
+        0.948957,
+        0.47273,
+        0.470964,
+        0.268009
+       ],
+       "E5": [
+        0.296688,
+        0.204485,
+        0.249585,
+        0.35031,
+        0.830986
+       ],
+       "E6": [
+        0.040881,
+        0.858824,
+        0.952664,
+        0.439072,
+        0.444051
+       ]
+      }
+     },
+     "F1_macro": 0.579138,
+     "MAE": 0.379631,
+     "recall": {
+      "E1": 0.811209,
+      "E2": 0.600107,
+      "E3": 0.652439,
+      "E4": 0.586228,
+      "E5": 0.386411,
+      "E6": 0.547098
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.085604,
+        0.167193,
+        0.112295,
+        0.085318,
+        0.145013
+       ],
+       "media": 0.119085,
+       "SE": 0.016269,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.149017,
+        -0.171611,
+        -0.174888,
+        -0.054439,
+        -0.192961
+       ],
+       "media": -0.148583,
+       "SE": 0.024551,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.606012,
+       0.630557,
+       0.466116,
+       0.5173,
+       0.666137
+      ],
+      "MAE": [
+       0.279526,
+       0.332418,
+       0.835889,
+       0.461783,
+       0.260753
+      ],
+      "recall": {
+       "E1": [
+        0.831196,
+        0.741861,
+        0.285534,
+        0.818483,
+        0.916025
+       ],
+       "E2": [
+        0.526358,
+        0.629722,
+        0.897557,
+        0.62873,
+        0.497477
+       ],
+       "E3": [
+        0.821534,
+        0.775296,
+        0.02048,
+        0.327917,
+        0.970078
+       ],
+       "E4": [
+        0.742764,
+        0.906655,
+        0.767336,
+        0.617622,
+        0.277244
+       ],
+       "E5": [
+        0.573996,
+        0.1559,
+        0.438226,
+        0.579491,
+        0.841635
+       ],
+       "E6": [
+        0.113208,
+        0.70519,
+        0.827293,
+        0.669246,
+        0.587414
+       ]
+      }
+     },
+     "F1_macro": 0.577224,
+     "MAE": 0.434074,
+     "recall": {
+      "E1": 0.71862,
+      "E2": 0.635969,
+      "E3": 0.583061,
+      "E4": 0.662324,
+      "E5": 0.517849,
+      "E6": 0.58047
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.071125,
+        -0.020258,
+        -0.086881,
+        -0.003561,
+        0.030006
+       ],
+       "media": -0.001914,
+       "SE": 0.026374,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.020188,
+        0.007068,
+        0.27069,
+        0.044921,
+        -0.030278
+       ],
+       "media": 0.054443,
+       "SE": 0.055608,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        0.03104,
+        0.000496,
+        -0.119574,
+        -0.072556,
+        0.047246
+       ],
+       "media": -0.02267,
+       "SE": 0.031772,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.043256,
+        -0.03816,
+        0.330852,
+        0.025194,
+        -0.085278
+       ],
+       "media": 0.03787,
+       "SE": 0.075341,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.156729,
+        0.146935,
+        0.025414,
+        0.081758,
+        0.175018
+       ],
+       "media": 0.117171,
+       "SE": 0.027812,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.169204,
+        -0.164543,
+        0.095802,
+        -0.009519,
+        -0.223238
+       ],
+       "media": -0.09414,
+       "SE": 0.05937,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.601,
+       0.635237,
+       0.466353,
+       0.532805,
+       0.667395
+      ],
+      "MAE": [
+       0.278866,
+       0.327327,
+       0.835347,
+       0.450259,
+       0.260847
+      ],
+      "recall": {
+       "E1": [
+        0.83726,
+        0.759451,
+        0.286588,
+        0.846549,
+        0.91651
+       ],
+       "E2": [
+        0.526979,
+        0.622527,
+        0.892749,
+        0.625855,
+        0.498412
+       ],
+       "E3": [
+        0.82996,
+        0.783318,
+        0.023129,
+        0.345983,
+        0.969301
+       ],
+       "E4": [
+        0.740852,
+        0.911168,
+        0.765675,
+        0.615905,
+        0.293314
+       ],
+       "E5": [
+        0.512685,
+        0.15937,
+        0.421227,
+        0.59532,
+        0.852971
+       ],
+       "E6": [
+        0.116352,
+        0.70519,
+        0.839176,
+        0.65764,
+        0.563029
+       ]
+      }
+     },
+     "F1_macro": 0.580558,
+     "MAE": 0.430529,
+     "recall": {
+      "E1": 0.729272,
+      "E2": 0.633304,
+      "E3": 0.590338,
+      "E4": 0.665383,
+      "E5": 0.508315,
+      "E6": 0.576277
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.066112,
+        -0.015578,
+        -0.086643,
+        0.011944,
+        0.031263
+       ],
+       "media": 0.00142,
+       "SE": 0.02572,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.020848,
+        0.001978,
+        0.270148,
+        0.033397,
+        -0.030184
+       ],
+       "media": 0.050898,
+       "SE": 0.055898,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        0.026028,
+        0.005176,
+        -0.119336,
+        -0.057052,
+        0.048503
+       ],
+       "media": -0.019336,
+       "SE": 0.030564,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.043917,
+        -0.043251,
+        0.33031,
+        0.013671,
+        -0.085185
+       ],
+       "media": 0.034326,
+       "SE": 0.075649,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.151717,
+        0.151615,
+        0.025651,
+        0.097262,
+        0.176276
+       ],
+       "media": 0.120504,
+       "SE": 0.027009,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.169865,
+        -0.169633,
+        0.09526,
+        -0.021043,
+        -0.223145
+       ],
+       "media": -0.097685,
+       "SE": 0.058834,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        -0.005012,
+        0.00468,
+        0.000237,
+        0.015504,
+        0.001258
+       ],
+       "media": 0.003334,
+       "SE": 0.003417,
+       "folds_a_favor": 4,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.00066,
+        -0.00509,
+        -0.000542,
+        -0.011524,
+        9.4e-05
+       ],
+       "media": -0.003545,
+       "SE": 0.002198,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 8)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad KNN (k = 8)",
+     "folds": {
+      "F1_macro": [
+       0.522752,
+       0.650312,
+       0.52236,
+       0.562859,
+       0.617287
+      ],
+      "MAE": [
+       0.375803,
+       0.374442,
+       0.566724,
+       0.422189,
+       0.368922
+      ],
+      "recall": {
+       "E1": [
+        0.628311,
+        0.84832,
+        0.772219,
+        0.797034,
+        0.734857
+       ],
+       "E2": [
+        0.56656,
+        0.604664,
+        0.726916,
+        0.349063,
+        0.370211
+       ],
+       "E3": [
+        0.795535,
+        0.378487,
+        0.054114,
+        0.513323,
+        0.913888
+       ],
+       "E4": [
+        0.430639,
+        0.795826,
+        0.681976,
+        0.643177,
+        0.476173
+       ],
+       "E5": [
+        0.718111,
+        0.660171,
+        0.242537,
+        0.434962,
+        0.739952
+       ],
+       "E6": [
+        0.066038,
+        0.783391,
+        0.871658,
+        0.673114,
+        0.500885
+       ]
+      }
+     },
+     "F1_macro": 0.575114,
+     "MAE": 0.421616,
+     "recall": {
+      "E1": 0.756148,
+      "E2": 0.523483,
+      "E3": 0.531069,
+      "E4": 0.605558,
+      "E5": 0.559147,
+      "E6": 0.579017
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.073469,
+        0.16669,
+        0.081658,
+        0.127316,
+        0.126168
+       ],
+       "media": 0.11506,
+       "SE": 0.017007,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.072928,
+        -0.122519,
+        -0.173362,
+        -0.049113,
+        -0.11507
+       ],
+       "media": -0.106598,
+       "SE": 0.021472,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad KNN (k = 8)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad KNN (k = 8)",
+     "folds": {
+      "F1_macro": [
+       0.560632,
+       0.59569,
+       0.466293,
+       0.536874,
+       0.691411
+      ],
+      "MAE": [
+       0.302875,
+       0.397953,
+       0.795493,
+       0.484608,
+       0.265167
+      ],
+      "recall": {
+       "E1": [
+        0.808893,
+        0.76864,
+        0.49041,
+        0.719038,
+        0.890075
+       ],
+       "E2": [
+        0.488374,
+        0.514172,
+        0.841331,
+        0.680579,
+        0.48589
+       ],
+       "E3": [
+        0.826575,
+        0.698997,
+        0.030985,
+        0.596589,
+        0.955312
+       ],
+       "E4": [
+        0.556253,
+        0.766074,
+        0.892431,
+        0.47783,
+        0.463428
+       ],
+       "E5": [
+        0.869274,
+        0.254405,
+        0.28524,
+        0.448039,
+        0.884919
+       ],
+       "E6": [
+        0.015723,
+        0.874048,
+        0.527431,
+        0.655706,
+        0.553982
+       ]
+      }
+     },
+     "F1_macro": 0.57018,
+     "MAE": 0.449219,
+     "recall": {
+      "E1": 0.735411,
+      "E2": 0.602069,
+      "E3": 0.621692,
+      "E4": 0.631203,
+      "E5": 0.548375,
+      "E6": 0.525378
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.03788,
+        -0.054622,
+        -0.056067,
+        -0.025985,
+        0.074124
+       ],
+       "media": -0.004934,
+       "SE": 0.026086,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.072928,
+        0.023511,
+        0.228769,
+        0.062419,
+        -0.103755
+       ],
+       "media": 0.027603,
+       "SE": 0.058761,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.014339,
+        -0.034371,
+        -0.119396,
+        -0.052983,
+        0.07252
+       ],
+       "media": -0.029714,
+       "SE": 0.03106,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.019908,
+        0.027375,
+        0.290456,
+        0.048019,
+        -0.080865
+       ],
+       "media": 0.053016,
+       "SE": 0.063365,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.111349,
+        0.112068,
+        0.025591,
+        0.101331,
+        0.200292
+       ],
+       "media": 0.110126,
+       "SE": 0.027712,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.145855,
+        -0.099008,
+        0.055406,
+        0.013306,
+        -0.218825
+       ],
+       "media": -0.078995,
+       "SE": 0.050501,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad KNN (k = 8)",
+     "folds": {
+      "F1_macro": [
+       0.569058,
+       0.59867,
+       0.462883,
+       0.534412,
+       0.692835
+      ],
+      "MAE": [
+       0.291611,
+       0.397385,
+       0.799025,
+       0.494471,
+       0.267897
+      ],
+      "recall": {
+       "E1": [
+        0.846111,
+        0.767918,
+        0.494133,
+        0.727665,
+        0.879464
+       ],
+       "E2": [
+        0.467962,
+        0.481796,
+        0.828182,
+        0.690294,
+        0.476827
+       ],
+       "E3": [
+        0.827872,
+        0.715588,
+        0.032221,
+        0.578018,
+        0.954923
+       ],
+       "E4": [
+        0.590388,
+        0.822617,
+        0.89364,
+        0.454277,
+        0.482638
+       ],
+       "E5": [
+        0.854827,
+        0.243994,
+        0.266584,
+        0.468685,
+        0.905531
+       ],
+       "E6": [
+        0.015723,
+        0.86782,
+        0.527233,
+        0.611219,
+        0.544149
+       ]
+      }
+     },
+     "F1_macro": 0.571571,
+     "MAE": 0.450078,
+     "recall": {
+      "E1": 0.743058,
+      "E2": 0.589012,
+      "E3": 0.621724,
+      "E4": 0.648712,
+      "E5": 0.547924,
+      "E6": 0.513229
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.046306,
+        -0.051642,
+        -0.059478,
+        -0.028447,
+        0.075548
+       ],
+       "media": -0.003543,
+       "SE": 0.027205,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.084192,
+        0.022944,
+        0.232301,
+        0.072282,
+        -0.101025
+       ],
+       "media": 0.028462,
+       "SE": 0.060398,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.005914,
+        -0.031391,
+        -0.122807,
+        -0.055445,
+        0.073943
+       ],
+       "media": -0.028323,
+       "SE": 0.032119,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.031172,
+        0.026807,
+        0.293988,
+        0.057882,
+        -0.078134
+       ],
+       "media": 0.053874,
+       "SE": 0.064445,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.119775,
+        0.115048,
+        0.022181,
+        0.098869,
+        0.201716
+       ],
+       "media": 0.111518,
+       "SE": 0.028598,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.15712,
+        -0.099575,
+        0.058938,
+        0.023169,
+        -0.216094
+       ],
+       "media": -0.078136,
+       "SE": 0.052337,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.008425,
+        0.00298,
+        -0.003411,
+        -0.002462,
+        0.001423
+       ],
+       "media": 0.001391,
+       "SE": 0.00212,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.011264,
+        -0.000568,
+        0.003532,
+        0.009863,
+        0.00273
+       ],
+       "media": 0.000859,
+       "SE": 0.003469,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+     "folds": {
+      "F1_macro": [
+       0.574972,
+       0.630061,
+       0.585689,
+       0.589857,
+       0.618891
+      ],
+      "MAE": [
+       0.322783,
+       0.370578,
+       0.505037,
+       0.436589,
+       0.346032
+      ],
+      "recall": {
+       "E1": [
+        0.650683,
+        0.87838,
+        0.971123,
+        0.763177,
+        0.86952
+       ],
+       "E2": [
+        0.575524,
+        0.531787,
+        0.749583,
+        0.356201,
+        0.364511
+       ],
+       "E3": [
+        0.854303,
+        0.493892,
+        0.120586,
+        0.539362,
+        0.832828
+       ],
+       "E4": [
+        0.589159,
+        0.849549,
+        0.680465,
+        0.613808,
+        0.496121
+       ],
+       "E5": [
+        0.760395,
+        0.477042,
+        0.255804,
+        0.827254,
+        0.824459
+       ],
+       "E6": [
+        0.081761,
+        0.683045,
+        0.86532,
+        0.659574,
+        0.404326
+       ]
+      }
+     },
+     "F1_macro": 0.599894,
+     "MAE": 0.396204,
+     "recall": {
+      "E1": 0.826577,
+      "E2": 0.515521,
+      "E3": 0.568194,
+      "E4": 0.64582,
+      "E5": 0.628991,
+      "E6": 0.538805
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.125689,
+        0.146439,
+        0.144987,
+        0.154314,
+        0.127773
+       ],
+       "media": 0.13984,
+       "SE": 0.005592,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.125948,
+        -0.126382,
+        -0.23505,
+        -0.034713,
+        -0.13796
+       ],
+       "media": -0.132011,
+       "SE": 0.031771,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+     "folds": {
+      "F1_macro": [
+       0.617808,
+       0.593597,
+       0.483992,
+       0.52116,
+       0.719427
+      ],
+      "MAE": [
+       0.251936,
+       0.406998,
+       0.607862,
+       0.410868,
+       0.254039
+      ],
+      "recall": {
+       "E1": [
+        0.806454,
+        0.606655,
+        0.720649,
+        0.826755,
+        0.846783
+       ],
+       "E2": [
+        0.513756,
+        0.548409,
+        0.77225,
+        0.606821,
+        0.463091
+       ],
+       "E3": [
+        0.934822,
+        0.759708,
+        0.082362,
+        0.381106,
+        0.955934
+       ],
+       "E4": [
+        0.729929,
+        0.847575,
+        0.82097,
+        0.648517,
+        0.627817
+       ],
+       "E5": [
+        0.691684,
+        0.214896,
+        0.288143,
+        0.316586,
+        0.913088
+       ],
+       "E6": [
+        0.069182,
+        0.908651,
+        0.446227,
+        0.603482,
+        0.60177
+       ]
+      }
+     },
+     "F1_macro": 0.587197,
+     "MAE": 0.386341,
+     "recall": {
+      "E1": 0.761459,
+      "E2": 0.580865,
+      "E3": 0.622786,
+      "E4": 0.734962,
+      "E5": 0.484879,
+      "E6": 0.525862
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.042836,
+        -0.036464,
+        -0.101698,
+        -0.068696,
+        0.100536
+       ],
+       "media": -0.012697,
+       "SE": 0.0371,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.070847,
+        0.036421,
+        0.102825,
+        -0.025721,
+        -0.091992
+       ],
+       "media": -0.009863,
+       "SE": 0.035747,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        0.042836,
+        -0.036464,
+        -0.101698,
+        -0.068696,
+        0.100536
+       ],
+       "media": -0.012697,
+       "SE": 0.0371,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.070847,
+        0.036421,
+        0.102825,
+        -0.025721,
+        -0.091992
+       ],
+       "media": -0.009863,
+       "SE": 0.035747,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.168525,
+        0.109975,
+        0.04329,
+        0.085617,
+        0.228309
+       ],
+       "media": 0.127143,
+       "SE": 0.032402,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.196795,
+        -0.089962,
+        -0.132224,
+        -0.060434,
+        -0.229952
+       ],
+       "media": -0.141873,
+       "SE": 0.031776,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+     "folds": {
+      "F1_macro": [
+       0.614406,
+       0.612629,
+       0.492294,
+       0.520213,
+       0.723061
+      ],
+      "MAE": [
+       0.253256,
+       0.385227,
+       0.635014,
+       0.421075,
+       0.249963
+      ],
+      "recall": {
+       "E1": [
+        0.807011,
+        0.608559,
+        0.775803,
+        0.838513,
+        0.851028
+       ],
+       "E2": [
+        0.51065,
+        0.521677,
+        0.781474,
+        0.590166,
+        0.48262
+       ],
+       "E3": [
+        0.935902,
+        0.780948,
+        0.080244,
+        0.371922,
+        0.955934
+       ],
+       "E4": [
+        0.723375,
+        0.942611,
+        0.823387,
+        0.632021,
+        0.630772
+       ],
+       "E5": [
+        0.687104,
+        0.221036,
+        0.291874,
+        0.348245,
+        0.914462
+       ],
+       "E6": [
+        0.062893,
+        0.902422,
+        0.412755,
+        0.591876,
+        0.590364
+       ]
+      }
+     },
+     "F1_macro": 0.59252,
+     "MAE": 0.388907,
+     "recall": {
+      "E1": 0.776183,
+      "E2": 0.577317,
+      "E3": 0.62499,
+      "E4": 0.750433,
+      "E5": 0.492544,
+      "E6": 0.512062
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.039434,
+        -0.017432,
+        -0.093396,
+        -0.069643,
+        0.104169
+       ],
+       "media": -0.007374,
+       "SE": 0.036063,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.069526,
+        0.014649,
+        0.129977,
+        -0.015514,
+        -0.096069
+       ],
+       "media": -0.007297,
+       "SE": 0.039463,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+      "F1": {
+       "dif_por_fold": [
+        0.039434,
+        -0.017432,
+        -0.093396,
+        -0.069643,
+        0.104169
+       ],
+       "media": -0.007374,
+       "SE": 0.036063,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.069526,
+        0.014649,
+        0.129977,
+        -0.015514,
+        -0.096069
+       ],
+       "media": -0.007297,
+       "SE": 0.039463,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.165123,
+        0.129007,
+        0.051592,
+        0.08467,
+        0.231942
+       ],
+       "media": 0.132467,
+       "SE": 0.031463,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.195474,
+        -0.111734,
+        -0.105073,
+        -0.050227,
+        -0.234029
+       ],
+       "media": -0.139307,
+       "SE": 0.033162,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        -0.003402,
+        0.019032,
+        0.008302,
+        -0.000947,
+        0.003633
+       ],
+       "media": 0.005324,
+       "SE": 0.003969,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        0.001321,
+        -0.021772,
+        0.027151,
+        0.010207,
+        -0.004077
+       ],
+       "media": 0.002566,
+       "SE": 0.008065,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     }
+    }
+   },
+   "oof": {
+    "Logística B | B": {
+     "F1_macro": 0.492935,
+     "MAE": 0.527063,
+     "recall": {
+      "E1": 0.75424,
+      "E2": 0.479159,
+      "E3": 0.481377,
+      "E4": 0.598928,
+      "E5": 0.141467,
+      "E6": 0.512325
+     },
+     "IC95_F1": [
+      0.367202,
+      0.529466
+     ],
+     "IC95_MAE": [
+      0.391296,
+      0.659518
+     ]
+    },
+    "XGBoost | B": {
+     "F1_macro": 0.546863,
+     "MAE": 0.486728,
+     "recall": {
+      "E1": 0.780951,
+      "E2": 0.558291,
+      "E3": 0.620085,
+      "E4": 0.569038,
+      "E5": 0.526422,
+      "E6": 0.314323
+     },
+     "IC95_F1": [
+      0.428902,
+      0.632582
+     ],
+     "IC95_MAE": [
+      0.298165,
+      0.687474
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.090876,
+       "IC95_inf": -0.15119,
+       "IC95_sup": 0.022311,
+       "p_bootstrap": 0.12
+      },
+      "MAE": {
+       "diferencia": 0.091825,
+       "IC95_inf": -0.043673,
+       "IC95_sup": 0.221708,
+       "p_bootstrap": 0.228
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.053928,
+       "IC95_inf": -0.006824,
+       "IC95_sup": 0.143033,
+       "p_bootstrap": 0.104
+      },
+      "MAE": {
+       "diferencia": -0.040335,
+       "IC95_inf": -0.145969,
+       "IC95_sup": 0.058395,
+       "p_bootstrap": 0.396
+      }
+     }
+    },
+    "XGBoost geográfico | B": {
+     "F1_macro": 0.548768,
+     "MAE": 0.480991,
+     "recall": {
+      "E1": 0.788526,
+      "E2": 0.549828,
+      "E3": 0.622307,
+      "E4": 0.580436,
+      "E5": 0.525524,
+      "E6": 0.311745
+     },
+     "IC95_F1": [
+      0.432087,
+      0.635948
+     ],
+     "IC95_MAE": [
+      0.297802,
+      0.681605
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.088971,
+       "IC95_inf": -0.149561,
+       "IC95_sup": 0.025931,
+       "p_bootstrap": 0.124
+      },
+      "MAE": {
+       "diferencia": 0.086088,
+       "IC95_inf": -0.046897,
+       "IC95_sup": 0.214279,
+       "p_bootstrap": 0.264
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.055834,
+       "IC95_inf": -0.005966,
+       "IC95_sup": 0.145181,
+       "p_bootstrap": 0.076
+      },
+      "MAE": {
+       "diferencia": -0.046072,
+       "IC95_inf": -0.149215,
+       "IC95_sup": 0.051052,
+       "p_bootstrap": 0.336
+      }
+     }
+    },
+    "Logística B | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.628662,
+     "MAE": 0.377257,
+     "recall": {
+      "E1": 0.810304,
+      "E2": 0.61128,
+      "E3": 0.669816,
+      "E4": 0.592701,
+      "E5": 0.384581,
+      "E6": 0.688658
+     },
+     "IC95_F1": [
+      0.465205,
+      0.665791
+     ],
+     "IC95_MAE": [
+      0.289627,
+      0.471876
+     ]
+    },
+    "XGBoost | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.621488,
+     "MAE": 0.429594,
+     "recall": {
+      "E1": 0.728345,
+      "E2": 0.632112,
+      "E3": 0.608484,
+      "E4": 0.67487,
+      "E5": 0.491168,
+      "E6": 0.689947
+     },
+     "IC95_F1": [
+      0.455585,
+      0.680191
+     ],
+     "IC95_MAE": [
+      0.274584,
+      0.627256
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.016251,
+       "IC95_inf": -0.069016,
+       "IC95_sup": 0.041736,
+       "p_bootstrap": 0.628
+      },
+      "MAE": {
+       "diferencia": 0.034691,
+       "IC95_inf": -0.064559,
+       "IC95_sup": 0.149086,
+       "p_bootstrap": 0.676
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.007174,
+       "IC95_inf": -0.046342,
+       "IC95_sup": 0.035444,
+       "p_bootstrap": 0.808
+      },
+      "MAE": {
+       "diferencia": 0.052337,
+       "IC95_inf": -0.041102,
+       "IC95_sup": 0.176887,
+       "p_bootstrap": 0.512
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.622196,
+     "MAE": 0.426088,
+     "recall": {
+      "E1": 0.739389,
+      "E2": 0.62908,
+      "E3": 0.615336,
+      "E4": 0.676928,
+      "E5": 0.48024,
+      "E6": 0.684389
+     },
+     "IC95_F1": [
+      0.459832,
+      0.681448
+     ],
+     "IC95_MAE": [
+      0.26947,
+      0.624511
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.015542,
+       "IC95_inf": -0.066029,
+       "IC95_sup": 0.041744,
+       "p_bootstrap": 0.664
+      },
+      "MAE": {
+       "diferencia": 0.031185,
+       "IC95_inf": -0.073576,
+       "IC95_sup": 0.144288,
+       "p_bootstrap": 0.724
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.006465,
+       "IC95_inf": -0.045041,
+       "IC95_sup": 0.034509,
+       "p_bootstrap": 0.856
+      },
+      "MAE": {
+       "diferencia": 0.048831,
+       "IC95_inf": -0.045323,
+       "IC95_sup": 0.174164,
+       "p_bootstrap": 0.528
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 8)": {
+     "F1_macro": 0.619176,
+     "MAE": 0.419966,
+     "recall": {
+      "E1": 0.757956,
+      "E2": 0.531497,
+      "E3": 0.553886,
+      "E4": 0.612817,
+      "E5": 0.58997,
+      "E6": 0.680603
+     },
+     "IC95_F1": [
+      0.450994,
+      0.666892
+     ],
+     "IC95_MAE": [
+      0.331374,
+      0.523789
+     ]
+    },
+    "XGBoost | B + vecindad KNN (k = 8)": {
+     "F1_macro": 0.59978,
+     "MAE": 0.445515,
+     "recall": {
+      "E1": 0.739907,
+      "E2": 0.589882,
+      "E3": 0.639421,
+      "E4": 0.620912,
+      "E5": 0.549027,
+      "E6": 0.570888
+     },
+     "IC95_F1": [
+      0.447041,
+      0.656816
+     ],
+     "IC95_MAE": [
+      0.289626,
+      0.642098
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.037958,
+       "IC95_inf": -0.083878,
+       "IC95_sup": 0.02227,
+       "p_bootstrap": 0.22
+      },
+      "MAE": {
+       "diferencia": 0.050612,
+       "IC95_inf": -0.052163,
+       "IC95_sup": 0.167095,
+       "p_bootstrap": 0.484
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.019396,
+       "IC95_inf": -0.062867,
+       "IC95_sup": 0.051717,
+       "p_bootstrap": 0.604
+      },
+      "MAE": {
+       "diferencia": 0.025549,
+       "IC95_inf": -0.084395,
+       "IC95_sup": 0.136296,
+       "p_bootstrap": 0.792
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8)": {
+     "F1_macro": 0.600491,
+     "MAE": 0.446351,
+     "recall": {
+      "E1": 0.74699,
+      "E2": 0.57472,
+      "E3": 0.639845,
+      "E4": 0.634882,
+      "E5": 0.546407,
+      "E6": 0.564202
+     },
+     "IC95_F1": [
+      0.449401,
+      0.659989
+     ],
+     "IC95_MAE": [
+      0.288434,
+      0.643007
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.037247,
+       "IC95_inf": -0.084538,
+       "IC95_sup": 0.02709,
+       "p_bootstrap": 0.272
+      },
+      "MAE": {
+       "diferencia": 0.051447,
+       "IC95_inf": -0.053784,
+       "IC95_sup": 0.169905,
+       "p_bootstrap": 0.468
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.018685,
+       "IC95_inf": -0.062638,
+       "IC95_sup": 0.059671,
+       "p_bootstrap": 0.688
+      },
+      "MAE": {
+       "diferencia": 0.026384,
+       "IC95_inf": -0.085095,
+       "IC95_sup": 0.138003,
+       "p_bootstrap": 0.78
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "F1_macro": 0.637739,
+     "MAE": 0.394903,
+     "recall": {
+      "E1": 0.826035,
+      "E2": 0.517243,
+      "E3": 0.588656,
+      "E4": 0.648879,
+      "E5": 0.611078,
+      "E6": 0.626631
+     },
+     "IC95_F1": [
+      0.476485,
+      0.667892
+     ],
+     "IC95_MAE": [
+      0.313098,
+      0.490553
+     ]
+    },
+    "XGBoost | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "F1_macro": 0.622921,
+     "MAE": 0.384731,
+     "recall": {
+      "E1": 0.764288,
+      "E2": 0.575251,
+      "E3": 0.650005,
+      "E4": 0.73075,
+      "E5": 0.49259,
+      "E6": 0.560657
+     },
+     "IC95_F1": [
+      0.486294,
+      0.672689
+     ],
+     "IC95_MAE": [
+      0.27791,
+      0.501423
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.014818,
+       "IC95_inf": -0.055843,
+       "IC95_sup": 0.047376,
+       "p_bootstrap": 0.708
+      },
+      "MAE": {
+       "diferencia": -0.010172,
+       "IC95_inf": -0.074562,
+       "IC95_sup": 0.044529,
+       "p_bootstrap": 0.668
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.014818,
+       "IC95_inf": -0.055843,
+       "IC95_sup": 0.047376,
+       "p_bootstrap": 0.708
+      },
+      "MAE": {
+       "diferencia": -0.010172,
+       "IC95_inf": -0.074562,
+       "IC95_sup": 0.044529,
+       "p_bootstrap": 0.668
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "F1_macro": 0.625279,
+     "MAE": 0.386737,
+     "recall": {
+      "E1": 0.778414,
+      "E2": 0.569581,
+      "E3": 0.652261,
+      "E4": 0.743881,
+      "E5": 0.497754,
+      "E6": 0.541002
+     },
+     "IC95_F1": [
+      0.486438,
+      0.684737
+     ],
+     "IC95_MAE": [
+      0.268692,
+      0.519493
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.01246,
+       "IC95_inf": -0.058969,
+       "IC95_sup": 0.053965,
+       "p_bootstrap": 0.816
+      },
+      "MAE": {
+       "diferencia": -0.008166,
+       "IC95_inf": -0.081783,
+       "IC95_sup": 0.059773,
+       "p_bootstrap": 0.736
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": -0.01246,
+       "IC95_inf": -0.058969,
+       "IC95_sup": 0.053965,
+       "p_bootstrap": 0.816
+      },
+      "MAE": {
+       "diferencia": -0.008166,
+       "IC95_inf": -0.081783,
+       "IC95_sup": 0.059773,
+       "p_bootstrap": 0.736
+      }
+     }
+    }
+   },
+   "geo_info": {
+    "B": {
+     "anclas": [
+      33,
+      33,
+      30,
+      34,
+      33
+     ],
+     "k_vecinos": [
+      31093,
+      30399,
+      31116,
+      31184,
+      30570
+     ],
+     "cobertura": [
+      1.0,
+      0.89332,
+      0.876826,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad por radios (300 m y 1 km)": {
+     "anclas": [
+      33,
+      33,
+      30,
+      34,
+      33
+     ],
+     "k_vecinos": [
+      31093,
+      30399,
+      31116,
+      31184,
+      30570
+     ],
+     "cobertura": [
+      1.0,
+      0.89332,
+      0.876826,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad KNN (k = 8)": {
+     "anclas": [
+      33,
+      33,
+      30,
+      34,
+      33
+     ],
+     "k_vecinos": [
+      31093,
+      30399,
+      31116,
+      31184,
+      30570
+     ],
+     "cobertura": [
+      1.0,
+      0.89332,
+      0.876826,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+     "anclas": [
+      33,
+      33,
+      30,
+      34,
+      33
+     ],
+     "k_vecinos": [
+      31093,
+      30399,
+      31116,
+      31184,
+      30570
+     ],
+     "cobertura": [
+      1.0,
+      0.89332,
+      0.876826,
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "segundos_por_tarea": {
+    "logistica": 24.658593,
+    "arboles": 425.943509
+   }
+  },
+  "zonas conocidas": {
+   "q": 6000,
+   "W_km": 0.016294,
+   "k_vecindad": 30,
+   "k_estrato": 30,
+   "conjuntos": [
+    "B",
+    "B + vecindad por radios (300 m y 1 km)",
+    "B + vecindad KNN (k = 30)",
+    "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)"
+   ],
+   "referencia_logistica": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+   "verificacion_folds_logistica_vs_07_max_dif_F1": {
+    "B": 0.0,
+    "B + vecindad por radios (300 m y 1 km)": 0.0004,
+    "B + vecindad KNN (k = 30)": 0.0008,
+    "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": 0.0002
+   },
+   "variables_elegidas_por_cv": {
+    "Logística B": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+    "XGBoost": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+    "XGBoost geográfico": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)"
+   },
+   "modelos": {
+    "Logística B | B": {
+     "modelo": "Logística B",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.557524,
+       0.531939,
+       0.556316,
+       0.556235,
+       0.551393
+      ],
+      "MAE": [
+       0.510553,
+       0.472305,
+       0.44194,
+       0.413227,
+       0.42778
+      ],
+      "recall": {
+       "E1": [
+        0.763965,
+        0.788077,
+        0.78251,
+        0.827362,
+        0.829425
+       ],
+       "E2": [
+        0.461145,
+        0.565931,
+        0.50461,
+        0.485154,
+        0.497461
+       ],
+       "E3": [
+        0.537214,
+        0.587059,
+        0.498632,
+        0.622926,
+        0.62354
+       ],
+       "E4": [
+        0.767239,
+        0.506679,
+        0.754654,
+        0.752159,
+        0.556617
+       ],
+       "E5": [
+        0.154305,
+        0.120272,
+        0.164461,
+        0.188108,
+        0.135593
+       ],
+       "E6": [
+        0.650384,
+        0.623904,
+        0.620096,
+        0.452861,
+        0.683286
+       ]
+      }
+     },
+     "F1_macro": 0.550681,
+     "MAE": 0.453161,
+     "recall": {
+      "E1": 0.798268,
+      "E2": 0.50286,
+      "E3": 0.573874,
+      "E4": 0.66747,
+      "E5": 0.152548,
+      "E6": 0.606106
+     }
+    },
+    "XGBoost | B": {
+     "modelo": "XGBoost",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.72156,
+       0.725977,
+       0.746801,
+       0.74062,
+       0.730622
+      ],
+      "MAE": [
+       0.280853,
+       0.369884,
+       0.251696,
+       0.23834,
+       0.272282
+      ],
+      "recall": {
+       "E1": [
+        0.836191,
+        0.754735,
+        0.844798,
+        0.924153,
+        0.89906
+       ],
+       "E2": [
+        0.699565,
+        0.704036,
+        0.727335,
+        0.69395,
+        0.649858
+       ],
+       "E3": [
+        0.834671,
+        0.750717,
+        0.772696,
+        0.760276,
+        0.873583
+       ],
+       "E4": [
+        0.619787,
+        0.714149,
+        0.731649,
+        0.727199,
+        0.603411
+       ],
+       "E5": [
+        0.667164,
+        0.705371,
+        0.754253,
+        0.776739,
+        0.621592
+       ],
+       "E6": [
+        0.790472,
+        0.795219,
+        0.73779,
+        0.680097,
+        0.747446
+       ]
+      }
+     },
+     "F1_macro": 0.733116,
+     "MAE": 0.282611,
+     "recall": {
+      "E1": 0.851787,
+      "E2": 0.694949,
+      "E3": 0.798389,
+      "E4": 0.679239,
+      "E5": 0.705024,
+      "E6": 0.750205
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.164037,
+        0.194038,
+        0.190485,
+        0.184385,
+        0.179229
+       ],
+       "media": 0.182435,
+       "SE": 0.005254,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.2297,
+        -0.102422,
+        -0.190244,
+        -0.174887,
+        -0.155498
+       ],
+       "media": -0.17055,
+       "SE": 0.020945,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.023887,
+        -0.015795,
+        -0.044663,
+        -0.031985,
+        -0.000396
+       ],
+       "media": -0.023345,
+       "SE": 0.00746,
+       "folds_a_favor": 0,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.040794,
+        0.067886,
+        0.05978,
+        0.024468,
+        -0.079916
+       ],
+       "media": 0.006285,
+       "SE": 0.028839,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.164037,
+        0.194038,
+        0.190485,
+        0.184385,
+        0.179229
+       ],
+       "media": 0.182435,
+       "SE": 0.005254,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.2297,
+        -0.102422,
+        -0.190244,
+        -0.174887,
+        -0.155498
+       ],
+       "media": -0.17055,
+       "SE": 0.020945,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B",
+     "folds": {
+      "F1_macro": [
+       0.723311,
+       0.732724,
+       0.75959,
+       0.744631,
+       0.737485
+      ],
+      "MAE": [
+       0.279706,
+       0.363159,
+       0.242503,
+       0.231227,
+       0.267637
+      ],
+      "recall": {
+       "E1": [
+        0.826773,
+        0.748119,
+        0.844213,
+        0.926344,
+        0.888882
+       ],
+       "E2": [
+        0.712019,
+        0.720113,
+        0.739201,
+        0.716929,
+        0.679029
+       ],
+       "E3": [
+        0.836783,
+        0.754598,
+        0.77432,
+        0.767764,
+        0.876629
+       ],
+       "E4": [
+        0.623467,
+        0.741003,
+        0.769548,
+        0.732326,
+        0.607776
+       ],
+       "E5": [
+        0.658591,
+        0.704236,
+        0.767486,
+        0.777113,
+        0.632277
+       ],
+       "E6": [
+        0.797335,
+        0.798008,
+        0.732586,
+        0.660757,
+        0.750306
+       ]
+      }
+     },
+     "F1_macro": 0.739548,
+     "MAE": 0.276846,
+     "recall": {
+      "E1": 0.846866,
+      "E2": 0.713458,
+      "E3": 0.802019,
+      "E4": 0.694824,
+      "E5": 0.707941,
+      "E6": 0.747799
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.165788,
+        0.200785,
+        0.203274,
+        0.188396,
+        0.186092
+       ],
+       "media": 0.188867,
+       "SE": 0.006672,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.230847,
+        -0.109146,
+        -0.199436,
+        -0.182,
+        -0.160143
+       ],
+       "media": -0.176315,
+       "SE": 0.020389,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.022136,
+        -0.009048,
+        -0.031874,
+        -0.027974,
+        0.006467
+       ],
+       "media": -0.016913,
+       "SE": 0.007007,
+       "folds_a_favor": 1,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.04194,
+        0.061161,
+        0.050588,
+        0.017355,
+        -0.084561
+       ],
+       "media": 0.000521,
+       "SE": 0.027847,
+       "folds_a_favor": 2,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.165788,
+        0.200785,
+        0.203274,
+        0.188396,
+        0.186092
+       ],
+       "media": 0.188867,
+       "SE": 0.006672,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.230847,
+        -0.109146,
+        -0.199436,
+        -0.182,
+        -0.160143
+       ],
+       "media": -0.176315,
+       "SE": 0.020389,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.001751,
+        0.006747,
+        0.012789,
+        0.004011,
+        0.006863
+       ],
+       "media": 0.006432,
+       "SE": 0.00185,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.001147,
+        -0.006724,
+        -0.009192,
+        -0.007113,
+        -0.004645
+       ],
+       "media": -0.005764,
+       "SE": 0.001361,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "Logística B | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.714377,
+       0.668841,
+       0.711172,
+       0.664901,
+       0.668188
+      ],
+      "MAE": [
+       0.317624,
+       0.35521,
+       0.269945,
+       0.290695,
+       0.301804
+      ],
+      "recall": {
+       "E1": [
+        0.799883,
+        0.755903,
+        0.836996,
+        0.855974,
+        0.817895
+       ],
+       "E2": [
+        0.574853,
+        0.63725,
+        0.690968,
+        0.644462,
+        0.601411
+       ],
+       "E3": [
+        0.80637,
+        0.817446,
+        0.721234,
+        0.751,
+        0.821205
+       ],
+       "E4": [
+        0.782093,
+        0.588468,
+        0.817819,
+        0.71843,
+        0.599181
+       ],
+       "E5": [
+        0.472605,
+        0.428517,
+        0.441588,
+        0.42558,
+        0.288136
+       ],
+       "E6": [
+        0.822769,
+        0.701594,
+        0.703763,
+        0.53062,
+        0.909277
+       ]
+      }
+     },
+     "F1_macro": 0.685496,
+     "MAE": 0.307055,
+     "recall": {
+      "E1": 0.81333,
+      "E2": 0.629789,
+      "E3": 0.783451,
+      "E4": 0.701198,
+      "E5": 0.411285,
+      "E6": 0.733605
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.156853,
+        0.136902,
+        0.154856,
+        0.108666,
+        0.116795
+       ],
+       "media": 0.134814,
+       "SE": 0.009747,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.19293,
+        -0.117095,
+        -0.171995,
+        -0.122532,
+        -0.125977
+       ],
+       "media": -0.146106,
+       "SE": 0.015273,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.739293,
+       0.750741,
+       0.799081,
+       0.758905,
+       0.738011
+      ],
+      "MAE": [
+       0.242216,
+       0.346795,
+       0.190283,
+       0.221412,
+       0.256462
+      ],
+      "recall": {
+       "E1": [
+        0.789361,
+        0.773482,
+        0.893563,
+        0.916742,
+        0.819763
+       ],
+       "E2": [
+        0.73343,
+        0.712331,
+        0.76447,
+        0.719425,
+        0.676534
+       ],
+       "E3": [
+        0.920757,
+        0.76818,
+        0.815524,
+        0.72096,
+        0.836859
+       ],
+       "E4": [
+        0.742437,
+        0.72819,
+        0.77992,
+        0.778872,
+        0.634652
+       ],
+       "E5": [
+        0.612001,
+        0.74584,
+        0.816635,
+        0.750561,
+        0.641857
+       ],
+       "E6": [
+        0.705692,
+        0.83745,
+        0.790232,
+        0.751007,
+        0.849612
+       ]
+      }
+     },
+     "F1_macro": 0.757206,
+     "MAE": 0.251434,
+     "recall": {
+      "E1": 0.838582,
+      "E2": 0.721238,
+      "E3": 0.812456,
+      "E4": 0.732814,
+      "E5": 0.713379,
+      "E6": 0.786799
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.024916,
+        0.0819,
+        0.087909,
+        0.094005,
+        0.069822
+       ],
+       "media": 0.07171,
+       "SE": 0.012362,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.075407,
+        -0.008415,
+        -0.079662,
+        -0.069282,
+        -0.045341
+       ],
+       "media": -0.055622,
+       "SE": 0.01321,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        -0.006155,
+        0.008969,
+        0.007617,
+        -0.0137,
+        0.006993
+       ],
+       "media": 0.000745,
+       "SE": 0.004529,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.07943,
+        0.044797,
+        -0.001632,
+        0.00754,
+        -0.095736
+       ],
+       "media": -0.024892,
+       "SE": 0.026873,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.181769,
+        0.218802,
+        0.242765,
+        0.20267,
+        0.186618
+       ],
+       "media": 0.206525,
+       "SE": 0.011154,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.268337,
+        -0.12551,
+        -0.251657,
+        -0.191814,
+        -0.171318
+       ],
+       "media": -0.201727,
+       "SE": 0.026231,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad por radios (300 m y 1 km)",
+     "folds": {
+      "F1_macro": [
+       0.750095,
+       0.75315,
+       0.800143,
+       0.757796,
+       0.739167
+      ],
+      "MAE": [
+       0.226999,
+       0.343861,
+       0.188378,
+       0.218731,
+       0.255704
+      ],
+      "recall": {
+       "E1": [
+        0.831255,
+        0.771277,
+        0.893628,
+        0.923379,
+        0.81403
+       ],
+       "E2": [
+        0.736757,
+        0.721652,
+        0.770787,
+        0.731044,
+        0.691593
+       ],
+       "E3": [
+        0.921855,
+        0.769023,
+        0.820397,
+        0.71713,
+        0.833051
+       ],
+       "E4": [
+        0.757018,
+        0.740049,
+        0.775532,
+        0.776039,
+        0.639427
+       ],
+       "E5": [
+        0.60902,
+        0.739032,
+        0.815879,
+        0.751309,
+        0.638909
+       ],
+       "E6": [
+        0.702463,
+        0.836653,
+        0.792634,
+        0.726833,
+        0.844299
+       ]
+      }
+     },
+     "F1_macro": 0.76007,
+     "MAE": 0.246734,
+     "recall": {
+      "E1": 0.846714,
+      "E2": 0.730367,
+      "E3": 0.812291,
+      "E4": 0.737613,
+      "E5": 0.71083,
+      "E6": 0.780576
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.035718,
+        0.084309,
+        0.088971,
+        0.092896,
+        0.070979
+       ],
+       "media": 0.074575,
+       "SE": 0.010393,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.090625,
+        -0.01135,
+        -0.081566,
+        -0.071964,
+        -0.046099
+       ],
+       "media": -0.060321,
+       "SE": 0.014328,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        0.004647,
+        0.011377,
+        0.008679,
+        -0.014809,
+        0.008149
+       ],
+       "media": 0.003609,
+       "SE": 0.004727,
+       "folds_a_favor": 4,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.094648,
+        0.041863,
+        -0.003537,
+        0.004859,
+        -0.096494
+       ],
+       "media": -0.029592,
+       "SE": 0.028,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.192571,
+        0.221211,
+        0.243827,
+        0.201562,
+        0.187774
+       ],
+       "media": 0.209389,
+       "SE": 0.010337,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.283554,
+        -0.128445,
+        -0.253561,
+        -0.194496,
+        -0.172076
+       ],
+       "media": -0.206427,
+       "SE": 0.027905,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.010802,
+        0.002409,
+        0.001062,
+        -0.001109,
+        0.001157
+       ],
+       "media": 0.002864,
+       "SE": 0.002064,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.015217,
+        -0.002935,
+        -0.001905,
+        -0.002682,
+        -0.000758
+       ],
+       "media": -0.004699,
+       "SE": 0.002657,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 30)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad KNN (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.706212,
+       0.686984,
+       0.694872,
+       0.702116,
+       0.676846
+      ],
+      "MAE": [
+       0.336864,
+       0.359525,
+       0.324342,
+       0.305018,
+       0.363587
+      ],
+      "recall": {
+       "E1": [
+        0.757859,
+        0.745394,
+        0.795644,
+        0.844181,
+        0.831229
+       ],
+       "E2": [
+        0.508402,
+        0.576877,
+        0.635991,
+        0.517687,
+        0.536184
+       ],
+       "E3": [
+        0.812959,
+        0.781677,
+        0.661224,
+        0.698749,
+        0.705111
+       ],
+       "E4": [
+        0.779095,
+        0.547846,
+        0.728191,
+        0.772261,
+        0.570123
+       ],
+       "E5": [
+        0.565412,
+        0.618759,
+        0.565217,
+        0.664174,
+        0.57406
+       ],
+       "E6": [
+        0.762212,
+        0.821514,
+        0.714572,
+        0.750201,
+        0.840213
+       ]
+      }
+     },
+     "F1_macro": 0.693406,
+     "MAE": 0.337867,
+     "recall": {
+      "E1": 0.794861,
+      "E2": 0.555028,
+      "E3": 0.731944,
+      "E4": 0.679503,
+      "E5": 0.597525,
+      "E6": 0.777742
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.148689,
+        0.155045,
+        0.138556,
+        0.145881,
+        0.125452
+       ],
+       "media": 0.142725,
+       "SE": 0.005065,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.173689,
+        -0.11278,
+        -0.117598,
+        -0.108209,
+        -0.064193
+       ],
+       "media": -0.115294,
+       "SE": 0.01744,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad KNN (k = 30)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad KNN (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.775305,
+       0.758173,
+       0.799902,
+       0.777198,
+       0.746791
+      ],
+      "MAE": [
+       0.257939,
+       0.339352,
+       0.194966,
+       0.203008,
+       0.345376
+      ],
+      "recall": {
+       "E1": [
+        0.782996,
+        0.770433,
+        0.893823,
+        0.909911,
+        0.891007
+       ],
+       "E2": [
+        0.691035,
+        0.707628,
+        0.741506,
+        0.686978,
+        0.645383
+       ],
+       "E3": [
+        0.838219,
+        0.758984,
+        0.818772,
+        0.795507,
+        0.734981
+       ],
+       "E4": [
+        0.857591,
+        0.818566,
+        0.783245,
+        0.825553,
+        0.636971
+       ],
+       "E5": [
+        0.759597,
+        0.756808,
+        0.815879,
+        0.781601,
+        0.701916
+       ],
+       "E6": [
+        0.759386,
+        0.806375,
+        0.798639,
+        0.722401,
+        0.891704
+       ]
+      }
+     },
+     "F1_macro": 0.771474,
+     "MAE": 0.268128,
+     "recall": {
+      "E1": 0.849634,
+      "E2": 0.694506,
+      "E3": 0.789293,
+      "E4": 0.784385,
+      "E5": 0.76316,
+      "E6": 0.795701
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.069092,
+        0.071188,
+        0.10503,
+        0.075082,
+        0.069945
+       ],
+       "media": 0.078068,
+       "SE": 0.006818,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.078925,
+        -0.020173,
+        -0.129375,
+        -0.102009,
+        -0.01821
+       ],
+       "media": -0.069739,
+       "SE": 0.022129,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        0.029857,
+        0.0164,
+        0.008438,
+        0.004593,
+        0.015773
+       ],
+       "media": 0.015012,
+       "SE": 0.004328,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.063707,
+        0.037354,
+        0.003051,
+        -0.010864,
+        -0.006822
+       ],
+       "media": -0.008198,
+       "SE": 0.016266,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.217781,
+        0.226234,
+        0.243586,
+        0.220964,
+        0.195398
+       ],
+       "media": 0.220792,
+       "SE": 0.007756,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.252614,
+        -0.132954,
+        -0.246973,
+        -0.210218,
+        -0.082404
+       ],
+       "media": -0.185033,
+       "SE": 0.033379,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad KNN (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.77348,
+       0.763011,
+       0.798005,
+       0.780082,
+       0.749793
+      ],
+      "MAE": [
+       0.255704,
+       0.335815,
+       0.19724,
+       0.203708,
+       0.340168
+      ],
+      "recall": {
+       "E1": [
+        0.7841,
+        0.769136,
+        0.897074,
+        0.915775,
+        0.886241
+       ],
+       "E2": [
+        0.710484,
+        0.719343,
+        0.752092,
+        0.701437,
+        0.677825
+       ],
+       "E3": [
+        0.83729,
+        0.756032,
+        0.792016,
+        0.792443,
+        0.736081
+       ],
+       "E4": [
+        0.857454,
+        0.828517,
+        0.788431,
+        0.828521,
+        0.636289
+       ],
+       "E5": [
+        0.716735,
+        0.759455,
+        0.818147,
+        0.787958,
+        0.6986
+       ],
+       "E6": [
+        0.75979,
+        0.811952,
+        0.795436,
+        0.707897,
+        0.884348
+       ]
+      }
+     },
+     "F1_macro": 0.772874,
+     "MAE": 0.266527,
+     "recall": {
+      "E1": 0.850465,
+      "E2": 0.712236,
+      "E3": 0.782772,
+      "E4": 0.787843,
+      "E5": 0.756179,
+      "E6": 0.791885
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.067268,
+        0.076027,
+        0.103133,
+        0.077966,
+        0.072947
+       ],
+       "media": 0.079468,
+       "SE": 0.006187,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.08116,
+        -0.02371,
+        -0.127101,
+        -0.10131,
+        -0.023419
+       ],
+       "media": -0.07134,
+       "SE": 0.020819,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        0.028033,
+        0.021238,
+        0.006541,
+        0.007477,
+        0.018775
+       ],
+       "media": 0.016413,
+       "SE": 0.00413,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.065942,
+        0.033817,
+        0.005325,
+        -0.010164,
+        -0.01203
+       ],
+       "media": -0.009799,
+       "SE": 0.016261,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.215957,
+        0.231072,
+        0.241689,
+        0.223847,
+        0.1984
+       ],
+       "media": 0.222193,
+       "SE": 0.007303,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.254849,
+        -0.136491,
+        -0.244699,
+        -0.209519,
+        -0.087612
+       ],
+       "media": -0.186634,
+       "SE": 0.032302,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        -0.001824,
+        0.004838,
+        -0.001897,
+        0.002884,
+        0.003002
+       ],
+       "media": 0.001401,
+       "SE": 0.001376,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.002235,
+        -0.003537,
+        0.002274,
+        0.0007,
+        -0.005209
+       ],
+       "media": -0.001601,
+       "SE": 0.001369,
+       "folds_a_favor": 3,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "modelo": "Logística B",
+     "variables": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.745448,
+       0.741773,
+       0.791463,
+       0.772605,
+       0.731018
+      ],
+      "MAE": [
+       0.321647,
+       0.301998,
+       0.191915,
+       0.213872,
+       0.352198
+      ],
+      "recall": {
+       "E1": [
+        0.835412,
+        0.803321,
+        0.906957,
+        0.920802,
+        0.814481
+       ],
+       "E2": [
+        0.668344,
+        0.719429,
+        0.761823,
+        0.669335,
+        0.667929
+       ],
+       "E3": [
+        0.673228,
+        0.855745,
+        0.823132,
+        0.78955,
+        0.781689
+       ],
+       "E4": [
+        0.83088,
+        0.611914,
+        0.774468,
+        0.837156,
+        0.645839
+       ],
+       "E5": [
+        0.653746,
+        0.658094,
+        0.693762,
+        0.694091,
+        0.598379
+       ],
+       "E6": [
+        0.765846,
+        0.777291,
+        0.738991,
+        0.738114,
+        0.838578
+       ]
+      }
+     },
+     "F1_macro": 0.756461,
+     "MAE": 0.276326,
+     "recall": {
+      "E1": 0.856195,
+      "E2": 0.697372,
+      "E3": 0.784669,
+      "E4": 0.740051,
+      "E5": 0.659614,
+      "E6": 0.771764
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.187924,
+        0.209834,
+        0.235148,
+        0.21637,
+        0.179625
+       ],
+       "media": 0.20578,
+       "SE": 0.009985,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.188907,
+        -0.170307,
+        -0.250024,
+        -0.199355,
+        -0.075582
+       ],
+       "media": -0.176835,
+       "SE": 0.028552,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "modelo": "XGBoost",
+     "variables": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.780413,
+       0.766342,
+       0.783353,
+       0.780295,
+       0.769828
+      ],
+      "MAE": [
+       0.259416,
+       0.294418,
+       0.206413,
+       0.205924,
+       0.250593
+      ],
+      "recall": {
+       "E1": [
+        0.780073,
+        0.74241,
+        0.892393,
+        0.91236,
+        0.877544
+       ],
+       "E2": [
+        0.773266,
+        0.753463,
+        0.804934,
+        0.757122,
+        0.72739
+       ],
+       "E3": [
+        0.800118,
+        0.805888,
+        0.790819,
+        0.747681,
+        0.82019
+       ],
+       "E4": [
+        0.86604,
+        0.787895,
+        0.703191,
+        0.840529,
+        0.646248
+       ],
+       "E5": [
+        0.716735,
+        0.774584,
+        0.81172,
+        0.786836,
+        0.662491
+       ],
+       "E6": [
+        0.777957,
+        0.798008,
+        0.819456,
+        0.674859,
+        0.906825
+       ]
+      }
+     },
+     "F1_macro": 0.776046,
+     "MAE": 0.243353,
+     "recall": {
+      "E1": 0.840956,
+      "E2": 0.763235,
+      "E3": 0.792939,
+      "E4": 0.768781,
+      "E5": 0.750473,
+      "E6": 0.795421
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.034965,
+        0.024569,
+        -0.008111,
+        0.007689,
+        0.03881
+       ],
+       "media": 0.019584,
+       "SE": 0.008774,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.06223,
+        -0.00758,
+        0.014498,
+        -0.007949,
+        -0.101605
+       ],
+       "media": -0.032973,
+       "SE": 0.02132,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        0.034965,
+        0.024569,
+        -0.008111,
+        0.007689,
+        0.03881
+       ],
+       "media": 0.019584,
+       "SE": 0.008774,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.06223,
+        -0.00758,
+        0.014498,
+        -0.007949,
+        -0.101605
+       ],
+       "media": -0.032973,
+       "SE": 0.02132,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.222889,
+        0.234402,
+        0.227037,
+        0.22406,
+        0.218435
+       ],
+       "media": 0.225365,
+       "SE": 0.002649,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.251137,
+        -0.177887,
+        -0.235526,
+        -0.207303,
+        -0.177187
+       ],
+       "media": -0.209808,
+       "SE": 0.014931,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "modelo": "XGBoost geográfico",
+     "variables": "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)",
+     "folds": {
+      "F1_macro": [
+       0.793947,
+       0.766344,
+       0.783051,
+       0.78032,
+       0.767438
+      ],
+      "MAE": [
+       0.229545,
+       0.300229,
+       0.206375,
+       0.205321,
+       0.2586
+      ],
+      "recall": {
+       "E1": [
+        0.800143,
+        0.763492,
+        0.892848,
+        0.913004,
+        0.87471
+       ],
+       "E2": [
+        0.781882,
+        0.759193,
+        0.808349,
+        0.766847,
+        0.7372
+       ],
+       "E3": [
+        0.847597,
+        0.755863,
+        0.790221,
+        0.741214,
+        0.815874
+       ],
+       "E4": [
+        0.866721,
+        0.807661,
+        0.702527,
+        0.840664,
+        0.643111
+       ],
+       "E5": [
+        0.703317,
+        0.770045,
+        0.810964,
+        0.802917,
+        0.650332
+       ],
+       "E6": [
+        0.797335,
+        0.799203,
+        0.815853,
+        0.660355,
+        0.908868
+       ]
+      }
+     },
+     "F1_macro": 0.77822,
+     "MAE": 0.240014,
+     "recall": {
+      "E1": 0.84884,
+      "E2": 0.770694,
+      "E3": 0.790154,
+      "E4": 0.772137,
+      "E5": 0.747515,
+      "E6": 0.796323
+     },
+     "vs Logística B (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.048499,
+        0.024572,
+        -0.008413,
+        0.007715,
+        0.03642
+       ],
+       "media": 0.021759,
+       "SE": 0.010113,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.092102,
+        -0.001769,
+        0.014459,
+        -0.008551,
+        -0.093598
+       ],
+       "media": -0.036312,
+       "SE": 0.023384,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 30) + estrato de vecinos (k = 30))": {
+      "F1": {
+       "dif_por_fold": [
+        0.048499,
+        0.024572,
+        -0.008413,
+        0.007715,
+        0.03642
+       ],
+       "media": 0.021759,
+       "SE": 0.010113,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.092102,
+        -0.001769,
+        0.014459,
+        -0.008551,
+        -0.093598
+       ],
+       "media": -0.036312,
+       "SE": 0.023384,
+       "folds_a_favor": 4,
+       "supera_por_1SE": true
+      }
+     },
+     "vs Logística B (sin vecindad)": {
+      "F1": {
+       "dif_por_fold": [
+        0.236424,
+        0.234405,
+        0.226735,
+        0.224085,
+        0.216044
+       ],
+       "media": 0.227539,
+       "SE": 0.00368,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.281008,
+        -0.172076,
+        -0.235565,
+        -0.207906,
+        -0.16918
+       ],
+       "media": -0.213147,
+       "SE": 0.020923,
+       "folds_a_favor": 5,
+       "supera_por_1SE": true
+      }
+     },
+     "vs XGBoost (mismas variables)": {
+      "F1": {
+       "dif_por_fold": [
+        0.013534,
+        3e-06,
+        -0.000302,
+        2.5e-05,
+        -0.00239
+       ],
+       "media": 0.002174,
+       "SE": 0.002875,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      },
+      "MAE": {
+       "dif_por_fold": [
+        -0.029871,
+        0.005811,
+        -3.9e-05,
+        -0.000602,
+        0.008007
+       ],
+       "media": -0.003339,
+       "SE": 0.006837,
+       "folds_a_favor": 3,
+       "supera_por_1SE": false
+      }
+     }
+    }
+   },
+   "oof": {
+    "Logística B | B": {
+     "F1_macro": 0.551197,
+     "MAE": 0.453161,
+     "recall": {
+      "E1": 0.798366,
+      "E2": 0.50287,
+      "E3": 0.573968,
+      "E4": 0.668102,
+      "E5": 0.152545,
+      "E6": 0.605929
+     },
+     "IC95_F1": [
+      0.397593,
+      0.583136
+     ],
+     "IC95_MAE": [
+      0.355829,
+      0.549145
+     ]
+    },
+    "XGBoost | B": {
+     "F1_macro": 0.73176,
+     "MAE": 0.28261,
+     "recall": {
+      "E1": 0.851956,
+      "E2": 0.69502,
+      "E3": 0.798467,
+      "E4": 0.679608,
+      "E5": 0.704641,
+      "E6": 0.750282
+     },
+     "IC95_F1": [
+      0.614641,
+      0.768132
+     ],
+     "IC95_MAE": [
+      0.189338,
+      0.394298
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.024912,
+       "IC95_inf": -0.046988,
+       "IC95_sup": 0.083568,
+       "p_bootstrap": 0.324
+      },
+      "MAE": {
+       "diferencia": 0.006285,
+       "IC95_inf": -0.038847,
+       "IC95_sup": 0.04053,
+       "p_bootstrap": 0.808
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.180564,
+       "IC95_inf": 0.153978,
+       "IC95_sup": 0.240876,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.17055,
+       "IC95_inf": -0.226812,
+       "IC95_sup": -0.116281,
+       "p_bootstrap": 0.002
+      }
+     }
+    },
+    "XGBoost geográfico | B": {
+     "F1_macro": 0.738104,
+     "MAE": 0.276846,
+     "recall": {
+      "E1": 0.847036,
+      "E2": 0.713505,
+      "E3": 0.802096,
+      "E4": 0.695284,
+      "E5": 0.70756,
+      "E6": 0.747865
+     },
+     "IC95_F1": [
+      0.621524,
+      0.77453
+     ],
+     "IC95_MAE": [
+      0.183163,
+      0.388554
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.018567,
+       "IC95_inf": -0.040067,
+       "IC95_sup": 0.092337,
+       "p_bootstrap": 0.46
+      },
+      "MAE": {
+       "diferencia": 0.000521,
+       "IC95_inf": -0.045568,
+       "IC95_sup": 0.033678,
+       "p_bootstrap": 0.972
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.186908,
+       "IC95_inf": 0.161579,
+       "IC95_sup": 0.249149,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.176315,
+       "IC95_inf": -0.234435,
+       "IC95_sup": -0.119674,
+       "p_bootstrap": 0.002
+      }
+     }
+    },
+    "Logística B | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.686776,
+     "MAE": 0.307055,
+     "recall": {
+      "E1": 0.813385,
+      "E2": 0.629799,
+      "E3": 0.783643,
+      "E4": 0.701836,
+      "E5": 0.410853,
+      "E6": 0.732963
+     },
+     "IC95_F1": [
+      0.502497,
+      0.721177
+     ],
+     "IC95_MAE": [
+      0.238327,
+      0.37848
+     ]
+    },
+    "XGBoost | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.756499,
+     "MAE": 0.251433,
+     "recall": {
+      "E1": 0.838646,
+      "E2": 0.721317,
+      "E3": 0.812561,
+      "E4": 0.73316,
+      "E5": 0.712799,
+      "E6": 0.786773
+     },
+     "IC95_F1": [
+      0.622938,
+      0.787987
+     ],
+     "IC95_MAE": [
+      0.187261,
+      0.323078
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": -0.000173,
+       "IC95_inf": -0.017979,
+       "IC95_sup": 0.086596,
+       "p_bootstrap": 0.792
+      },
+      "MAE": {
+       "diferencia": -0.024892,
+       "IC95_inf": -0.068572,
+       "IC95_sup": 0.006024,
+       "p_bootstrap": 0.216
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.069722,
+       "IC95_inf": 0.045886,
+       "IC95_sup": 0.140459,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.055622,
+       "IC95_inf": -0.089818,
+       "IC95_sup": -0.025173,
+       "p_bootstrap": 0.002
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+     "F1_macro": 0.759392,
+     "MAE": 0.246734,
+     "recall": {
+      "E1": 0.846751,
+      "E2": 0.730431,
+      "E3": 0.812392,
+      "E4": 0.737898,
+      "E5": 0.710254,
+      "E6": 0.78057
+     },
+     "IC95_F1": [
+      0.622449,
+      0.791324
+     ],
+     "IC95_MAE": [
+      0.182803,
+      0.317774
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": 0.002721,
+       "IC95_inf": -0.014828,
+       "IC95_sup": 0.086572,
+       "p_bootstrap": 0.56
+      },
+      "MAE": {
+       "diferencia": -0.029591,
+       "IC95_inf": -0.072284,
+       "IC95_sup": 0.002539,
+       "p_bootstrap": 0.084
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.072616,
+       "IC95_inf": 0.048064,
+       "IC95_sup": 0.139129,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.060321,
+       "IC95_inf": -0.095937,
+       "IC95_sup": -0.028981,
+       "p_bootstrap": 0.002
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 30)": {
+     "F1_macro": 0.693974,
+     "MAE": 0.337867,
+     "recall": {
+      "E1": 0.794987,
+      "E2": 0.555104,
+      "E3": 0.732182,
+      "E4": 0.67996,
+      "E5": 0.597455,
+      "E6": 0.77759
+     },
+     "IC95_F1": [
+      0.502451,
+      0.735287
+     ],
+     "IC95_MAE": [
+      0.270252,
+      0.407558
+     ]
+    },
+    "XGBoost | B + vecindad KNN (k = 30)": {
+     "F1_macro": 0.771265,
+     "MAE": 0.268128,
+     "recall": {
+      "E1": 0.849768,
+      "E2": 0.694591,
+      "E3": 0.789223,
+      "E4": 0.784492,
+      "E5": 0.762874,
+      "E6": 0.795473
+     },
+     "IC95_F1": [
+      0.609304,
+      0.816415
+     ],
+     "IC95_MAE": [
+      0.182865,
+      0.392699
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": 0.014593,
+       "IC95_inf": -0.000582,
+       "IC95_sup": 0.087162,
+       "p_bootstrap": 0.068
+      },
+      "MAE": {
+       "diferencia": -0.008198,
+       "IC95_inf": -0.04265,
+       "IC95_sup": 0.019815,
+       "p_bootstrap": 0.5
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.077291,
+       "IC95_inf": 0.045218,
+       "IC95_sup": 0.142897,
+       "p_bootstrap": 0.012
+      },
+      "MAE": {
+       "diferencia": -0.069739,
+       "IC95_inf": -0.133962,
+       "IC95_sup": 0.003672,
+       "p_bootstrap": 0.056
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30)": {
+     "F1_macro": 0.772711,
+     "MAE": 0.266526,
+     "recall": {
+      "E1": 0.850597,
+      "E2": 0.712306,
+      "E3": 0.782744,
+      "E4": 0.787958,
+      "E5": 0.755838,
+      "E6": 0.791687
+     },
+     "IC95_F1": [
+      0.605023,
+      0.817112
+     ],
+     "IC95_MAE": [
+      0.181167,
+      0.391703
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": 0.016039,
+       "IC95_inf": 0.002906,
+       "IC95_sup": 0.077919,
+       "p_bootstrap": 0.048
+      },
+      "MAE": {
+       "diferencia": -0.009799,
+       "IC95_inf": -0.043759,
+       "IC95_sup": 0.018264,
+       "p_bootstrap": 0.416
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.078737,
+       "IC95_inf": 0.04617,
+       "IC95_sup": 0.133371,
+       "p_bootstrap": 0.012
+      },
+      "MAE": {
+       "diferencia": -0.071341,
+       "IC95_inf": -0.135984,
+       "IC95_sup": 0.002263,
+       "p_bootstrap": 0.056
+      }
+     }
+    },
+    "Logística B | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "F1_macro": 0.756672,
+     "MAE": 0.276325,
+     "recall": {
+      "E1": 0.856203,
+      "E2": 0.697453,
+      "E3": 0.784592,
+      "E4": 0.740443,
+      "E5": 0.659356,
+      "E6": 0.771548
+     },
+     "IC95_F1": [
+      0.558239,
+      0.792849
+     ],
+     "IC95_MAE": [
+      0.197098,
+      0.383467
+     ]
+    },
+    "XGBoost | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "F1_macro": 0.776333,
+     "MAE": 0.243352,
+     "recall": {
+      "E1": 0.841093,
+      "E2": 0.763307,
+      "E3": 0.793005,
+      "E4": 0.768627,
+      "E5": 0.75,
+      "E6": 0.795151
+     },
+     "IC95_F1": [
+      0.628661,
+      0.821167
+     ],
+     "IC95_MAE": [
+      0.174266,
+      0.332206
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": 0.019661,
+       "IC95_inf": 0.008371,
+       "IC95_sup": 0.085234,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.032973,
+       "IC95_inf": -0.069895,
+       "IC95_sup": -0.007052,
+       "p_bootstrap": 0.008
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.019661,
+       "IC95_inf": 0.008371,
+       "IC95_sup": 0.085234,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.032973,
+       "IC95_inf": -0.069895,
+       "IC95_sup": -0.007052,
+       "p_bootstrap": 0.008
+      }
+     }
+    },
+    "XGBoost geográfico | B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "F1_macro": 0.778686,
+     "MAE": 0.240014,
+     "recall": {
+      "E1": 0.848953,
+      "E2": 0.770759,
+      "E3": 0.790207,
+      "E4": 0.771957,
+      "E5": 0.747006,
+      "E6": 0.796037
+     },
+     "IC95_F1": [
+      0.630735,
+      0.822003
+     ],
+     "IC95_MAE": [
+      0.17189,
+      0.326207
+     ],
+     "dif_vs_logistica_referencia": {
+      "F1": {
+       "diferencia": 0.022015,
+       "IC95_inf": 0.010806,
+       "IC95_sup": 0.089147,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.036312,
+       "IC95_inf": -0.075139,
+       "IC95_sup": -0.008619,
+       "p_bootstrap": 0.004
+      }
+     },
+     "dif_vs_logistica_mismas_variables": {
+      "F1": {
+       "diferencia": 0.022015,
+       "IC95_inf": 0.010806,
+       "IC95_sup": 0.089147,
+       "p_bootstrap": 0.002
+      },
+      "MAE": {
+       "diferencia": -0.036312,
+       "IC95_inf": -0.075139,
+       "IC95_sup": -0.008619,
+       "p_bootstrap": 0.004
+      }
+     }
+    }
+   },
+   "geo_info": {
+    "B": {
+     "anclas": [
+      35,
+      35,
+      34,
+      34,
+      34
+     ],
+     "k_vecinos": [
+      30872,
+      30872,
+      30872,
+      30872,
+      30872
+     ],
+     "cobertura": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad por radios (300 m y 1 km)": {
+     "anclas": [
+      35,
+      35,
+      34,
+      34,
+      34
+     ],
+     "k_vecinos": [
+      30872,
+      30872,
+      30872,
+      30872,
+      30872
+     ],
+     "cobertura": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad KNN (k = 30)": {
+     "anclas": [
+      35,
+      35,
+      34,
+      34,
+      34
+     ],
+     "k_vecinos": [
+      30872,
+      30872,
+      30872,
+      30872,
+      30872
+     ],
+     "cobertura": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    "B + vecindad KNN (k = 30) + estrato de vecinos (k = 30)": {
+     "anclas": [
+      35,
+      35,
+      34,
+      34,
+      34
+     ],
+     "k_vecinos": [
+      30872,
+      30872,
+      30872,
+      30872,
+      30872
+     ],
+     "cobertura": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "segundos_por_tarea": {
+    "logistica": 39.862598,
+    "arboles": 6491.546384
+   }
+  }
+ },
+ "test_zonas_nuevas": {
+  "Logística B | B": {
+   "modelo": "Logística B",
+   "variables": "B",
+   "F1_macro": 0.49318,
+   "accuracy": 0.661355,
+   "MAE": 0.384327,
+   "kappa": 0.854654,
+   "AUC": 0.907497,
+   "IC95_F1": [
+    0.295302,
+    0.51254
+   ],
+   "IC95_MAE": [
+    0.154705,
+    0.568345
+   ],
+   "recall": {
+    "E1": 0.903902,
+    "E2": 0.40373,
+    "E3": 0.747591,
+    "E4": 0.57951,
+    "E5": 0.081972,
+    "E6": 0.254729
+   }
+  },
+  "XGBoost | B": {
+   "modelo": "XGBoost",
+   "variables": "B",
+   "F1_macro": 0.452357,
+   "accuracy": 0.597237,
+   "MAE": 0.425543,
+   "kappa": 0.869303,
+   "AUC": 0.919985,
+   "IC95_F1": [
+    0.318671,
+    0.490181
+   ],
+   "IC95_MAE": [
+    0.159138,
+    0.601947
+   ],
+   "recall": {
+    "E1": 0.667923,
+    "E2": 0.851046,
+    "E3": 0.170173,
+    "E4": 0.678286,
+    "E5": 0.531631,
+    "E6": 0.04918
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": -0.040823,
+     "IC95_inf": -0.088889,
+     "IC95_sup": 0.158389,
+     "p_bootstrap": 0.76
+    },
+    "MAE": {
+     "diferencia": 0.041216,
+     "IC95_inf": -0.108229,
+     "IC95_sup": 0.171875,
+     "p_bootstrap": 0.628
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.040823,
+     "IC95_inf": -0.088889,
+     "IC95_sup": 0.158389,
+     "p_bootstrap": 0.76
+    },
+    "MAE": {
+     "diferencia": 0.041216,
+     "IC95_inf": -0.108229,
+     "IC95_sup": 0.171875,
+     "p_bootstrap": 0.628
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": -0.121585,
+     "IC95_inf": -0.164232,
+     "IC95_sup": -0.00363,
+     "p_bootstrap": 0.04
+    },
+    "MAE": {
+     "diferencia": 0.100791,
+     "IC95_inf": 0.017928,
+     "IC95_sup": 0.174751,
+     "p_bootstrap": 0.024
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.143475,
+     "IC95_inf": -0.186954,
+     "IC95_sup": 0.010472,
+     "p_bootstrap": 0.064
+    },
+    "MAE": {
+     "diferencia": 0.126257,
+     "IC95_inf": 0.015995,
+     "IC95_sup": 0.213899,
+     "p_bootstrap": 0.012
+    }
+   }
+  },
+  "XGBoost geográfico | B": {
+   "modelo": "XGBoost geográfico",
+   "variables": "B",
+   "F1_macro": 0.483848,
+   "accuracy": 0.613493,
+   "MAE": 0.406186,
+   "kappa": 0.874213,
+   "AUC": 0.923767,
+   "IC95_F1": [
+    0.366035,
+    0.515631
+   ],
+   "IC95_MAE": [
+    0.18221,
+    0.530975
+   ],
+   "recall": {
+    "E1": 0.643454,
+    "E2": 0.828684,
+    "E3": 0.337616,
+    "E4": 0.670939,
+    "E5": 0.50698,
+    "E6": 0.058008
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": -0.009333,
+     "IC95_inf": -0.054017,
+     "IC95_sup": 0.149626,
+     "p_bootstrap": 0.84
+    },
+    "MAE": {
+     "diferencia": 0.021859,
+     "IC95_inf": -0.109754,
+     "IC95_sup": 0.100174,
+     "p_bootstrap": 0.756
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.009333,
+     "IC95_inf": -0.054017,
+     "IC95_sup": 0.149626,
+     "p_bootstrap": 0.84
+    },
+    "MAE": {
+     "diferencia": 0.021859,
+     "IC95_inf": -0.109754,
+     "IC95_sup": 0.100174,
+     "p_bootstrap": 0.756
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": -0.090094,
+     "IC95_inf": -0.141698,
+     "IC95_sup": -0.008407,
+     "p_bootstrap": 0.036
+    },
+    "MAE": {
+     "diferencia": 0.081434,
+     "IC95_inf": 0.027178,
+     "IC95_sup": 0.123038,
+     "p_bootstrap": 0.016
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.111984,
+     "IC95_inf": -0.154126,
+     "IC95_sup": 0.002306,
+     "p_bootstrap": 0.072
+    },
+    "MAE": {
+     "diferencia": 0.1069,
+     "IC95_inf": 0.040956,
+     "IC95_sup": 0.150561,
+     "p_bootstrap": 0.008
+    }
+   },
+   "vs XGBoost (mismas variables)": {
+    "F1": {
+     "diferencia": 0.03149,
+     "IC95_inf": -0.012753,
+     "IC95_sup": 0.057888,
+     "p_bootstrap": 0.236
+    },
+    "MAE": {
+     "diferencia": -0.019357,
+     "IC95_inf": -0.081474,
+     "IC95_sup": 0.028084,
+     "p_bootstrap": 0.564
+    }
+   }
+  },
+  "Logística B | B + vecindad por radios (300 m y 1 km)": {
+   "modelo": "Logística B",
+   "variables": "B + vecindad por radios (300 m y 1 km)",
+   "F1_macro": 0.595832,
+   "accuracy": 0.707529,
+   "MAE": 0.299286,
+   "kappa": 0.910809,
+   "AUC": 0.920595,
+   "IC95_F1": [
+    0.42704,
+    0.61704
+   ],
+   "IC95_MAE": [
+    0.143098,
+    0.394932
+   ],
+   "recall": {
+    "E1": 0.888918,
+    "E2": 0.539721,
+    "E3": 0.63275,
+    "E4": 0.773633,
+    "E5": 0.217701,
+    "E6": 0.450189
+   }
+  },
+  "XGBoost | B + vecindad por radios (300 m y 1 km)": {
+   "modelo": "XGBoost",
+   "variables": "B + vecindad por radios (300 m y 1 km)",
+   "F1_macro": 0.583199,
+   "accuracy": 0.689186,
+   "MAE": 0.321253,
+   "kappa": 0.902683,
+   "AUC": 0.931702,
+   "IC95_F1": [
+    0.389071,
+    0.624286
+   ],
+   "IC95_MAE": [
+    0.109611,
+    0.451349
+   ],
+   "recall": {
+    "E1": 0.803993,
+    "E2": 0.79768,
+    "E3": 0.402666,
+    "E4": 0.769878,
+    "E5": 0.29106,
+    "E6": 0.484237
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.090018,
+     "IC95_inf": -0.012427,
+     "IC95_sup": 0.199504,
+     "p_bootstrap": 0.052
+    },
+    "MAE": {
+     "diferencia": -0.063075,
+     "IC95_inf": -0.17463,
+     "IC95_sup": 0.014708,
+     "p_bootstrap": 0.156
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.012633,
+     "IC95_inf": -0.103014,
+     "IC95_sup": 0.060893,
+     "p_bootstrap": 0.852
+    },
+    "MAE": {
+     "diferencia": 0.021966,
+     "IC95_inf": -0.04875,
+     "IC95_sup": 0.085501,
+     "p_bootstrap": 0.5
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": 0.009257,
+     "IC95_inf": -0.104752,
+     "IC95_sup": 0.062769,
+     "p_bootstrap": 0.88
+    },
+    "MAE": {
+     "diferencia": -0.0035,
+     "IC95_inf": -0.057457,
+     "IC95_sup": 0.062511,
+     "p_bootstrap": 0.868
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.012633,
+     "IC95_inf": -0.103014,
+     "IC95_sup": 0.060893,
+     "p_bootstrap": 0.852
+    },
+    "MAE": {
+     "diferencia": 0.021966,
+     "IC95_inf": -0.04875,
+     "IC95_sup": 0.085501,
+     "p_bootstrap": 0.5
+    }
+   }
+  },
+  "XGBoost geográfico | B + vecindad por radios (300 m y 1 km)": {
+   "modelo": "XGBoost geográfico",
+   "variables": "B + vecindad por radios (300 m y 1 km)",
+   "F1_macro": 0.584768,
+   "accuracy": 0.688495,
+   "MAE": 0.320163,
+   "kappa": 0.902558,
+   "AUC": 0.932469,
+   "IC95_F1": [
+    0.398767,
+    0.627779
+   ],
+   "IC95_MAE": [
+    0.106091,
+    0.458861
+   ],
+   "recall": {
+    "E1": 0.768958,
+    "E2": 0.846043,
+    "E3": 0.411259,
+    "E4": 0.77249,
+    "E5": 0.294327,
+    "E6": 0.453972
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.091588,
+     "IC95_inf": -0.015579,
+     "IC95_sup": 0.213584,
+     "p_bootstrap": 0.052
+    },
+    "MAE": {
+     "diferencia": -0.064165,
+     "IC95_inf": -0.185574,
+     "IC95_sup": 0.026758,
+     "p_bootstrap": 0.196
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.011064,
+     "IC95_inf": -0.106341,
+     "IC95_sup": 0.06297,
+     "p_bootstrap": 0.936
+    },
+    "MAE": {
+     "diferencia": 0.020877,
+     "IC95_inf": -0.054753,
+     "IC95_sup": 0.095905,
+     "p_bootstrap": 0.612
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": 0.010826,
+     "IC95_inf": -0.108267,
+     "IC95_sup": 0.074519,
+     "p_bootstrap": 0.872
+    },
+    "MAE": {
+     "diferencia": -0.00459,
+     "IC95_inf": -0.072394,
+     "IC95_sup": 0.075284,
+     "p_bootstrap": 0.844
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.011064,
+     "IC95_inf": -0.106341,
+     "IC95_sup": 0.06297,
+     "p_bootstrap": 0.936
+    },
+    "MAE": {
+     "diferencia": 0.020877,
+     "IC95_inf": -0.054753,
+     "IC95_sup": 0.095905,
+     "p_bootstrap": 0.612
+    }
+   },
+   "vs XGBoost (mismas variables)": {
+    "F1": {
+     "diferencia": 0.001569,
+     "IC95_inf": -0.011502,
+     "IC95_sup": 0.034883,
+     "p_bootstrap": 0.732
+    },
+    "MAE": {
+     "diferencia": -0.00109,
+     "IC95_inf": -0.01441,
+     "IC95_sup": 0.013298,
+     "p_bootstrap": 0.82
+    }
+   }
+  },
+  "Logística B | B + vecindad KNN (k = 8)": {
+   "modelo": "Logística B",
+   "variables": "B + vecindad KNN (k = 8)",
+   "F1_macro": 0.57422,
+   "accuracy": 0.698488,
+   "MAE": 0.317169,
+   "kappa": 0.905121,
+   "AUC": 0.930372,
+   "IC95_F1": [
+    0.434456,
+    0.594731
+   ],
+   "IC95_MAE": [
+    0.150035,
+    0.42248
+   ],
+   "recall": {
+    "E1": 0.932268,
+    "E2": 0.405776,
+    "E3": 0.708882,
+    "E4": 0.688653,
+    "E5": 0.301455,
+    "E6": 0.435057
+   }
+  },
+  "XGBoost | B + vecindad KNN (k = 8)": {
+   "modelo": "XGBoost",
+   "variables": "B + vecindad KNN (k = 8)",
+   "F1_macro": 0.568387,
+   "accuracy": 0.682002,
+   "MAE": 0.327869,
+   "kappa": 0.901577,
+   "AUC": 0.932725,
+   "IC95_F1": [
+    0.404998,
+    0.602964
+   ],
+   "IC95_MAE": [
+    0.114962,
+    0.466894
+   ],
+   "recall": {
+    "E1": 0.773028,
+    "E2": 0.717708,
+    "E3": 0.44274,
+    "E4": 0.830367,
+    "E5": 0.352539,
+    "E6": 0.301387
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.075207,
+     "IC95_inf": 0.031864,
+     "IC95_sup": 0.192182,
+     "p_bootstrap": 0.04
+    },
+    "MAE": {
+     "diferencia": -0.056459,
+     "IC95_inf": -0.201185,
+     "IC95_sup": 0.036912,
+     "p_bootstrap": 0.388
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.005833,
+     "IC95_inf": -0.051602,
+     "IC95_sup": 0.057528,
+     "p_bootstrap": 0.908
+    },
+    "MAE": {
+     "diferencia": 0.010699,
+     "IC95_inf": -0.067265,
+     "IC95_sup": 0.083751,
+     "p_bootstrap": 0.892
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": -0.005554,
+     "IC95_inf": -0.060492,
+     "IC95_sup": 0.032997,
+     "p_bootstrap": 0.716
+    },
+    "MAE": {
+     "diferencia": 0.003116,
+     "IC95_inf": -0.055399,
+     "IC95_sup": 0.067987,
+     "p_bootstrap": 0.98
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.027445,
+     "IC95_inf": -0.071503,
+     "IC95_sup": 0.044575,
+     "p_bootstrap": 0.484
+    },
+    "MAE": {
+     "diferencia": 0.028582,
+     "IC95_inf": -0.039377,
+     "IC95_sup": 0.091454,
+     "p_bootstrap": 0.496
+    }
+   }
+  },
+  "XGBoost geográfico | B + vecindad KNN (k = 8)": {
+   "modelo": "XGBoost geográfico",
+   "variables": "B + vecindad KNN (k = 8)",
+   "F1_macro": 0.584825,
+   "accuracy": 0.692532,
+   "MAE": 0.317031,
+   "kappa": 0.903518,
+   "AUC": 0.935478,
+   "IC95_F1": [
+    0.421663,
+    0.622486
+   ],
+   "IC95_MAE": [
+    0.113766,
+    0.454683
+   ],
+   "recall": {
+    "E1": 0.757698,
+    "E2": 0.722029,
+    "E3": 0.52345,
+    "E4": 0.825143,
+    "E5": 0.362934,
+    "E6": 0.310214
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.091645,
+     "IC95_inf": 0.033814,
+     "IC95_sup": 0.198993,
+     "p_bootstrap": 0.036
+    },
+    "MAE": {
+     "diferencia": -0.067296,
+     "IC95_inf": -0.211011,
+     "IC95_sup": 0.029594,
+     "p_bootstrap": 0.232
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": 0.010605,
+     "IC95_inf": -0.047348,
+     "IC95_sup": 0.070948,
+     "p_bootstrap": 0.844
+    },
+    "MAE": {
+     "diferencia": -0.000138,
+     "IC95_inf": -0.074228,
+     "IC95_sup": 0.06852,
+     "p_bootstrap": 0.92
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": 0.010883,
+     "IC95_inf": -0.058387,
+     "IC95_sup": 0.054684,
+     "p_bootstrap": 0.984
+    },
+    "MAE": {
+     "diferencia": -0.007721,
+     "IC95_inf": -0.066633,
+     "IC95_sup": 0.064394,
+     "p_bootstrap": 0.792
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.011007,
+     "IC95_inf": -0.069494,
+     "IC95_sup": 0.052923,
+     "p_bootstrap": 0.804
+    },
+    "MAE": {
+     "diferencia": 0.017745,
+     "IC95_inf": -0.044395,
+     "IC95_sup": 0.089407,
+     "p_bootstrap": 0.676
+    }
+   },
+   "vs XGBoost (mismas variables)": {
+    "F1": {
+     "diferencia": 0.016438,
+     "IC95_inf": -0.000683,
+     "IC95_sup": 0.033984,
+     "p_bootstrap": 0.116
+    },
+    "MAE": {
+     "diferencia": -0.010837,
+     "IC95_inf": -0.031009,
+     "IC95_sup": 0.004035,
+     "p_bootstrap": 0.284
+    }
+   }
+  },
+  "Logística B | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+   "modelo": "Logística B",
+   "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+   "F1_macro": 0.573942,
+   "accuracy": 0.685563,
+   "MAE": 0.324752,
+   "kappa": 0.906418,
+   "AUC": 0.931591,
+   "IC95_F1": [
+    0.435516,
+    0.591791
+   ],
+   "IC95_MAE": [
+    0.136404,
+    0.439034
+   ],
+   "recall": {
+    "E1": 0.908319,
+    "E2": 0.474303,
+    "E3": 0.601189,
+    "E4": 0.681469,
+    "E5": 0.372141,
+    "E6": 0.432535
+   }
+  },
+  "XGBoost | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+   "modelo": "XGBoost",
+   "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+   "F1_macro": 0.555316,
+   "accuracy": 0.666099,
+   "MAE": 0.351278,
+   "kappa": 0.895001,
+   "AUC": 0.923224,
+   "IC95_F1": [
+    0.4255,
+    0.582193
+   ],
+   "IC95_MAE": [
+    0.125965,
+    0.484453
+   ],
+   "recall": {
+    "E1": 0.842969,
+    "E2": 0.615525,
+    "E3": 0.457115,
+    "E4": 0.679265,
+    "E5": 0.473418,
+    "E6": 0.253468
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.062136,
+     "IC95_inf": 0.023874,
+     "IC95_sup": 0.182337,
+     "p_bootstrap": 0.04
+    },
+    "MAE": {
+     "diferencia": -0.033049,
+     "IC95_inf": -0.13302,
+     "IC95_sup": 0.042658,
+     "p_bootstrap": 0.416
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.018625,
+     "IC95_inf": -0.048764,
+     "IC95_sup": 0.037984,
+     "p_bootstrap": 0.504
+    },
+    "MAE": {
+     "diferencia": 0.026525,
+     "IC95_inf": -0.016432,
+     "IC95_sup": 0.053326,
+     "p_bootstrap": 0.148
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": -0.018625,
+     "IC95_inf": -0.048764,
+     "IC95_sup": 0.037984,
+     "p_bootstrap": 0.504
+    },
+    "MAE": {
+     "diferencia": 0.026525,
+     "IC95_inf": -0.016432,
+     "IC95_sup": 0.053326,
+     "p_bootstrap": 0.148
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.040516,
+     "IC95_inf": -0.060153,
+     "IC95_sup": 0.036093,
+     "p_bootstrap": 0.48
+    },
+    "MAE": {
+     "diferencia": 0.051992,
+     "IC95_inf": -0.024335,
+     "IC95_sup": 0.092946,
+     "p_bootstrap": 0.12
+    }
+   }
+  },
+  "XGBoost geográfico | B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": {
+   "modelo": "XGBoost geográfico",
+   "variables": "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)",
+   "F1_macro": 0.559696,
+   "accuracy": 0.663167,
+   "MAE": 0.355284,
+   "kappa": 0.892584,
+   "AUC": 0.927159,
+   "IC95_F1": [
+    0.417059,
+    0.587854
+   ],
+   "IC95_MAE": [
+    0.127587,
+    0.492111
+   ],
+   "recall": {
+    "E1": 0.81339,
+    "E2": 0.629776,
+    "E3": 0.472856,
+    "E4": 0.689633,
+    "E5": 0.458865,
+    "E6": 0.291299
+   },
+   "vs Logística B (sin vecindad)": {
+    "F1": {
+     "diferencia": 0.066516,
+     "IC95_inf": 0.030048,
+     "IC95_sup": 0.182543,
+     "p_bootstrap": 0.04
+    },
+    "MAE": {
+     "diferencia": -0.029043,
+     "IC95_inf": -0.139383,
+     "IC95_sup": 0.053652,
+     "p_bootstrap": 0.532
+    }
+   },
+   "vs Logística B (mismas variables)": {
+    "F1": {
+     "diferencia": -0.014246,
+     "IC95_inf": -0.052611,
+     "IC95_sup": 0.034784,
+     "p_bootstrap": 0.476
+    },
+    "MAE": {
+     "diferencia": 0.030532,
+     "IC95_inf": -0.01646,
+     "IC95_sup": 0.067122,
+     "p_bootstrap": 0.168
+    }
+   },
+   "vs Logística B + vecindad (referencia: B + vecindad KNN (k = 8) + estrato de vecinos (k = 100))": {
+    "F1": {
+     "diferencia": -0.014246,
+     "IC95_inf": -0.052611,
+     "IC95_sup": 0.034784,
+     "p_bootstrap": 0.476
+    },
+    "MAE": {
+     "diferencia": 0.030532,
+     "IC95_inf": -0.01646,
+     "IC95_sup": 0.067122,
+     "p_bootstrap": 0.168
+    }
+   },
+   "vs Logística B + vecindad por radios (la mejor logística en test)": {
+    "F1": {
+     "diferencia": -0.036136,
+     "IC95_inf": -0.064251,
+     "IC95_sup": 0.03322,
+     "p_bootstrap": 0.448
+    },
+    "MAE": {
+     "diferencia": 0.055998,
+     "IC95_inf": -0.022397,
+     "IC95_sup": 0.103233,
+     "p_bootstrap": 0.124
+    }
+   },
+   "vs XGBoost (mismas variables)": {
+    "F1": {
+     "diferencia": 0.00438,
+     "IC95_inf": -0.012451,
+     "IC95_sup": 0.008376,
+     "p_bootstrap": 0.92
+    },
+    "MAE": {
+     "diferencia": 0.004006,
+     "IC95_inf": -0.007351,
+     "IC95_sup": 0.016482,
+     "p_bootstrap": 0.532
+    }
+   }
+  }
+ },
+ "verificacion_test_logistica_vs_07_dif_F1": {
+  "B": 0.0,
+  "B + vecindad por radios (300 m y 1 km)": 0.000454,
+  "B + vecindad KNN (k = 8)": 4.7e-05,
+  "B + vecindad KNN (k = 8) + estrato de vecinos (k = 100)": 8.9e-05
+ }
+}

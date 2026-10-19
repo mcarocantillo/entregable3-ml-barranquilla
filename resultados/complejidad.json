@@ -1,0 +1,750 @@
+{
+ "p": 35,
+ "tamanos": [
+  1000,
+  2000,
+  4000,
+  8000,
+  16000,
+  32000
+ ],
+ "mediciones": [
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 1000,
+   "segundos": 0.029881599999498576,
+   "memoria_MB": 1.647296,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 2000,
+   "segundos": 0.05109340000490192,
+   "memoria_MB": 1.655346,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 4000,
+   "segundos": 0.06371600000420585,
+   "memoria_MB": 1.671176,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 8000,
+   "segundos": 0.11551390000386164,
+   "memoria_MB": 1.703137,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 16000,
+   "segundos": 0.1907531999895582,
+   "memoria_MB": 1.767211,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p≈30)",
+   "n": 32000,
+   "segundos": 0.270522400009213,
+   "memoria_MB": 1.895145,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 1000,
+   "segundos": 0.13375680000171997,
+   "memoria_MB": 2.665572,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 2000,
+   "segundos": 0.260107699999935,
+   "memoria_MB": 2.716341,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 4000,
+   "segundos": 0.5906946000031894,
+   "memoria_MB": 2.820456,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 8000,
+   "segundos": 1.3326043999986723,
+   "memoria_MB": 3.033611,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 16000,
+   "segundos": 3.088147200003732,
+   "memoria_MB": 3.461998,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p≈30)",
+   "n": 32000,
+   "segundos": 4.649674400003278,
+   "memoria_MB": 4.32169,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 1000,
+   "segundos": 0.3579031999979634,
+   "memoria_MB": 2.647234,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 2000,
+   "segundos": 0.27012730001297314,
+   "memoria_MB": 2.680357,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 4000,
+   "segundos": 0.6084564999910071,
+   "memoria_MB": 2.748556,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 8000,
+   "segundos": 1.3625849999953061,
+   "memoria_MB": 2.890025,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 16000,
+   "segundos": 3.230755800002953,
+   "memoria_MB": 3.175368,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | Ball Tree (p≈30)",
+   "n": 32000,
+   "segundos": 4.186112999988836,
+   "memoria_MB": 3.74831,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 1000,
+   "segundos": 0.021432699999422766,
+   "memoria_MB": 2.615705,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 2000,
+   "segundos": 0.048612800004775636,
+   "memoria_MB": 2.637355,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 4000,
+   "segundos": 0.0678358000004664,
+   "memoria_MB": 2.681457,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 8000,
+   "segundos": 0.08315950000542216,
+   "memoria_MB": 2.77493,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 16000,
+   "segundos": 0.1638082999998005,
+   "memoria_MB": 2.96415,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | fuerza bruta (p=2)",
+   "n": 32000,
+   "segundos": 0.22749010000552516,
+   "memoria_MB": 3.346948,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 1000,
+   "segundos": 0.020145100002991967,
+   "memoria_MB": 2.638248,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 2000,
+   "segundos": 0.016522500009159558,
+   "memoria_MB": 2.671818,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 4000,
+   "segundos": 0.017757400011760183,
+   "memoria_MB": 2.740224,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 8000,
+   "segundos": 0.020809899986488745,
+   "memoria_MB": 2.88196,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 16000,
+   "segundos": 0.02880879999429453,
+   "memoria_MB": 3.16809,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "KNN | KD-Tree (p=2)",
+   "n": 32000,
+   "segundos": 0.06348079998861067,
+   "memoria_MB": 3.744192,
+   "f1_validacion": NaN,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 1000,
+   "segundos": 0.06503990000055637,
+   "memoria_MB": 0.23768,
+   "f1_validacion": 0.6332721908685538,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 2000,
+   "segundos": 0.10456529998918995,
+   "memoria_MB": 0.358746,
+   "f1_validacion": 0.6652455364312719,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 4000,
+   "segundos": 0.1660550999949919,
+   "memoria_MB": 0.566536,
+   "f1_validacion": 0.685381688764857,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 8000,
+   "segundos": 0.30940450000343844,
+   "memoria_MB": 0.982323,
+   "f1_validacion": 0.6921196386270951,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 16000,
+   "segundos": 0.9389910000027157,
+   "memoria_MB": 1.877384,
+   "f1_validacion": 0.6954415089756263,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | lbfgs",
+   "n": 32000,
+   "segundos": 1.8949095999996644,
+   "memoria_MB": 3.669221,
+   "f1_validacion": 0.7021351243468267,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 1000,
+   "segundos": 0.29255559999728575,
+   "memoria_MB": 0.095775,
+   "f1_validacion": 0.6309826900130084,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 2000,
+   "segundos": 0.45179320000170264,
+   "memoria_MB": 0.175697,
+   "f1_validacion": 0.6608098831862582,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 4000,
+   "segundos": 0.6599008999910438,
+   "memoria_MB": 0.335727,
+   "f1_validacion": 0.6796503299002938,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 8000,
+   "segundos": 3.5819684000016423,
+   "memoria_MB": 0.655727,
+   "f1_validacion": 0.6808384284162821,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 16000,
+   "segundos": 7.059138099997654,
+   "memoria_MB": 1.295745,
+   "f1_validacion": 0.6894774997833765,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Logística | SAGA",
+   "n": 32000,
+   "segundos": 13.03797580000537,
+   "memoria_MB": 2.575745,
+   "f1_validacion": 0.7003118679300099,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 1000,
+   "segundos": 0.003018200004589744,
+   "memoria_MB": 0.349486,
+   "f1_validacion": 0.31080054634842874,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 2000,
+   "segundos": 0.004462899989448488,
+   "memoria_MB": 0.629554,
+   "f1_validacion": 0.3500318565095836,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 4000,
+   "segundos": 0.004457600007299334,
+   "memoria_MB": 1.189522,
+   "f1_validacion": 0.3477653957877551,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 8000,
+   "segundos": 0.007523599997512065,
+   "memoria_MB": 2.309452,
+   "f1_validacion": 0.2857264692611465,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 16000,
+   "segundos": 0.013153899999451824,
+   "memoria_MB": 4.549398,
+   "f1_validacion": 0.2181357420564575,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | fit",
+   "n": 32000,
+   "segundos": 0.026707999990321696,
+   "memoria_MB": 9.029436,
+   "f1_validacion": 0.26692303331573486,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 1000,
+   "segundos": 0.003178899991326034,
+   "memoria_MB": 0.349476,
+   "f1_validacion": 0.31080054634842874,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 2000,
+   "segundos": 0.006816500012064353,
+   "memoria_MB": 0.353642,
+   "f1_validacion": 0.35066634391363577,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 4000,
+   "segundos": 0.01811279999674298,
+   "memoria_MB": 0.353932,
+   "f1_validacion": 0.3493196547757836,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 8000,
+   "segundos": 0.027367799993953668,
+   "memoria_MB": 0.353932,
+   "f1_validacion": 0.28542515214370273,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 16000,
+   "segundos": 0.05959940000320785,
+   "memoria_MB": 0.353932,
+   "f1_validacion": 0.2199805766095305,
+   "arboles_usados": null
+  },
+  {
+   "variante": "Naive Bayes | partial_fit (lotes de 1000)",
+   "n": 32000,
+   "segundos": 0.10941900000034366,
+   "memoria_MB": 0.353932,
+   "f1_validacion": 0.280346771338344,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 1000,
+   "segundos": 1.3202522999927169,
+   "memoria_MB": 0.02227,
+   "f1_validacion": 0.7328993057544979,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 2000,
+   "segundos": 3.0428738000045996,
+   "memoria_MB": 0.03803,
+   "f1_validacion": 0.7638442037526804,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 4000,
+   "segundos": 6.958755499988911,
+   "memoria_MB": 0.07003,
+   "f1_validacion": 0.8021518996716623,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 8000,
+   "segundos": 16.239419999998063,
+   "memoria_MB": 0.13403,
+   "f1_validacion": 0.8376662511920481,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 16000,
+   "segundos": 32.08010160000413,
+   "memoria_MB": 0.26203,
+   "f1_validacion": 0.8693082086889357,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | exact",
+   "n": 32000,
+   "segundos": 53.57242060000135,
+   "memoria_MB": 0.51803,
+   "f1_validacion": 0.8889769085846319,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 1000,
+   "segundos": 0.5637750000023516,
+   "memoria_MB": 0.023056,
+   "f1_validacion": 0.7381754163384419,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 2000,
+   "segundos": 0.8599170999950729,
+   "memoria_MB": 0.03803,
+   "f1_validacion": 0.7710539202585845,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 4000,
+   "segundos": 1.3626968000025954,
+   "memoria_MB": 0.07003,
+   "f1_validacion": 0.8055191949532322,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 8000,
+   "segundos": 2.1566038000019034,
+   "memoria_MB": 0.13403,
+   "f1_validacion": 0.8374517267976033,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 16000,
+   "segundos": 4.130332200002158,
+   "memoria_MB": 0.26203,
+   "f1_validacion": 0.8701349727899447,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist",
+   "n": 32000,
+   "segundos": 5.849660100007895,
+   "memoria_MB": 0.51803,
+   "f1_validacion": 0.8903761152084408,
+   "arboles_usados": null
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 1000,
+   "segundos": 0.3476673999975901,
+   "memoria_MB": 0.048009,
+   "f1_validacion": 0.7287295102859971,
+   "arboles_usados": 19
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 2000,
+   "segundos": 0.4630957000044873,
+   "memoria_MB": 0.06223,
+   "f1_validacion": 0.7666245091600824,
+   "arboles_usados": 23
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 4000,
+   "segundos": 0.6862402999977348,
+   "memoria_MB": 0.09423,
+   "f1_validacion": 0.7987984519315666,
+   "arboles_usados": 34
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 8000,
+   "segundos": 1.3304886999976588,
+   "memoria_MB": 0.15823,
+   "f1_validacion": 0.8309921583326848,
+   "arboles_usados": 56
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 16000,
+   "segundos": 2.2111302000121213,
+   "memoria_MB": 0.28623,
+   "f1_validacion": 0.8647412037059777,
+   "arboles_usados": 66
+  },
+  {
+   "variante": "XGBoost | hist + early stopping",
+   "n": 32000,
+   "segundos": 6.771705499995733,
+   "memoria_MB": 0.54223,
+   "f1_validacion": 0.8889215061095461,
+   "arboles_usados": 122
+  },
+  {
+   "variante": "SVM | núcleo RBF completo (SVC)",
+   "n": 1000,
+   "segundos": 0.03657319999183528,
+   "memoria_MB": 0.292034,
+   "f1_validacion": 0.6469992757534764,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | núcleo RBF completo (SVC)",
+   "n": 2000,
+   "segundos": 0.1184268999932101,
+   "memoria_MB": 0.579988,
+   "f1_validacion": 0.6987873607752416,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | núcleo RBF completo (SVC)",
+   "n": 4000,
+   "segundos": 0.43036120000761,
+   "memoria_MB": 1.156034,
+   "f1_validacion": 0.7314178757465887,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | núcleo RBF completo (SVC)",
+   "n": 8000,
+   "segundos": 1.4561184000049252,
+   "memoria_MB": 2.307988,
+   "f1_validacion": 0.7523666318025984,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | núcleo RBF completo (SVC)",
+   "n": 16000,
+   "segundos": 7.146099099991261,
+   "memoria_MB": 4.612098,
+   "f1_validacion": 0.7691058822883842,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 1000,
+   "segundos": 0.21344239999598358,
+   "memoria_MB": 5.62434,
+   "f1_validacion": 0.6498391274672388,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 2000,
+   "segundos": 0.4835583999956725,
+   "memoria_MB": 10.43631,
+   "f1_validacion": 0.6973762127444094,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 4000,
+   "segundos": 1.1703362999978708,
+   "memoria_MB": 20.060072,
+   "f1_validacion": 0.7205594405071688,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 8000,
+   "segundos": 2.740215400001034,
+   "memoria_MB": 39.307968,
+   "f1_validacion": 0.7353854782521257,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 16000,
+   "segundos": 6.889694500001497,
+   "memoria_MB": 77.8041,
+   "f1_validacion": 0.7432930664387829,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | Nyström + LinearSVC",
+   "n": 32000,
+   "segundos": 17.300801499994122,
+   "memoria_MB": 154.796038,
+   "f1_validacion": 0.7569946676555835,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 1000,
+   "segundos": 0.06515040001249872,
+   "memoria_MB": 0.060655,
+   "f1_validacion": 0.5738749001199704,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 2000,
+   "segundos": 0.09127730000182055,
+   "memoria_MB": 0.089275,
+   "f1_validacion": 0.5725372453480383,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 4000,
+   "segundos": 0.1470534999971278,
+   "memoria_MB": 0.147275,
+   "f1_validacion": 0.5849621961110354,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 8000,
+   "segundos": 0.5683958000008715,
+   "memoria_MB": 0.263181,
+   "f1_validacion": 0.6093760843500862,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 16000,
+   "segundos": 0.8307620999985375,
+   "memoria_MB": 0.432759,
+   "f1_validacion": 0.6331712143862206,
+   "arboles_usados": null
+  },
+  {
+   "variante": "SVM | SGD (hinge)",
+   "n": 32000,
+   "segundos": 1.4449840000015683,
+   "memoria_MB": 0.768253,
+   "f1_validacion": 0.6516969640083631,
+   "arboles_usados": null
+  }
+ ],
+ "exponentes": {
+  "KNN | fuerza bruta (p≈30)": 0.6414836532797435,
+  "KNN | KD-Tree (p≈30)": 1.0708478145630007,
+  "KNN | Ball Tree (p≈30)": 0.8469557369780597,
+  "KNN | fuerza bruta (p=2)": 0.6454636130240798,
+  "KNN | KD-Tree (p=2)": 0.31184397406809383,
+  "Logística | lbfgs": 0.992035842606054,
+  "Logística | SAGA": 1.1922008674864726,
+  "Naive Bayes | fit": 0.6046007372132025,
+  "Naive Bayes | partial_fit (lotes de 1000)": 1.0144575219546041,
+  "XGBoost | exact": 1.089432583378679,
+  "XGBoost | hist": 0.6951448141836594,
+  "XGBoost | hist + early stopping": 0.8325735228193182,
+  "SVM | núcleo RBF completo (SVC)": 1.884050944384478,
+  "SVM | Nyström + LinearSVC": 1.2694183263869823,
+  "SVM | SGD (hinge)": 0.9675587218339421
+ },
+ "perfil_cprofile": "         212295 function calls (210960 primitive calls) in 4.094 seconds\n\n   Ordered by: cumulative time\n   List reduced from 1265 to 18 due to restriction <18>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n     19/1    0.001    0.000    4.088    4.088 sklearn\\base.py:1319(wrapper)\n        1    0.000    0.000    4.087    4.087 imblearn\\pipeline.py:451(fit)\n        1    0.000    0.000    3.906    3.906 estrato3\\modelos_propios.py:60(fit)\n     13/2    0.000    0.000    3.901    1.951 xgboost\\core.py:732(inner_f)\n        1    0.000    0.000    3.901    3.901 xgboost\\sklearn.py:1719(fit)\n        1    0.001    0.001    3.787    3.787 xgboost\\training.py:52(train)\n      150    3.733    0.025    3.745    0.025 xgboost\\core.py:2362(update)\n        1    0.000    0.000    0.181    0.181 imblearn\\pipeline.py:394(_fit)\n      9/2    0.000    0.000    0.181    0.090 joblib\\memory.py:325(__call__)\n        1    0.000    0.000    0.122    0.122 imblearn\\pipeline.py:1366(_fit_transform_one)\n     23/1    0.000    0.000    0.122    0.122 sklearn\\utils\\_set_output.py:314(wrapped)\n        1    0.000    0.000    0.121    0.121 sklearn\\compose\\_column_transformer.py:941(fit_transform)\n        1    0.000    0.000    0.119    0.119 sklearn\\compose\\_column_transformer.py:829(_call_func_on_transformers)\n        1    0.000    0.000    0.112    0.112 sklearn\\utils\\parallel.py:54(__call__)\n        1    0.000    0.000    0.112    0.112 joblib\\parallel.py:1969(__call__)\n        5    0.000    0.000    0.112    0.022 joblib\\parallel.py:1888(_get_sequential_output)\n        3    0.000    0.000    0.112    0.037 sklearn\\utils\\parallel.py:140(__call__)\n        1    0.000    0.000    0.111    0.111 xgboost\\sklearn.py:676(_wrap_evaluation_matrices)\n\n\n",
+ "aceleracion_n_jobs": {
+  "1": 11.995702200001688,
+  "2": 10.844935799992527,
+  "4": 10.373868399998173,
+  "8": 12.411342899999
+ },
+ "gpu": "No disponible: el portátil (Intel Core i5-8265U) no tiene GPU NVIDIA para device='cuda'."
+}

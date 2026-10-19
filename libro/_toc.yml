@@ -1,0 +1,24 @@
+format: jb-book
+root: intro
+parts:
+  - caption: "I. Datos y diseño"
+    chapters:
+      - file: notebooks/01_datos
+      - file: notebooks/02_diseno
+  - caption: "II. Optimización"
+    chapters:
+      - file: notebooks/03_optimizacion
+      - file: notebooks/04_computacional
+  - caption: "III. Resultados"
+    chapters:
+      - file: notebooks/05_clasificacion
+      - file: notebooks/06_regresion
+      - file: notebooks/07_estadistica
+      - file: notebooks/08_interpretabilidad
+      - file: notebooks/09_modelo_nuevo
+  - caption: Cierre
+    chapters:
+      - file: notebooks/10_conclusiones
+  - caption: Apéndice
+    chapters:
+      - file: notebooks/A_reproducibilidad

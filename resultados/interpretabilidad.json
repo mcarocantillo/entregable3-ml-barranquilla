@@ -1,0 +1,573 @@
+{
+ "clasificacion": {
+  "XGBoost": {
+   "n_viviendas_global": 800,
+   "importancia_global": {
+    "y_km": 0.8408153653144836,
+    "knn8_log_area": 0.5081985592842102,
+    "knn8_banios": 0.5078556537628174,
+    "dist_centro_km": 0.31838998198509216,
+    "x_km": 0.28279396891593933,
+    "knn8_dist_km": 0.2653791904449463,
+    "knn8_prop_PH": 0.14807413518428802,
+    "knn8_piso": 0.14497996866703033,
+    "knn8_habitaciones": 0.06550556421279907,
+    "total_banios": 0.06280763447284698,
+    "area_construida": 0.059352513402700424,
+    "knn8_antiguedad": 0.05868074297904968,
+    "condicion_predio_Informal": 0.042777348309755325,
+    "area_catastral_terreno": 0.03766845166683197,
+    "antiguedad": 0.037340037524700165,
+    "total_habitaciones": 0.022533269599080086,
+    "uso_Residencial_Vivienda_Hasta_3_Pisos": 0.02215714193880558,
+    "planta_ubicacion": 0.019756097346544266,
+    "uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH": 0.01782168261706829,
+    "total_plantas": 0.014412542805075645
+   },
+   "importancia_por_estrato": {
+    "1": {
+     "y_km": 0.38247740268707275,
+     "knn8_log_area": 0.6824116706848145,
+     "knn8_banios": 0.35540786385536194,
+     "dist_centro_km": 0.8427429795265198,
+     "x_km": 0.3136623501777649,
+     "knn8_dist_km": 0.08118051290512085,
+     "knn8_prop_PH": 0.2600941061973572,
+     "knn8_piso": 0.06250784546136856,
+     "knn8_habitaciones": 0.08788472414016724,
+     "total_banios": 0.028444534167647362
+    },
+    "2": {
+     "y_km": 0.44198593497276306,
+     "knn8_log_area": 0.30586424469947815,
+     "knn8_banios": 0.5607509016990662,
+     "dist_centro_km": 0.15256917476654053,
+     "x_km": 0.2943512797355652,
+     "knn8_dist_km": 0.2011805921792984,
+     "knn8_prop_PH": 0.13949117064476013,
+     "knn8_piso": 0.09372904151678085,
+     "knn8_habitaciones": 0.04072422906756401,
+     "total_banios": 0.04188813269138336
+    },
+    "3": {
+     "y_km": 0.33449774980545044,
+     "knn8_log_area": 0.2290809005498886,
+     "knn8_banios": 0.15725859999656677,
+     "dist_centro_km": 0.37340325117111206,
+     "x_km": 0.613024890422821,
+     "knn8_dist_km": 0.12424297630786896,
+     "knn8_prop_PH": 0.04324312135577202,
+     "knn8_piso": 0.1910078078508377,
+     "knn8_habitaciones": 0.06537580490112305,
+     "total_banios": 0.019471503794193268
+    },
+    "4": {
+     "y_km": 1.5052926540374756,
+     "knn8_log_area": 0.15889865159988403,
+     "knn8_banios": 0.5164336562156677,
+     "dist_centro_km": 0.3454115390777588,
+     "x_km": 0.183639794588089,
+     "knn8_dist_km": 0.18634673953056335,
+     "knn8_prop_PH": 0.20717066526412964,
+     "knn8_piso": 0.05476735532283783,
+     "knn8_habitaciones": 0.04454536363482475,
+     "total_banios": 0.024161463603377342
+    },
+    "5": {
+     "y_km": 1.4326399564743042,
+     "knn8_log_area": 0.7930262684822083,
+     "knn8_banios": 0.5420305132865906,
+     "dist_centro_km": 0.13885612785816193,
+     "x_km": 0.13398119807243347,
+     "knn8_dist_km": 0.5560084581375122,
+     "knn8_prop_PH": 0.14446982741355896,
+     "knn8_piso": 0.11578454077243805,
+     "knn8_habitaciones": 0.07561902701854706,
+     "total_banios": 0.13599206507205963
+    },
+    "6": {
+     "y_km": 0.9479991793632507,
+     "knn8_log_area": 0.8799099922180176,
+     "knn8_banios": 0.9152538180351257,
+     "dist_centro_km": 0.057356785982847214,
+     "x_km": 0.15810340642929077,
+     "knn8_dist_km": 0.4433150589466095,
+     "knn8_prop_PH": 0.09397571533918381,
+     "knn8_piso": 0.3520830571651459,
+     "knn8_habitaciones": 0.07888415455818176,
+     "total_banios": 0.1268879473209381
+    }
+   },
+   "locales": {
+    "bien_clasificada": {
+     "fila_test": 51187,
+     "real": 1,
+     "predicho": 1,
+     "probabilidad": 0.9312135577201843,
+     "base_shap": -0.03174678608775139,
+     "shap_top": {
+      "dist_centro_km": 0.7725033164024353,
+      "knn8_log_area": 0.5629590749740601,
+      "x_km": 0.5032832622528076,
+      "area_construida": 0.367664098739624,
+      "knn8_prop_PH": -0.2665681838989258,
+      "y_km": 0.2626274526119232,
+      "knn8_dist_km": 0.20178435742855072,
+      "knn8_habitaciones": 0.20120012760162354
+     },
+     "lime_top": {
+      "dist_centro_km > 0.68": 0.24373885747306587,
+      "x_km <= -0.65": 0.14274813172386153,
+      "knn8_log_area <= -0.70": 0.11265278807960431,
+      "-0.88 < y_km <= -0.07": 0.07855727912884418,
+      "missingindicator_total_habitaciones <= -0.04": 0.07588253739697913,
+      "missingindicator_total_banios <= -0.01": -0.03868148143737737,
+      "condicion_predio_infrequent_sklearn <= 0.00": 0.029325521936802705,
+      "uso_infrequent_sklearn <= 0.00": 0.022900603160785495
+     },
+     "lime_r2_local": 0.38424538760857907,
+     "variables_en_comun_top8": [
+      "dist_centro_km",
+      "knn8_log_area",
+      "x_km",
+      "y_km"
+     ]
+    },
+    "error_grande": {
+     "fila_test": 15025,
+     "real": 2,
+     "predicho": 4,
+     "probabilidad": 0.48263469338417053,
+     "base_shap": -0.052245840430259705,
+     "shap_top": {
+      "knn8_banios": 0.5214070081710815,
+      "x_km": 0.4500673711299896,
+      "knn8_prop_PH": 0.19137419760227203,
+      "y_km": -0.17915138602256775,
+      "knn8_log_area": 0.14541654288768768,
+      "knn8_dist_km": -0.0804077684879303,
+      "knn8_piso": 0.06405340880155563,
+      "condicion_predio_PH_Unidad_Predial": -0.05557120591402054
+     },
+     "lime_top": {
+      "y_km > 0.89": 0.12510800991473361,
+      "missingindicator_total_habitaciones <= -0.04": -0.059817334901134896,
+      "0.03 < x_km <= 0.78": 0.05663975189575103,
+      "-0.31 < knn8_banios <= 0.51": 0.0473399180391115,
+      "missingindicator_planta_ubicacion <= -0.04": 0.0421949016509296,
+      "-0.87 < dist_centro_km <= 0.14": 0.03838444927246273,
+      "condicion_predio_infrequent_sklearn <= 0.00": 0.026089784036591714,
+      "uso_infrequent_sklearn <= 0.00": 0.01838874191683265
+     },
+     "lime_r2_local": 0.11828168896310287,
+     "variables_en_comun_top8": [
+      "knn8_banios",
+      "x_km",
+      "y_km"
+     ]
+    }
+   }
+  },
+  "XGBoost geográfico": {
+   "n_viviendas_global": 200,
+   "importancia_global": {
+    "y_km": 0.06421199472089834,
+    "dist_centro_km": 0.05328997593021351,
+    "x_km": 0.0483678050989621,
+    "knn8_log_area": 0.026958483379383467,
+    "knn8_banios": 0.022036361057078253,
+    "knn8_dist_km": 0.015205225666284725,
+    "knn8_piso": 0.009900321618073247,
+    "area_construida": 0.008768115498361635,
+    "knn8_antiguedad": 0.007638302097260786,
+    "knn8_prop_PH": 0.006942521018295995,
+    "knn8_habitaciones": 0.006508231885248191,
+    "antiguedad": 0.006498757816943599,
+    "condicion_predio_Informal": 0.005147524583331846,
+    "area_catastral_terreno": 0.0038459449953809105,
+    "planta_ubicacion": 0.0031335647479966804,
+    "uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH": 0.002786845448137909,
+    "total_habitaciones": 0.002745321566282575,
+    "total_banios": 0.0021610650637544702,
+    "y_km (ancla)": 0.0018986773063677934,
+    "uso_Residencial_Vivienda_Hasta_3_Pisos_En_PH": 0.0017903276917961841
+   },
+   "importancia_por_estrato": {
+    "1": {
+     "y_km": 0.07298953648213428,
+     "dist_centro_km": 0.1447648592284478,
+     "x_km": 0.0714582495273625,
+     "knn8_log_area": 0.04893208329511301,
+     "knn8_banios": 0.02551070436192769,
+     "knn8_dist_km": 0.008769988447045046,
+     "knn8_piso": 0.005851006124724616,
+     "area_construida": 0.020821279971192416,
+     "knn8_antiguedad": 0.014642138852814847,
+     "knn8_prop_PH": 0.01661923034921149
+    },
+    "2": {
+     "y_km": 0.08472129686138778,
+     "dist_centro_km": 0.09353127625627383,
+     "x_km": 0.05435887279801084,
+     "knn8_log_area": 0.026941531772552908,
+     "knn8_banios": 0.038974894063016866,
+     "knn8_dist_km": 0.026090354021826342,
+     "knn8_piso": 0.009981952961246876,
+     "area_construida": 0.014762615363292845,
+     "knn8_antiguedad": 0.015226466343923186,
+     "knn8_prop_PH": 0.009940890301803996
+    },
+    "3": {
+     "y_km": 0.05332608428745588,
+     "dist_centro_km": 0.029480871726382217,
+     "x_km": 0.10287507228942941,
+     "knn8_log_area": 0.018351629359084746,
+     "knn8_banios": 0.008916293593162905,
+     "knn8_dist_km": 0.013556208754592479,
+     "knn8_piso": 0.01434961695726158,
+     "area_construida": 0.008014001572537965,
+     "knn8_antiguedad": 0.006992931512089887,
+     "knn8_prop_PH": 0.00321140183061208
+    },
+    "4": {
+     "y_km": 0.12748854898103526,
+     "dist_centro_km": 0.0417315167767848,
+     "x_km": 0.045815055962981306,
+     "knn8_log_area": 0.026793948948966747,
+     "knn8_banios": 0.034338053433937,
+     "knn8_dist_km": 0.020569718845117074,
+     "knn8_piso": 0.009926761889664652,
+     "area_construida": 0.0030271899831535182,
+     "knn8_antiguedad": 0.00527898943054308,
+     "knn8_prop_PH": 0.007340639366098796
+    },
+    "5": {
+     "y_km": 0.02832938673819723,
+     "dist_centro_km": 0.0071466645089103805,
+     "x_km": 0.011212055410683848,
+     "knn8_log_area": 0.02544824212322009,
+     "knn8_banios": 0.006136857350126419,
+     "knn8_dist_km": 0.017405096636682146,
+     "knn8_piso": 0.005628654574949381,
+     "area_construida": 0.0027664350747333166,
+     "knn8_antiguedad": 0.002238832823983605,
+     "knn8_prop_PH": 0.003136613046080579
+    },
+    "6": {
+     "y_km": 0.01841711497517946,
+     "dist_centro_km": 0.0030846670844821024,
+     "x_km": 0.0044875246053047825,
+     "knn8_log_area": 0.015283464777363354,
+     "knn8_banios": 0.01834136354029876,
+     "knn8_dist_km": 0.004839987292445203,
+     "knn8_piso": 0.013663937200592375,
+     "area_construida": 0.0032171710252597713,
+     "knn8_antiguedad": 0.0014504536202101265,
+     "knn8_prop_PH": 0.0014063512159690056
+    }
+   },
+   "locales": {
+    "bien_clasificada": {
+     "fila_test": 20279,
+     "real": 3,
+     "predicho": 3,
+     "probabilidad": 0.4373299479484558,
+     "base_shap": 0.2192050745941975,
+     "shap_top": {
+      "dist_centro_km": 0.109820049573268,
+      "x_km": -0.051119063314777266,
+      "knn8_log_area": 0.047514183601436194,
+      "y_km": 0.024466854229747863,
+      "knn8_dist_km": 0.02323002922378123,
+      "knn8_piso": 0.02195004312667522,
+      "knn8_banios": 0.018650220723130786,
+      "area_construida": 0.01448583387859636
+     },
+     "lime_top": {
+      "uso_infrequent_sklearn <= 0.00": -0.09248787600095583,
+      "condicion_predio_infrequent_sklearn <= 0.00": -0.07336012065797945,
+      "0.03 < x_km <= 0.78": 0.0536910735036787,
+      "missingindicator_total_habitaciones <= -0.04": -0.04970807947466621,
+      "missingindicator_total_banios <= -0.01": 0.04864197792037412,
+      "missingindicator_planta_ubicacion <= -0.04": 0.03961713538016407,
+      "tipo_vivienda_tv_1 <= 0.00": 0.038605244356927595,
+      "tipo_vivienda_tv_2 <= 0.00": -0.028880709417006854
+     },
+     "lime_r2_local": 0.01829240665390064,
+     "variables_en_comun_top8": [
+      "x_km"
+     ]
+    },
+    "error_grande": {
+     "fila_test": 65031,
+     "real": 4,
+     "predicho": 2,
+     "probabilidad": 0.38201674818992615,
+     "base_shap": 0.21991809375316657,
+     "shap_top": {
+      "dist_centro_km": 0.06370232998020273,
+      "y_km": 0.05277546243797013,
+      "knn8_banios": 0.046706894194047006,
+      "area_catastral_terreno": -0.04351188828033428,
+      "knn8_log_area": 0.03800008778524151,
+      "knn8_dist_km": 0.03048680197625303,
+      "knn8_habitaciones": -0.02450984195115497,
+      "uso_Residencial_Vivienda_Hasta_3_Pisos_En_PH": -0.014684081474395963
+     },
+     "lime_top": {
+      "condicion_predio_infrequent_sklearn <= 0.00": -0.1929499316989895,
+      "-0.87 < dist_centro_km <= 0.14": 0.12176993830699474,
+      "uso_infrequent_sklearn <= 0.00": -0.11417369822497904,
+      "missingindicator_total_habitaciones <= -0.04": -0.10562228221523713,
+      "-0.07 < y_km <= 0.89": -0.07148828849055686,
+      "missingindicator_planta_ubicacion <= -0.04": -0.06144529745900169,
+      "0.03 < x_km <= 0.78": -0.048594222706946424,
+      "missingindicator_total_banios <= -0.01": 0.043441383328276795
+     },
+     "lime_r2_local": 0.07778635271005441,
+     "variables_en_comun_top8": [
+      "dist_centro_km",
+      "y_km"
+     ]
+    }
+   }
+  },
+  "Logística L1/L2": {
+   "n_viviendas_global": 200,
+   "importancia_global": {
+    "knn8_log_area": 0.07016322071356872,
+    "dist_centro_km": 0.043608862390204194,
+    "x_km": 0.030997004484333908,
+    "y_km": 0.028398238900381685,
+    "knn8_piso": 0.02102895142924264,
+    "knn8_banios": 0.020736716166338858,
+    "condicion_predio_NPH": 0.018770795394333236,
+    "condicion_predio_PH_Unidad_Predial": 0.01737106394908478,
+    "knn8_dist_km": 0.016206275581078424,
+    "condicion_predio_Informal": 0.016202407804880838,
+    "knn8_habitaciones": 0.015853213474297315,
+    "knn8_antiguedad": 0.015061857583954626,
+    "uso_Residencial_Vivienda_Hasta_3_Pisos_En_PH": 0.01184939190022784,
+    "uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH": 0.011476571453063106,
+    "area_catastral_terreno": 0.010903569056606303,
+    "area_construida": 0.010104769702752552,
+    "knn8_prop_PH": 0.010058353300755041,
+    "planta_ubicacion": 0.009021191976757463,
+    "uso_Residencial_Vivienda_Hasta_3_Pisos": 0.00866710750988801,
+    "total_banios": 0.00851162006645268
+   },
+   "importancia_por_estrato": {
+    "1": {
+     "knn8_log_area": 0.12807486525898995,
+     "dist_centro_km": 0.07381604039718041,
+     "x_km": 0.04048611856558216,
+     "y_km": 0.04359496476272673,
+     "knn8_piso": 0.024745409216580003,
+     "knn8_banios": 0.020742693438305607,
+     "condicion_predio_NPH": 0.025560941924817247,
+     "condicion_predio_PH_Unidad_Predial": 0.02672699913170968,
+     "knn8_dist_km": 0.028036618053695738,
+     "condicion_predio_Informal": 0.04694768471438801
+    },
+    "2": {
+     "knn8_log_area": 0.03911715887631413,
+     "dist_centro_km": 0.035417431814974414,
+     "x_km": 0.05461058873940866,
+     "y_km": 0.030619392753857354,
+     "knn8_piso": 0.029889723512493926,
+     "knn8_banios": 0.014092303186746969,
+     "condicion_predio_NPH": 0.009456972027249882,
+     "condicion_predio_PH_Unidad_Predial": 0.011076579259523642,
+     "knn8_dist_km": 0.012486976094719946,
+     "condicion_predio_Informal": 0.015448790774165343
+    },
+    "3": {
+     "knn8_log_area": 0.07670174108592677,
+     "dist_centro_km": 0.06366470623217887,
+     "x_km": 0.02898947012259283,
+     "y_km": 0.0324481917066258,
+     "knn8_piso": 0.020558170009113367,
+     "knn8_banios": 0.02680353894354589,
+     "condicion_predio_NPH": 0.054625135285823044,
+     "condicion_predio_PH_Unidad_Predial": 0.04048285289347934,
+     "knn8_dist_km": 0.019492276761982306,
+     "condicion_predio_Informal": 0.03211171510984092
+    },
+    "4": {
+     "knn8_log_area": 0.07812076843784367,
+     "dist_centro_km": 0.059752578996129006,
+     "x_km": 0.04844522825704093,
+     "y_km": 0.05844139394359644,
+     "knn8_piso": 0.025033773547406525,
+     "knn8_banios": 0.022281921168042715,
+     "condicion_predio_NPH": 0.012972741470932388,
+     "condicion_predio_PH_Unidad_Predial": 0.011647783425963443,
+     "knn8_dist_km": 0.017536327106677102,
+     "condicion_predio_Informal": 0.0014142855198778798
+    },
+    "5": {
+     "knn8_log_area": 0.057022598799434526,
+     "dist_centro_km": 0.014333964035102087,
+     "x_km": 0.0033274306158747125,
+     "y_km": 0.00327607388898574,
+     "knn8_piso": 0.008817575761789034,
+     "knn8_banios": 0.018743931484108634,
+     "condicion_predio_NPH": 0.005607083218713397,
+     "condicion_predio_PH_Unidad_Predial": 0.004291900613366634,
+     "knn8_dist_km": 0.016810204889969236,
+     "condicion_predio_Informal": 0.0004379120557258791
+    },
+    "6": {
+     "knn8_log_area": 0.04194219182290324,
+     "dist_centro_km": 0.014668452865660453,
+     "x_km": 0.010123190605504248,
+     "y_km": 0.0020094163464979315,
+     "knn8_piso": 0.017129056528072888,
+     "knn8_banios": 0.021755908777283287,
+     "condicion_predio_NPH": 0.004401898438463494,
+     "condicion_predio_PH_Unidad_Predial": 0.010000268370465987,
+     "knn8_dist_km": 0.0028752505794262073,
+     "condicion_predio_Informal": 0.0008540586552869703
+    }
+   },
+   "locales": {
+    "bien_clasificada": {
+     "fila_test": 22904,
+     "real": 3,
+     "predicho": 3,
+     "probabilidad": 0.5642637014389038,
+     "base_shap": 0.28810569731319224,
+     "shap_top": {
+      "condicion_predio_NPH": 0.12732545655801022,
+      "knn8_log_area": 0.07341007534528611,
+      "condicion_predio_PH_Unidad_Predial": -0.06150397767536139,
+      "dist_centro_km": 0.05771718802450218,
+      "y_km": 0.05024968505904172,
+      "condicion_predio_Informal": 0.03481865218824758,
+      "planta_ubicacion": -0.03131263887410293,
+      "area_construida": 0.02995483050290415
+     },
+     "lime_top": {
+      "uso_infrequent_sklearn <= 0.00": -0.2634956299895804,
+      "missingindicator_planta_ubicacion <= -0.04": -0.20926276433875604,
+      "uso_Residencial_Vivienda_Hasta_3_Pisos_En_PH <= 0.00": -0.1719652486641873,
+      "0.00 < condicion_predio_NPH <= 1.00": 0.1504574804468141,
+      "condicion_predio_Informal <= 0.00": 0.1419268754258477,
+      "condicion_predio_PH_Unidad_Predial <= 0.00": -0.09728562857439207,
+      "missingindicator_total_banios <= -0.01": 0.0736313260119055,
+      "missingindicator_total_habitaciones <= -0.04": 0.06015187767481924
+     },
+     "lime_r2_local": 0.18186768650900786,
+     "variables_en_comun_top8": [
+      "condicion_predio_Informal",
+      "condicion_predio_NPH",
+      "condicion_predio_PH_Unidad_Predial",
+      "planta_ubicacion"
+     ]
+    },
+    "error_grande": {
+     "fila_test": 64340,
+     "real": 3,
+     "predicho": 5,
+     "probabilidad": 0.4707673192024231,
+     "base_shap": 0.0308474114534928,
+     "shap_top": {
+      "knn8_log_area": 0.3090376027962779,
+      "knn8_banios": 0.07252715259050077,
+      "knn8_prop_PH": 0.04967864862246248,
+      "knn8_habitaciones": -0.04934533576952752,
+      "knn8_dist_km": 0.0352290046290675,
+      "knn8_piso": 0.03377948921679128,
+      "tipo_vivienda_tv_3": -0.022497853909455467,
+      "uso_Residencial_Vivienda_Hasta_3_Pisos": 0.022369554204288496
+     },
+     "lime_top": {
+      "knn8_log_area > 0.62": 0.17202549264204137,
+      "knn8_banios > 0.51": 0.05473509057516322,
+      "knn8_prop_PH > 0.36": 0.05291723356019041,
+      "knn8_habitaciones > 0.52": -0.03828864671203978,
+      "missingindicator_total_habitaciones <= -0.04": 0.036675367394199354,
+      "missingindicator_total_banios <= -0.01": 0.030488297609390924,
+      "tipo_vivienda_tv_2 <= 0.00": -0.02698072603066577,
+      "uso_Residencial_Vivienda_Hasta_3_Pisos <= 0.00": 0.025267752568320784
+     },
+     "lime_r2_local": 0.2932165651172228,
+     "variables_en_comun_top8": [
+      "knn8_banios",
+      "knn8_habitaciones",
+      "knn8_log_area",
+      "knn8_prop_PH",
+      "uso_Residencial_Vivienda_Hasta_3_Pisos"
+     ]
+    }
+   }
+  }
+ },
+ "mejor_clasificacion_test": "Logística L1/L2",
+ "regresion": {
+  "modelo": "Random Forest (regresión) | Grid",
+  "params": {
+   "n_estimators": 150,
+   "max_depth": 20,
+   "max_features": 0.3,
+   "min_samples_leaf": 2
+  },
+  "n_viviendas_global": 400,
+  "importancia_global": {
+   "knn8_banios": 0.3035945655413482,
+   "y_km": 0.2766151560032304,
+   "dist_centro_km": 0.2737837602272892,
+   "knn8_log_area": 0.24179709011817357,
+   "x_km": 0.09172626203640327,
+   "knn8_prop_PH": 0.08999080159044517,
+   "knn8_piso": 0.06059976557814714,
+   "knn8_dist_km": 0.048455619981854936,
+   "area_construida": 0.04039218854286906,
+   "total_banios": 0.03338098919042492,
+   "condicion_predio_Informal": 0.031297150009543424,
+   "uso_Residencial_Vivienda_Hasta_3_Pisos": 0.026997518147976952,
+   "knn8_habitaciones": 0.019036697087364537,
+   "antiguedad": 0.013606760960038438,
+   "knn8_antiguedad": 0.013453968880609655,
+   "condicion_predio_PH_Unidad_Predial": 0.011043239727201623,
+   "area_catastral_terreno": 0.010364793600285836,
+   "uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH": 0.00910899676375116,
+   "condicion_predio_NPH": 0.007608188493825244,
+   "planta_ubicacion": 0.006549531449752299
+  },
+  "locales": {
+   "bien_predicha": {
+    "fila_test": 20150,
+    "real": 3.0,
+    "predicho": 2.864984126984127,
+    "base_shap": 2.565694763856948,
+    "shap_top": {
+     "y_km": -0.36112048192522633,
+     "dist_centro_km": 0.2948168929331251,
+     "knn8_log_area": 0.26736872556123453,
+     "knn8_piso": -0.08195406659345361,
+     "knn8_prop_PH": 0.07759585647682797,
+     "area_construida": 0.04784280076371101,
+     "x_km": -0.041677932825917946,
+     "knn8_banios": 0.029047034477759064
+    }
+   },
+   "error_grande": {
+    "fila_test": 6350,
+    "real": 5.0,
+    "predicho": 2.923025062656641,
+    "base_shap": 2.565694763856948,
+    "shap_top": {
+     "y_km": 0.373996994814645,
+     "dist_centro_km": 0.36844291585622774,
+     "knn8_banios": -0.2546943961080898,
+     "knn8_log_area": 0.1089672890792892,
+     "knn8_prop_PH": -0.10166550295684582,
+     "area_construida": -0.09436945303620384,
+     "knn8_piso": -0.08238907210531629,
+     "knn8_dist_km": 0.056579101694064514
+    }
+   }
+  }
+ }
+}

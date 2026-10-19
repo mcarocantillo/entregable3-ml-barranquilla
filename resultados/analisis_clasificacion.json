@@ -1,0 +1,1432 @@
+{
+ "n_tareas": 640,
+ "n_combinaciones_completas": 128,
+ "submuestra": 10001,
+ "knndm_externo": {
+  "q": 50,
+  "W_km": 0.12437980476278626,
+  "W_aleatoria_km": 0.43136179000368385
+ },
+ "friedman_todas_bloques": {
+  "chi2": 979.5098359871762,
+  "gl": 127,
+  "p": 1.2253379573762304e-131,
+  "n_bloques": 32,
+  "cd": 40.878814742627185,
+  "rangos": {
+   "XGBoost | ninguno | Random": 36.938,
+   "XGBoost geográfico | class_weight | Bayesiana": 39.0,
+   "XGBoost geográfico | smote | Bayesiana": 39.984,
+   "XGBoost | ninguno | Bayesiana": 40.391,
+   "XGBoost | smote | Genética": 40.391,
+   "XGBoost geográfico | ninguno | Bayesiana": 41.062,
+   "XGBoost geográfico | ninguno | Grid": 41.422,
+   "XGBoost | smote | Random": 43.062,
+   "XGBoost | class_weight | Bayesiana": 43.172,
+   "Random Forest | class_weight | Random": 43.234,
+   "Random Forest | class_weight | Grid": 43.531,
+   "XGBoost geográfico | smote | Grid": 43.75,
+   "Random Forest | ninguno | Bayesiana": 43.766,
+   "XGBoost geográfico | ninguno | Random": 43.781,
+   "XGBoost | ninguno | Genética": 43.828,
+   "Random Forest | adasyn | Bayesiana": 43.828,
+   "XGBoost | smote | Bayesiana": 43.891,
+   "Random Forest | ninguno | Random": 43.906,
+   "Random Forest | adasyn | Grid": 44.625,
+   "Random Forest | class_weight | Genética": 44.859,
+   "XGBoost geográfico | ninguno | Genética": 45.828,
+   "XGBoost geográfico | adasyn | Bayesiana": 46.422,
+   "XGBoost | ninguno | Grid": 46.609,
+   "XGBoost geográfico | class_weight | Random": 46.672,
+   "XGBoost geográfico | class_weight | Grid": 46.938,
+   "XGBoost | class_weight | Genética": 47.078,
+   "XGBoost | smote | Grid": 47.281,
+   "XGBoost geográfico | adasyn | Genética": 47.281,
+   "Random Forest | ninguno | Genética": 47.625,
+   "Random Forest | adasyn | Random": 47.812,
+   "XGBoost | adasyn | Genética": 47.922,
+   "Random Forest | smote | Random": 48.516,
+   "XGBoost | class_weight | Random": 48.625,
+   "XGBoost geográfico | adasyn | Random": 49.031,
+   "Random Forest | class_weight | Bayesiana": 49.141,
+   "Random Forest | adasyn | Genética": 49.203,
+   "XGBoost geográfico | adasyn | Grid": 49.391,
+   "XGBoost geográfico | smote | Genética": 49.422,
+   "Random Forest | smote | Grid": 49.469,
+   "XGBoost | class_weight | Grid": 50.141,
+   "Random Forest | ninguno | Grid": 51.234,
+   "XGBoost | adasyn | Random": 51.766,
+   "XGBoost | adasyn | Bayesiana": 52.516,
+   "Random Forest | smote | Bayesiana": 52.562,
+   "XGBoost geográfico | class_weight | Genética": 52.766,
+   "XGBoost geográfico | smote | Random": 53.125,
+   "KNN | ninguno | Bayesiana": 54.219,
+   "Random Forest | smote | Genética": 54.812,
+   "KNN | ninguno | Grid": 55.422,
+   "XGBoost | adasyn | Grid": 56.906,
+   "KNN | class_weight | Grid": 57.875,
+   "SVM | ninguno | Grid": 58.812,
+   "KNN | ninguno | Random": 58.875,
+   "KNN | ninguno | Genética": 59.906,
+   "KNN | smote | Grid": 61.188,
+   "KNN | smote | Random": 61.984,
+   "KNN | class_weight | Random": 62.797,
+   "KNN | class_weight | Bayesiana": 62.844,
+   "Logística L1/L2 | ninguno | Bayesiana": 63.719,
+   "SVM | ninguno | Random": 63.75,
+   "Logística L1/L2 | ninguno | Grid": 63.984,
+   "SVM | ninguno | Bayesiana": 64.125,
+   "Logística L1/L2 | ninguno | Random": 64.172,
+   "Logística L1/L2 | ninguno | Genética": 64.219,
+   "KNN | smote | Genética": 64.234,
+   "SVM | class_weight | Grid": 65.719,
+   "SVM | smote | Grid": 66.234,
+   "SVM | class_weight | Random": 66.359,
+   "KNN | class_weight | Genética": 66.484,
+   "KNN | smote | Bayesiana": 66.781,
+   "Árbol de decisión | ninguno | Bayesiana": 66.844,
+   "SVM | ninguno | Genética": 67.266,
+   "Árbol de decisión | ninguno | Genética": 69.047,
+   "Árbol de decisión | adasyn | Bayesiana": 69.062,
+   "Árbol de decisión | ninguno | Grid": 69.094,
+   "Árbol de decisión | smote | Grid": 69.359,
+   "Árbol de decisión | ninguno | Random": 69.812,
+   "KNN | adasyn | Bayesiana": 70.0,
+   "Logística L1/L2 | class_weight | Genética": 70.25,
+   "Logística L1/L2 | adasyn | Bayesiana": 70.562,
+   "Logística L1/L2 | adasyn | Grid": 70.609,
+   "KNN | adasyn | Genética": 70.812,
+   "Logística L1/L2 | class_weight | Bayesiana": 71.625,
+   "Logística L1/L2 | class_weight | Random": 71.797,
+   "Logística L1/L2 | class_weight | Grid": 71.891,
+   "SVM | smote | Bayesiana": 72.016,
+   "Logística L1/L2 | adasyn | Genética": 72.188,
+   "Logística L1/L2 | smote | Bayesiana": 72.312,
+   "Logística L1/L2 | adasyn | Random": 72.453,
+   "Árbol de decisión | class_weight | Grid": 72.578,
+   "KNN | adasyn | Random": 72.594,
+   "KNN | adasyn | Grid": 72.781,
+   "SVM | adasyn | Random": 72.859,
+   "Logística L1/L2 | smote | Random": 72.922,
+   "Logística L1/L2 | smote | Genética": 73.219,
+   "SVM | adasyn | Genética": 73.281,
+   "SVM | class_weight | Genética": 73.609,
+   "SVM | adasyn | Grid": 73.922,
+   "Logística L1/L2 | smote | Grid": 73.984,
+   "SVM | smote | Genética": 75.531,
+   "SVM | smote | Random": 75.547,
+   "SVM | class_weight | Bayesiana": 76.625,
+   "SVM | adasyn | Bayesiana": 76.875,
+   "Árbol de decisión | smote | Genética": 78.469,
+   "Árbol de decisión | class_weight | Bayesiana": 78.594,
+   "Árbol de decisión | class_weight | Genética": 78.641,
+   "Árbol de decisión | adasyn | Random": 79.344,
+   "Árbol de decisión | adasyn | Grid": 79.766,
+   "Árbol de decisión | class_weight | Random": 85.156,
+   "Árbol de decisión | smote | Random": 85.531,
+   "Árbol de decisión | adasyn | Genética": 85.609,
+   "Naive Bayes | ninguno | Grid": 87.672,
+   "Árbol de decisión | smote | Bayesiana": 88.469,
+   "Naive Bayes | ninguno | Genética": 89.391,
+   "Naive Bayes | smote | Genética": 89.391,
+   "Naive Bayes | smote | Grid": 93.0,
+   "Naive Bayes | smote | Random": 93.141,
+   "Naive Bayes | ninguno | Bayesiana": 94.047,
+   "Naive Bayes | smote | Bayesiana": 95.312,
+   "Naive Bayes | ninguno | Random": 95.531,
+   "Naive Bayes | class_weight | Grid": 95.797,
+   "Naive Bayes | class_weight | Genética": 96.078,
+   "Naive Bayes | class_weight | Random": 98.828,
+   "Naive Bayes | adasyn | Grid": 98.891,
+   "Naive Bayes | class_weight | Bayesiana": 99.562,
+   "Naive Bayes | adasyn | Random": 100.438,
+   "Naive Bayes | adasyn | Genética": 102.312,
+   "Naive Bayes | adasyn | Bayesiana": 105.484
+  }
+ },
+ "friedman_todas_pliegues": {
+  "chi2": 506.1605536245054,
+  "gl": 127,
+  "p": 1.0423533311654333e-46,
+  "n_bloques": 5,
+  "cd": 103.4161301078174,
+  "rangos": {
+   "Random Forest | smote | Genética": 13.0,
+   "XGBoost | smote | Bayesiana": 13.6,
+   "XGBoost geográfico | class_weight | Bayesiana": 13.6,
+   "XGBoost | smote | Random": 15.2,
+   "XGBoost | smote | Genética": 16.8,
+   "Random Forest | class_weight | Random": 17.6,
+   "XGBoost | smote | Grid": 18.2,
+   "XGBoost | class_weight | Bayesiana": 20.0,
+   "Random Forest | smote | Random": 20.2,
+   "XGBoost | ninguno | Random": 20.4,
+   "Random Forest | class_weight | Genética": 20.4,
+   "Random Forest | class_weight | Grid": 21.0,
+   "XGBoost geográfico | adasyn | Bayesiana": 21.2,
+   "Random Forest | adasyn | Bayesiana": 21.8,
+   "XGBoost geográfico | smote | Bayesiana": 22.0,
+   "XGBoost | class_weight | Genética": 22.0,
+   "XGBoost geográfico | class_weight | Grid": 22.6,
+   "Random Forest | ninguno | Random": 23.2,
+   "XGBoost geográfico | class_weight | Random": 24.0,
+   "XGBoost geográfico | adasyn | Grid": 24.4,
+   "Random Forest | class_weight | Bayesiana": 24.8,
+   "XGBoost geográfico | ninguno | Bayesiana": 25.6,
+   "Random Forest | smote | Grid": 25.8,
+   "XGBoost geográfico | smote | Grid": 26.0,
+   "XGBoost | class_weight | Random": 26.8,
+   "XGBoost geográfico | ninguno | Random": 27.0,
+   "XGBoost geográfico | class_weight | Genética": 27.2,
+   "XGBoost | ninguno | Genética": 28.6,
+   "XGBoost | ninguno | Bayesiana": 29.6,
+   "XGBoost geográfico | smote | Genética": 30.5,
+   "XGBoost | class_weight | Grid": 31.0,
+   "XGBoost | ninguno | Grid": 31.4,
+   "XGBoost geográfico | ninguno | Genética": 31.6,
+   "Random Forest | ninguno | Genética": 32.4,
+   "XGBoost | adasyn | Grid": 33.4,
+   "XGBoost geográfico | adasyn | Genética": 34.3,
+   "XGBoost geográfico | smote | Random": 35.3,
+   "Random Forest | adasyn | Random": 35.4,
+   "XGBoost geográfico | ninguno | Grid": 37.2,
+   "Random Forest | ninguno | Grid": 38.2,
+   "Random Forest | adasyn | Genética": 39.0,
+   "Random Forest | adasyn | Grid": 39.0,
+   "Random Forest | ninguno | Bayesiana": 39.6,
+   "Random Forest | smote | Bayesiana": 39.6,
+   "XGBoost | adasyn | Random": 40.2,
+   "XGBoost geográfico | adasyn | Random": 41.1,
+   "XGBoost | adasyn | Bayesiana": 44.4,
+   "XGBoost | adasyn | Genética": 48.8,
+   "Logística L1/L2 | ninguno | Random": 55.6,
+   "Logística L1/L2 | ninguno | Bayesiana": 55.8,
+   "SVM | ninguno | Grid": 56.0,
+   "Logística L1/L2 | ninguno | Grid": 56.9,
+   "Logística L1/L2 | ninguno | Genética": 57.9,
+   "Logística L1/L2 | class_weight | Genética": 58.0,
+   "SVM | class_weight | Grid": 59.0,
+   "Logística L1/L2 | class_weight | Bayesiana": 59.3,
+   "Logística L1/L2 | smote | Genética": 63.2,
+   "Logística L1/L2 | class_weight | Grid": 64.0,
+   "Logística L1/L2 | class_weight | Random": 65.3,
+   "Logística L1/L2 | smote | Bayesiana": 66.6,
+   "SVM | class_weight | Genética": 68.2,
+   "KNN | class_weight | Bayesiana": 68.3,
+   "SVM | class_weight | Random": 68.4,
+   "SVM | smote | Random": 68.4,
+   "KNN | class_weight | Random": 68.8,
+   "Árbol de decisión | smote | Grid": 69.4,
+   "Logística L1/L2 | smote | Random": 70.1,
+   "SVM | ninguno | Random": 70.5,
+   "Logística L1/L2 | smote | Grid": 70.9,
+   "SVM | smote | Grid": 71.4,
+   "SVM | adasyn | Genética": 72.8,
+   "SVM | smote | Bayesiana": 73.8,
+   "KNN | smote | Genética": 74.7,
+   "Logística L1/L2 | adasyn | Grid": 75.2,
+   "KNN | class_weight | Genética": 75.3,
+   "SVM | ninguno | Genética": 76.1,
+   "KNN | adasyn | Grid": 76.6,
+   "SVM | ninguno | Bayesiana": 77.2,
+   "KNN | class_weight | Grid": 77.8,
+   "Logística L1/L2 | adasyn | Bayesiana": 77.8,
+   "KNN | adasyn | Genética": 78.2,
+   "KNN | smote | Grid": 79.0,
+   "KNN | adasyn | Bayesiana": 79.4,
+   "SVM | adasyn | Grid": 79.6,
+   "SVM | class_weight | Bayesiana": 80.0,
+   "KNN | smote | Random": 81.1,
+   "Logística L1/L2 | adasyn | Random": 82.5,
+   "SVM | adasyn | Bayesiana": 82.8,
+   "Logística L1/L2 | adasyn | Genética": 82.9,
+   "KNN | ninguno | Bayesiana": 83.4,
+   "KNN | adasyn | Random": 84.2,
+   "KNN | ninguno | Genética": 84.4,
+   "SVM | adasyn | Random": 84.4,
+   "KNN | ninguno | Grid": 85.2,
+   "SVM | smote | Genética": 85.6,
+   "KNN | smote | Bayesiana": 86.8,
+   "Árbol de decisión | class_weight | Grid": 87.8,
+   "Árbol de decisión | ninguno | Bayesiana": 88.0,
+   "Árbol de decisión | adasyn | Genética": 88.5,
+   "KNN | ninguno | Random": 89.0,
+   "Árbol de decisión | ninguno | Genética": 90.3,
+   "Árbol de decisión | smote | Genética": 91.1,
+   "Árbol de decisión | adasyn | Bayesiana": 93.0,
+   "Árbol de decisión | ninguno | Random": 93.7,
+   "Árbol de decisión | class_weight | Genética": 95.0,
+   "Árbol de decisión | ninguno | Grid": 97.8,
+   "Árbol de decisión | class_weight | Bayesiana": 97.8,
+   "Árbol de decisión | adasyn | Random": 98.7,
+   "Árbol de decisión | adasyn | Grid": 99.4,
+   "Árbol de decisión | class_weight | Random": 100.2,
+   "Árbol de decisión | smote | Bayesiana": 107.0,
+   "Árbol de decisión | smote | Random": 109.7,
+   "Naive Bayes | ninguno | Grid": 114.5,
+   "Naive Bayes | ninguno | Genética": 114.7,
+   "Naive Bayes | smote | Bayesiana": 115.6,
+   "Naive Bayes | ninguno | Bayesiana": 115.6,
+   "Naive Bayes | smote | Genética": 116.6,
+   "Naive Bayes | ninguno | Random": 116.8,
+   "Naive Bayes | smote | Random": 116.8,
+   "Naive Bayes | smote | Grid": 118.8,
+   "Naive Bayes | class_weight | Bayesiana": 119.6,
+   "Naive Bayes | class_weight | Grid": 120.6,
+   "Naive Bayes | class_weight | Random": 120.9,
+   "Naive Bayes | class_weight | Genética": 121.7,
+   "Naive Bayes | adasyn | Random": 122.2,
+   "Naive Bayes | adasyn | Grid": 123.2,
+   "Naive Bayes | adasyn | Genética": 123.8,
+   "Naive Bayes | adasyn | Bayesiana": 123.8
+  }
+ },
+ "friedman_mejor_por_modelo": {
+  "chi2": 47.621167576648425,
+  "gl": 7,
+  "p": 4.2223018772444555e-08,
+  "n_bloques": 32,
+  "cd": 1.8560264184882715,
+  "rangos": {
+   "XGBoost geográfico": 3.031,
+   "XGBoost": 3.406,
+   "Random Forest": 4.047,
+   "KNN": 4.625,
+   "Logística L1/L2": 4.688,
+   "Árbol de decisión": 4.828,
+   "SVM": 4.859,
+   "Naive Bayes": 6.516
+  }
+ },
+ "nemenyi_mejor_por_modelo": {
+  "Random Forest": {
+   "Random Forest": 1.0,
+   "XGBoost": 0.9673,
+   "XGBoost geográfico": 0.7142,
+   "SVM": 0.8889,
+   "Logística L1/L2": 0.9673,
+   "KNN": 0.9817,
+   "Árbol de decisión": 0.908,
+   "Naive Bayes": 0.0014
+  },
+  "XGBoost": {
+   "Random Forest": 0.9673,
+   "XGBoost": 1.0,
+   "XGBoost geográfico": 0.9987,
+   "SVM": 0.2547,
+   "Logística L1/L2": 0.4198,
+   "KNN": 0.4885,
+   "Árbol de decisión": 0.2814,
+   "Naive Bayes": 0.0
+  },
+  "XGBoost geográfico": {
+   "Random Forest": 0.7142,
+   "XGBoost": 0.9987,
+   "XGBoost geográfico": 1.0,
+   "SVM": 0.0571,
+   "Logística L1/L2": 0.121,
+   "KNN": 0.1548,
+   "Árbol de decisión": 0.0659,
+   "Naive Bayes": 0.0
+  },
+  "SVM": {
+   "Random Forest": 0.8889,
+   "XGBoost": 0.2547,
+   "XGBoost geográfico": 0.0571,
+   "SVM": 1.0,
+   "Logística L1/L2": 1.0,
+   "KNN": 0.9999,
+   "Árbol de decisión": 1.0,
+   "Naive Bayes": 0.121
+  },
+  "Logística L1/L2": {
+   "Random Forest": 0.9673,
+   "XGBoost": 0.4198,
+   "XGBoost geográfico": 0.121,
+   "SVM": 1.0,
+   "Logística L1/L2": 1.0,
+   "KNN": 1.0,
+   "Árbol de decisión": 1.0,
+   "Naive Bayes": 0.0571
+  },
+  "KNN": {
+   "Random Forest": 0.9817,
+   "XGBoost": 0.4885,
+   "XGBoost geográfico": 0.1548,
+   "SVM": 0.9999,
+   "Logística L1/L2": 1.0,
+   "KNN": 1.0,
+   "Árbol de decisión": 1.0,
+   "Naive Bayes": 0.0423
+  },
+  "Árbol de decisión": {
+   "Random Forest": 0.908,
+   "XGBoost": 0.2814,
+   "XGBoost geográfico": 0.0659,
+   "SVM": 1.0,
+   "Logística L1/L2": 1.0,
+   "KNN": 1.0,
+   "Árbol de decisión": 1.0,
+   "Naive Bayes": 0.1064
+  },
+  "Naive Bayes": {
+   "Random Forest": 0.0014,
+   "XGBoost": 0.0,
+   "XGBoost geográfico": 0.0,
+   "SVM": 0.121,
+   "Logística L1/L2": 0.0571,
+   "KNN": 0.0423,
+   "Árbol de decisión": 0.1064,
+   "Naive Bayes": 1.0
+  }
+ },
+ "mejor_por_modelo": [
+  {
+   "modelo": "Random Forest",
+   "balanceo": "smote",
+   "metodo": "Genética",
+   "f1_macro_mean": 0.657931984879599,
+   "f1_macro_std": 0.06850885636464728,
+   "auc_ovr_mean": 0.9351821420715561,
+   "mae_ordinal_mean": 0.3220196756281414
+  },
+  {
+   "modelo": "XGBoost",
+   "balanceo": "smote",
+   "metodo": "Random",
+   "f1_macro_mean": 0.6558335714349206,
+   "f1_macro_std": 0.07101108471560179,
+   "auc_ovr_mean": 0.9297926337064151,
+   "mae_ordinal_mean": 0.3206613149405005
+  },
+  {
+   "modelo": "XGBoost geográfico",
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "f1_macro_mean": 0.6555435509505004,
+   "f1_macro_std": 0.06320620166892707,
+   "auc_ovr_mean": 0.9308994119386386,
+   "mae_ordinal_mean": 0.3195205135323612
+  },
+  {
+   "modelo": "SVM",
+   "balanceo": "class_weight",
+   "metodo": "Grid",
+   "f1_macro_mean": 0.6174899488673022,
+   "f1_macro_std": 0.0668216687588538,
+   "auc_ovr_mean": 0.9118322702529662,
+   "mae_ordinal_mean": 0.37527918941801086
+  },
+  {
+   "modelo": "Logística L1/L2",
+   "balanceo": "ninguno",
+   "metodo": "Bayesiana",
+   "f1_macro_mean": 0.6071144995430082,
+   "f1_macro_std": 0.08166623217000651,
+   "auc_ovr_mean": 0.9108212280683627,
+   "mae_ordinal_mean": 0.40340073633072526
+  },
+  {
+   "modelo": "KNN",
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "f1_macro_mean": 0.6001328703830091,
+   "f1_macro_std": 0.09085689877911715,
+   "auc_ovr_mean": 0.9027249630660709,
+   "mae_ordinal_mean": 0.4171900782027719
+  },
+  {
+   "modelo": "Árbol de decisión",
+   "balanceo": "smote",
+   "metodo": "Grid",
+   "f1_macro_mean": 0.5992822231458798,
+   "f1_macro_std": 0.09201094785211099,
+   "auc_ovr_mean": 0.8247478780443182,
+   "mae_ordinal_mean": 0.42596713600162384
+  },
+  {
+   "modelo": "Naive Bayes",
+   "balanceo": "smote",
+   "metodo": "Bayesiana",
+   "f1_macro_mean": 0.45170045068786874,
+   "f1_macro_std": 0.1108826676719533,
+   "auc_ovr_mean": 0.857271258880289,
+   "mae_ordinal_mean": 0.6505186686823526
+  }
+ ],
+ "optimizadores": {
+  "Bayesiana": {
+   "f1_macro_mean": 0.5874,
+   "f1_macro_std": 0.0988,
+   "f1_interno_mejor_mean": 0.5978,
+   "f1_interno_mejor_std": 0.0678,
+   "seg_busqueda_mean": 192.2034,
+   "seg_busqueda_std": 152.7115,
+   "seg_por_evaluacion_mean": 16.0169,
+   "seg_por_evaluacion_std": 12.726,
+   "n_evaluaciones_mean": 12.0,
+   "n_evaluaciones_std": 0.0
+  },
+  "Genética": {
+   "f1_macro_mean": 0.5885,
+   "f1_macro_std": 0.0978,
+   "f1_interno_mejor_mean": 0.597,
+   "f1_interno_mejor_std": 0.0673,
+   "seg_busqueda_mean": 214.8613,
+   "seg_busqueda_std": 174.8247,
+   "seg_por_evaluacion_mean": 17.9083,
+   "seg_por_evaluacion_std": 14.5661,
+   "n_evaluaciones_mean": 11.9938,
+   "n_evaluaciones_std": 0.0791
+  },
+  "Grid": {
+   "f1_macro_mean": 0.59,
+   "f1_macro_std": 0.0984,
+   "f1_interno_mejor_mean": 0.5969,
+   "f1_interno_mejor_std": 0.0678,
+   "seg_busqueda_mean": 219.1552,
+   "seg_busqueda_std": 173.8885,
+   "seg_por_evaluacion_mean": 18.2629,
+   "seg_por_evaluacion_std": 14.4907,
+   "n_evaluaciones_mean": 12.0,
+   "n_evaluaciones_std": 0.0
+  },
+  "Random": {
+   "f1_macro_mean": 0.5864,
+   "f1_macro_std": 0.0994,
+   "f1_interno_mejor_mean": 0.5975,
+   "f1_interno_mejor_std": 0.0674,
+   "seg_busqueda_mean": 195.2984,
+   "seg_busqueda_std": 152.9147,
+   "seg_por_evaluacion_mean": 16.2749,
+   "seg_por_evaluacion_std": 12.7429,
+   "n_evaluaciones_mean": 12.0,
+   "n_evaluaciones_std": 0.0
+  }
+ },
+ "friedman_optimizadores": {
+  "chi2": 1.2593790426908902,
+  "p": 0.738800766297374,
+  "n_bloques": 160,
+  "rangos": {
+   "Bayesiana": 2.412,
+   "Grid": 2.491,
+   "Genética": 2.538,
+   "Random": 2.559
+  },
+  "cd": 0.37080779635910327
+ },
+ "anytime": {
+  "Bayesiana": {
+   "media": [
+    0.9282,
+    0.9812,
+    0.9853,
+    0.9876,
+    0.9912,
+    0.9934,
+    0.9942,
+    0.9963,
+    0.9976,
+    0.9986,
+    0.9996,
+    1.0
+   ],
+   "area_bajo_curva": 0.9877871723755357,
+   "evals_para_99pct": 5
+  },
+  "Grid": {
+   "media": [
+    0.8131,
+    0.8965,
+    0.9392,
+    0.9519,
+    0.9594,
+    0.9676,
+    0.9752,
+    0.9812,
+    0.9866,
+    0.9918,
+    0.997,
+    1.0
+   ],
+   "area_bajo_curva": 0.9549567072751154,
+   "evals_para_99pct": 10
+  },
+  "Genética": {
+   "media": [
+    0.953,
+    0.9615,
+    0.9778,
+    0.987,
+    0.9932,
+    0.9936,
+    0.9944,
+    0.9959,
+    0.9972,
+    0.9981,
+    0.9987,
+    1.0
+   ],
+   "area_bajo_curva": 0.9875146421971089,
+   "evals_para_99pct": 5
+  },
+  "Random": {
+   "media": [
+    0.9522,
+    0.9607,
+    0.977,
+    0.9863,
+    0.9898,
+    0.9963,
+    0.9975,
+    0.9984,
+    0.9989,
+    0.9993,
+    0.9995,
+    1.0
+   ],
+   "area_bajo_curva": 0.9879993452956355,
+   "evals_para_99pct": 6
+  }
+ },
+ "diversidad_genetica": {
+  "0": {
+   "mean": 0.6844,
+   "std": 0.2315,
+   "count": 160
+  },
+  "1": {
+   "mean": 0.6132,
+   "std": 0.2194,
+   "count": 160
+  },
+  "2": {
+   "mean": 0.2383,
+   "std": 0.24,
+   "count": 160
+  },
+  "3": {
+   "mean": 0.0561,
+   "std": 0.0982,
+   "count": 160
+  },
+  "4": {
+   "mean": 0.0742,
+   "std": 0.0685,
+   "count": 150
+  },
+  "5": {
+   "mean": 0.0465,
+   "std": 0.0387,
+   "count": 142
+  },
+  "6": {
+   "mean": 0.0363,
+   "std": 0.0387,
+   "count": 140
+  },
+  "7": {
+   "mean": 0.0333,
+   "std": 0.0388,
+   "count": 129
+  },
+  "8": {
+   "mean": 0.0293,
+   "std": 0.0509,
+   "count": 119
+  },
+  "9": {
+   "mean": 0.0691,
+   "std": 0.0417,
+   "count": 113
+  },
+  "10": {
+   "mean": 0.1159,
+   "std": 0.1168,
+   "count": 83
+  },
+  "11": {
+   "mean": 0.0067,
+   "std": 0.0201,
+   "count": 72
+  },
+  "12": {
+   "mean": 0.0321,
+   "std": 0.0379,
+   "count": 63
+  },
+  "13": {
+   "mean": 0.0263,
+   "std": 0.0583,
+   "count": 63
+  },
+  "14": {
+   "mean": 0.0001,
+   "std": 0.0006,
+   "count": 52
+  },
+  "15": {
+   "mean": 0.0468,
+   "std": 0.0207,
+   "count": 32
+  },
+  "16": {
+   "mean": 0.1353,
+   "std": 0.1168,
+   "count": 14
+  },
+  "17": {
+   "mean": 0.0448,
+   "std": 0.035,
+   "count": 14
+  },
+  "18": {
+   "mean": 0.0336,
+   "std": 0.0262,
+   "count": 14
+  },
+  "19": {
+   "mean": 0.0635,
+   "std": 0.0492,
+   "count": 14
+  },
+  "20": {
+   "mean": 0.0461,
+   "std": 0.0518,
+   "count": 13
+  },
+  "21": {
+   "mean": 0.086,
+   "std": 0.0411,
+   "count": 8
+  },
+  "22": {
+   "mean": 0.101,
+   "std": 0.0027,
+   "count": 4
+  },
+  "23": {
+   "mean": 0.1172,
+   "std": 0.0,
+   "count": 4
+  },
+  "24": {
+   "mean": 0.1315,
+   "std": 0.0107,
+   "count": 4
+  },
+  "25": {
+   "mean": 0.1335,
+   "std": 0.0565,
+   "count": 4
+  },
+  "26": {
+   "mean": 0.0876,
+   "std": 0.0074,
+   "count": 4
+  },
+  "27": {
+   "mean": 0.1131,
+   "std": 0.0074,
+   "count": 4
+  },
+  "28": {
+   "mean": 0.0878,
+   "std": 0.0098,
+   "count": 3
+  },
+  "29": {
+   "mean": 0.098,
+   "std": 0.0095,
+   "count": 3
+  },
+  "30": {
+   "mean": 0.0925,
+   "std": 0.0091,
+   "count": 3
+  },
+  "31": {
+   "mean": 0.0457,
+   "std": 0.0411,
+   "count": 3
+  },
+  "32": {
+   "mean": 0.0304,
+   "std": 0.0526,
+   "count": 3
+  },
+  "33": {
+   "mean": 0.0171,
+   "std": 0.0295,
+   "count": 3
+  },
+  "34": {
+   "mean": 0.0609,
+   "std": 0.0323,
+   "count": 3
+  },
+  "35": {
+   "mean": 0.0499,
+   "std": 0.0566,
+   "count": 3
+  },
+  "36": {
+   "mean": 0.064,
+   "std": 0.0002,
+   "count": 3
+  },
+  "37": {
+   "mean": 0.0607,
+   "std": 0.0059,
+   "count": 3
+  },
+  "38": {
+   "mean": 0.1226,
+   "std": NaN,
+   "count": 1
+  },
+  "39": {
+   "mean": 0.0609,
+   "std": NaN,
+   "count": 1
+  },
+  "40": {
+   "mean": 0.036,
+   "std": NaN,
+   "count": 1
+  },
+  "41": {
+   "mean": 0.0127,
+   "std": NaN,
+   "count": 1
+  },
+  "42": {
+   "mean": 0.0048,
+   "std": NaN,
+   "count": 1
+  },
+  "43": {
+   "mean": 0.0033,
+   "std": NaN,
+   "count": 1
+  },
+  "44": {
+   "mean": 0.08,
+   "std": NaN,
+   "count": 1
+  },
+  "45": {
+   "mean": 0.0033,
+   "std": NaN,
+   "count": 1
+  },
+  "46": {
+   "mean": 0.0185,
+   "std": NaN,
+   "count": 1
+  },
+  "47": {
+   "mean": 0.0437,
+   "std": NaN,
+   "count": 1
+  },
+  "48": {
+   "mean": 0.1426,
+   "std": NaN,
+   "count": 1
+  },
+  "49": {
+   "mean": 0.1144,
+   "std": NaN,
+   "count": 1
+  }
+ },
+ "balanceo": {
+  "adasyn": {
+   "f1_macro_mean": 0.5787,
+   "f1_macro_std": 0.1025,
+   "recall_macro_mean": 0.6067,
+   "recall_macro_std": 0.0832,
+   "auc_ovr_mean": 0.8911,
+   "auc_ovr_std": 0.0669,
+   "ece_mean": 0.1642,
+   "ece_std": 0.1413,
+   "seg_busqueda_mean": 285.62,
+   "seg_busqueda_std": 191.78
+  },
+  "class_weight": {
+   "f1_macro_mean": 0.593,
+   "f1_macro_std": 0.0998,
+   "recall_macro_mean": 0.618,
+   "recall_macro_std": 0.0793,
+   "auc_ovr_mean": 0.8997,
+   "auc_ovr_std": 0.048,
+   "ece_mean": 0.1529,
+   "ece_std": 0.1337,
+   "seg_busqueda_mean": 136.2538,
+   "seg_busqueda_std": 95.2932
+  },
+  "ninguno": {
+   "f1_macro_mean": 0.5901,
+   "f1_macro_std": 0.0911,
+   "recall_macro_mean": 0.6043,
+   "recall_macro_std": 0.0768,
+   "auc_ovr_mean": 0.8985,
+   "auc_ovr_std": 0.0527,
+   "ece_mean": 0.1457,
+   "ece_std": 0.1297,
+   "seg_busqueda_mean": 140.5465,
+   "seg_busqueda_std": 99.7867
+  },
+  "smote": {
+   "f1_macro_mean": 0.5905,
+   "f1_macro_std": 0.1001,
+   "recall_macro_mean": 0.6159,
+   "recall_macro_std": 0.0824,
+   "auc_ovr_mean": 0.8934,
+   "auc_ovr_std": 0.0565,
+   "ece_mean": 0.1598,
+   "ece_std": 0.1388,
+   "seg_busqueda_mean": 259.0979,
+   "seg_busqueda_std": 183.9137
+  }
+ },
+ "friedman_balanceo": {
+  "chi2": 29.392499999999927,
+  "p": 1.8520141113739566e-06,
+  "n_bloques": 160,
+  "rangos": {
+   "class_weight": 2.25,
+   "smote": 2.388,
+   "ninguno": 2.394,
+   "adasyn": 2.969
+  }
+ },
+ "delong_finalistas": [
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 1,
+   "auc_1": 0.9412,
+   "auc_2": 0.93491,
+   "diferencia": 0.00629,
+   "se": 0.00117,
+   "z": 5.36847,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 2,
+   "auc_1": 0.89271,
+   "auc_2": 0.88597,
+   "diferencia": 0.00674,
+   "se": 0.00181,
+   "z": 3.73477,
+   "p": 0.00019,
+   "p_holm": 0.00263,
+   "p_bh": 0.00029
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 3,
+   "auc_1": 0.91915,
+   "auc_2": 0.9051,
+   "diferencia": 0.01404,
+   "se": 0.00162,
+   "z": 8.68755,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 4,
+   "auc_1": 0.95064,
+   "auc_2": 0.94618,
+   "diferencia": 0.00446,
+   "se": 0.00163,
+   "z": 2.7381,
+   "p": 0.00618,
+   "p_holm": 0.05561,
+   "p_bh": 0.00794
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 5,
+   "auc_1": 0.95548,
+   "auc_2": 0.95696,
+   "diferencia": -0.00148,
+   "se": 0.00148,
+   "z": -1.00023,
+   "p": 0.3172,
+   "p_holm": 1.0,
+   "p_bh": 0.34604
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "estrato": 6,
+   "auc_1": 0.97167,
+   "auc_2": 0.95438,
+   "diferencia": 0.01729,
+   "se": 0.00362,
+   "z": 4.77137,
+   "p": 0.0,
+   "p_holm": 3e-05,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 1,
+   "auc_1": 0.9412,
+   "auc_2": 0.93832,
+   "diferencia": 0.00288,
+   "se": 0.0012,
+   "z": 2.39482,
+   "p": 0.01663,
+   "p_holm": 0.1164,
+   "p_bh": 0.01995
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 2,
+   "auc_1": 0.89271,
+   "auc_2": 0.88573,
+   "diferencia": 0.00698,
+   "se": 0.00193,
+   "z": 3.61143,
+   "p": 0.0003,
+   "p_holm": 0.00396,
+   "p_bh": 0.00046
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 3,
+   "auc_1": 0.91915,
+   "auc_2": 0.89932,
+   "diferencia": 0.01983,
+   "se": 0.00228,
+   "z": 8.71196,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 4,
+   "auc_1": 0.95064,
+   "auc_2": 0.9488,
+   "diferencia": 0.00185,
+   "se": 0.00144,
+   "z": 1.28058,
+   "p": 0.20034,
+   "p_holm": 1.0,
+   "p_bh": 0.22538
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 5,
+   "auc_1": 0.95548,
+   "auc_2": 0.93733,
+   "diferencia": 0.01816,
+   "se": 0.00283,
+   "z": 6.40471,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 6,
+   "auc_1": 0.97167,
+   "auc_2": 0.9676,
+   "diferencia": 0.00407,
+   "se": 0.00166,
+   "z": 2.44663,
+   "p": 0.01442,
+   "p_holm": 0.11536,
+   "p_bh": 0.0179
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 1,
+   "auc_1": 0.9412,
+   "auc_2": 0.91324,
+   "diferencia": 0.02796,
+   "se": 0.00188,
+   "z": 14.88665,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 2,
+   "auc_1": 0.89271,
+   "auc_2": 0.83484,
+   "diferencia": 0.05787,
+   "se": 0.00324,
+   "z": 17.88869,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 3,
+   "auc_1": 0.91915,
+   "auc_2": 0.87135,
+   "diferencia": 0.0478,
+   "se": 0.00279,
+   "z": 17.11345,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 4,
+   "auc_1": 0.95064,
+   "auc_2": 0.93297,
+   "diferencia": 0.01767,
+   "se": 0.00227,
+   "z": 7.77735,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 5,
+   "auc_1": 0.95548,
+   "auc_2": 0.95634,
+   "diferencia": -0.00085,
+   "se": 0.0021,
+   "z": -0.40659,
+   "p": 0.68431,
+   "p_holm": 1.0,
+   "p_bh": 0.72456
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 6,
+   "auc_1": 0.97167,
+   "auc_2": 0.97858,
+   "diferencia": -0.00691,
+   "se": 0.00166,
+   "z": -4.16898,
+   "p": 3e-05,
+   "p_holm": 0.00046,
+   "p_bh": 5e-05
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 1,
+   "auc_1": 0.93491,
+   "auc_2": 0.93832,
+   "diferencia": -0.00341,
+   "se": 0.001,
+   "z": -3.40425,
+   "p": 0.00066,
+   "p_holm": 0.0073,
+   "p_bh": 0.00092
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 2,
+   "auc_1": 0.88597,
+   "auc_2": 0.88573,
+   "diferencia": 0.00023,
+   "se": 0.00176,
+   "z": 0.13265,
+   "p": 0.89447,
+   "p_holm": 1.0,
+   "p_bh": 0.89447
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 3,
+   "auc_1": 0.9051,
+   "auc_2": 0.89932,
+   "diferencia": 0.00579,
+   "se": 0.00184,
+   "z": 3.13908,
+   "p": 0.00169,
+   "p_holm": 0.01695,
+   "p_bh": 0.00226
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 4,
+   "auc_1": 0.94618,
+   "auc_2": 0.9488,
+   "diferencia": -0.00262,
+   "se": 0.00121,
+   "z": -2.15925,
+   "p": 0.03083,
+   "p_holm": 0.18499,
+   "p_bh": 0.0358
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 5,
+   "auc_1": 0.95696,
+   "auc_2": 0.93733,
+   "diferencia": 0.01964,
+   "se": 0.00289,
+   "z": 6.80156,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "estrato": 6,
+   "auc_1": 0.95438,
+   "auc_2": 0.9676,
+   "diferencia": -0.01322,
+   "se": 0.00369,
+   "z": -3.57903,
+   "p": 0.00034,
+   "p_holm": 0.00414,
+   "p_bh": 0.0005
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 1,
+   "auc_1": 0.93491,
+   "auc_2": 0.91324,
+   "diferencia": 0.02167,
+   "se": 0.00215,
+   "z": 10.08684,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 2,
+   "auc_1": 0.88597,
+   "auc_2": 0.83484,
+   "diferencia": 0.05113,
+   "se": 0.00345,
+   "z": 14.82022,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 3,
+   "auc_1": 0.9051,
+   "auc_2": 0.87135,
+   "diferencia": 0.03376,
+   "se": 0.00311,
+   "z": 10.84646,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 4,
+   "auc_1": 0.94618,
+   "auc_2": 0.93297,
+   "diferencia": 0.01321,
+   "se": 0.00243,
+   "z": 5.43854,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 5,
+   "auc_1": 0.95696,
+   "auc_2": 0.95634,
+   "diferencia": 0.00063,
+   "se": 0.00224,
+   "z": 0.28125,
+   "p": 0.77852,
+   "p_holm": 1.0,
+   "p_bh": 0.80076
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 6,
+   "auc_1": 0.95438,
+   "auc_2": 0.97858,
+   "diferencia": -0.0242,
+   "se": 0.00446,
+   "z": -5.42415,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 1,
+   "auc_1": 0.93832,
+   "auc_2": 0.91324,
+   "diferencia": 0.02508,
+   "se": 0.00227,
+   "z": 11.04545,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 2,
+   "auc_1": 0.88573,
+   "auc_2": 0.83484,
+   "diferencia": 0.0509,
+   "se": 0.00374,
+   "z": 13.59932,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 3,
+   "auc_1": 0.89932,
+   "auc_2": 0.87135,
+   "diferencia": 0.02797,
+   "se": 0.00382,
+   "z": 7.32312,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 4,
+   "auc_1": 0.9488,
+   "auc_2": 0.93297,
+   "diferencia": 0.01583,
+   "se": 0.00234,
+   "z": 6.77025,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 5,
+   "auc_1": 0.93733,
+   "auc_2": 0.95634,
+   "diferencia": -0.01901,
+   "se": 0.00348,
+   "z": -5.45546,
+   "p": 0.0,
+   "p_holm": 0.0,
+   "p_bh": 0.0
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "estrato": 6,
+   "auc_1": 0.9676,
+   "auc_2": 0.97858,
+   "diferencia": -0.01099,
+   "se": 0.0024,
+   "z": -4.58608,
+   "p": 0.0,
+   "p_holm": 7e-05,
+   "p_bh": 1e-05
+  }
+ ],
+ "cliff_finalistas": [
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost | smote | Random",
+   "delta_cliff_bloques": -0.0927734375,
+   "magnitud": "despreciable"
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "delta_cliff_bloques": -0.1279296875,
+   "magnitud": "despreciable"
+  },
+  {
+   "A": "Random Forest | smote | Genética",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "delta_cliff_bloques": 0.171875,
+   "magnitud": "pequeño"
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "XGBoost geográfico | class_weight | Bayesiana",
+   "delta_cliff_bloques": -0.0380859375,
+   "magnitud": "despreciable"
+  },
+  {
+   "A": "XGBoost | smote | Random",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "delta_cliff_bloques": 0.2421875,
+   "magnitud": "pequeño"
+  },
+  {
+   "A": "XGBoost geográfico | class_weight | Bayesiana",
+   "B": "Logística L1/L2 | ninguno | Bayesiana",
+   "delta_cliff_bloques": 0.283203125,
+   "magnitud": "pequeño"
+  }
+ ],
+ "ic_bca_f1_finalistas": {
+  "Random Forest | smote | Genética": [
+   0.64003490133071,
+   0.7282098036268496
+  ],
+  "XGBoost | smote | Random": [
+   0.6536338867760969,
+   0.7294013808203214
+  ],
+  "XGBoost geográfico | class_weight | Bayesiana": [
+   0.6478809468420911,
+   0.7322121915398803
+  ],
+  "Logística L1/L2 | ninguno | Bayesiana": [
+   0.5844980440151213,
+   0.6913025305938238
+  ]
+ }
+}

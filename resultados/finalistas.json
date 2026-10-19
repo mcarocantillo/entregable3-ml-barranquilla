@@ -1,0 +1,1165 @@
+{
+ "finalistas": {
+  "Random Forest": {
+   "balanceo": "smote",
+   "metodo": "Genética",
+   "params": {
+    "n_estimators": 141,
+    "max_depth": 21,
+    "max_features": 0.3,
+    "min_samples_leaf": 2
+   },
+   "f1_busqueda_final": 0.6607482454162124,
+   "test": {
+    "f1_macro": 0.5570999100296592,
+    "accuracy": 0.6940210300099777,
+    "balanced_accuracy": 0.553476462554301,
+    "precision_macro": 0.5775378417621474,
+    "recall_macro": 0.553476462554301,
+    "auc_ovr": 0.9335067552236272,
+    "log_loss": 0.7478550076640075,
+    "brier": 0.4239789538981968,
+    "ece": 0.09094578390027935,
+    "mae_ordinal": 0.31506639035996625,
+    "acc_pm1": 0.9918489523370941,
+    "kappa_cuadratico": 0.9035013251861586
+   },
+   "ic95_bca_f1_test": [
+    0.5233236276960229,
+    0.7139094654028966
+   ],
+   "segundos": 1991.8826796000067,
+   "confusion": [
+    [
+     17934,
+     4936,
+     160,
+     61,
+     0,
+     0
+    ],
+    [
+     2201,
+     8586,
+     2323,
+     82,
+     0,
+     0
+    ],
+    [
+     25,
+     2696,
+     7228,
+     2481,
+     22,
+     0
+    ],
+    [
+     0,
+     42,
+     536,
+     10246,
+     1333,
+     93
+    ],
+    [
+     0,
+     0,
+     1,
+     2086,
+     1099,
+     181
+    ],
+    [
+     0,
+     0,
+     0,
+     45,
+     629,
+     119
+    ]
+   ]
+  },
+  "XGBoost": {
+   "balanceo": "smote",
+   "metodo": "Random",
+   "params": {
+    "n_estimators": 202,
+    "learning_rate": 0.04696344667875392,
+    "max_depth": 5,
+    "subsample": 0.6175215063148914,
+    "colsample_bytree": 0.577144746033774,
+    "min_child_weight": 7.738685132478183
+   },
+   "f1_busqueda_final": 0.6568967719469085,
+   "test": {
+    "f1_macro": 0.5664869754596945,
+    "accuracy": 0.6957709724460818,
+    "balanced_accuracy": 0.5611287812776308,
+    "precision_macro": 0.6053156089250377,
+    "recall_macro": 0.5611287812776308,
+    "auc_ovr": 0.9350510284754922,
+    "log_loss": 0.7065883332301582,
+    "brier": 0.40849022808754853,
+    "ece": 0.029000224185908224,
+    "mae_ordinal": 0.31244147670581013,
+    "acc_pm1": 0.9927699746718858,
+    "kappa_cuadratico": 0.9050921305446098
+   },
+   "ic95_bca_f1_test": [
+    0.5361101260624856,
+    0.7559854250825605
+   ],
+   "segundos": 1893.3653663000005,
+   "confusion": [
+    [
+     18011,
+     4894,
+     125,
+     61,
+     0,
+     0
+    ],
+    [
+     2003,
+     8862,
+     2219,
+     108,
+     0,
+     0
+    ],
+    [
+     26,
+     2793,
+     6855,
+     2746,
+     30,
+     2
+    ],
+    [
+     0,
+     30,
+     446,
+     10218,
+     1510,
+     46
+    ],
+    [
+     0,
+     1,
+     1,
+     2004,
+     1255,
+     106
+    ],
+    [
+     0,
+     0,
+     0,
+     41,
+     627,
+     125
+    ]
+   ]
+  },
+  "XGBoost geográfico": {
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "params": {
+    "n_estimators": 186,
+    "learning_rate": 0.04386723024324426,
+    "max_depth": 8,
+    "frac_vecinos": 0.1233959246959953,
+    "alpha": 0.9747105681970639
+   },
+   "f1_busqueda_final": 0.6539840138370134,
+   "test": {
+    "f1_macro": 0.5220504140687906,
+    "accuracy": 0.6562284135390283,
+    "balanced_accuracy": 0.5260995047822976,
+    "precision_macro": 0.5945041422083829,
+    "recall_macro": 0.5260995047822976,
+    "auc_ovr": 0.9316403832795285,
+    "log_loss": 0.7872125934495943,
+    "brier": 0.45133371428516916,
+    "ece": 0.06829430648547256,
+    "mae_ordinal": 0.35523831452912735,
+    "acc_pm1": 0.9894235935221429,
+    "kappa_cuadratico": 0.8893141062283798
+   },
+   "ic95_bca_f1_test": [
+    0.4594093534643816,
+    0.7136042627127807
+   ],
+   "segundos": 1871.7209365000017,
+   "confusion": [
+    [
+     17371,
+     5617,
+     46,
+     57,
+     0,
+     0
+    ],
+    [
+     1845,
+     10164,
+     968,
+     215,
+     0,
+     0
+    ],
+    [
+     20,
+     5601,
+     3091,
+     3725,
+     14,
+     1
+    ],
+    [
+     0,
+     80,
+     280,
+     10993,
+     864,
+     33
+    ],
+    [
+     0,
+     0,
+     0,
+     2214,
+     973,
+     180
+    ],
+    [
+     0,
+     0,
+     0,
+     223,
+     412,
+     158
+    ]
+   ]
+  },
+  "SVM": {
+   "balanceo": "class_weight",
+   "metodo": "Grid",
+   "params": {
+    "gamma": 0.03,
+    "n_components": 300,
+    "C": 10.0
+   },
+   "f1_busqueda_final": 0.6191160869910142,
+   "test": {
+    "f1_macro": 0.4848776705216354,
+    "accuracy": 0.5418988410468953,
+    "balanced_accuracy": 0.5006213795256711,
+    "precision_macro": 0.4877792071333753,
+    "recall_macro": 0.5006213795256711,
+    "auc_ovr": 0.8710383214795736,
+    "log_loss": 1.1265238804431552,
+    "brier": 0.6352157524886902,
+    "ece": 0.15181592765273358,
+    "mae_ordinal": 0.4815872284902909,
+    "acc_pm1": 0.9785555299716018,
+    "kappa_cuadratico": 0.8458397734223033
+   },
+   "ic95_bca_f1_test": [
+    0.3615962735951128,
+    0.5523821144734437
+   ],
+   "segundos": 1105.798313399995,
+   "confusion": [
+    [
+     11413,
+     11062,
+     512,
+     103,
+     0,
+     1
+    ],
+    [
+     4440,
+     5333,
+     3212,
+     202,
+     4,
+     1
+    ],
+    [
+     71,
+     1472,
+     7564,
+     3293,
+     42,
+     10
+    ],
+    [
+     1,
+     68,
+     849,
+     9802,
+     1249,
+     281
+    ],
+    [
+     0,
+     8,
+     6,
+     2066,
+     833,
+     454
+    ],
+    [
+     0,
+     0,
+     2,
+     85,
+     349,
+     357
+    ]
+   ]
+  },
+  "Logística L1/L2": {
+   "balanceo": "ninguno",
+   "metodo": "Bayesiana",
+   "params": {
+    "penalty": "l1",
+    "C": 0.47367173240839705
+   },
+   "f1_busqueda_final": 0.6080290638996162,
+   "test": {
+    "f1_macro": 0.5716270271786491,
+    "accuracy": 0.6952030086729604,
+    "balanced_accuracy": 0.5952620460763612,
+    "precision_macro": 0.5696611163702616,
+    "recall_macro": 0.5952620460763612,
+    "auc_ovr": 0.9286006916177584,
+    "log_loss": 0.7225005125107244,
+    "brier": 0.4136282915434683,
+    "ece": 0.017315301360132623,
+    "mae_ordinal": 0.32450686929158035,
+    "acc_pm1": 0.9805664287358968,
+    "kappa_cuadratico": 0.9025369684472844
+   },
+   "ic95_bca_f1_test": [
+    0.5485794230375189,
+    0.6042463896819281
+   ],
+   "segundos": 1856.1704415999993,
+   "confusion": [
+    [
+     21595,
+     1118,
+     369,
+     9,
+     0,
+     0
+    ],
+    [
+     5245,
+     5327,
+     2565,
+     54,
+     1,
+     0
+    ],
+    [
+     167,
+     2174,
+     8751,
+     1261,
+     94,
+     5
+    ],
+    [
+     1,
+     34,
+     1904,
+     8181,
+     1767,
+     363
+    ],
+    [
+     0,
+     2,
+     49,
+     1746,
+     983,
+     587
+    ],
+    [
+     0,
+     0,
+     0,
+     118,
+     223,
+     452
+    ]
+   ]
+  },
+  "KNN": {
+   "balanceo": "class_weight",
+   "metodo": "Bayesiana",
+   "params": {
+    "n_neighbors": 54,
+    "weights": "distance",
+    "p": 1
+   },
+   "f1_busqueda_final": 0.6015975253197815,
+   "test": {
+    "f1_macro": 0.5363264240692106,
+    "accuracy": 0.6487374318827231,
+    "balanced_accuracy": 0.5898531104952704,
+    "precision_macro": 0.5412355893912854,
+    "recall_macro": 0.5898531104952704,
+    "auc_ovr": 0.9142303447250514,
+    "log_loss": 0.8811438433446899,
+    "brier": 0.47017003896312193,
+    "ece": 0.0291374385867887,
+    "mae_ordinal": 0.3779261647094942,
+    "acc_pm1": 0.9744723309540256,
+    "kappa_cuadratico": 0.8938494337058752
+   },
+   "ic95_bca_f1_test": [
+    0.5133686947861176,
+    0.7176068042205992
+   ],
+   "segundos": 480.7184857999964,
+   "confusion": [
+    [
+     21051,
+     1726,
+     294,
+     19,
+     0,
+     1
+    ],
+    [
+     4913,
+     4833,
+     3338,
+     104,
+     4,
+     0
+    ],
+    [
+     175,
+     1652,
+     8649,
+     1552,
+     391,
+     33
+    ],
+    [
+     9,
+     33,
+     1458,
+     5153,
+     5061,
+     536
+    ],
+    [
+     1,
+     4,
+     46,
+     615,
+     2181,
+     520
+    ],
+    [
+     0,
+     0,
+     0,
+     13,
+     385,
+     395
+    ]
+   ]
+  },
+  "Árbol de decisión": {
+   "balanceo": "smote",
+   "metodo": "Grid",
+   "params": {
+    "max_depth": 10,
+    "min_samples_leaf": 5,
+    "criterion": "entropy"
+   },
+   "f1_busqueda_final": 0.5802234510805163,
+   "test": {
+    "f1_macro": 0.4852772307296534,
+    "accuracy": 0.6218896308235474,
+    "balanced_accuracy": 0.493987460923161,
+    "precision_macro": 0.48606402955923994,
+    "recall_macro": 0.493987460923161,
+    "auc_ovr": 0.7667029244717171,
+    "log_loss": 5.176505124677231,
+    "brier": 0.6127498618916162,
+    "ece": 0.23344190461168413,
+    "mae_ordinal": 0.42454524522219667,
+    "acc_pm1": 0.9559751323969606,
+    "kappa_cuadratico": 0.8527881024229986
+   },
+   "ic95_bca_f1_test": [
+    0.45391184332081025,
+    0.5305079670498004
+   ],
+   "segundos": 188.83502240000234,
+   "confusion": [
+    [
+     15004,
+     6938,
+     1082,
+     30,
+     37,
+     0
+    ],
+    [
+     2183,
+     7503,
+     3399,
+     73,
+     34,
+     0
+    ],
+    [
+     162,
+     1646,
+     8612,
+     1803,
+     226,
+     3
+    ],
+    [
+     0,
+     106,
+     1032,
+     8111,
+     2222,
+     779
+    ],
+    [
+     0,
+     15,
+     25,
+     1746,
+     1272,
+     309
+    ],
+    [
+     0,
+     0,
+     1,
+     295,
+     486,
+     11
+    ]
+   ]
+  },
+  "Naive Bayes": {
+   "balanceo": "smote",
+   "metodo": "Bayesiana",
+   "params": {
+    "var_smoothing": 0.03214719348281692
+   },
+   "f1_busqueda_final": 0.44998189047327203,
+   "test": {
+    "f1_macro": 0.38660371934964993,
+    "accuracy": 0.4807122572722389,
+    "balanced_accuracy": 0.48478916446320186,
+    "precision_macro": 0.47296211554781015,
+    "recall_macro": 0.48478916446320186,
+    "auc_ovr": 0.8751593986447329,
+    "log_loss": 3.08009678352309,
+    "brier": 0.9127583859468452,
+    "ece": 0.44149860093440113,
+    "mae_ordinal": 0.5834522987182439,
+    "acc_pm1": 0.9384450072914268,
+    "kappa_cuadratico": 0.8171513392585075
+   },
+   "ic95_bca_f1_test": [
+    0.29281605504193503,
+    0.4546465937747815
+   ],
+   "segundos": 116.94027759999153,
+   "confusion": [
+    [
+     13193,
+     8780,
+     1068,
+     44,
+     5,
+     1
+    ],
+    [
+     950,
+     11193,
+     989,
+     15,
+     45,
+     0
+    ],
+    [
+     7,
+     7478,
+     3258,
+     443,
+     1254,
+     12
+    ],
+    [
+     1,
+     1264,
+     1293,
+     368,
+     9149,
+     175
+    ],
+    [
+     0,
+     52,
+     65,
+     10,
+     3080,
+     160
+    ],
+    [
+     0,
+     1,
+     1,
+     0,
+     567,
+     224
+    ]
+   ]
+  }
+ },
+ "modelo_base": {
+  "nombre": "Logística B (modelo base del E1)",
+  "params": {
+   "C": 0.01,
+   "class_weight": null
+  },
+  "variables": "modelo B sin vecindad física",
+  "f1_pliegues_externos": [
+   0.47776737458967694,
+   0.5168154166814746,
+   0.3659070101162652,
+   0.5420319155523133,
+   0.3926735101156396
+  ],
+  "test": {
+   "f1_macro": 0.4276231857820337,
+   "accuracy": 0.6183897459513393,
+   "balanced_accuracy": 0.44316145432405807,
+   "precision_macro": 0.47737974374471975,
+   "recall_macro": 0.44316145432405807,
+   "auc_ovr": 0.8945019639784008,
+   "log_loss": 0.9014558737736197,
+   "brier": 0.4853153712059349,
+   "ece": 0.05484836984053633,
+   "mae_ordinal": 0.441799063627293,
+   "acc_pm1": 0.9460434415534577,
+   "kappa_cuadratico": 0.8195470224588324
+  },
+  "ic95_bca_f1_test": [
+   0.3975737702464305,
+   0.4802294538010373
+  ],
+  "confusion": [
+   [
+    21095,
+    1326,
+    666,
+    2,
+    0,
+    2
+   ],
+   [
+    5114,
+    5379,
+    2548,
+    137,
+    2,
+    12
+   ],
+   [
+    268,
+    2396,
+    9175,
+    544,
+    4,
+    65
+   ],
+   [
+    47,
+    74,
+    7348,
+    4436,
+    42,
+    303
+   ],
+   [
+    4,
+    12,
+    1312,
+    1750,
+    14,
+    275
+   ],
+   [
+    0,
+    0,
+    240,
+    365,
+    2,
+    186
+   ]
+  ]
+ },
+ "geo_vs_rivales": [
+  {
+   "rival": "Logística B (modelo base del E1)",
+   "cv_dif_media": 0.19650450553942655,
+   "cv_se": 0.034159943507344616,
+   "cv_pliegues_a_favor": 5,
+   "cv_supera_1se": true,
+   "test_dif": 0.09442722828675693,
+   "test_ic95_bca": [
+    0.04169970258352074,
+    0.14733432960878967
+   ],
+   "test_bloques_a_favor": 6,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "Logística L1/L2",
+   "cv_dif_media": 0.04842905140749223,
+   "cv_se": 0.015030522284882176,
+   "cv_pliegues_a_favor": 5,
+   "cv_supera_1se": true,
+   "test_dif": -0.0495766131098585,
+   "test_ic95_bca": [
+    -0.10658340343578963,
+    0.010694010312784424
+   ],
+   "test_bloques_a_favor": 3,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "XGBoost",
+   "cv_dif_media": -0.0002900204844201282,
+   "cv_se": 0.008018048126026776,
+   "cv_pliegues_a_favor": 2,
+   "cv_supera_1se": false,
+   "test_dif": -0.044436561390903906,
+   "test_ic95_bca": [
+    -0.07142083247516944,
+    0.008746447914254218
+   ],
+   "test_bloques_a_favor": 3,
+   "test_n_bloques": 7
+  },
+  {
+   "rival": "Random Forest",
+   "cv_dif_media": -0.002388433929098599,
+   "cv_se": 0.0063334799796306565,
+   "cv_pliegues_a_favor": 3,
+   "cv_supera_1se": false,
+   "test_dif": -0.03504949596086859,
+   "test_ic95_bca": [
+    -0.07449550069758008,
+    0.021244869771439617
+   ],
+   "test_bloques_a_favor": 3,
+   "test_n_bloques": 7
+  }
+ ],
+ "calibracion": {
+  "Random Forest": {
+   "original": {
+    "brier": 0.4239789538981968,
+    "ece": 0.09094578389925913
+   },
+   "platt": {
+    "brier": 0.39620866361672025,
+    "ece": 0.04436953393657252,
+    "f1": 0.5786363567377065
+   },
+   "isotonica": {
+    "brier": 0.39127163688494804,
+    "ece": 0.0511765683164601,
+    "f1": 0.5686210885059761
+   }
+  },
+  "XGBoost": {
+   "original": {
+    "brier": 0.40849022808754853,
+    "ece": 0.029000223339432002
+   },
+   "platt": {
+    "brier": 0.4149254553911279,
+    "ece": 0.03709415373148385,
+    "f1": 0.5752393596475148
+   },
+   "isotonica": {
+    "brier": 0.4021774163173675,
+    "ece": 0.03594331613941806,
+    "f1": 0.5645692450276614
+   }
+  },
+  "XGBoost geográfico": {
+   "original": {
+    "brier": 0.45133371428516916,
+    "ece": 0.06829430698535495
+   },
+   "platt": {
+    "brier": 0.4363614868394304,
+    "ece": 0.031882646405609956,
+    "f1": 0.5545153060768806
+   },
+   "isotonica": {
+    "brier": 0.4181775577012612,
+    "ece": 0.04565810693264943,
+    "f1": 0.557997403198431
+   }
+  },
+  "SVM": {
+   "original": {
+    "brier": 0.6352157524886902,
+    "ece": 0.15181592765273358
+   },
+   "platt": {
+    "brier": 0.5341978493251437,
+    "ece": 0.0683237559793936,
+    "f1": 0.502059797093926
+   },
+   "isotonica": {
+    "brier": 0.5373860739425447,
+    "ece": 0.06349026010820022,
+    "f1": 0.4904477113762047
+   }
+  },
+  "Logística L1/L2": {
+   "original": {
+    "brier": 0.4136282915434683,
+    "ece": 0.01731530136013751
+   },
+   "platt": {
+    "brier": 0.5068260396216597,
+    "ece": 0.22327851013401223,
+    "f1": 0.48508133925746116
+   },
+   "isotonica": {
+    "brier": 0.4892143648983813,
+    "ece": 0.16598852294900596,
+    "f1": 0.5301533866357537
+   }
+  },
+  "KNN": {
+   "original": {
+    "brier": 0.47017003896312193,
+    "ece": 0.029137438586826193
+   },
+   "platt": {
+    "brier": 0.46716104557339294,
+    "ece": 0.03625644663330249,
+    "f1": 0.5370399060083431
+   },
+   "isotonica": {
+    "brier": 0.45185253912104023,
+    "ece": 0.028883258070188104,
+    "f1": 0.5380187215945583
+   }
+  },
+  "Árbol de decisión": {
+   "original": {
+    "brier": 0.6127498618916162,
+    "ece": 0.23344190461527348
+   },
+   "platt": {
+    "brier": 0.5034941477133364,
+    "ece": 0.12855184378414142,
+    "f1": 0.48267842397077626
+   },
+   "isotonica": {
+    "brier": 0.48929859446555585,
+    "ece": 0.12404392572681888,
+    "f1": 0.4987472540752021
+   }
+  },
+  "Naive Bayes": {
+   "original": {
+    "brier": 0.9127583859468452,
+    "ece": 0.44149860093598303
+   },
+   "platt": {
+    "brier": 0.6028442468072168,
+    "ece": 0.08591346046382561,
+    "f1": 0.4181259493780995
+   },
+   "isotonica": {
+    "brier": 0.5430696807306036,
+    "ece": 0.043665176014248235,
+    "f1": 0.4435722554405113
+   }
+  }
+ },
+ "semillas": {
+  "Random Forest": {
+   "f1": [
+    0.5912519608532899,
+    0.572032597128197,
+    0.5570999100296592,
+    0.5605462884384493,
+    0.5721975719765564
+   ],
+   "media": 0.5706256656852303,
+   "sd": 0.013364452004954949
+  },
+  "XGBoost": {
+   "f1": [
+    0.5787456794408139,
+    0.5697200992605507,
+    0.5664869754596945,
+    0.5763920151095072,
+    0.5661220326519879
+   ],
+   "media": 0.5714933603845108,
+   "sd": 0.00578040778078183
+  },
+  "XGBoost geográfico": {
+   "f1": [
+    0.5184599991995774,
+    0.5330124851847189,
+    0.5220504140687906,
+    0.536436873164018,
+    0.5274973692477364
+   ],
+   "media": 0.5274914281729682,
+   "sd": 0.007444367597293455
+  },
+  "SVM": {
+   "f1": [
+    0.4955239937371309,
+    0.48499798615926365,
+    0.4848776705216354,
+    0.48332952166710585,
+    0.4723501725807046
+   ],
+   "media": 0.4842158689331681,
+   "sd": 0.008223498900783862
+  }
+ },
+ "interpretabilidad": {
+  "XGBoost": {
+   "shap_importancia_global": {
+    "num_lin__y_km": 0.837887704372406,
+    "num_lin__knn8_banios": 0.5080274939537048,
+    "num_lin__knn8_log_area": 0.5034223198890686,
+    "num_lin__dist_centro_km": 0.3209480047225952,
+    "num_lin__x_km": 0.276223748922348,
+    "num_lin__knn8_dist_km": 0.268976092338562,
+    "num_lin__knn8_prop_PH": 0.1471869945526123,
+    "num_lin__knn8_piso": 0.14496390521526337,
+    "num_lin__knn8_habitaciones": 0.06543545424938202,
+    "num_log__total_banios": 0.0615665577352047,
+    "num_log__area_construida": 0.05907941982150078,
+    "num_lin__knn8_antiguedad": 0.05741514265537262,
+    "cat__condicion_predio_Informal": 0.04309629276394844,
+    "num_log__antiguedad": 0.037861477583646774,
+    "num_log__area_catastral_terreno": 0.03624914959073067
+   },
+   "locales": {
+    "bien_clasificada": {
+     "real": 1,
+     "predicho": 1,
+     "shap_top": {
+      "num_lin__dist_centro_km": 0.778247058391571,
+      "num_lin__x_km": 0.4727286994457245,
+      "num_lin__knn8_log_area": 0.382843017578125,
+      "num_lin__y_km": 0.23675747215747833,
+      "cat__condicion_predio_Informal": 0.18611650168895721,
+      "num_log__area_construida": 0.16820310056209564,
+      "num_lin__knn8_prop_PH": 0.15623943507671356,
+      "num_lin__knn8_banios": 0.11549301445484161
+     },
+     "lime_top": {
+      "num_lin__dist_centro_km > 0.68": 0.23886655055684744,
+      "num_lin__x_km <= -0.65": 0.14000629719720029,
+      "num_log__missingindicator_total_habitaciones <= -0.04": -0.10407081250476621,
+      "-0.88 < num_lin__y_km <= -0.07": 0.07181299589221939,
+      "cat__uso_infrequent_sklearn <= 0.00": 0.05847470486800936,
+      "cat__condicion_predio_Informal > 0.00": 0.04257713983525803,
+      "cat__tipo_vivienda_tv_1 <= 0.00": 0.029844664474835903,
+      "num_log__missingindicator_total_banios <= -0.01": 0.026266724013157126
+     }
+    },
+    "error_grande": {
+     "real": 4,
+     "predicho": 2,
+     "shap_top": {
+      "num_lin__knn8_banios": 0.6346434950828552,
+      "num_lin__y_km": -0.49546918272972107,
+      "num_lin__knn8_dist_km": 0.39577716588974,
+      "num_lin__dist_centro_km": -0.3337625563144684,
+      "num_lin__knn8_prop_PH": 0.17957629263401031,
+      "num_lin__x_km": -0.14917390048503876,
+      "num_lin__knn8_log_area": 0.13884131610393524,
+      "num_lin__knn8_habitaciones": -0.12229859083890915
+     },
+     "lime_top": {
+      "cat__condicion_predio_infrequent_sklearn <= 0.00": 0.14410775754991675,
+      "num_lin__knn8_banios <= -0.78": 0.13089157096578552,
+      "num_lin__knn8_dist_km <= -0.40": 0.07751153868093348,
+      "num_lin__dist_centro_km <= -0.87": -0.06570161669227545,
+      "0.03 < num_lin__x_km <= 0.78": -0.05380691600775722,
+      "cat__uso_infrequent_sklearn <= 0.00": 0.05281962033742374,
+      "-0.07 < num_lin__y_km <= 0.89": -0.05038821734346765,
+      "num_log__missingindicator_total_banios <= -0.01": -0.007392074672765609
+     }
+    }
+   }
+  },
+  "XGBoost geográfico": {
+   "shap_importancia_global": {
+    "base__num_lin__y_km": 0.06763296355032532,
+    "base__num_lin__dist_centro_km": 0.05358407320424746,
+    "base__num_lin__x_km": 0.04622710262543163,
+    "base__num_lin__knn8_log_area": 0.026759994376963425,
+    "base__num_lin__knn8_banios": 0.024181698260983025,
+    "base__num_lin__knn8_dist_km": 0.0163459001352556,
+    "base__num_lin__knn8_piso": 0.00959205925210179,
+    "base__num_log__area_construida": 0.00849909704899218,
+    "base__num_lin__knn8_antiguedad": 0.00758084399725026,
+    "base__num_lin__knn8_habitaciones": 0.007488595258851267,
+    "base__num_lin__knn8_prop_PH": 0.0071363294943739145,
+    "base__num_log__antiguedad": 0.006887512129970029,
+    "base__cat__condicion_predio_Informal": 0.005025165717084566,
+    "base__num_log__area_catastral_terreno": 0.004296497523469326,
+    "base__num_log__planta_ubicacion": 0.0029756210435121395
+   },
+   "locales": {
+    "bien_clasificada": {
+     "real": 1,
+     "predicho": 1,
+     "shap_top": {
+      "base__num_lin__dist_centro_km": 0.18343531696216764,
+      "base__num_lin__x_km": 0.16612191235517004,
+      "base__num_lin__y_km": 0.0849780647567688,
+      "base__num_lin__knn8_banios": 0.0433650016914569,
+      "base__num_lin__knn8_log_area": 0.03779177039476651,
+      "base__num_log__area_construida": 0.02674393955150607,
+      "base__num_lin__knn8_piso": 0.02113448303772773,
+      "base__num_lin__knn8_dist_km": 0.020584365539524287
+     },
+     "lime_top": {
+      "base__num_lin__dist_centro_km > 0.68": 0.25441507100595834,
+      "base__num_lin__x_km <= -0.65": 0.11279238249996437,
+      "-0.88 < base__num_lin__y_km <= -0.07": 0.09608970980738905,
+      "base__num_log__missingindicator_total_habitaciones <= -0.04": -0.08381508670180098,
+      "base__cat__uso_infrequent_sklearn <= 0.00": 0.06741167233451746,
+      "-0.31 < base__num_lin__knn8_banios <= 0.51": 0.04832361890547177,
+      "base__num_log__missingindicator_planta_ubicacion <= -0.04": 0.04418205956741387,
+      "base__num_log__missingindicator_total_banios <= -0.01": 0.03939828392488118
+     }
+    },
+    "error_grande": {
+     "real": 4,
+     "predicho": 2,
+     "shap_top": {
+      "base__num_lin__knn8_banios": 0.08845891286737506,
+      "base__num_lin__knn8_dist_km": 0.06909410641890537,
+      "base__num_lin__knn8_log_area": 0.06686850881385215,
+      "base__num_lin__y_km": -0.06575112957080355,
+      "base__num_lin__knn8_habitaciones": -0.026839509868944896,
+      "base__num_lin__knn8_antiguedad": 0.022875476753662787,
+      "base__num_lin__dist_centro_km": 0.017630535820852652,
+      "base__num_log__area_construida": -0.014605012392796227
+     },
+     "lime_top": {
+      "base__num_log__missingindicator_planta_ubicacion <= -0.04": 0.17098136125902916,
+      "base__cat__uso_infrequent_sklearn <= 0.00": -0.12815899467312672,
+      "base__num_log__missingindicator_total_habitaciones <= -0.04": -0.10920199546009046,
+      "base__num_lin__knn8_banios <= -0.78": 0.09342888716748139,
+      "base__num_lin__knn8_dist_km <= -0.40": 0.08196263781623561,
+      "-0.07 < base__num_lin__y_km <= 0.89": -0.0603480416745531,
+      "base__num_lin__dist_centro_km <= -0.87": -0.04678742008529114,
+      "0.03 < base__num_lin__x_km <= 0.78": -0.04491309190851358
+     }
+    }
+   }
+  },
+  "Logística L1/L2": {
+   "shap_importancia_global": {
+    "num_lin__knn8_log_area": 0.07388615993698795,
+    "num_lin__dist_centro_km": 0.04387633180529363,
+    "num_lin__x_km": 0.029301489435743875,
+    "num_lin__y_km": 0.028667080938006483,
+    "num_lin__knn8_banios": 0.02273992134439776,
+    "cat__condicion_predio_NPH": 0.019908672045299152,
+    "num_lin__knn8_piso": 0.01958780579264571,
+    "cat__condicion_predio_PH_Unidad_Predial": 0.01731936250968558,
+    "num_lin__knn8_dist_km": 0.01657764211081672,
+    "num_lin__knn8_habitaciones": 0.01651005815449451,
+    "cat__condicion_predio_Informal": 0.015324296107726489,
+    "num_lin__knn8_antiguedad": 0.014491355424918246,
+    "num_log__area_catastral_terreno": 0.011491245899029825,
+    "cat__uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH": 0.011291560216454718,
+    "num_lin__knn8_prop_PH": 0.01067370438044825
+   },
+   "locales": {
+    "bien_clasificada": {
+     "real": 1,
+     "predicho": 1,
+     "shap_top": {
+      "num_lin__dist_centro_km": 0.15167336273815357,
+      "num_lin__x_km": 0.10727301678578913,
+      "cat__condicion_predio_Informal": 0.10380353698336314,
+      "num_lin__knn8_log_area": 0.09470227091871802,
+      "num_lin__knn8_antiguedad": 0.04836784921950828,
+      "num_lin__knn8_piso": 0.02994549876672672,
+      "num_lin__y_km": 0.024446568114253095,
+      "cat__condicion_predio_NPH": 0.023651077584730337
+     },
+     "lime_top": {
+      "num_log__missingindicator_planta_ubicacion <= -0.04": 0.21498487820040782,
+      "num_lin__dist_centro_km > 0.68": 0.18192630168311383,
+      "cat__condicion_predio_Informal > 0.00": 0.1401250873419167,
+      "cat__tipo_vivienda_tv_1 <= 0.00": 0.10065841120542078,
+      "num_log__missingindicator_total_banios <= -0.01": 0.09747441696415651,
+      "cat__uso_Residencial_Vivienda_Hasta_3_Pisos_En_PH <= 0.00": 0.09584530913628203,
+      "cat__tipo_vivienda_tv_2 <= 0.00": -0.07030839851393314,
+      "cat__uso_Residencial_Apartamentos_4_y_mas_pisos_en_PH <= 0.00": -0.06877393482735038
+     }
+    },
+    "error_grande": {
+     "real": 4,
+     "predicho": 2,
+     "shap_top": {
+      "num_log__area_construida": 0.10456483460533926,
+      "num_log__total_banios": 0.09028349872420294,
+      "num_lin__knn8_log_area": 0.05989377630364842,
+      "num_lin__dist_centro_km": -0.03999180699418643,
+      "num_lin__x_km": 0.03735666172554783,
+      "num_log__total_habitaciones": -0.030274241367782975,
+      "num_log__planta_ubicacion": 0.02439252309219584,
+      "cat__uso_Residencial_Vivienda_Hasta_3_Pisos": 0.020311478791517894
+     },
+     "lime_top": {
+      "num_log__missingindicator_total_banios <= -0.01": -0.3065074626604904,
+      "cat__tipo_vivienda_tv_1 <= 0.00": -0.12095885862442654,
+      "num_lin__dist_centro_km <= -0.87": -0.1050304287404995,
+      "-0.48 < num_lin__knn8_piso <= -0.15": 0.09462727495820886,
+      "cat__condicion_predio_infrequent_sklearn <= 0.00": 0.0905647024008026,
+      "cat__tipo_vivienda_tv_2 <= 0.00": 0.05824334002629996,
+      "num_log__total_banios <= -0.54": 0.04325658120132216,
+      "-0.70 < num_lin__knn8_log_area <= -0.08": 0.04218939463432239
+     }
+    }
+   }
+  }
+ }
+}

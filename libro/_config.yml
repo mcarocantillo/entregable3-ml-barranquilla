@@ -1,0 +1,15 @@
+title: "Estrato y catastro en Barranquilla — Entregable 3"
+author: "María Carolina Cantillo Orozco (200179105) y Juan Camilo Oñoro Araujo (200177329)"
+copyright: "2026"
+execute:
+  execute_notebooks: "off"
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+    - colon_fence
+    - deflist
+sphinx:
+  config:
+    language: es
+    html_show_copyright: false

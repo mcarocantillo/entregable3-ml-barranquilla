@@ -1,0 +1,235 @@
+{
+ "p": 35,
+ "k": 30,
+ "consultas": 2000,
+ "mediciones": [
+  {
+   "metodo": "scikit-learn fuerza bruta",
+   "detalle": "scikit-learn fuerza bruta",
+   "n": 4000,
+   "seg_construccion": 0.0006240000075194985,
+   "seg_busqueda_2000": 3.9346908000006806,
+   "ms_por_consulta": 1.9673454000003403,
+   "indice_MB": 0.56,
+   "recall_at_30": 1.0,
+   "f1_macro_voto": 0.48312283155038216
+  },
+  {
+   "metodo": "scikit-learn KD-Tree",
+   "detalle": "scikit-learn KD-Tree",
+   "n": 4000,
+   "seg_construccion": 0.03882889999658801,
+   "seg_busqueda_2000": 0.7726850000035483,
+   "ms_por_consulta": 0.38634250000177417,
+   "indice_MB": 0.56,
+   "recall_at_30": 0.9977166666666667,
+   "f1_macro_voto": 0.48312283155038216
+  },
+  {
+   "metodo": "FAISS Flat",
+   "detalle": "FAISS Flat (exacto)",
+   "n": 4000,
+   "seg_construccion": 0.00529669999377802,
+   "seg_busqueda_2000": 0.1586055999941891,
+   "ms_por_consulta": 0.07930279999709455,
+   "indice_MB": 0.560045,
+   "recall_at_30": 0.9978833333333333,
+   "f1_macro_voto": 0.48312283155038216
+  },
+  {
+   "metodo": "FAISS IVF",
+   "detalle": "FAISS IVF (nlist = 63, nprobe = 8)",
+   "n": 4000,
+   "seg_construccion": 0.031447200002730824,
+   "seg_busqueda_2000": 0.028831899995566346,
+   "ms_por_consulta": 0.014415949997783173,
+   "indice_MB": 0.601463,
+   "recall_at_30": 0.9833,
+   "f1_macro_voto": 0.48192458315192427
+  },
+  {
+   "metodo": "FAISS HNSW",
+   "detalle": "FAISS HNSW (M = 32, efSearch = 64)",
+   "n": 4000,
+   "seg_construccion": 0.1481807999953162,
+   "seg_busqueda_2000": 0.12833140000293497,
+   "ms_por_consulta": 0.06416570000146748,
+   "indice_MB": 1.645922,
+   "recall_at_30": 0.9971833333333334,
+   "f1_macro_voto": 0.48288567754026723
+  },
+  {
+   "metodo": "scikit-learn fuerza bruta",
+   "detalle": "scikit-learn fuerza bruta",
+   "n": 16000,
+   "seg_construccion": 0.0006700999947497621,
+   "seg_busqueda_2000": 0.3237453999900026,
+   "ms_por_consulta": 0.1618726999950013,
+   "indice_MB": 2.24,
+   "recall_at_30": 1.0,
+   "f1_macro_voto": 0.48821429156540147
+  },
+  {
+   "metodo": "scikit-learn KD-Tree",
+   "detalle": "scikit-learn KD-Tree",
+   "n": 16000,
+   "seg_construccion": 0.11004810000304133,
+   "seg_busqueda_2000": 3.036465599987423,
+   "ms_por_consulta": 1.5182327999937115,
+   "indice_MB": 2.24,
+   "recall_at_30": 0.9910666666666668,
+   "f1_macro_voto": 0.48821429156540147
+  },
+  {
+   "metodo": "FAISS Flat",
+   "detalle": "FAISS Flat (exacto)",
+   "n": 16000,
+   "seg_construccion": 0.0036324999964563176,
+   "seg_busqueda_2000": 0.6770394999912241,
+   "ms_por_consulta": 0.3385197499956121,
+   "indice_MB": 2.240045,
+   "recall_at_30": 0.9906333333333334,
+   "f1_macro_voto": 0.48821429156540147
+  },
+  {
+   "metodo": "FAISS IVF",
+   "detalle": "FAISS IVF (nlist = 126, nprobe = 8)",
+   "n": 16000,
+   "seg_construccion": 0.138424999997369,
+   "seg_busqueda_2000": 0.11192450000089593,
+   "ms_por_consulta": 0.055962250000447966,
+   "indice_MB": 2.386787,
+   "recall_at_30": 0.9686500000000001,
+   "f1_macro_voto": 0.4952946739519048
+  },
+  {
+   "metodo": "FAISS HNSW",
+   "detalle": "FAISS HNSW (M = 32, efSearch = 64)",
+   "n": 16000,
+   "seg_construccion": 0.8735032999975374,
+   "seg_busqueda_2000": 0.1331876999902306,
+   "ms_por_consulta": 0.0665938499951153,
+   "indice_MB": 6.595298,
+   "recall_at_30": 0.9793666666666667,
+   "f1_macro_voto": 0.48914236253297094
+  },
+  {
+   "metodo": "scikit-learn fuerza bruta",
+   "detalle": "scikit-learn fuerza bruta",
+   "n": 64000,
+   "seg_construccion": 0.002520899986848235,
+   "seg_busqueda_2000": 1.1321121000073617,
+   "ms_por_consulta": 0.5660560500036809,
+   "indice_MB": 8.96,
+   "recall_at_30": 1.0,
+   "f1_macro_voto": 0.5010370958560734
+  },
+  {
+   "metodo": "scikit-learn KD-Tree",
+   "detalle": "scikit-learn KD-Tree",
+   "n": 64000,
+   "seg_construccion": 0.528063599995221,
+   "seg_busqueda_2000": 14.254434399990714,
+   "ms_por_consulta": 7.127217199995357,
+   "indice_MB": 8.96,
+   "recall_at_30": 0.9943,
+   "f1_macro_voto": 0.5010370958560734
+  },
+  {
+   "metodo": "FAISS Flat",
+   "detalle": "FAISS Flat (exacto)",
+   "n": 64000,
+   "seg_construccion": 0.0034103999932995066,
+   "seg_busqueda_2000": 2.72780189999321,
+   "ms_por_consulta": 1.363900949996605,
+   "indice_MB": 8.960045,
+   "recall_at_30": 0.99225,
+   "f1_macro_voto": 0.5010370958560734
+  },
+  {
+   "metodo": "FAISS IVF",
+   "detalle": "FAISS IVF (nlist = 252, nprobe = 8)",
+   "n": 64000,
+   "seg_construccion": 0.7653314000053797,
+   "seg_busqueda_2000": 0.08329670000239275,
+   "ms_por_consulta": 0.04164835000119638,
+   "indice_MB": 9.509435,
+   "recall_at_30": 0.9714166666666667,
+   "f1_macro_voto": 0.49573521200266996
+  },
+  {
+   "metodo": "FAISS HNSW",
+   "detalle": "FAISS HNSW (M = 32, efSearch = 64)",
+   "n": 64000,
+   "seg_construccion": 3.497780599995167,
+   "seg_busqueda_2000": 0.1471495000005234,
+   "ms_por_consulta": 0.0735747500002617,
+   "indice_MB": 26.380258,
+   "recall_at_30": 0.9412833333333332,
+   "f1_macro_voto": 0.4963655868915207
+  },
+  {
+   "metodo": "scikit-learn fuerza bruta",
+   "detalle": "scikit-learn fuerza bruta",
+   "n": 256000,
+   "seg_construccion": 0.007005099992966279,
+   "seg_busqueda_2000": 5.119499100008397,
+   "ms_por_consulta": 2.5597495500041987,
+   "indice_MB": 35.84,
+   "recall_at_30": 1.0,
+   "f1_macro_voto": 0.5101580374708625
+  },
+  {
+   "metodo": "scikit-learn KD-Tree",
+   "detalle": "scikit-learn KD-Tree",
+   "n": 256000,
+   "seg_construccion": 2.7881550999882165,
+   "seg_busqueda_2000": 36.361828900000546,
+   "ms_por_consulta": 18.180914450000273,
+   "indice_MB": 35.84,
+   "recall_at_30": 0.9911833333333334,
+   "f1_macro_voto": 0.5101580374708625
+  },
+  {
+   "metodo": "FAISS Flat",
+   "detalle": "FAISS Flat (exacto)",
+   "n": 256000,
+   "seg_construccion": 0.017516699997941032,
+   "seg_busqueda_2000": 9.200172199998633,
+   "ms_por_consulta": 4.6000860999993165,
+   "indice_MB": 35.840045,
+   "recall_at_30": 0.9869833333333333,
+   "f1_macro_voto": 0.5101580374708625
+  },
+  {
+   "metodo": "FAISS IVF",
+   "detalle": "FAISS IVF (nlist = 505, nprobe = 8)",
+   "n": 256000,
+   "seg_construccion": 3.601630999997724,
+   "seg_busqueda_2000": 0.18195730001025368,
+   "ms_por_consulta": 0.09097865000512684,
+   "indice_MB": 37.962879,
+   "recall_at_30": 0.9634833333333335,
+   "f1_macro_voto": 0.5134102565138232
+  },
+  {
+   "metodo": "FAISS HNSW",
+   "detalle": "FAISS HNSW (M = 32, efSearch = 64)",
+   "n": 256000,
+   "seg_construccion": 18.22483849999844,
+   "seg_busqueda_2000": 0.18073830001230817,
+   "ms_por_consulta": 0.09036915000615409,
+   "indice_MB": 105.513058,
+   "recall_at_30": 0.8893833333333333,
+   "f1_macro_voto": 0.5323034636744822
+  }
+ ],
+ "exponentes_busqueda": {
+  "scikit-learn fuerza bruta": 0.14726711988369168,
+  "scikit-learn KD-Tree": 0.9450073777790311,
+  "FAISS Flat": 0.9792431355987645,
+  "FAISS IVF": 0.3773695858843142,
+  "FAISS HNSW": 0.08129529639210362
+ },
+ "faiss_version": "1.15.1"
+}

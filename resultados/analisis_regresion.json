@@ -1,0 +1,325 @@
+{
+ "n_tareas": 140,
+ "mcs": [
+  {
+   "Model name": "Random Forest (regresión) | Grid",
+   "Pvalue": 1.0,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3361,
+   "rango_perdida": 12.9538
+  },
+  {
+   "Model name": "Random Forest (regresión) | Random",
+   "Pvalue": 0.2773,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3457,
+   "rango_perdida": 12.936
+  },
+  {
+   "Model name": "Random Forest (regresión) | Genética",
+   "Pvalue": 0.2362,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3471,
+   "rango_perdida": 12.8802
+  },
+  {
+   "Model name": "XGBoost (regresión) | Random",
+   "Pvalue": 0.4635,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3482,
+   "rango_perdida": 13.5731
+  },
+  {
+   "Model name": "XGBoost (regresión) | Bayesiana",
+   "Pvalue": 0.2773,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3513,
+   "rango_perdida": 13.5262
+  },
+  {
+   "Model name": "XGBoost (regresión) | Genética",
+   "Pvalue": 0.0711,
+   "en_el_conjunto": false,
+   "perdida_media": 0.3567,
+   "rango_perdida": 13.3256
+  },
+  {
+   "Model name": "SVR | Random",
+   "Pvalue": 0.4785,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3593,
+   "rango_perdida": 14.0688
+  },
+  {
+   "Model name": "SVR | Grid",
+   "Pvalue": 0.4785,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3616,
+   "rango_perdida": 13.9522
+  },
+  {
+   "Model name": "SVR | Bayesiana",
+   "Pvalue": 0.4785,
+   "en_el_conjunto": true,
+   "perdida_media": 0.3627,
+   "rango_perdida": 14.4429
+  },
+  {
+   "Model name": "Random Forest (regresión) | Bayesiana",
+   "Pvalue": 0.0621,
+   "en_el_conjunto": false,
+   "perdida_media": 0.3657,
+   "rango_perdida": 12.8231
+  },
+  {
+   "Model name": "XGBoost (regresión) | Grid",
+   "Pvalue": 0.0621,
+   "en_el_conjunto": false,
+   "perdida_media": 0.3873,
+   "rango_perdida": 13.6268
+  },
+  {
+   "Model name": "SVR | Genética",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.408,
+   "rango_perdida": 14.8317
+  },
+  {
+   "Model name": "KNN (regresión) | Bayesiana",
+   "Pvalue": 0.047,
+   "en_el_conjunto": false,
+   "perdida_media": 0.417,
+   "rango_perdida": 14.2747
+  },
+  {
+   "Model name": "KNN (regresión) | Grid",
+   "Pvalue": 0.045,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4175,
+   "rango_perdida": 14.2589
+  },
+  {
+   "Model name": "KNN (regresión) | Random",
+   "Pvalue": 0.045,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4203,
+   "rango_perdida": 14.2132
+  },
+  {
+   "Model name": "KNN (regresión) | Genética",
+   "Pvalue": 0.025,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4205,
+   "rango_perdida": 14.6606
+  },
+  {
+   "Model name": "Ridge | Bayesiana",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4562,
+   "rango_perdida": 16.0257
+  },
+  {
+   "Model name": "Lasso | Genética",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4574,
+   "rango_perdida": 16.1003
+  },
+  {
+   "Model name": "Lasso | Bayesiana",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4578,
+   "rango_perdida": 16.1672
+  },
+  {
+   "Model name": "Ridge | Random",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4583,
+   "rango_perdida": 16.0685
+  },
+  {
+   "Model name": "Ridge | Genética",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4584,
+   "rango_perdida": 16.0528
+  },
+  {
+   "Model name": "Lasso | Grid",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4606,
+   "rango_perdida": 16.2948
+  },
+  {
+   "Model name": "Lasso | Random",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4608,
+   "rango_perdida": 16.1334
+  },
+  {
+   "Model name": "Ridge | Grid",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.4608,
+   "rango_perdida": 16.0352
+  },
+  {
+   "Model name": "Árbol (regresión) | Grid",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.5935,
+   "rango_perdida": 14.2819
+  },
+  {
+   "Model name": "Árbol (regresión) | Genética",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.6004,
+   "rango_perdida": 13.9037
+  },
+  {
+   "Model name": "Árbol (regresión) | Random",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.6283,
+   "rango_perdida": 14.4315
+  },
+  {
+   "Model name": "Árbol (regresión) | Bayesiana",
+   "Pvalue": 0.0,
+   "en_el_conjunto": false,
+   "perdida_media": 0.6521,
+   "rango_perdida": 14.1572
+  }
+ ],
+ "giacomini_white": [
+  {
+   "A": "Random Forest (regresión) | Grid",
+   "B": "Random Forest (regresión) | Random",
+   "estadistico": 207.186019130886,
+   "gl": 2,
+   "p": 1.0235936475433386e-45,
+   "signo": "modelo 1 mejor"
+  },
+  {
+   "A": "Random Forest (regresión) | Grid",
+   "B": "Random Forest (regresión) | Genética",
+   "estadistico": 176.90319530501372,
+   "gl": 2,
+   "p": 3.8544216671173955e-39,
+   "signo": "modelo 1 mejor"
+  },
+  {
+   "A": "Random Forest (regresión) | Grid",
+   "B": "XGBoost (regresión) | Random",
+   "estadistico": 439.9519496398682,
+   "gl": 2,
+   "p": 2.9217831785972023e-96,
+   "signo": "modelo 1 mejor"
+  },
+  {
+   "A": "Random Forest (regresión) | Random",
+   "B": "Random Forest (regresión) | Genética",
+   "estadistico": 82.20434554057603,
+   "gl": 2,
+   "p": 1.411084988125281e-18,
+   "signo": "modelo 1 mejor"
+  },
+  {
+   "A": "Random Forest (regresión) | Random",
+   "B": "XGBoost (regresión) | Random",
+   "estadistico": 307.3109825083746,
+   "gl": 2,
+   "p": 1.854675923369439e-67,
+   "signo": "modelo 1 mejor"
+  },
+  {
+   "A": "Random Forest (regresión) | Genética",
+   "B": "XGBoost (regresión) | Random",
+   "estadistico": 307.91294574481225,
+   "gl": 2,
+   "p": 1.3726296576803202e-67,
+   "signo": "modelo 1 mejor"
+  }
+ ],
+ "diebold_mariano_hln": {
+  "mejor": "Random Forest (regresión) | Grid",
+  "segundo": "Random Forest (regresión) | Random",
+  "diferencia_perdida": -0.009638045279607078,
+  "estadistico": -5.665901363064036,
+  "p": 1.5030012747987353e-08,
+  "ic95_bootstrap_estacionario": [
+   -0.01921152126966127,
+   -0.0012228799866175095
+  ],
+  "d_cohen": -0.056656180892412415
+ },
+ "clark_west_ridge_vecindad": {
+  "alpha": 141.7710381103998,
+  "media_ajustada": 0.5860443668108442,
+  "estadistico": 47.352146203861885,
+  "p_una_cola": 0.0
+ },
+ "supuestos_mejor": {
+  "white": {
+   "lm": 721.1194053917542,
+   "p": 1.9902659656795433e-149
+  },
+  "bds": {
+   "estadistico_dim2": 20.211912942085497,
+   "p_dim2": 7.690874456613876e-91
+  },
+  "ljung_box": {
+   "lags": 20,
+   "q": 9687.879939856992,
+   "p": 0.0
+  },
+  "acf": [
+   1.0,
+   0.4609528782131556,
+   0.3826376730201977,
+   0.3429434768290933,
+   0.3030020599724859,
+   0.27427451355207333,
+   0.2412163311124657,
+   0.22290954192011023,
+   0.20242958089507215,
+   0.18589777561068382,
+   0.1667270176038976,
+   0.1439257229649811,
+   0.14960413151138022,
+   0.12576772538956546,
+   0.1122012365754328,
+   0.10857221661136453,
+   0.08891995806016398,
+   0.08635598813467857,
+   0.07321764546642302,
+   0.0679013632875392,
+   0.06817018493604077
+  ],
+  "normalidad": {
+   "asimetria": -0.020294836269687682,
+   "curtosis_exceso": 2.3275439320735476,
+   "p_dagostino": 4.4250404911153895e-120
+  },
+  "moran_residuos_k8": 0.3461597337156982
+ },
+ "test_mejor": {
+  "modelo": "Random Forest (regresión) | Grid",
+  "params": {
+   "n_estimators": 150,
+   "max_depth": 20,
+   "max_features": 0.3,
+   "min_samples_leaf": 2
+  },
+  "rmse": 0.5168115844154807,
+  "mae": 0.4286304535128251,
+  "f1_macro_redondeado": 0.520388915152966
+ }
+}

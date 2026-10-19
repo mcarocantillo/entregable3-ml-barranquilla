@@ -259,3 +259,16 @@ else:
 # cerca (zonas conocidas) y cuando se les da peso (α ≈ 0.75). Con pocos datos por ancla su aporte es inestable: en
 # los pliegues externos la búsqueda les dio un peso mediano del 35 % (α = 0.65), pero la búsqueda final con toda la
 # submuestra casi los apagó (α = 0.97) y el modelo quedó reducido a un XGBoost global más profundo.
+#
+# ```{admonition} Actualización después del entregable (capítulo 11)
+# :class: note
+# - **Significancia.** Sobre 30 bloques espaciales de 2 km, con Wilcoxon y corrección de Holm, el XGBoost geográfico
+#   supera al modelo base con significancia estadística y un efecto grande (δ de Cliff 0.43 con la configuración del
+#   Entregable 2 y 0.51 afinado con todos los datos), igual que los demás modelos con vecindad física; frente a ellos,
+#   ninguna diferencia es significativa.
+# - **Intervalo del Entregable 2.** Con el método BCa de este entregable, el +0.092 de la configuración del Entregable
+#   2 frente al modelo base tiene IC [−0.024, +0.172]; el Entregable 2 publicó [+0.034, +0.199] con bootstrap de
+#   percentiles. Con 7 bloques de test, esa confirmación depende del método del intervalo.
+# - **Hiperparámetros con todos los datos.** Buscarlos con las 257 273 viviendas no mejora el test (0.566 frente a
+#   0.585 con la configuración del Entregable 2).
+# ```

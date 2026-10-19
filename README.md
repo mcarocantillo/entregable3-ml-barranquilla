@@ -58,6 +58,7 @@ Las métricas que se reportan salen siempre del bucle externo.
 | `estrato3/experimento.py` | Una tarea = combinación × pliegue externo (se guarda en disco: el experimento se puede retomar) |
 | `experimentos/` | Ejecutores (`correr_clasificacion.py`, `correr_regresion.py`) y análisis (`analizar_*.py`, `finalistas.py`, `multifidelidad.py`, `complejidad*.py`, `tabla_estandar_optimizado.py`, `todos_los_datos.py`, `interpretabilidad.py`, `verificar_reproducibilidad.py`) |
 | `resultados/` | Tabla maestra, resúmenes, JSON de análisis, probabilidades fuera de muestra (`tareas/`) y figuras. Los `.pkl` con la submuestra y el test no se suben: los regeneran `correr_clasificacion.py` y `finalistas.py` |
+| `mejoras/` | Después del entregable (capítulo 11 del libro): búsqueda del XGBoost geográfico con todos los datos, Rotation Forest, RF + SVM y stacking de la revisión bibliográfica, y pruebas de significancia; ver `mejoras/README.md`. Las probabilidades de `mejoras/chk/` (≈ 600 MB) no se suben |
 | `libro/` | Jupyter Book del entregable: cuadernos en formato jupytext (`.py`) y ejecutados (`.ipynb`); `construir_libro.py` los ejecuta y construye el HTML |
 | `requirements-e3.txt` | Versiones exactas (Python 3.14.6) |
 

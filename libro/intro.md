@@ -25,6 +25,11 @@ calibración e interpretabilidad.
 cercanos), que también hace mejorar a la logística, a XGBoost y a Random Forest. Frente a modelos con la misma
 información, el modelo nuevo no gana en zonas nuevas; su ventaja aparece en zonas con datos cerca (capítulos 9 y 10).
 
+**Después del entregable (capítulo 11).** Con todos los datos y pruebas corregidas por comparaciones múltiples, la
+mejora sobre el modelo base es **estadísticamente significativa** (efecto mediano a grande) para todos los modelos con
+vecindad física, incluidos el XGBoost geográfico y el **Rotation Forest**, otro modelo original de la revisión
+bibliográfica. Ningún modelo original supera significativamente a los convencionales que reciben la misma información.
+
 **Otros hallazgos.** (1) El modelo pesa mucho más que el balanceo o el optimizador. (2) Con el mismo presupuesto, los
 cuatro optimizadores llegan al mismo resultado; la bayesiana llega antes. (3) `class_weight` es el mejor balanceo y
 ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la vivienda, no la vivienda misma
@@ -60,8 +65,10 @@ la que se pone a prueba.
    modelos locales alrededor de las anclas). Y la logística con las mismas variables de vecindad muestra cuánto aporta
    esa información por sí sola.
 
-El aporte del proyecto sigue siendo el mismo del Entregable 2: un modelo no usado antes en esta aplicación, puesto a
-prueba con más rigor. Lo que se encontró sobre él, incluidas sus limitaciones, está en el capítulo 9.
+El aporte del proyecto sigue siendo el mismo del Entregable 2: modelos no usados antes en esta aplicación, puestos a
+prueba con más rigor. Lo que se encontró sobre el XGBoost geográfico, incluidas sus limitaciones, está en el capítulo 9;
+los demás candidatos originales de la revisión (Rotation Forest, stacking y RF + SVM) están en el capítulo 11 de este
+libro y en el capítulo 9 del Entregable 2 (versión 3).
 ```
 
 ## Cómo está organizado
@@ -80,6 +87,7 @@ El libro sigue el orden de un experimento: cómo se diseñó, cómo se optimizó
 | | 8. Interpretabilidad | ¿Qué variables deciden el estrato, en general y en una vivienda concreta? | 5.3 |
 | | **9. El modelo nuevo frente al modelo base** | **La respuesta a la pregunta del proyecto** | Objetivo del proyecto |
 | **Cierre** | 10. Conclusiones | Respuesta, lecciones, limitaciones y próximos pasos | 8, 9 |
+| **Después del entregable** | 11. Todos los datos y otros modelos de la revisión | ¿Mejora el modelo nuevo con todos los datos? ¿Funcionan otros modelos originales de la revisión? ¿Son significativas las diferencias? | Próximos pasos (10.6) |
 | **Apéndice** | A. Reproducibilidad | Entorno, semilla, registro de experimentos, módulos, orden de ejecución y verificación | 7.3 |
 
 ## Cómo leer este libro

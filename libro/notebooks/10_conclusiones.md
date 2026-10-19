@@ -43,6 +43,13 @@ propiedad horizontal de sus 8 vecinos, más su posición norte-sur y su distanci
 geográfico es una buena opción para **completar el mapa en zonas ya muestreadas**, no para extrapolar a barrios
 nuevos.
 
+**Después del entregable (capítulo 11).** Con todos los datos y pruebas corregidas por comparaciones múltiples, la
+mejora sobre el modelo base es **estadísticamente significativa** para todos los modelos con vecindad física
+(30 bloques espaciales, Wilcoxon con Holm p < 0.01, efecto mediano a grande), incluidos el XGBoost geográfico y el
+Rotation Forest, otro modelo original de la revisión bibliográfica, que además es el único original cuyo intervalo de
+test frente al base excluye el 0. **Ningún modelo original supera significativamente a los convencionales con la
+misma información**: lo significativo es la vecindad física.
+
 ## 10.2 Qué enseñó el pipeline combinatorio
 
 1. **El modelo importa mucho más que el balanceo y el optimizador.** Entre modelos, el mejor F1 macro externo va de
@@ -107,12 +114,14 @@ La validación anidada con kNNDM y el test no cuentan la misma historia, y esa d
 
 ## 10.6 Trabajo futuro
 
-- Repetir la **búsqueda** del XGBoost geográfico con todos los datos (o con más viviendas por ancla): con los
-  hiperparámetros de la submuestra pierde frente a XGBoost global, mientras que con los del Entregable 2
-  (α = 0.75, profundidad 4) superaba al modelo base.
+- ~~Repetir la **búsqueda** del XGBoost geográfico con todos los datos~~ **Hecho en el capítulo 11:** sube la
+  validación (0.581) pero no el test (0.566 frente a 0.585 con la configuración del Entregable 2).
 - Recalibrar con validación cruzada como paso final del pipeline: en el test mejoró la calibración y, en varios
   modelos, también el F1.
 - Para la multi-fidelidad, expresar los frenos de los árboles como fracciones de n o usar Hyperband con una
   fidelidad mínima más alta.
-- Un ensamble apilado de la logística con vecindad y los árboles: ordenan mejor estratos distintos (la logística
-  los altos, los árboles los bajos y medios; capítulo 7).
+- ~~Un ensamble apilado de la logística con vecindad y los árboles~~ **Hecho en el capítulo 11** (stacking, candidato 8
+  de la revisión): empata con el mejor en la validación, pero su intervalo de test frente al base toca el 0.
+- Más datos de test: con 7 bloques, ninguna diferencia puede ser significativa después de corregir por comparaciones
+  múltiples (capítulo 11). Evaluar en más zonas nuevas, por ejemplo con otra ciudad o con otra partición de bloques,
+  permitiría confirmar o descartar las diferencias pequeñas.

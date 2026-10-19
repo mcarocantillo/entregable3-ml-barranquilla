@@ -1,0 +1,801 @@
+{
+ "protocolo": "todos los datos (257 273); pliegues kNNDM de zonas nuevas del E2 v3 (q = 30); elección por F1 macro medio en la CV; test de 7 bloques mirado una sola vez; IC 95 % BCa por bloques",
+ "elegidos": {
+  "Modelo base (logística B, sin vecindad)": [
+   "logistica_base",
+   "base"
+  ],
+  "Logística con vecindad": [
+   "logistica_vecindad",
+   "LV_C0.01_nobal"
+  ],
+  "XGBoost afinado": [
+   "xgb",
+   "G5"
+  ],
+  "XGBoost geográfico (configuración del E2)": [
+   "geo",
+   [
+    "G1_e2",
+    "L1_e2",
+    0.75
+   ]
+  ],
+  "XGBoost geográfico afinado": [
+   "geo",
+   [
+    "G5",
+    "L5",
+    0.5
+   ]
+  ],
+  "Random Forest": [
+   "random_forest",
+   "RF3"
+  ],
+  "Rotation Forest": [
+   "rotation_forest",
+   "RoF2"
+  ],
+  "RF + SVM (dos etapas)": [
+   "rf_svm",
+   "RFSVM_k10_S1"
+  ],
+  "SVM sola (referencia del RF + SVM)": [
+   "svm_sola",
+   "SVM_todas_S1"
+  ]
+ },
+ "stacking": {
+  "Stacking S1 (logística, XGBoost, RF)": {
+   "bases": [
+    "Logística con vecindad",
+    "XGBoost afinado",
+    "Random Forest"
+   ],
+   "meta": "C0.1_bal",
+   "f1_por_meta": {
+    "C0.1_nobal": 0.5969888131388595,
+    "C0.1_bal": 0.5977829979258524,
+    "C1.0_nobal": 0.5964186154968052,
+    "C1.0_bal": 0.597502158450118
+   }
+  },
+  "Stacking S2 (S1 + XGBoost geográfico)": {
+   "bases": [
+    "Logística con vecindad",
+    "XGBoost afinado",
+    "Random Forest",
+    "XGBoost geográfico afinado"
+   ],
+   "meta": "C1.0_bal",
+   "f1_por_meta": {
+    "C0.1_nobal": 0.5793907770922044,
+    "C0.1_bal": 0.5823913790041169,
+    "C1.0_nobal": 0.5786328110900383,
+    "C1.0_bal": 0.5831034996647899
+   }
+  }
+ },
+ "cv": {
+  "Modelo base (logística B, sin vecindad)": {
+   "f1_pliegues": [
+    0.44878925804621855,
+    0.48333856123576147,
+    0.44079461329215475,
+    0.4355071788046308,
+    0.4911691707031108
+   ],
+   "f1": 0.4599197564163752,
+   "sd": 0.025547012308545808,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "media": 0.0,
+    "SE": 0.0,
+    "pliegues_a_favor": 0,
+    "supera_1SE": false
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     -0.0737,
+     -0.1664,
+     -0.0817,
+     -0.1289,
+     -0.1255
+    ],
+    "media": -0.11524652911610142,
+    "SE": 0.01697941205621716,
+    "pliegues_a_favor": 0,
+    "supera_1SE": false
+   }
+  },
+  "Logística con vecindad": {
+   "f1_pliegues": [
+    0.522479920120124,
+    0.6497624306365746,
+    0.5224655985942498,
+    0.5644311167495806,
+    0.6166923615618546
+   ],
+   "f1": 0.5751662855324767,
+   "sd": 0.05691541796321872,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.0737,
+     0.1664,
+     0.0817,
+     0.1289,
+     0.1255
+    ],
+    "media": 0.11524652911610142,
+    "SE": 0.01697941205621716,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "media": 0.0,
+    "SE": 0.0,
+    "pliegues_a_favor": 0,
+    "supera_1SE": false
+   }
+  },
+  "XGBoost afinado": {
+   "f1_pliegues": [
+    0.6023939936328533,
+    0.6055600812211696,
+    0.4422618027153915,
+    0.5471419121905357,
+    0.6781883204841582
+   ],
+   "f1": 0.5751092220488216,
+   "sd": 0.08764647934063062,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1536,
+     0.1222,
+     0.0015,
+     0.1116,
+     0.187
+    ],
+    "media": 0.11518946563244636,
+    "SE": 0.03132896304261628,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0799,
+     -0.0442,
+     -0.0802,
+     -0.0173,
+     0.0615
+    ],
+    "media": -5.7063483655062085e-05,
+    "SE": 0.03070293877584794,
+    "pliegues_a_favor": 2,
+    "supera_1SE": false
+   }
+  },
+  "XGBoost geográfico (configuración del E2)": {
+   "f1_pliegues": [
+    0.5690575445398575,
+    0.5986699453009816,
+    0.46288261623576354,
+    0.5344117049420487,
+    0.6928345616463046
+   ],
+   "f1": 0.5715712745329913,
+   "sd": 0.08461604406380598,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1203,
+     0.1153,
+     0.0221,
+     0.0989,
+     0.2017
+    ],
+    "media": 0.11165151811661592,
+    "SE": 0.028613280541180102,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0466,
+     -0.0511,
+     -0.0596,
+     -0.03,
+     0.0761
+    ],
+    "media": -0.0035950109994855152,
+    "SE": 0.027353453291699487,
+    "pliegues_a_favor": 2,
+    "supera_1SE": false
+   }
+  },
+  "XGBoost geográfico afinado": {
+   "f1_pliegues": [
+    0.5865871074572256,
+    0.6203801672115157,
+    0.4464296431881504,
+    0.5533805096908198,
+    0.696093560774277
+   ],
+   "f1": 0.5805741976643978,
+   "sd": 0.09178732443849491,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1378,
+     0.137,
+     0.0056,
+     0.1179,
+     0.2049
+    ],
+    "media": 0.12065444124802242,
+    "SE": 0.03232727907551393,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0641,
+     -0.0294,
+     -0.076,
+     -0.0111,
+     0.0794
+    ],
+    "media": 0.005407912131920989,
+    "SE": 0.029184717037669863,
+    "pliegues_a_favor": 2,
+    "supera_1SE": false
+   },
+   "vs_xgboost_afinado": {
+    "dif_por_pliegue": [
+     -0.0158,
+     0.0148,
+     0.0042,
+     0.0062,
+     0.0179
+    ],
+    "media": 0.005464975615576051,
+    "SE": 0.005903606650853814,
+    "pliegues_a_favor": 4,
+    "supera_1SE": false
+   },
+   "vs_geo_E2": {
+    "dif_por_pliegue": [
+     0.0175,
+     0.0217,
+     -0.0165,
+     0.019,
+     0.0033
+    ],
+    "media": 0.009002923131406503,
+    "SE": 0.007122124465168869,
+    "pliegues_a_favor": 4,
+    "supera_1SE": true
+   }
+  },
+  "Random Forest": {
+   "f1_pliegues": [
+    0.5925392735111089,
+    0.6956282755486732,
+    0.414799467086453,
+    0.5457896433000673,
+    0.6294128186108623
+   ],
+   "f1": 0.5756338956114329,
+   "sd": 0.10527940013650999,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1438,
+     0.2123,
+     -0.026,
+     0.1103,
+     0.1382
+    ],
+    "media": 0.11571413919505766,
+    "SE": 0.03919914252202042,
+    "pliegues_a_favor": 4,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0701,
+     0.0459,
+     -0.1077,
+     -0.0186,
+     0.0127
+    ],
+    "media": 0.00046761007895623763,
+    "SE": 0.03091294701649508,
+    "pliegues_a_favor": 3,
+    "supera_1SE": false
+   }
+  },
+  "Rotation Forest": {
+   "f1_pliegues": [
+    0.5981134200517821,
+    0.6734573469487554,
+    0.46964049279041736,
+    0.5711602208277088,
+    0.6768954425649464
+   ],
+   "f1": 0.597853384636722,
+   "sd": 0.08531521594497703,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1493,
+     0.1901,
+     0.0288,
+     0.1357,
+     0.1857
+    ],
+    "media": 0.13793362822034672,
+    "SE": 0.029191188485005744,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0756,
+     0.0237,
+     -0.0528,
+     0.0067,
+     0.0602
+    ],
+    "media": 0.022687099104245302,
+    "SE": 0.022548322165151607,
+    "pliegues_a_favor": 4,
+    "supera_1SE": true
+   }
+  },
+  "RF + SVM (dos etapas)": {
+   "f1_pliegues": [
+    0.5662126721760411,
+    0.665230983370082,
+    0.43903961676905556,
+    0.5089199390195028,
+    0.5860077471815393
+   ],
+   "f1": 0.5530821917032441,
+   "sd": 0.08483788459918014,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1174,
+     0.1819,
+     -0.0018,
+     0.0734,
+     0.0948
+    ],
+    "media": 0.09316243528686888,
+    "SE": 0.029886270791544583,
+    "pliegues_a_favor": 4,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0437,
+     0.0155,
+     -0.0834,
+     -0.0555,
+     -0.0307
+    ],
+    "media": -0.022084093829232553,
+    "SE": 0.023125986012393563,
+    "pliegues_a_favor": 2,
+    "supera_1SE": false
+   }
+  },
+  "SVM sola (referencia del RF + SVM)": {
+   "f1_pliegues": [
+    0.5414272204393653,
+    0.6450021380547445,
+    0.49234614289367057,
+    0.4572518057064017,
+    0.61302998305286
+   ],
+   "f1": 0.5498114580294085,
+   "sd": 0.07905329624942677,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.0926,
+     0.1617,
+     0.0516,
+     0.0217,
+     0.1219
+    ],
+    "media": 0.08989170161303316,
+    "SE": 0.024793911189768286,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0189,
+     -0.0048,
+     -0.0301,
+     -0.1072,
+     -0.0037
+    ],
+    "media": -0.025354827503068278,
+    "SE": 0.021880726142010445,
+    "pliegues_a_favor": 1,
+    "supera_1SE": false
+   }
+  },
+  "Stacking S1 (logística, XGBoost, RF)": {
+   "f1_pliegues": [
+    0.5632964372688533,
+    0.6569909677718055,
+    0.5934032647560361,
+    0.5082219008222985,
+    0.6670024190102694
+   ],
+   "f1": 0.5977829979258524,
+   "sd": 0.06619404616640573,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1145,
+     0.1737,
+     0.1526,
+     0.0727,
+     0.1758
+    ],
+    "media": 0.1378632415094773,
+    "SE": 0.019659410090030426,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0408,
+     0.0072,
+     0.0709,
+     -0.0562,
+     0.0503
+    ],
+    "media": 0.022616712393375836,
+    "SE": 0.022229925483397583,
+    "pliegues_a_favor": 4,
+    "supera_1SE": true
+   }
+  },
+  "Stacking S2 (S1 + XGBoost geográfico)": {
+   "f1_pliegues": [
+    0.5665916057126793,
+    0.6396419559992745,
+    0.5466981001907653,
+    0.5084794659027075,
+    0.654106370518523
+   ],
+   "f1": 0.5831034996647899,
+   "sd": 0.06205793035912453,
+   "vs_base": {
+    "dif_por_pliegue": [
+     0.1178,
+     0.1563,
+     0.1059,
+     0.073,
+     0.1629
+    ],
+    "media": 0.12318374324841468,
+    "SE": 0.016622282683445514,
+    "pliegues_a_favor": 5,
+    "supera_1SE": true
+   },
+   "vs_logistica_vecindad": {
+    "dif_por_pliegue": [
+     0.0441,
+     -0.0101,
+     0.0242,
+     -0.056,
+     0.0374
+    ],
+    "media": 0.007937214132313231,
+    "SE": 0.018507940733797076,
+    "pliegues_a_favor": 3,
+    "supera_1SE": false
+   }
+  }
+ },
+ "test": {
+  "XGBoost geográfico (configuración del E2)": {
+   "f1": 0.5848250019179735,
+   "ic95_bca": [
+    0.530363672998969,
+    0.7931282817734843
+   ],
+   "vs_base": {
+    "dif": 0.09168251447894699,
+    "ic95_bca": [
+     -0.023538727276341945,
+     0.1723708873093386
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": 0.010534148727017856,
+    "ic95_bca": [
+     -0.04475896713647737,
+     0.07362392753452429
+    ],
+    "bloques_a_favor": 3,
+    "n_bloques": 7
+   }
+  },
+  "XGBoost geográfico afinado": {
+   "f1": 0.5661316156210195,
+   "ic95_bca": [
+    0.5089178582414705,
+    0.8050915253893011
+   ],
+   "vs_base": {
+    "dif": 0.07298912818199305,
+    "ic95_bca": [
+     -0.11907699381062044,
+     0.14948623105292408
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": -0.008159237569936084,
+    "ic95_bca": [
+     -0.11094351530932964,
+     0.06868936606384779
+    ],
+    "bloques_a_favor": 3,
+    "n_bloques": 7
+   },
+   "vs_xgboost_afinado": {
+    "dif": 0.0007657180662734575,
+    "ic95_bca": [
+     -0.026787211228563486,
+     0.0681464399029183
+    ],
+    "bloques_a_favor": 4,
+    "n_bloques": 7
+   }
+  },
+  "Rotation Forest": {
+   "f1": 0.5925396632578827,
+   "ic95_bca": [
+    0.5597485689758508,
+    0.8011218161334125
+   ],
+   "vs_base": {
+    "dif": 0.09939717581885615,
+    "ic95_bca": [
+     0.02355919370126668,
+     0.16982177317891528
+    ],
+    "bloques_a_favor": 6,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": 0.018248810066927024,
+    "ic95_bca": [
+     -0.018844434700875157,
+     0.06430015159670865
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   }
+  },
+  "Modelo base (logística B, sin vecindad)": {
+   "f1": 0.4931424874390265,
+   "ic95_bca": [
+    0.4661505496137147,
+    0.5315902507552465
+   ],
+   "vs_base": null,
+   "vs_logistica_vecindad": {
+    "dif": -0.08114836575192913,
+    "ic95_bca": [
+     -0.09078858410281457,
+     -0.0032809492294232374
+    ],
+    "bloques_a_favor": 0,
+    "n_bloques": 7
+   }
+  },
+  "Logística con vecindad": {
+   "f1": 0.5742908531909556,
+   "ic95_bca": [
+    0.5494917842300532,
+    0.6066407034632372
+   ],
+   "vs_base": {
+    "dif": 0.08114836575192913,
+    "ic95_bca": [
+     0.003280949229423261,
+     0.09078858410281457
+    ],
+    "bloques_a_favor": 6,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": null
+  },
+  "XGBoost afinado": {
+   "f1": 0.5653658975547461,
+   "ic95_bca": [
+    0.5224392370253692,
+    0.7784786169038569
+   ],
+   "vs_base": {
+    "dif": 0.07222341011571959,
+    "ic95_bca": [
+     -0.01455661497860293,
+     0.14984521457857752
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": -0.008924955636209542,
+    "ic95_bca": [
+     -0.046399246790703695,
+     0.03676118821508961
+    ],
+    "bloques_a_favor": 4,
+    "n_bloques": 7
+   }
+  },
+  "Random Forest": {
+   "f1": 0.6014343857230234,
+   "ic95_bca": [
+    0.5585058205691908,
+    0.7829437142209897
+   ],
+   "vs_base": {
+    "dif": 0.10829189828399693,
+    "ic95_bca": [
+     0.02237033920325955,
+     0.17044424527740248
+    ],
+    "bloques_a_favor": 6,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": 0.027143532532067804,
+    "ic95_bca": [
+     -0.008517048147612104,
+     0.07348593111534485
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   }
+  },
+  "RF + SVM (dos etapas)": {
+   "f1": 0.5168698706279428,
+   "ic95_bca": [
+    0.46960043272702273,
+    0.5618709240449977
+   ],
+   "vs_base": {
+    "dif": 0.023727383188916262,
+    "ic95_bca": [
+     -0.059763490772949915,
+     0.08795844035784939
+    ],
+    "bloques_a_favor": 4,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": -0.05742098256301287,
+    "ic95_bca": [
+     -0.1478769128305823,
+     0.012825566668586275
+    ],
+    "bloques_a_favor": 1,
+    "n_bloques": 7
+   }
+  },
+  "SVM sola (referencia del RF + SVM)": {
+   "f1": 0.49263958800787094,
+   "ic95_bca": [
+    0.4132224065930537,
+    0.5481945707068396
+   ],
+   "vs_base": {
+    "dif": -0.0005028994311555568,
+    "ic95_bca": [
+     -0.1922088837604342,
+     0.06306478144769567
+    ],
+    "bloques_a_favor": 3,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": -0.08165126518308469,
+    "ic95_bca": [
+     -0.18727126240645314,
+     -0.00839431323582962
+    ],
+    "bloques_a_favor": 1,
+    "n_bloques": 7
+   }
+  },
+  "Stacking S1 (logística, XGBoost, RF)": {
+   "f1": 0.5956064975471871,
+   "ic95_bca": [
+    0.534604527820563,
+    0.761123397076861
+   ],
+   "vs_base": {
+    "dif": 0.10246401010816059,
+    "ic95_bca": [
+     -0.0064650137482093065,
+     0.17276086523564976
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": 0.021315644356231456,
+    "ic95_bca": [
+     -0.031732685453825404,
+     0.07975268745854822
+    ],
+    "bloques_a_favor": 3,
+    "n_bloques": 7
+   }
+  },
+  "Stacking S2 (S1 + XGBoost geográfico)": {
+   "f1": 0.5677413087258328,
+   "ic95_bca": [
+    0.5094907850707378,
+    0.764015583384021
+   ],
+   "vs_base": {
+    "dif": 0.07459882128680634,
+    "ic95_bca": [
+     -0.052569738500234,
+     0.14547243555062392
+    ],
+    "bloques_a_favor": 5,
+    "n_bloques": 7
+   },
+   "vs_logistica_vecindad": {
+    "dif": -0.006549544465122792,
+    "ic95_bca": [
+     -0.06131193291443583,
+     0.06072012469623694
+    ],
+    "bloques_a_favor": 3,
+    "n_bloques": 7
+   }
+  }
+ },
+ "geo_afinado_test": {
+  "anclas": 88,
+  "k": 12863,
+  "cobertura": 0.9903906669736741
+ },
+ "segundos_test": {
+  "XGBoost geográfico (configuración del E2)": 393.07387256622314,
+  "XGBoost geográfico afinado": 364.03540229797363,
+  "Rotation Forest": 964.806786775589,
+  "Modelo base (logística B, sin vecindad)": 16.501609086990356,
+  "Logística con vecindad": 24.302512884140015,
+  "XGBoost afinado": 116.33192420005798,
+  "Random Forest": 84.96902680397034,
+  "RF + SVM (dos etapas)": 1183.0773198604584,
+  "SVM sola (referencia del RF + SVM)": 547.9302847385406
+ }
+}

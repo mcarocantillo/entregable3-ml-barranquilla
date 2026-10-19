@@ -49,10 +49,28 @@ faltante, log1p de las variables asimétricas, estandarización y one-hot con ca
   homogéneas y viviendas atípicas).
 - **Describir el entorno ayuda.** Con la validación correcta, la **vecindad física** (promedios de área, baños,
   habitaciones, antigüedad, piso y proporción de propiedad horizontal de los 8 edificios más cercanos, sin usar el
-  estrato) sube el F1 de test de la logística de 0.49 a 0.57–0.60 (Entregable 2 v3, cap. 6). Todas las
+  estrato) sube el F1 de test de la logística de 0.49 a 0.57–0.60 (Entregable 2 v3, cap. 7). Todas las
   combinaciones de este entregable usan estas variables.
+- **El entorno dice más que la vivienda misma.** En los seis atributos, el promedio de los 8 vecinos se relaciona con el
+  estrato más que el atributo de la propia vivienda (η² de Kruskal-Wallis: baños 0.60 frente a 0.33; área 0.45
+  frente a 0.17).
+- **Las fronteras concentran la dificultad.** El 22 % de las viviendas tiene la mitad o más de sus 8 edificios
+  vecinos en otro estrato (el estrato 5, el 44 %), y el 96 % de esas diferencias es de un solo estrato: por eso los
+  errores son casi siempre de un estrato y ADASYN, que refuerza los casos «difíciles», es el peor balanceo (cap. 5).
 - **Desbalance.** El estrato 1 es el 30 % del entrenamiento y el 6 menos del 5 % (6.2 a 1): por eso la métrica
   principal es el F1 macro y se comparan cuatro técnicas de balanceo.
+- **Composición del test** (diagnóstico hecho después de evaluar, no usado para decidir). El test tiene 1.2 % de
+  estrato 6 y sus 793 viviendas de ese estrato están en **un solo bloque**: el F1 del estrato 6 depende de un bloque,
+  los intervalos de test son anchos y, con 7 bloques, ninguna diferencia pequeña puede ser significativa después de
+  corregir por comparaciones múltiples (cap. 11).
+
+```{admonition} El EDA mejorado completo
+:class: note
+Las correcciones de la primera entrega y estos hallazgos, con sus tablas y figuras, están en el **capítulo 15 del
+Entregable 1** (versión 3): https://mcarocantillo.github.io/entregable1-ml-barranquilla/v3/notebooks/15_eda_mejorado.html.
+Es la respuesta a la sección 7.1 de la guía («realizar todas las correcciones solicitadas en la primera entrega y
+mejorar el análisis exploratorio con base en nuevos hallazgos»).
+```
 
 ## 1.4 Variables del modelo
 

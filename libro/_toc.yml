@@ -19,6 +19,9 @@ parts:
   - caption: Cierre
     chapters:
       - file: notebooks/10_conclusiones
+  - caption: Después del entregable
+    chapters:
+      - file: notebooks/11_mejoras
   - caption: Apéndice
     chapters:
       - file: notebooks/A_reproducibilidad

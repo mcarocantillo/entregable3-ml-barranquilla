@@ -433,6 +433,34 @@ cuatro optimizadores llegan al mismo resultado; la bayesiana llega antes. (3) <c
 ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la vivienda, no la vivienda misma
 (SHAP).</p>
 </div>
+<div class="note admonition">
+<p class="admonition-title">El vacío en la literatura: nadie ha clasificado el estrato de cada vivienda con el catastro</p>
+<p><strong>El estrato es colombiano.</strong> Clasifica los inmuebles residenciales (no los hogares) en seis niveles para cobrar los
+servicios públicos con subsidios cruzados (Ley 142 de 1994): los estratos 1 a 3 reciben subsidio, el 4 paga el costo
+y el 5 y el 6 contribuyen. El DANE lo calcula con la base catastral, sin avalúos ni datos del hogar, y señala que este
+cobro «se institucionalizó sin que existiera un modelo similar en otros países».</p>
+<p><strong>Por qué no hay estudios comparables.</strong> La revisión en Scopus del Entregable 2 (5-oct-2026) halló 9 trabajos
+cercanos, y todos predicen otra cosa (una consulta complementaria en Web of Science, el 19-oct-2026, no devolvió
+ningún documento):</p>
+<ul class="simple">
+<li><p>el precio de la vivienda (5 estudios, con XGBoost, Random Forest o SVR);</p></li>
+<li><p>la pobreza por zonas (1);</p></li>
+<li><p>el nivel socioeconómico como variable de entrada (3);</p></li>
+<li><p>la elección residencial, con una logística sobre sectores censales (1998).</p></li>
+</ul>
+<p>Difieren del proyecto en el objetivo, en la unidad (zonas en lugar de viviendas, salvo los de precio) y en la tarea
+(regresión con R² en lugar de clasificación en 6 clases con F1 macro).</p>
+<p><strong>El vacío tiene dos partes.</strong></p>
+<ol class="arabic simple">
+<li><p><strong>De aplicación:</strong> nadie ha clasificado el estrato de cada vivienda con sus datos catastrales y su ubicación.</p></li>
+<li><p><strong>De método:</strong> ninguno de los nueve modelos originales de la revisión se ha aplicado a este problema, y el XGBoost
+geográfico solo existía para regresión.</p></li>
+</ol>
+<p>El DANE usa insumos del catastro que no son públicos, así que la pregunta precisa es <strong>cuánto del estrato se recupera
+con la parte pública del catastro</strong>. Sin cifras externas con las que compararse, todo se mide contra un modelo base
+propio y con el mismo protocolo espacial. El detalle está en el
+<a class="reference external" href="https://mcarocantillo.github.io/entregable2-ml-barranquilla/v3/notebooks/01_revision.html">capítulo 1 del Entregable 2</a>.</p>
+</div>
 <div class="important admonition">
 <p class="admonition-title">¿Por qué aparecen modelos conocidos si el proyecto busca un modelo no usado antes?</p>
 <p><strong>La regla del proyecto.</strong> La revisión bibliográfica del Entregable 2

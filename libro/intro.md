@@ -36,6 +36,35 @@ ADASYN el peor. (4) Lo que decide el estrato es la ubicación y el entorno de la
 (SHAP).
 ```
 
+```{admonition} El vacío en la literatura: nadie ha clasificado el estrato de cada vivienda con el catastro
+:class: note
+**El estrato es colombiano.** Clasifica los inmuebles residenciales (no los hogares) en seis niveles para cobrar los
+servicios públicos con subsidios cruzados (Ley 142 de 1994): los estratos 1 a 3 reciben subsidio, el 4 paga el costo
+y el 5 y el 6 contribuyen. El DANE lo calcula con la base catastral, sin avalúos ni datos del hogar, y señala que este
+cobro «se institucionalizó sin que existiera un modelo similar en otros países».
+
+**Por qué no hay estudios comparables.** La revisión en Scopus del Entregable 2 (5-oct-2026) halló 9 trabajos
+cercanos, y todos predicen otra cosa (una consulta complementaria en Web of Science, el 19-oct-2026, no devolvió
+ningún documento):
+- el precio de la vivienda (5 estudios, con XGBoost, Random Forest o SVR);
+- la pobreza por zonas (1);
+- el nivel socioeconómico como variable de entrada (3);
+- la elección residencial, con una logística sobre sectores censales (1998).
+
+Difieren del proyecto en el objetivo, en la unidad (zonas en lugar de viviendas, salvo los de precio) y en la tarea
+(regresión con R² en lugar de clasificación en 6 clases con F1 macro).
+
+**El vacío tiene dos partes.**
+1. **De aplicación:** nadie ha clasificado el estrato de cada vivienda con sus datos catastrales y su ubicación.
+2. **De método:** ninguno de los nueve modelos originales de la revisión se ha aplicado a este problema, y el XGBoost
+   geográfico solo existía para regresión.
+
+El DANE usa insumos del catastro que no son públicos, así que la pregunta precisa es **cuánto del estrato se recupera
+con la parte pública del catastro**. Sin cifras externas con las que compararse, todo se mide contra un modelo base
+propio y con el mismo protocolo espacial. El detalle está en el
+[capítulo 1 del Entregable 2](https://mcarocantillo.github.io/entregable2-ml-barranquilla/v3/notebooks/01_revision.html).
+```
+
 ```{admonition} ¿Por qué aparecen modelos conocidos si el proyecto busca un modelo no usado antes?
 :class: important
 **La regla del proyecto.** La revisión bibliográfica del Entregable 2

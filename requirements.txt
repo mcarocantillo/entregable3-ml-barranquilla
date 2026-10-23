@@ -1,3 +1,4 @@
+# Entregable 3 — versiones exactas (Python 3.14.6, Windows 11). Instalar con: pip install -r requirements.txt
 arch==8.0.0
 deap==1.4.4
 imbalanced-learn==0.14.2

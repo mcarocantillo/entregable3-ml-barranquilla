@@ -48,6 +48,24 @@ class SVMNystroem(ClassifierMixin, BaseEstimator):
     se resuelve con LinearSVC (sección 4.2 de la guía). ``predict_proba``
     devuelve el softmax de la función de decisión: son puntajes, no
     probabilidades calibradas (la calibración se evalúa y corrige aparte).
+
+    Parámetros
+    ----------
+    gamma : float
+        Ancho del kernel RBF, k(x, z) = exp(−γ‖x − z‖²). Valores grandes hacen el kernel más local.
+    n_components : int
+        Número m de puntos de referencia de Nyström (calidad de la aproximación frente a costo).
+    C : float
+        Inverso de la regularización del LinearSVC.
+    class_weight : {None, "balanced"}
+        Pesos de clase del LinearSVC.
+    random_state : int
+        Semilla de la selección de puntos de Nyström y del LinearSVC.
+
+    Supuestos
+    ---------
+    Las variables llegan estandarizadas (las escala el preprocesador del pipeline), porque el kernel RBF depende
+    de las distancias.
     """
 
     def __init__(self, gamma=0.1, n_components=500, C=1.0, class_weight=None, random_state=CF.SEED):
@@ -58,6 +76,7 @@ class SVMNystroem(ClassifierMixin, BaseEstimator):
         self.random_state = random_state
 
     def fit(self, X, y):
+        """Ajusta el mapa de Nyström y el LinearSVC sobre ``X`` (n × p) y ``y``; devuelve ``self``."""
         self.mapa_ = Nystroem(gamma=self.gamma, n_components=self.n_components, random_state=self.random_state)
         Z = self.mapa_.fit_transform(X)
         self.svm_ = LinearSVC(C=self.C, class_weight=self.class_weight, random_state=self.random_state,
@@ -66,14 +85,17 @@ class SVMNystroem(ClassifierMixin, BaseEstimator):
         return self
 
     def decision_function(self, X):
+        """Puntaje de cada clase (n × K): distancia con signo al hiperplano en el espacio de Nyström."""
         return self.svm_.decision_function(self.mapa_.transform(X))
 
     def predict_proba(self, X):
+        """Softmax de ``decision_function`` (n × K): suma 1 por fila, pero no está calibrado."""
         d = self.decision_function(X)
         e = np.exp(d - d.max(1, keepdims=True))
         return e / e.sum(1, keepdims=True)
 
     def predict(self, X):
+        """Clase con el mayor puntaje de decisión."""
         return self.classes_[np.argmax(self.decision_function(X), axis=1)]
 
 
@@ -84,22 +106,35 @@ class CorreccionPriors(ClassifierMixin, BaseEstimator):
     entrenamiento y renormaliza: p̃_k ∝ p_k / π_k. Es la corrección bayesiana que
     convierte un clasificador con priors empíricos en uno con priors uniformes,
     el mismo efecto que pesar cada clase por 1/π_k.
+
+    Parámetros
+    ----------
+    estimador : clasificador de scikit-learn con ``predict_proba``
+        Modelo base (aquí, ``KNeighborsClassifier``); se clona al ajustar.
+
+    Supuestos
+    ---------
+    Las probabilidades del modelo base estiman p(k | x) con los priors del entrenamiento π_k (frecuencias de
+    clase), y todas las clases aparecen en el entrenamiento (π_k > 0).
     """
 
     def __init__(self, estimador=None):
         self.estimador = estimador
 
     def fit(self, X, y):
+        """Ajusta el modelo base y guarda los priors empíricos ``priors_`` de ``y``; devuelve ``self``."""
         self.estimador_ = clone(self.estimador).fit(X, y)
         self.classes_ = self.estimador_.classes_
         self.priors_ = np.array([np.mean(np.asarray(y) == k) for k in self.classes_])
         return self
 
     def predict_proba(self, X):
+        """Probabilidades corregidas p̃_k ∝ p_k / π_k, renormalizadas para sumar 1 (n × K)."""
         p = self.estimador_.predict_proba(X) / self.priors_
         return p / p.sum(1, keepdims=True)
 
     def predict(self, X):
+        """Clase con la mayor probabilidad corregida."""
         return self.classes_[np.argmax(self.predict_proba(X), axis=1)]
 
 
@@ -111,6 +146,18 @@ class ADASYNPorClase(BaseEstimator):
     estrato, algo frecuente con un estrato tan concentrado), esa densidad es cero e imbalanced-learn falla
     ("No samples will be generated"). Aquí ese estrato se deja sin muestras sintéticas y se registra en
     ``omitidos_``; los demás se sobremuestrean normalmente.
+
+    Parámetros
+    ----------
+    n_neighbors : int
+        Vecinos que usa ADASYN para medir la dificultad de cada ejemplo y para interpolar.
+    random_state : int
+        Semilla del muestreo sintético.
+
+    Supuestos
+    ---------
+    Va dentro de un ``imblearn.pipeline.Pipeline``, después del preprocesamiento: se aplica solo al entrenamiento
+    de cada pliegue y nunca al predecir.
     """
 
     def __init__(self, n_neighbors=5, random_state=CF.SEED):
@@ -118,6 +165,21 @@ class ADASYNPorClase(BaseEstimator):
         self.random_state = random_state
 
     def fit_resample(self, X, y):
+        """Devuelve ``(X, y)`` con los ejemplos sintéticos de cada estrato minoritario agregados al final.
+
+        Parámetros
+        ----------
+        X : array (n, p)
+            Variables ya preprocesadas.
+        y : array (n,)
+            Estratos.
+
+        Devuelve
+        --------
+        X_res : array (n', p)
+        y_res : array (n',)
+            n' ≥ n; cada estrato llega al tamaño del mayoritario salvo los de ``omitidos_``.
+        """
         X, y = np.asarray(X), np.asarray(y)
         clases, cuenta = np.unique(y, return_counts=True)
         objetivo = cuenta.max()
@@ -190,6 +252,25 @@ def estimador(nombre, params, balanceo, seed=CF.SEED):
     ``balanceo == "class_weight"`` usa ``class_weight='balanced'`` donde existe;
     XGBoost y el geográfico usan pesos de muestra 1/frecuencia; Naive Bayes usa
     priors uniformes y KNN la corrección de priors (``CorreccionPriors``).
+
+    Parámetros
+    ----------
+    nombre : str
+        Clave de ``CATALOGO`` (uno de los 8 modelos de clasificación).
+    params : dict
+        Hiperparámetros del modelo (los que propone el optimizador).
+    balanceo : str
+        Una de ``BALANCEOS``. SMOTE y ADASYN no cambian el modelo: se agregan como paso del pipeline.
+    seed : int
+        Semilla del modelo (los que tienen aleatoriedad).
+
+    Devuelve
+    --------
+    estimador de scikit-learn sin ajustar.
+
+    Supuestos
+    ---------
+    Cada modelo usa un solo hilo (``n_jobs=1``): el paralelismo va entre tareas, no dentro del modelo.
     """
     cw = balanceo == "class_weight"
     p = dict(params)
@@ -215,7 +296,27 @@ def estimador(nombre, params, balanceo, seed=CF.SEED):
 
 
 def preprocesador(datos, con_xy=False):
-    """Preprocesador del Entregable 1 (y, para el modelo geográfico, x_km e y_km sin escalar al final)."""
+    """Preprocesador del Entregable 1 (y, para el modelo geográfico, x_km e y_km sin escalar al final).
+
+    Parámetros
+    ----------
+    datos : dict
+        Paquete de ``datos.cargar()`` o de ``resultados/datos_clasificacion.pkl``: listas ``num``, ``cat`` y
+        ``num_log``, decisiones ``dec`` del Entregable 1 y el módulo ``M1`` (``src/modelo.py`` del E1).
+    con_xy : bool
+        Si es verdadero, agrega al final las coordenadas x_km e y_km sin transformar, que el XGBoost geográfico
+        usa para ubicar las anclas.
+
+    Devuelve
+    --------
+    ColumnTransformer sin ajustar: winsorización (cuantiles del E1) → imputación por mediana con indicador de
+    faltante → log1p (solo ``num_log``) → estandarización en las numéricas; imputación y one-hot con categorías
+    infrecuentes en las categóricas.
+
+    Supuestos
+    ---------
+    Se ajusta dentro de cada pliegue (forma parte del pipeline), así que no hay fuga de información.
+    """
     num, cat, num_log = datos["num"], datos["cat"], datos["num_log"]
     q_inf, q_sup = datos["dec"]["winsorizacion_cuantiles"]["valor"]
     prep = datos["M1"].construir_preprocesador([c for c in num if c in num_log], [c for c in num if c not in num_log],
@@ -256,7 +357,18 @@ def pipeline(datos, nombre, params, balanceo, seed=CF.SEED):
 
 
 def columnas(datos):
-    """Columnas de entrada del pipeline (el geográfico usa además x_km, y_km, que ya están en ``num``)."""
+    """Columnas de entrada del pipeline (el geográfico usa además x_km, y_km, que ya están en ``num``).
+
+    Parámetros
+    ----------
+    datos : dict
+        Paquete de datos con las listas ``num`` y ``cat``.
+
+    Devuelve
+    --------
+    list of str
+        ``num + cat``.
+    """
     return datos["num"] + datos["cat"]
 
 
@@ -264,7 +376,25 @@ def columnas(datos):
 # Regresión: el estrato (1-6) tratado como número
 # ---------------------------------------------------------------------------
 class SVRNystroem(BaseEstimator):
-    """SVR con kernel RBF aproximado (Nyström) y LinearSVR: costo O(n·m²) en vez de O(n²)–O(n³)."""
+    """SVR con kernel RBF aproximado (Nyström) y LinearSVR: costo O(n·m²) en vez de O(n²)–O(n³).
+
+    Parámetros
+    ----------
+    gamma : float
+        Ancho del kernel RBF.
+    n_components : int
+        Puntos de referencia de Nyström.
+    C : float
+        Inverso de la regularización.
+    epsilon : float
+        Ancho del tubo insensible de la pérdida ε-insensible (en estratos).
+    random_state : int
+        Semilla de Nyström y del LinearSVR.
+
+    Supuestos
+    ---------
+    Variables estandarizadas (las escala el preprocesador del pipeline).
+    """
 
     def __init__(self, gamma=0.1, n_components=300, C=1.0, epsilon=0.1, random_state=CF.SEED):
         self.gamma = gamma
@@ -274,6 +404,7 @@ class SVRNystroem(BaseEstimator):
         self.random_state = random_state
 
     def fit(self, X, y):
+        """Ajusta el mapa de Nyström y el LinearSVR sobre ``X`` y el estrato numérico ``y``; devuelve ``self``."""
         from sklearn.svm import LinearSVR
         self.mapa_ = Nystroem(gamma=self.gamma, n_components=self.n_components, random_state=self.random_state)
         self.svr_ = LinearSVR(C=self.C, epsilon=self.epsilon, random_state=self.random_state, max_iter=5000,
@@ -281,6 +412,7 @@ class SVRNystroem(BaseEstimator):
         return self
 
     def predict(self, X):
+        """Estrato predicho como número real (n,)."""
         return self.svr_.predict(self.mapa_.transform(X))
 
 
@@ -316,12 +448,37 @@ MODELOS_REG = list(CATALOGO_REG)
 
 
 def catalogo(nombre):
-    """Entrada del catálogo (clasificación o regresión) de un modelo."""
+    """Entrada del catálogo (clasificación o regresión) de un modelo.
+
+    Parámetros
+    ----------
+    nombre : str
+        Clave de ``CATALOGO`` o de ``CATALOGO_REG``.
+
+    Devuelve
+    --------
+    dict
+        Con ``espacio`` (rangos para Random, Bayesiana y Genética) y ``rejilla`` (Grid Search).
+    """
     return CATALOGO[nombre] if nombre in CATALOGO else CATALOGO_REG[nombre]
 
 
 def estimador_reg(nombre, params, seed=CF.SEED):
-    """Regresor final con sus hiperparámetros."""
+    """Regresor final con sus hiperparámetros.
+
+    Parámetros
+    ----------
+    nombre : str
+        Clave de ``CATALOGO_REG`` (uno de los 7 modelos de regresión).
+    params : dict
+        Hiperparámetros del modelo.
+    seed : int
+        Semilla de los modelos con aleatoriedad.
+
+    Devuelve
+    --------
+    regresor de scikit-learn (o compatible) sin ajustar, con un solo hilo.
+    """
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.linear_model import Lasso, Ridge
     from sklearn.neighbors import KNeighborsRegressor
@@ -346,5 +503,22 @@ def estimador_reg(nombre, params, seed=CF.SEED):
 
 
 def pipeline_reg(datos, nombre, params, seed=CF.SEED):
-    """Pipeline de regresión: preprocesamiento del Entregable 1 → regresor (sin balanceo: no aplica)."""
+    """Pipeline de regresión: preprocesamiento del Entregable 1 → regresor (sin balanceo: no aplica).
+
+    Parámetros
+    ----------
+    datos : dict
+        Paquete de datos (ver ``preprocesador``).
+    nombre : str
+        Clave de ``CATALOGO_REG``.
+    params : dict
+        Hiperparámetros del regresor.
+    seed : int
+        Semilla del regresor.
+
+    Devuelve
+    --------
+    imblearn.pipeline.Pipeline
+        Pasos ``prep`` y ``modelo``; el objetivo es el estrato (1–6) como número.
+    """
     return Pipeline([("prep", preprocesador(datos)), ("modelo", estimador_reg(nombre, params, seed))])

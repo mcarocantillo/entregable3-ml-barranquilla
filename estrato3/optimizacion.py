@@ -43,7 +43,21 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 # Espacios
 # ---------------------------------------------------------------------------
 def de_unitario(espacio, u):
-    """Traduce un vector u ∈ [0, 1]^d a una configuración del espacio (usado por Random y Genética)."""
+    """Traduce un vector u ∈ [0, 1]^d a una configuración del espacio (usado por Random y Genética).
+
+    Parámetros
+    ----------
+    espacio : dict
+        ``{hiperparámetro: (tipo, ...)}`` con tipo ``log``, ``float``, ``int``, ``intlog`` o ``cat``.
+    u : sequence of float
+        Un valor por hiperparámetro, en el mismo orden del espacio; se recorta a [0, 1].
+
+    Devuelve
+    --------
+    dict
+        Configuración: interpolación lineal (``float``, ``int``) o logarítmica (``log``, ``intlog``) entre los
+        extremos, y para ``cat`` la opción del intervalo en que cae u.
+    """
     out = {}
     for (nombre, spec), v in zip(espacio.items(), u):
         v = float(np.clip(v, 0, 1))
@@ -62,7 +76,20 @@ def de_unitario(espacio, u):
 
 
 def sugerir(trial, espacio):
-    """Traduce el espacio a las llamadas ``trial.suggest_*`` de Optuna."""
+    """Traduce el espacio a las llamadas ``trial.suggest_*`` de Optuna.
+
+    Parámetros
+    ----------
+    trial : optuna.trial.Trial
+        Prueba en curso del estudio.
+    espacio : dict
+        Espacio de búsqueda (mismo formato que en ``de_unitario``).
+
+    Devuelve
+    --------
+    dict
+        Configuración propuesta por el muestreador TPE (escala log donde el espacio lo indica).
+    """
     out = {}
     for nombre, spec in espacio.items():
         tipo = spec[0]
@@ -80,7 +107,18 @@ def sugerir(trial, espacio):
 
 
 def clave(params):
-    """Clave hashable de una configuración (para no evaluar dos veces la misma)."""
+    """Clave hashable de una configuración (para no evaluar dos veces la misma).
+
+    Parámetros
+    ----------
+    params : dict
+        Configuración de hiperparámetros.
+
+    Devuelve
+    --------
+    tuple
+        Pares ``(nombre, valor)`` ordenados, con los reales redondeados a 10 decimales.
+    """
     return tuple(sorted((k, round(v, 10) if isinstance(v, float) else v) for k, v in params.items()))
 
 
@@ -97,7 +135,23 @@ class Objetivo:
     X, y : DataFrame y array del entrenamiento del pliegue EXTERNO.
     folds : list
         Pliegues internos (índices posicionales sobre X).
-    nombre, balanceo : modelo y técnica de balanceo.
+    nombre, balanceo : str
+        Modelo y técnica de balanceo (``"no aplica"`` en regresión).
+    seed : int
+        Semilla del pipeline en cada evaluación.
+    tarea : {"clasificacion", "regresion"}
+        En regresión el puntaje es −RMSE (más alto es mejor).
+
+    Devuelve
+    --------
+    Al llamarse con una configuración, el puntaje medio en los pliegues internos (float). Una configuración que
+    falla recibe el peor puntaje (0 o −10) y su error queda en el historial; una configuración repetida se
+    devuelve de la memoria sin volver a entrenar.
+
+    Supuestos
+    ---------
+    Los pliegues internos son índices posicionales sobre ``X`` y se construyeron solo con el entrenamiento del
+    pliegue externo (kNNDM), así que la búsqueda nunca ve la validación externa.
     """
 
     def __init__(self, datos, X, y, folds, nombre, balanceo, seed=CF.SEED, tarea="clasificacion"):
@@ -140,6 +194,7 @@ class Objetivo:
         return s
 
     def mejor(self):
+        """Devuelve ``(params, puntaje)`` de la mejor evaluación del historial."""
         h = max(self.historial, key=lambda r: r["f1_interno"])
         return h["params"], h["f1_interno"]
 
@@ -148,7 +203,24 @@ class Objetivo:
 # Búsquedas
 # ---------------------------------------------------------------------------
 def grid(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED):
-    """Grid Search sobre la rejilla del catálogo (si excede el presupuesto, se toma una muestra fija)."""
+    """Grid Search sobre la rejilla del catálogo (si excede el presupuesto, se toma una muestra fija).
+
+    Parámetros
+    ----------
+    obj : Objetivo
+        Función objetivo del pliegue externo; registra cada evaluación en ``obj.historial``.
+    nombre : str
+        Modelo (clave de ``modelos.CATALOGO`` o ``CATALOGO_REG``), de donde salen el espacio o la rejilla.
+    presupuesto : int
+        Número de evaluaciones distintas (12 en el experimento); las repetidas no cuentan.
+    seed : int
+        Semilla del método.
+
+    Devuelve
+    --------
+    dict
+        Información extra del método (vacía).
+    """
     rej = MD.catalogo(nombre)["rejilla"]
     combos = [dict(zip(rej, v)) for v in itertools.product(*rej.values())]
     if len(combos) > presupuesto:
@@ -159,7 +231,24 @@ def grid(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED):
 
 
 def aleatoria(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED):
-    """Random Search: configuraciones uniformes en el espacio (log-uniformes donde corresponde)."""
+    """Random Search: configuraciones uniformes en el espacio (log-uniformes donde corresponde).
+
+    Parámetros
+    ----------
+    obj : Objetivo
+        Función objetivo del pliegue externo; registra cada evaluación en ``obj.historial``.
+    nombre : str
+        Modelo (clave de ``modelos.CATALOGO`` o ``CATALOGO_REG``), de donde salen el espacio o la rejilla.
+    presupuesto : int
+        Número de evaluaciones distintas (12 en el experimento); las repetidas no cuentan.
+    seed : int
+        Semilla del método.
+
+    Devuelve
+    --------
+    dict
+        Información extra del método (vacía).
+    """
     esp = MD.catalogo(nombre)["espacio"]
     rng = np.random.default_rng(seed)
     intentos = 0
@@ -170,7 +259,26 @@ def aleatoria(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED):
 
 
 def bayesiana(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED, n_startup=4):
-    """Optimización bayesiana con Optuna (TPE; adquisición equivalente a Expected Improvement)."""
+    """Optimización bayesiana con Optuna (TPE; adquisición equivalente a Expected Improvement).
+
+    Parámetros
+    ----------
+    obj : Objetivo
+        Función objetivo del pliegue externo; registra cada evaluación en ``obj.historial``.
+    nombre : str
+        Modelo (clave de ``modelos.CATALOGO`` o ``CATALOGO_REG``), de donde salen el espacio o la rejilla.
+    presupuesto : int
+        Número de evaluaciones distintas (12 en el experimento); las repetidas no cuentan.
+    seed : int
+        Semilla del método.
+    n_startup : int
+        Evaluaciones aleatorias iniciales antes de que TPE use su modelo sustituto.
+
+    Devuelve
+    --------
+    dict
+        ``{"n_startup": n_startup}``.
+    """
     esp = MD.catalogo(nombre)["espacio"]
     sampler = optuna.samplers.TPESampler(seed=seed, n_startup_trials=n_startup, multivariate=True)
     estudio = optuna.create_study(direction="maximize", sampler=sampler)
@@ -184,7 +292,37 @@ def bayesiana(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED, n_startup=4
 
 def genetica(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED, poblacion=4, p_cruce=0.7, p_mutacion=0.3,
              sigma=0.15, torneo=3, elite=1):
-    """Algoritmo genético (DEAP) sobre vectores en [0, 1]^d; devuelve la diversidad por generación."""
+    """Algoritmo genético (DEAP) sobre vectores en [0, 1]^d; devuelve la diversidad por generación.
+
+    Parámetros
+    ----------
+    obj : Objetivo
+        Función objetivo del pliegue externo; registra cada evaluación en ``obj.historial``.
+    nombre : str
+        Modelo (clave de ``modelos.CATALOGO`` o ``CATALOGO_REG``), de donde salen el espacio o la rejilla.
+    presupuesto : int
+        Número de evaluaciones distintas (12 en el experimento); las repetidas no cuentan.
+    seed : int
+        Semilla del método.
+    poblacion : int
+        Individuos por generación.
+    p_cruce : float
+        Probabilidad de cruce *blend* (α = 0.5) de cada pareja.
+    p_mutacion : float
+        Probabilidad de mutación gaussiana de cada individuo (cada gen con probabilidad 1/d).
+    sigma : float
+        Desviación de la mutación gaussiana, en la escala del genoma [0, 1].
+    torneo : int
+        Tamaño del torneo de selección.
+    elite : int
+        Individuos que pasan intactos a la siguiente generación.
+
+    Devuelve
+    --------
+    dict
+        ``diversidad`` (por generación: distancia media entre individuos, mejor puntaje y evaluaciones
+        acumuladas) y los parámetros del algoritmo.
+    """
     esp = MD.catalogo(nombre)["espacio"]
     d = len(esp)
     rng = np.random.default_rng(seed)
@@ -200,6 +338,7 @@ def genetica(obj, nombre, presupuesto=CF.PRESUPUESTO, seed=CF.SEED, poblacion=4,
     tb.register("select", tools.selTournament, tournsize=torneo)
 
     def evaluar(ind):
+        """Recorta el individuo a [0, 1], lo traduce a una configuración y devuelve su aptitud (tupla)."""
         ind[:] = list(np.clip(ind, 0, 1))
         return (obj(de_unitario(esp, ind)),)
 

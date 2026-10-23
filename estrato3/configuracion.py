@@ -55,7 +55,18 @@ def fijar_semillas(seed=SEED):
 
 
 def importar_e1():
-    """Agrega el Entregable 1 al ``sys.path`` y devuelve sus módulos ``config``, ``modelo``, ``particion`` y ``vecinos``."""
+    """Agrega el Entregable 1 al ``sys.path`` y devuelve sus módulos ``config``, ``modelo``, ``particion`` y ``vecinos``.
+
+    Devuelve
+    --------
+    tuple of module
+        ``(config, modelo, particion, vecinos)`` del paquete ``src`` del Entregable 1.
+
+    Supuestos
+    ---------
+    El Entregable 1 versión 3 (rama ``v3``, con sus datos procesados) está en ``../e1_rama`` o en la ruta de la
+    variable de entorno ``ENTREGABLE1``.
+    """
     if str(E1) not in sys.path:
         sys.path.insert(0, str(E1))
     from src import config as C1

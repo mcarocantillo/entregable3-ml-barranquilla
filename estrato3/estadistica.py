@@ -43,13 +43,42 @@ def diferencia_critica(k, n, alpha=0.05):
     """Diferencia crítica de Nemenyi: CD = q_α · sqrt(k(k+1) / (6n)) (Demšar, 2006).
 
     q_α es el cuantil del rango studentizado con k grupos e infinitos grados de libertad, dividido por √2.
+
+    Parámetros
+    ----------
+    k : int
+        Número de modelos comparados.
+    n : int
+        Número de bloques de la prueba de Friedman (pliegues o bloques espaciales).
+    alpha : float
+        Nivel de significancia familiar.
+
+    Devuelve
+    --------
+    float
+        Diferencia mínima de rango promedio para declarar distintos a dos modelos.
     """
     q = stats.studentized_range.ppf(1 - alpha, k, np.inf) / np.sqrt(2)
     return float(q * np.sqrt(k * (k + 1) / (6 * n)))
 
 
 def nemenyi(tabla):
-    """Matriz de p-valores de Nemenyi (scikit-posthocs) sobre la misma tabla de Friedman."""
+    """Matriz de p-valores de Nemenyi (scikit-posthocs) sobre la misma tabla de Friedman.
+
+    Parámetros
+    ----------
+    tabla : pandas.DataFrame
+        Filas = bloques, columnas = modelos, valores = métrica (más alto es mejor).
+
+    Devuelve
+    --------
+    pandas.DataFrame
+        Matriz simétrica (modelos × modelos) de p-valores ajustados por el error familiar.
+
+    Supuestos
+    ---------
+    Solo tiene sentido si Friedman rechazó la hipótesis nula (secuencia jerárquica de la sección 6 de la guía).
+    """
     import scikit_posthocs as sp
     return sp.posthoc_nemenyi_friedman(tabla.to_numpy()).set_axis(tabla.columns, axis=0).set_axis(tabla.columns, axis=1)
 
@@ -63,6 +92,16 @@ def diagrama_cd(rangos, cd, titulo="Diagrama de diferencia crítica (Nemenyi)", 
         Rango promedio por modelo (1 = mejor), ordenado de menor a mayor.
     cd : float
         Diferencia crítica.
+    titulo : str
+        Título del gráfico.
+    ax : matplotlib.axes.Axes, opcional
+        Ejes donde dibujar; si no se dan, se crea una figura.
+    max_modelos : int, opcional
+        Dibuja solo los ``max_modelos`` mejores (útil con 128 combinaciones).
+
+    Devuelve
+    --------
+    matplotlib.axes.Axes
     """
     import matplotlib.pyplot as plt
     r = rangos.sort_values()
@@ -151,7 +190,18 @@ def delong(y_bin, s1, s2):
 
 
 def holm(pvals):
-    """p-valores ajustados por Holm-Bonferroni (mismo orden de entrada)."""
+    """p-valores ajustados por Holm-Bonferroni (mismo orden de entrada).
+
+    Parámetros
+    ----------
+    pvals : sequence of float
+        p-valores crudos de una familia de pruebas.
+
+    Devuelve
+    --------
+    numpy.ndarray
+        p-valores ajustados (controlan el error familiar), acotados a 1 y monótonos en el orden de los crudos.
+    """
     p = np.asarray(pvals, float)
     orden = np.argsort(p)
     m = len(p)
@@ -164,7 +214,22 @@ def holm(pvals):
 
 
 def benjamini_hochberg(pvals):
-    """p-valores ajustados por Benjamini-Hochberg (tasa de falsos descubrimientos)."""
+    """p-valores ajustados por Benjamini-Hochberg (tasa de falsos descubrimientos).
+
+    Parámetros
+    ----------
+    pvals : sequence of float
+        p-valores crudos de una familia de pruebas.
+
+    Devuelve
+    --------
+    numpy.ndarray
+        p-valores ajustados en el orden de entrada.
+
+    Supuestos
+    ---------
+    Pruebas independientes o con dependencia positiva (las AUC por estrato de los mismos modelos lo son).
+    """
     p = np.asarray(pvals, float)
     m = len(p)
     orden = np.argsort(p)[::-1]
@@ -180,7 +245,22 @@ def benjamini_hochberg(pvals):
 # Tamaño del efecto y bootstrap
 # ---------------------------------------------------------------------------
 def delta_cliff(a, b):
-    """Delta de Cliff: P(a > b) − P(a < b). |δ| < 0.147 despreciable, < 0.33 pequeño, < 0.474 mediano, mayor grande."""
+    """Delta de Cliff: P(a > b) − P(a < b). |δ| < 0.147 despreciable, < 0.33 pequeño, < 0.474 mediano, mayor grande.
+
+    Parámetros
+    ----------
+    a, b : array
+        Métricas de dos modelos (aquí, el F1 macro por bloque espacial).
+
+    Devuelve
+    --------
+    (float, str)
+        δ en [−1, 1] (positivo = ``a`` tiende a ser mayor) y su magnitud según Romano et al. (2006).
+
+    Supuestos
+    ---------
+    No paramétrico: no supone normalidad; compara todos los pares (a_i, b_j), sin emparejar.
+    """
     a, b = np.asarray(a, float), np.asarray(b, float)
     mayor = (a[:, None] > b[None, :]).sum()
     menor = (a[:, None] < b[None, :]).sum()
@@ -199,6 +279,17 @@ def bootstrap_bca_bloques(estadistico, bloques, n_resamples=999, seed=42, confia
         f(indices_de_filas) -> float, calculado sobre las filas de los bloques remuestreados.
     bloques : array (n,)
         Bloque de cada fila.
+    n_resamples : int
+        Réplicas bootstrap.
+    seed : int
+        Semilla del remuestreo.
+    confianza : float
+        Nivel del intervalo.
+
+    Supuestos
+    ---------
+    Las filas de un mismo bloque espacial están correlacionadas y los bloques son aproximadamente independientes;
+    por eso se remuestrean bloques completos. Con pocos bloques (7 en el test) el intervalo es ancho y asimétrico.
 
     Devuelve
     --------
@@ -209,6 +300,7 @@ def bootstrap_bca_bloques(estadistico, bloques, n_resamples=999, seed=42, confia
     filas = [np.where(inv == g)[0] for g in range(len(ub))]
 
     def f(idx_bloques, axis=-1):
+        """Estadístico sobre las filas de los bloques remuestreados (vectorizado para scipy)."""
         a = np.asarray(idx_bloques)
         if a.ndim == 1:
             return estadistico(np.concatenate([filas[int(g)] for g in a]))

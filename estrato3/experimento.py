@@ -22,7 +22,18 @@ _DATOS = None
 
 
 def preparar():
-    """Submuestra, folds externos e internos (una sola vez; se guardan en ``CACHE``)."""
+    """Submuestra, folds externos e internos (una sola vez; se guardan en ``CACHE``).
+
+    Crea la submuestra estratificada de ``CF.N_SUBMUESTRA`` viviendas, los ``CF.K_EXTERNO`` pliegues externos
+    kNNDM (escenario = geometría del test) y, para cada uno, ``CF.K_INTERNO`` pliegues internos kNNDM (escenario =
+    ese pliegue externo). No hace nada si ``CACHE`` ya existe, así que todas las combinaciones usan los mismos
+    pliegues.
+
+    Devuelve
+    --------
+    None
+        Escribe ``resultados/datos_clasificacion.pkl``.
+    """
     if CACHE.exists():
         return
     from estrato3 import datos as DT
@@ -55,12 +66,53 @@ def _datos():
 
 
 def nombre_tarea(modelo, balanceo, metodo, fold):
+    """Identificador estable de una tarea.
+
+    Parámetros
+    ----------
+    modelo, balanceo, metodo : str
+        Combinación (``"no aplica"`` como balanceo en regresión).
+    fold : int
+        Pliegue externo.
+
+    Devuelve
+    --------
+    (str, str)
+        Hash MD5 de 12 caracteres (nombre del archivo en ``resultados/tareas``) y la descripción legible.
+    """
     s = f"{modelo}|{balanceo}|{metodo}|{fold}"
     return hashlib.md5(s.encode("utf-8")).hexdigest()[:12], s
 
 
 def tarea(modelo, balanceo, metodo, fold, presupuesto, carpeta=None):
-    """Una combinación en un pliegue externo: búsqueda en el bucle interno, reajuste y evaluación externa."""
+    """Una combinación en un pliegue externo: búsqueda en el bucle interno, reajuste y evaluación externa.
+
+    Parámetros
+    ----------
+    modelo : str
+        Clave de ``modelos.CATALOGO``.
+    balanceo : str
+        Una de ``modelos.BALANCEOS``.
+    metodo : str
+        Clave de ``optimizacion.METODOS`` (Grid, Random, Bayesiana o Genética).
+    fold : int
+        Pliegue externo (0 a 4).
+    presupuesto : int
+        Evaluaciones de la búsqueda.
+    carpeta : str o Path, opcional
+        Dónde guardar el resultado (por defecto ``resultados/tareas``).
+
+    Devuelve
+    --------
+    (str, float, float)
+        Descripción de la tarea, F1 macro en el pliegue externo y segundos de búsqueda. Además escribe
+        ``<hash>.json`` (semilla, hiperparámetros, métricas externas, tiempos e historial completo) y ``<hash>.npz``
+        (probabilidades fuera de muestra).
+
+    Supuestos
+    ---------
+    La métrica que se reporta sale del pliegue externo, nunca del óptimo interno (validación anidada).
+    """
     from estrato3 import evaluacion as EV
     from estrato3 import modelos as MD
     from estrato3 import optimizacion as OP
@@ -111,7 +163,20 @@ def _test():
 
 
 def finalista(modelo, balanceo, metodo, presupuesto=CF.PRESUPUESTO):
-    """Búsqueda final en toda la submuestra (pliegues externos como validación), ajuste y probabilidades en test."""
+    """Búsqueda final en toda la submuestra (pliegues externos como validación), ajuste y probabilidades en test.
+
+    Parámetros
+    ----------
+    modelo, balanceo, metodo : str
+        La mejor combinación del modelo según el bucle externo.
+    presupuesto : int
+        Evaluaciones de la búsqueda final.
+
+    Devuelve
+    --------
+    dict
+        ``params``, ``f1_busqueda_final``, ``proba_test`` (65 145 × 6) y ``segundos``.
+    """
     from estrato3 import evaluacion as EV
     from estrato3 import modelos as MD
     from estrato3 import optimizacion as OP
@@ -131,7 +196,24 @@ def finalista(modelo, balanceo, metodo, presupuesto=CF.PRESUPUESTO):
 
 
 def calibrado(modelo, params, balanceo, metodo_cal):
-    """Recalibración (``sigmoid`` = Platt o ``isotonic``) con los pliegues externos; probabilidades en test."""
+    """Recalibración (``sigmoid`` = Platt o ``isotonic``) con los pliegues externos; probabilidades en test.
+
+    Parámetros
+    ----------
+    modelo : str
+        Finalista.
+    params : dict
+        Sus hiperparámetros finales.
+    balanceo : str
+        Su técnica de balanceo.
+    metodo_cal : {"sigmoid", "isotonic"}
+        Platt o regresión isotónica (``CalibratedClassifierCV``).
+
+    Devuelve
+    --------
+    (str, str, numpy.ndarray)
+        Modelo, método y probabilidades recalibradas en el test.
+    """
     from sklearn.calibration import CalibratedClassifierCV
     from estrato3 import evaluacion as EV
     from estrato3 import modelos as MD
@@ -145,7 +227,20 @@ def calibrado(modelo, params, balanceo, metodo_cal):
 
 
 def con_semilla(modelo, params, balanceo, semilla):
-    """El finalista reentrenado con otra semilla (robustez); probabilidades en test."""
+    """El finalista reentrenado con otra semilla (robustez); probabilidades en test.
+
+    Parámetros
+    ----------
+    modelo, params, balanceo
+        El finalista y su configuración.
+    semilla : int
+        Semilla del modelo y del muestreo sintético.
+
+    Devuelve
+    --------
+    (str, int, numpy.ndarray)
+        Modelo, semilla y probabilidades en el test.
+    """
     from estrato3 import evaluacion as EV
     from estrato3 import modelos as MD
     d, test = _datos(), _test()
@@ -165,6 +260,26 @@ def todo_el_train(modelo, params, balanceo, lote_rf=15):
     Random Forest se entrena por lotes de ``lote_rf`` árboles (semillas distintas) y se promedian las
     probabilidades: es el mismo bosque en distribución, sin guardar en memoria los 150 árboles a la vez.
     ``modelo == BASE_E1`` es la logística B del E1 (C = 0.01, sin pesos, sin vecindad física).
+
+    Parámetros
+    ----------
+    modelo : str
+        Finalista o ``BASE_E1``.
+    params : dict
+        Hiperparámetros elegidos en la submuestra (no se vuelven a buscar).
+    balanceo : str
+        Técnica de balanceo del finalista.
+    lote_rf : int
+        Árboles por lote en Random Forest.
+
+    Devuelve
+    --------
+    (str, numpy.ndarray, float)
+        Modelo, probabilidades en el test y segundos.
+
+    Supuestos
+    ---------
+    ``COMPLETO_CACHE`` existe (lo escribe ``experimentos/todos_los_datos.py``).
     """
     from sklearn.linear_model import LogisticRegression
     from imblearn.pipeline import Pipeline
@@ -201,7 +316,26 @@ def todo_el_train(modelo, params, balanceo, lote_rf=15):
 
 
 def tarea_reg(modelo, metodo, fold, presupuesto, carpeta):
-    """Regresión del estrato como número: búsqueda interna (−RMSE), reajuste y evaluación externa."""
+    """Regresión del estrato como número: búsqueda interna (−RMSE), reajuste y evaluación externa.
+
+    Parámetros
+    ----------
+    modelo : str
+        Clave de ``modelos.CATALOGO_REG``.
+    metodo : str
+        Optimizador.
+    fold : int
+        Pliegue externo.
+    presupuesto : int
+        Evaluaciones de la búsqueda.
+    carpeta : str o Path
+        Dónde guardar el resultado (``resultados/tareas_regresion``).
+
+    Devuelve
+    --------
+    (str, float, float)
+        Descripción, RMSE externo y segundos de búsqueda; escribe el JSON y el ``.npz`` con las predicciones.
+    """
     from sklearn.metrics import mean_absolute_error, r2_score
     from estrato3 import evaluacion as EV
     from estrato3 import modelos as MD

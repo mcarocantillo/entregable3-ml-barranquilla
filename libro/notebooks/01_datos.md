@@ -54,6 +54,16 @@ faltante, log1p de las variables asimétricas, estandarización y one-hot con ca
 - **El entorno dice más que la vivienda misma.** En los seis atributos, el promedio de los 8 vecinos se relaciona con el
   estrato más que el atributo de la propia vivienda (η² de Kruskal-Wallis: baños 0.60 frente a 0.33; área 0.45
   frente a 0.17).
+```{figure} ../figuras/eda_area_vecinos.png
+:width: 100%
+:name: fig-eda-vecinos
+
+**El entorno ordena los estratos mejor que la vivienda.** Izquierda: área construida de la propia vivienda;
+derecha: área promedio de sus 8 edificios vecinos (entrenamiento, escala log). El área propia se solapa mucho entre
+estratos (una casa pequeña puede estar en cualquier barrio); la de los vecinos los ordena de forma casi monótona.
+Figura del capítulo 15 del Entregable 1 v3.
+```
+
 - **Las fronteras concentran la dificultad.** El 22 % de las viviendas tiene la mitad o más de sus 8 edificios
   vecinos en otro estrato (el estrato 5, el 44 %), y el 96 % de esas diferencias es de un solo estrato: por eso los
   errores son casi siempre de un estrato y ADASYN, que refuerza los casos «difíciles», es el peor balanceo (cap. 5).

@@ -34,8 +34,24 @@ def _proba_completa(est, X, clases_est):
 class XGBEstrato(ClassifierMixin, BaseEstimator):
     """XGBoost multiclase con pesos de clase opcionales.
 
-    Parámetros principales: ``max_depth``, ``n_estimators``, ``learning_rate``
-    y ``balanceado`` (si True, cada vivienda pesa 1/frecuencia de su clase).
+    Parámetros
+    ----------
+    max_depth, n_estimators, learning_rate : int, int, float
+        Profundidad, número de árboles y tasa de aprendizaje.
+    subsample, colsample_bytree : float
+        Fracción de filas y de columnas que ve cada árbol.
+    min_child_weight : float
+        Suma mínima de hessianos en una hoja (freno contra hojas con muy pocas viviendas).
+    balanceado : bool
+        Si es verdadero, cada vivienda pesa 1/frecuencia de su clase (equivale a ``class_weight='balanced'``).
+    n_jobs : int
+        Hilos de XGBoost.
+    random_state : int
+        Semilla del submuestreo de filas y columnas.
+
+    Supuestos
+    ---------
+    Usa ``tree_method="hist"`` (capítulo 4) y re-codifica los estratos presentes a 0..K−1 para XGBoost.
     """
 
     def __init__(self, max_depth=6, n_estimators=300, learning_rate=0.1, subsample=0.8,
@@ -58,6 +74,7 @@ class XGBEstrato(ClassifierMixin, BaseEstimator):
                              objective="multi:softprob" if n_clases > 2 else "binary:logistic", verbosity=0)
 
     def fit(self, X, y, sample_weight=None):
+        """Ajusta el XGBoost con los pesos de clase (si ``balanceado``) por ``sample_weight``; devuelve ``self``."""
         y = np.asarray(y)
         self.classes_ = np.unique(y)
         mapa = {k: i for i, k in enumerate(self.classes_)}
@@ -68,12 +85,14 @@ class XGBEstrato(ClassifierMixin, BaseEstimator):
         return self
 
     def predict_proba(self, X):
+        """Probabilidades (n × K) en el orden de ``classes_`` (también si solo hay dos clases)."""
         p = self.modelo_.predict_proba(X)
         if p.ndim == 1 or p.shape[1] == 1:
             p = np.c_[1 - p.ravel(), p.ravel()]
         return p
 
     def predict(self, X):
+        """Estrato con la mayor probabilidad."""
         return self.classes_[np.argmax(self.predict_proba(X), axis=1)]
 
 
@@ -84,6 +103,7 @@ class _Constante:
         self.classes_ = np.asarray(clases)
 
     def predict_proba(self, X):
+        """Probabilidad 1 para la única clase de la zona (n × 1)."""
         return np.ones((len(X), 1))
 
 
@@ -112,6 +132,23 @@ class GeoXGBEstrato(ClassifierMixin, BaseEstimator):
 
     Requiere que las columnas ``col_x`` y ``col_y`` (km) de X sean las
     coordenadas SIN escalar; por eso recibe aparte ``xy`` en fit y predict.
+
+    Parámetros
+    ----------
+    params_global, params_local : dict
+        Hiperparámetros de ``XGBEstrato`` para el modelo global y para los locales.
+    k_vecinos : int
+        Vecinos que definen el ancho de banda de cada ancla (si no se da ``frac_vecinos``).
+    frac_vecinos : float, opcional
+        Ancho de banda como fracción del entrenamiento (k = frac·n); se traslada igual de la CV al modelo final.
+    tam_ancla_km : float
+        Lado de las celdas que generan las anclas.
+    min_ancla : int
+        Viviendas mínimas en una celda para que tenga ancla.
+    alpha : float
+        Peso del modelo global en la mezcla (1 = XGBoost global puro; 0 = solo modelos locales).
+    random_state : int
+        Semilla de los modelos.
     """
 
     def __init__(self, params_global=None, params_local=None, k_vecinos=8000, frac_vecinos=None,
@@ -127,10 +164,26 @@ class GeoXGBEstrato(ClassifierMixin, BaseEstimator):
 
     @staticmethod
     def _kernel(d, h):
+        """Kernel bicuadrado: (1 − (d/h)²)² si d < h, 0 si no."""
         u = d / h
         return np.where(u < 1, (1 - u ** 2) ** 2, 0.0)
 
     def fit(self, X, y, xy):
+        """Ajusta el global y un modelo local por ancla.
+
+        Parámetros
+        ----------
+        X : array (n, p)
+            Variables preprocesadas (sin las coordenadas sin escalar).
+        y : array (n,)
+            Estratos.
+        xy : array (n, 2)
+            Coordenadas en km sin escalar, para las anclas y el kernel.
+
+        Devuelve
+        --------
+        self
+        """
         y = np.asarray(y)
         xy = np.asarray(xy, float)
         self.classes_ = CLASES
@@ -182,10 +235,12 @@ class GeoXGBEstrato(ClassifierMixin, BaseEstimator):
         return pg, pl, cubierto
 
     def predict_proba(self, X, xy):
+        """Mezcla α·p_global + (1 − α)·p_local (n × 6); sin ancla que cubra la vivienda, p_local = p_global."""
         pg, pl, _ = self.proba_partes(X, xy)
         return self.alpha * pg + (1 - self.alpha) * pl
 
     def predict(self, X, xy):
+        """Estrato con la mayor probabilidad mezclada."""
         return CLASES[np.argmax(self.predict_proba(X, xy), axis=1)]
 
 
@@ -202,6 +257,13 @@ class GeoXGBSk(ClassifierMixin, BaseEstimator):
     tam_ancla_km, min_ancla : rejilla de anclas y mínimo de viviendas por ancla.
     balanceado : bool
         Pesos 1/frecuencia de clase en el global y en los locales (equivale a class_weight='balanced').
+    random_state : int
+        Semilla de los modelos.
+
+    Supuestos
+    ---------
+    Los modelos locales son fijos (80 árboles de profundidad 4); las dos últimas columnas solo ubican la vivienda
+    respecto a las anclas y no entran como variables a los XGBoost (las coordenadas estandarizadas sí).
     """
 
     def __init__(self, max_depth=6, n_estimators=300, learning_rate=0.1, frac_vecinos=0.1, alpha=0.5,
@@ -217,6 +279,7 @@ class GeoXGBSk(ClassifierMixin, BaseEstimator):
         self.random_state = random_state
 
     def fit(self, X, y, sample_weight=None):
+        """Ajusta ``GeoXGBEstrato`` separando las dos últimas columnas de ``X`` como coordenadas; devuelve ``self``."""
         X = np.asarray(X, float)
         pg = dict(max_depth=self.max_depth, n_estimators=self.n_estimators, learning_rate=self.learning_rate,
                   balanceado=self.balanceado, n_jobs=1, random_state=self.random_state)
@@ -228,8 +291,10 @@ class GeoXGBSk(ClassifierMixin, BaseEstimator):
         return self
 
     def predict_proba(self, X):
+        """Probabilidades mezcladas (n × 6); las dos últimas columnas de ``X`` son x_km, y_km sin escalar."""
         X = np.asarray(X, float)
         return self.modelo_.predict_proba(X[:, :-2], X[:, -2:])
 
     def predict(self, X):
+        """Estrato con la mayor probabilidad mezclada."""
         return CLASES[np.argmax(self.predict_proba(X), axis=1)]

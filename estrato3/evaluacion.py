@@ -18,7 +18,21 @@ from . import configuracion as CF
 
 
 def proba_completa(est, X, clases=CF.CLASES):
-    """Probabilidades en las seis columnas de los estratos aunque el modelo no haya visto alguno."""
+    """Probabilidades en las seis columnas de los estratos aunque el modelo no haya visto alguno.
+
+    Parámetros
+    ----------
+    est : estimador ajustado con ``predict_proba`` y ``classes_``
+    X : DataFrame o array
+        Viviendas a predecir.
+    clases : array
+        Estratos en el orden de las columnas de salida (1 a 6).
+
+    Devuelve
+    --------
+    numpy.ndarray (n, 6)
+        Probabilidades; las columnas de estratos que el modelo no vio quedan en 0.
+    """
     p = est.predict_proba(X)
     out = np.zeros((len(X), len(clases)))
     for j, k in enumerate(est.classes_):
@@ -35,8 +49,15 @@ def ece(y, proba, clases=CF.CLASES, n_bins=10):
         Estrato real.
     proba : array (n, K)
         Probabilidades.
+    clases : array
+        Estratos en el orden de las columnas de ``proba``.
     n_bins : int
         Número de intervalos de confianza de igual ancho.
+
+    Devuelve
+    --------
+    float
+        ECE en [0, 1] (0 = la confianza coincide con la tasa de acierto en cada intervalo).
     """
     conf = proba.max(1)
     acierto = clases[proba.argmax(1)] == np.asarray(y)
@@ -51,6 +72,15 @@ def ece(y, proba, clases=CF.CLASES, n_bins=10):
 
 def metricas(y, proba, clases=CF.CLASES):
     """Tablero de métricas a partir de las probabilidades (la clase predicha es el argmax).
+
+    Parámetros
+    ----------
+    y : array (n,)
+        Estrato real.
+    proba : array (n, 6)
+        Probabilidades (``proba_completa``).
+    clases : array
+        Estratos en el orden de las columnas.
 
     Devuelve
     --------
@@ -80,5 +110,18 @@ def metricas(y, proba, clases=CF.CLASES):
 
 
 def metricas_clase(y, pred):
-    """F1 macro de una predicción de clase (p. ej. la regresión redondeada al estrato más cercano)."""
+    """F1 macro de una predicción de clase (p. ej. la regresión redondeada al estrato más cercano).
+
+    Parámetros
+    ----------
+    y : array (n,)
+        Estrato real.
+    pred : array (n,)
+        Estrato predicho (enteros de 1 a 6).
+
+    Devuelve
+    --------
+    float
+        F1 macro sobre los seis estratos (un estrato sin predicciones aporta F1 = 0).
+    """
     return float(f1_score(np.asarray(y), np.asarray(pred), average="macro", labels=CF.CLASES, zero_division=0))

@@ -19,6 +19,24 @@ def dm_hln(e1, e2, h=1, potencia=2):
     d_t = |e1_t|^potencia − |e2_t|^potencia; DM = d̄ / sqrt(V̂(d̄)) con varianza de largo plazo (Newey-West con
     h − 1 rezagos); HLN multiplica por sqrt((n + 1 − 2h + h(h − 1)/n) / n) y usa la t de Student con n − 1 gl.
     Valor negativo = el modelo 1 tiene menor pérdida.
+
+    Parámetros
+    ----------
+    e1, e2 : array (n,)
+        Errores de los dos modelos sobre las mismas viviendas, en orden espacial.
+    h : int
+        Horizonte (1: sin rezagos en la varianza).
+    potencia : int
+        2 = pérdida cuadrática, 1 = absoluta.
+
+    Devuelve
+    --------
+    dict
+        Diferencia media de pérdida, estadístico corregido y p-valor bilateral.
+
+    Supuestos
+    ---------
+    Serie de diferencias estacionaria; aquí el «tiempo» es el orden sur → norte.
     """
     d = np.abs(e1) ** potencia - np.abs(e2) ** potencia
     n = len(d)
@@ -36,6 +54,18 @@ def clark_west(y, pred_restringido, pred_general):
 
     f_t = (y − ŷ_r)² − [(y − ŷ_g)² − (ŷ_r − ŷ_g)²]; se prueba H0: E[f] = 0 contra E[f] > 0 (el general predice
     mejor) con una t de una cola. El término (ŷ_r − ŷ_g)² corrige el sesgo del DM a favor del modelo grande.
+
+    Parámetros
+    ----------
+    y : array (n,)
+        Estrato real.
+    pred_restringido, pred_general : array (n,)
+        Predicciones del modelo anidado (pocas variables) y del general.
+
+    Devuelve
+    --------
+    dict
+        Media de f, estadístico t y p-valor de una cola.
     """
     f = (y - pred_restringido) ** 2 - ((y - pred_general) ** 2 - (pred_restringido - pred_general) ** 2)
     t = f.mean() / (f.std(ddof=1) / np.sqrt(len(f)))
@@ -48,6 +78,18 @@ def giacomini_white(e1, e2, instrumentos=None):
     ``instrumentos``: matriz (n, q) de variables que podrían predecir cuál modelo es mejor (aquí: constante y la
     diferencia de pérdida de la vivienda anterior en el orden espacial, análogo del «estado del ciclo»). Con solo
     la constante es la versión incondicional. Estadístico n·Z̄'Ω⁻¹Z̄ ~ χ²_q.
+
+    Parámetros
+    ----------
+    e1, e2 : array (n,)
+        Errores de los dos modelos en orden espacial.
+    instrumentos : array (n, q), opcional
+        Si no se da, constante y la diferencia de pérdida rezagada una posición.
+
+    Devuelve
+    --------
+    dict
+        Estadístico, grados de libertad q, p-valor y cuál modelo tiene menor pérdida media.
     """
     d = e1 ** 2 - e2 ** 2
     if instrumentos is None:
@@ -64,7 +106,24 @@ def giacomini_white(e1, e2, instrumentos=None):
 
 
 def bootstrap_estacionario_ic(d, bloque_medio=50, n=999, seed=42):
-    """IC 95 % de la media de una diferencia de pérdidas con bootstrap estacionario (Politis y Romano, 1994)."""
+    """IC 95 % de la media de una diferencia de pérdidas con bootstrap estacionario (Politis y Romano, 1994).
+
+    Parámetros
+    ----------
+    d : array (n,)
+        Diferencia de pérdidas en orden espacial.
+    bloque_medio : int
+        Largo medio de los bloques geométricos (preserva la dependencia entre vecinos).
+    n : int
+        Réplicas.
+    seed : int
+        Semilla.
+
+    Devuelve
+    --------
+    (float, float)
+        Límites del intervalo percentil.
+    """
     from arch.bootstrap import StationaryBootstrap
     bs = StationaryBootstrap(bloque_medio, np.asarray(d), seed=seed)
     ic = bs.conf_int(np.mean, reps=n, method="percentile")
@@ -78,6 +137,14 @@ def mcs(perdidas, alpha=0.10, bloque=50, reps=999, seed=42):
     ----------
     perdidas : pandas.DataFrame
         Filas = observaciones (en orden espacial), columnas = modelos, valores = pérdida (p. ej. error²).
+    alpha : float
+        Tamaño del MCS (0.10: el conjunto contiene al mejor modelo con 90 % de confianza).
+    bloque : int
+        Tamaño del bloque del bootstrap.
+    reps : int
+        Réplicas bootstrap.
+    seed : int
+        Semilla.
 
     Devuelve
     --------
@@ -97,7 +164,24 @@ def mcs(perdidas, alpha=0.10, bloque=50, reps=999, seed=42):
 def supuestos_residuos(residuos, X_white=None, lags=20):
     """White (homocedasticidad), BDS (independencia no lineal), Ljung-Box (autocorrelación) y normalidad.
 
-    ``residuos`` debe venir ordenado en el espacio (sur → norte). ``X_white``: regresores para la prueba de White.
+    Parámetros
+    ----------
+    residuos : array (n,)
+        Residuos ordenados en el espacio (sur → norte).
+    X_white : array (n, q), opcional
+        Regresores de la prueba de White (aquí, la predicción y las coordenadas).
+    lags : int
+        Rezagos de Ljung-Box y de la ACF.
+
+    Devuelve
+    --------
+    dict
+        ``white``, ``bds`` (dimensión 2), ``ljung_box``, ``acf`` y ``normalidad`` (asimetría, curtosis y
+        D'Agostino).
+
+    Supuestos
+    ---------
+    BDS usa los primeros 4 000 residuos por costo (O(n²)).
     """
     from statsmodels.stats.diagnostic import acorr_ljungbox, het_white
     from statsmodels.tsa.stattools import acf, bds

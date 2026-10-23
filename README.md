@@ -60,12 +60,12 @@ Las métricas que se reportan salen siempre del bucle externo.
 | `resultados/` | Tabla maestra, resúmenes, JSON de análisis, probabilidades fuera de muestra (`tareas/`) y figuras. Los `.pkl` con la submuestra y el test no se suben: los regeneran `correr_clasificacion.py` y `finalistas.py` |
 | `mejoras/` | Después del entregable (capítulo 11 del libro): búsqueda del XGBoost geográfico con todos los datos, Rotation Forest, RF + SVM y stacking de la revisión bibliográfica, y pruebas de significancia; ver `mejoras/README.md`. Las probabilidades de `mejoras/chk/` (≈ 600 MB) no se suben |
 | `libro/` | Jupyter Book del entregable: cuadernos en formato jupytext (`.py`) y ejecutados (`.ipynb`); `construir_libro.py` los ejecuta y construye el HTML |
-| `requirements-e3.txt` | Versiones exactas (Python 3.14.6) |
+| `requirements.txt` | Versiones exactas (Python 3.14.6) |
 
 ## Cómo reproducir
 
 ```bash
-python -m venv venv && venv/Scripts/pip install -r requirements-e3.txt
+python -m venv venv && venv/Scripts/pip install -r requirements.txt
 # el Entregable 1 v3 (rama v3) debe estar en ../e1_rama o en la variable de entorno ENTREGABLE1
 python -u experimentos/correr_clasificacion.py      # 640 tareas (~4.8 h con 8 procesos)
 python -u experimentos/correr_regresion.py          # 140 tareas

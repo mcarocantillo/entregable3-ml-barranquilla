@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -478,6 +478,18 @@ combinaciones de este entregable usan estas variables.</p></li>
 <li><p><strong>El entorno dice más que la vivienda misma.</strong> En los seis atributos, el promedio de los 8 vecinos se relaciona con el
 estrato más que el atributo de la propia vivienda (η² de Kruskal-Wallis: baños 0.60 frente a 0.33; área 0.45
 frente a 0.17).</p></li>
+</ul>
+<figure class="align-default" id="fig-eda-vecinos">
+<a class="reference internal image-reference" href="../_images/eda_area_vecinos.png"><img alt="../_images/eda_area_vecinos.png" src="../_images/eda_area_vecinos.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 1 </span><span class="caption-text"><strong>El entorno ordena los estratos mejor que la vivienda.</strong> Izquierda: área construida de la propia vivienda;
+derecha: área promedio de sus 8 edificios vecinos (entrenamiento, escala log). El área propia se solapa mucho entre
+estratos (una casa pequeña puede estar en cualquier barrio); la de los vecinos los ordena de forma casi monótona.
+Figura del capítulo 15 del Entregable 1 v3.</span><a class="headerlink" href="#fig-eda-vecinos" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
 <li><p><strong>Las fronteras concentran la dificultad.</strong> El 22 % de las viviendas tiene la mitad o más de sus 8 edificios
 vecinos en otro estrato (el estrato 5, el 44 %), y el 96 % de esas diferencias es de un solo estrato: por eso los
 errores son casi siempre de un estrato y ADASYN, que refuerza los casos «difíciles», es el peor balanceo (cap. 5).</p></li>

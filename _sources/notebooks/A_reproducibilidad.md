@@ -14,9 +14,9 @@ Random Forest puede cambiar por diferencias de redondeo numérico, sin cambiar n
 ## A.1 Entorno fijado
 
 Python 3.14.6 en Windows 11 (Intel Core i5-8265U, 4 núcleos y 8 hilos, sin GPU NVIDIA). Versiones exactas en
-`requirements-e3.txt`:
+`requirements.txt`:
 
-```{literalinclude} ../../requirements-e3.txt
+```{literalinclude} ../../requirements.txt
 ```
 
 ## A.2 Semilla única
